@@ -4,4 +4,7 @@ class LogBooksController < ApplicationController
     @log_books = LogBook.all
   end
   
+  def show
+  end
+  
 end
