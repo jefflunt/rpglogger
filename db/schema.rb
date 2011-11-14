@@ -12,30 +12,8 @@
 
 ActiveRecord::Schema.define(:version => 20111112175831) do
 
-  create_table "categories", :force => true do |t|
-    t.integer  "log_book_id", :null => false
-    t.string   "name",        :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "characters", :force => true do |t|
-    t.integer "log_book_id", :null => false
-    t.string  "name",        :null => false
-    t.string  "notes"
-  end
-
   create_table "games", :force => true do |t|
     t.string   "name",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "locations", :force => true do |t|
-    t.integer  "log_book_id", :null => false
-    t.string   "name",        :null => false
-    t.string   "area"
-    t.text     "details"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,45 +25,17 @@ ActiveRecord::Schema.define(:version => 20111112175831) do
     t.datetime "updated_at"
   end
 
-  create_table "notes_entries", :force => true do |t|
-    t.integer  "log_book_id", :null => false
-    t.integer  "quest_id"
-    t.text     "text",        :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "section_properties", :force => true do |t|
+    t.integer "section_id", :null => false
+    t.string  "name",       :null => false
+    t.string  "data_type",  :null => false
+    t.integer "sort_order", :null => false
+    t.string  "entry_type"
   end
 
-  create_table "properties", :force => true do |t|
-    t.integer  "world_object_id", :null => false
-    t.string   "name",            :null => false
-    t.string   "data_type",       :null => false
-    t.string   "display_type",    :null => false
-    t.string   "lookup_value"
-    t.integer  "integer_value"
-    t.decimal  "decimal_value"
-    t.datetime "datetime_value"
-    t.boolean  "boolean_value"
-    t.string   "string_value"
-    t.text     "text_value"
-  end
-
-  create_table "quests", :force => true do |t|
+  create_table "sections", :force => true do |t|
     t.integer "log_book_id", :null => false
     t.string  "name",        :null => false
-  end
-
-  create_table "stats", :force => true do |t|
-    t.integer  "character_id",   :null => false
-    t.string   "name",           :null => false
-    t.string   "data_type",      :null => false
-    t.string   "display_type",   :null => false
-    t.string   "lookup_value"
-    t.integer  "integer_value"
-    t.decimal  "decimal_value"
-    t.datetime "datetime_value"
-    t.boolean  "boolean_value"
-    t.string   "string_value"
-    t.text     "text_value"
   end
 
   create_table "users", :force => true do |t|
@@ -107,15 +57,24 @@ ActiveRecord::Schema.define(:version => 20111112175831) do
     t.datetime "updated_at"
   end
 
-  create_table "world_objects", :force => true do |t|
-    t.integer  "log_book_id", :null => false
-    t.integer  "category_id", :null => false
-    t.integer  "location_id", :null => false
-    t.integer  "dropper_id"
-    t.string   "name",        :null => false
-    t.string   "notes"
+  create_table "world_object_properties", :force => true do |t|
+    t.integer  "world_object_id",     :null => false
+    t.integer  "section_property_id", :null => false
+    t.integer  "integer_value"
+    t.boolean  "boolean_value"
+    t.string   "string_value"
+    t.text     "text_value"
+    t.datetime "datetime_value"
+    t.string   "lookup_value"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "world_objects", :force => true do |t|
+    t.string  "type",             :null => false
+    t.integer "section_id",       :null => false
+    t.integer "parent_object_id"
+    t.string  "name",             :null => false
   end
 
 end

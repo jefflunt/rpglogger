@@ -1,4 +1,4 @@
 %h1="List of log books:"
-- @log_books.each do |lb|
-  = lb.name
+- @log_books.each do |log_book|
+  =link_to log_book.game_and_user_string, log_book
   %br

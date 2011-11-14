@@ -33,103 +33,53 @@ class BeginningObjectStructure < ActiveRecord::Migration
       
       t.timestamps
     end
-    
-    create_table :quests do |t|
-      t.integer :log_book_id, :null => false
-      t.string :name, :null => false
-    end
-    
-    create_table :notes_entries do |t|
-      t.integer :log_book_id, :null => false
-      t.integer :quest_id
-      
-      t.text :text, :null => false
-      
-      t.timestamps
-    end
-    
-    create_table :locations do |t|
-      t.integer :log_book_id, :null => false
-      t.string :name, :null => false
-      t.string :area
-      t.text :details
-      
-      t.timestamps
-    end
-    
-    create_table :categories do |t|
+            
+    create_table :sections do |t|
       t.integer :log_book_id, :null => false
       
       t.string :name, :null => false
+    end
+    
+    create_table :section_properties do |t|
+      t.integer :section_id, :null => false
       
-      t.timestamps
+      t.string :name, :null => false
+      t.string :data_type, :null => false
+      t.integer :sort_order, :null => false
+      
+      t.string :entry_type
     end
     
     create_table :world_objects do |t|
-      t.integer :log_book_id, :null => false
-      t.integer :category_id, :null => false
-      t.integer :location_id, :null => false
-      t.integer :dropper_id
+      t.string  :type, :null => false
+      t.integer :section_id, :null => false
+      t.integer :parent_object_id
       
       t.string :name, :null => false
-      t.string :notes
-      
-      t.timestamps
     end
         
-    create_table :properties do |t|
+    create_table :world_object_properties do |t|
       t.integer :world_object_id, :null => false
+      t.integer :section_property_id, :null => false
       
-      t.string :name, :null => false
-      t.string :data_type, :null => false
-      t.string :display_type, :null => false
-      
-      t.string    :lookup_value      
       t.integer   :integer_value
-      t.decimal   :decimal_value
-      t.datetime  :datetime_value
       t.boolean   :boolean_value
-      
-      t.string :string_value
-      t.text   :text_value
-    end
-    
-    create_table :characters do |t|
-      t.integer :log_book_id, :null => false
-      
-      t.string :name, :null => false
-      t.string :notes
-    end
-    
-    create_table :stats do |t|
-      t.integer :character_id, :null => false
-      
-      t.string :name, :null => false
-      t.string :data_type, :null => false
-      t.string :display_type, :null => false
-      
-      t.string    :lookup_value      
-      t.integer   :integer_value
-      t.decimal   :decimal_value
+      t.string    :string_value
+      t.text      :text_value
       t.datetime  :datetime_value
-      t.boolean   :boolean_value
-      
-      t.string :string_value
-      t.text   :text_value
+      t.string    :lookup_value
+            
+      t.timestamps
     end
   end
 
   def down
-    drop_table :games
     drop_table :users
+    drop_table :games
     drop_table :log_books
-    drop_table :quests
-    drop_table :notes_entries
-    drop_table :locations
-    drop_table :categories
+    drop_table :sections
+    drop_table :section_properties
     drop_table :world_objects
-    drop_table :properties
-    drop_table :characters
-    drop_table :stats
+    drop_table :world_object_properties
   end
 end
