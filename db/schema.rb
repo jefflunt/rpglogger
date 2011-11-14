@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20111112175831) do
   create_table "log_books", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.integer  "game_id",    :null => false
+    t.string   "title",      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

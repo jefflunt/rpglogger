@@ -1,0 +1,13 @@
+=render :partial => 'partials/log_book_nav'
+#details-div
+  %table
+    %tr
+      %td
+        =render :partial => 'partials/section_title'
+      %td{:width=>"20%"}
+        =render :partial => 'partials/section_filter'
+    %tr
+      %td
+        =render :partial => 'partials/section_detail'
+      %td
+        =render :partial => 'partials/section_meta'

@@ -1,0 +1,13 @@
+#log-book-index
+  %h1="List of log books:"
+  %table
+    %tr
+      %th='title'
+      %th='game'
+      %th='user'
+    - @log_books.each do |log_book|
+      %tr
+        %td=link_to log_book.title, log_book
+        %td=link_to log_book.game.name, log_book.game
+        %td=link_to log_book.user.login, log_book.user
+      

@@ -1,5 +1,10 @@
 #section-detail
-  %h1="Major section (h1)"
-  Some introductory text
-  %h2="Minor section (h2)"
-  "...and everything else"
+  %table{:cellspacing=>5}
+    %tr
+      -@section.section_properties.each do |sp|
+        %th{:class=>'detail-' + sp.data_type}=sp.name
+    -@section.world_objects.each do |obj|
+      %tr
+        -obj.object_properties.each do |prop|
+          %td{:class=>'detail-' + prop.section_property.data_type}=prop.raw_value
+    

@@ -3,10 +3,10 @@ class WorldObject < ActiveRecord::Base
   require 'faker'
   
   belongs_to :section
-  belongs_to :dropper, :class_name => 'WorldObject', :foreign_key => 'parent_object_id'
+  belongs_to :parent_object, :class_name => 'WorldObject', :foreign_key => 'parent_object_id'
 
-  has_many :dropped_items, :class_name => 'WorldObjects'
-  has_many :properties
+  has_many :child_objects, :class_name => 'WorldObject', :foreign_key => 'parent_object_id'
+  has_many :object_properties, :class_name => 'WorldObjectProperty'
   
   def fake_fill_properties
     section.section_properties.each do |sp|

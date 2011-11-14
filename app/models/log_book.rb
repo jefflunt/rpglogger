@@ -8,8 +8,4 @@ class LogBook < ActiveRecord::Base
   has_many :locations,      :through => :sections
   has_many :quests,         :through => :sections
   has_many :notes_entries,  :through => :sections
-  
-  def game_and_user_string
-    user.login + " | " + game.name
-  end
 end

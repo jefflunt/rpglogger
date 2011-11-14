@@ -2,12 +2,14 @@
   %table
     %tr
       %td
-        %h1="rpglogger"
+        %h1{:class => "site-title"}=link_to "rpglogger", root_path
       %td
         %table
           %tr
             %td{:align=>"right"}
-              %h2="log books"
+              %h2=link_to 'games', games_path
             %td{:align=>"right"}
-              %h2="logout"
+              %h2=link_to 'log books', log_books_path
+            %td{:align=>"right"}
+              %h2='login/logout'
   %hr

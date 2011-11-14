@@ -1,5 +1,22 @@
 @import 'globals'
 
+#log-book-index
+  a
+    color: $main-gray
+    font:
+      family: $sans
+      size: $typical-text-size
+    text-decoration: none
+    &:hover
+      color: $main-blue-gray
+
+
+#details-div
+  table
+    width: 95%
+  td
+    vertical-align: top
+
 #log_book_nav
   a
     color: $main-gray
@@ -8,7 +25,6 @@
       size: $typical-text-size
     text-transform: uppercase
     text-decoration: none
-    word-spacing: 15px
     &:hover
       color: $main-blue-gray
       text-decoration: overline
@@ -21,23 +37,38 @@
       weight: bold
     letter-spacing: 1px
 
+#section-filter
+  table
+    width: 30%
+
 #section-meta
   font:
     family: $sans
     size: $typical-text-size
 
 #section-detail
-  font:
-    family: $sans
-    size: $typical-text-size
-    weight: normal
-  h1
-    color: $main-blue-gray
+  table
+    width: 90%
+  th
+    border-bottom: $main-gray solid thin
     font:
       family: $serif
-      size: $h1-size
-  h2
-    color: $main-blue-gray
+      size: $typical-text-size
+    text-transform: uppercase
+  .detail-integer
+    text-align: right
+  .detail-string
+    text-align: left
+  .detail-text
+    text-align: left
+    
+  td
     font:
-      family: $serif
-      size: $h2-size
+      family: $sans
+      size: $typical-text-size
+    .detail-integer
+      text-align: right
+    .detail-string
+      text-align: left
+    .detail-text
+      text-align: left

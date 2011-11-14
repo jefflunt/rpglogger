@@ -31,6 +31,8 @@ class BeginningObjectStructure < ActiveRecord::Migration
       t.integer :user_id, :null => false
       t.integer :game_id, :null => false
       
+      t.string :title, :null => false
+      
       t.timestamps
     end
             
