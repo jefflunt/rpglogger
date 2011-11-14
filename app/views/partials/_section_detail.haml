@@ -1,10 +1,12 @@
-#section-detail
-  %table{:cellspacing=>5}
+#section-detail{:class => 'compact'}
+  %table
     %tr
+      %th{:class=>'column-string'}='name/title'
       -@section.section_properties.each do |sp|
-        %th{:class=>'detail-' + sp.data_type}=sp.name
+        %th{:class=>'column-' + sp.data_type}=sp.name
     -@section.world_objects.each do |obj|
       %tr
+        %td=obj.name
         -obj.object_properties.each do |prop|
-          %td{:class=>'detail-' + prop.section_property.data_type}=prop.raw_value
+          %td{:class=>'column-' + prop.section_property.data_type}=prop.raw_value
     

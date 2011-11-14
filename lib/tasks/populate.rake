@@ -32,18 +32,14 @@ namespace :db do
       log_book.title = Populator.words(1..4)
       
       locations_section  = Section.create(:log_book_id => log_book.id, :name => 'locations')
-      loc_name = SectionProperty.create(:section => locations_section, :name => 'name', :data_type => 'string', :sort_order => 1, :entry_type => 'plain')
       
       quests_section     = Section.create(:log_book_id => log_book.id, :name => 'quests')
-      quest_name   = SectionProperty.create(:section => quests_section, :name => 'name',   :data_type => 'string', :sort_order => 1, :entry_type => 'plain')
       quest_detail = SectionProperty.create(:section => quests_section, :name => 'detail', :data_type => 'text',   :sort_order => 2, :entry_type => 'plain')
       
       journal_section = Section.create(:log_book_id => log_book.id, :name => 'journal')
-      journal_title   = SectionProperty.create(:section => journal_section, :name => 'title', :data_type => 'string', :sort_order => 1, :entry_type => 'plain')
       jounral_entry   = SectionProperty.create(:section => journal_section, :name => 'entry', :data_type => 'text',   :sort_order => 2, :entry_type => 'plain')
       
       characters_section = Section.create(:log_book_id => log_book.id, :name => 'characters')
-      character_name  = SectionProperty.create(:section => characters_section, :name => 'name',       :data_type => 'string',  :sort_order => 1, :entry_type => 'plain')
       character_level = SectionProperty.create(:section => characters_section, :name => 'level',      :data_type => 'integer', :sort_order => 2, :entry_type => 'plain')
       character_story = SectionProperty.create(:section => characters_section, :name => 'back story', :data_type => 'text',    :sort_order => 3, :entry_type => 'plain')
       

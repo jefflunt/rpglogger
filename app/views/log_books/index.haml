@@ -1,13 +1,18 @@
-#log-book-index
-  %h1="List of log books:"
+#log-book-index{:class=>'compact left'}
+  .page-title
+    ='List of log books'
   %table
     %tr
-      %th='title'
-      %th='game'
-      %th='user'
+      %th{:class=>'column-string'}='title'
+      %th{:class=>'column-string'}='game'
+      %th{:class=>'column-string'}='user'
+      %th{:class=>'column-integer'}='no. of quests'
+      %th{:class=>'column-integer', :width=>'50px'}='no. of characters'
     - @log_books.each do |log_book|
       %tr
-        %td=link_to log_book.title, log_book
-        %td=link_to log_book.game.name, log_book.game
-        %td=link_to log_book.user.login, log_book.user
+        %td{:class=>'column-string'}=link_to log_book.title, log_book
+        %td{:class=>'column-string'}=link_to log_book.game.name, log_book.game
+        %td{:class=>'column-string'}=link_to log_book.user.login, log_book.user
+        %td{:class=>'column-integer'}=link_to log_book.world_objects.quests.count, log_book_path(log_book) + '?section=quests'
+        %td{:class=>'column-integer'}=link_to log_book.world_objects.characters.count, log_book_path(log_book) + '?section=characters'
       

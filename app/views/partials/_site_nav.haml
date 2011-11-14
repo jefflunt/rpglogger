@@ -1,15 +1,11 @@
 #site_nav
-  %table
+  %table{:class=>'max-width'}
     %tr
-      %td
-        %h1{:class => "site-title"}=link_to "rpglogger", root_path
-      %td
-        %table
-          %tr
-            %td{:align=>"right"}
-              %h2=link_to 'games', games_path
-            %td{:align=>"right"}
-              %h2=link_to 'log books', log_books_path
-            %td{:align=>"right"}
-              %h2='login/logout'
-  %hr
+      %th{:class=>'site-title'}=link_to 'rpglogger', root_path
+      %th
+        #site-links{:class => 'compact center cell-back-coloring'}
+          %table
+            %tr
+              %th=link_to 'games', games_path
+              %th=link_to 'log books', log_books_path
+              %th='login/username'

@@ -1,5 +1,51 @@
 @import 'globals'
 
+.site-title
+  text-transform: lowercase
+  text-align: left
+  border-bottom: none
+
+.page-title
+  color: $main-blue-gray
+  font:
+    size: $big-titles-size
+    weight: bold
+  letter-spacing: 1px
+
+.compact
+  table
+    width: 100%
+  th
+    vertical-align: bottom
+    border-bottom: $main-gray solid thin
+    font:
+      family: $serif
+      size: $typical-text-size
+    text-transform: uppercase
+    .detail-integer
+      text-align: right
+    .detail-string
+      text-align: left
+    .detail-text
+      text-align: left
+
+  td
+    font:
+      family: $sans
+      size: $typical-text-size
+    .detail-integer
+      text-align: right
+    .detail-string
+      text-align: left
+    .detail-text
+      text-align: left
+
+a
+  color: $main-gray
+  text-decoration: none
+  &:hover
+    color: $main-blue-gray
+
 hr
   color: $main-gray
   background-color: $main-gray

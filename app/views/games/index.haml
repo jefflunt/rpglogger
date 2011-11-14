@@ -1,0 +1,11 @@
+#games-index{:class=>'compact left'}
+  .page-title
+    ='List of games'
+  %table
+    %tr
+      %th{:class=>'column-integer'}='no. of characters'
+      %th='name/title'
+    - @games.each do |game|
+      %tr
+        %td{:class=>'column-integer'}=game.characters.count
+        %td=link_to game.name, game

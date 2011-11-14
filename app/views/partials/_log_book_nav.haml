@@ -1,6 +1,5 @@
-#log_book_nav
+#log_book_nav{:class=>'compact'}
   %table
     %tr
       -@log_book.sections.each do |s|
-        %td=link_to s.name, "/log_books/#{@log_book.id}?section=#{s.name}"
-  %hr
+        %th=link_to s.name, "/log_books/#{@log_book.id}?section=#{s.name}"
