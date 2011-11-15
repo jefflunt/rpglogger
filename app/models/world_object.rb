@@ -5,13 +5,15 @@ class WorldObject < ActiveRecord::Base
   belongs_to :section
   belongs_to :parent_object, :class_name => 'WorldObject', :foreign_key => 'parent_object_id'
 
-  has_many :child_objects, :class_name => 'WorldObject', :foreign_key => 'parent_object_id'
-  has_many :object_properties, :class_name => 'WorldObjectProperty'
+  has_many :child_objects, :class_name => 'WorldObject'
+  has_many :world_object_properties
   
   scope :characters, :conditions => ["type = 'Character'"]
   scope :locations, :conditions => ["type = 'Location'"]
   scope :notes_entries, :conditions => ["type = 'NotesEntry'"]
   scope :quests, :conditions => ["type = 'Quest'"]
+  
+  accepts_nested_attributes_for :world_object_properties
   
   def fake_fill_properties
     name = Populator.words(1..4)

@@ -1,12 +1,14 @@
 #section-detail{:class => 'compact'}
   %table
     %tr
+      %td{:class=>'min-width'}=link_to '+', new_world_object_path + "?section=#{@section.name}"
       %th{:class=>'column-string'}='name/title'
       -@section.section_properties.each do |sp|
         %th{:class=>'column-' + sp.data_type}=sp.name
     -@section.world_objects.each do |obj|
       %tr
-        %td=obj.name
-        -obj.object_properties.each do |prop|
+        %td=link_to 'X', "/world_objects/#{obj.id}", :method => :delete
+        %td=link_to obj.name, edit_world_object_path(obj)
+        -obj.world_object_properties.each do |prop|
           %td{:class=>'column-' + prop.section_property.data_type}=prop.raw_value
     

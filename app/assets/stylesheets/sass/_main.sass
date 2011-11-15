@@ -28,8 +28,9 @@
       text-align: left
     .detail-text
       text-align: left
-
   td
+    vertical-align: top
+    border-right: $background-color solid 10px
     font:
       family: $sans
       size: $typical-text-size
@@ -39,6 +40,19 @@
       text-align: left
     .detail-text
       text-align: left
+
+.detail
+  @extend .compact
+  table
+    width: 55%
+  th
+    padding: 5px
+    padding-right: 8px
+    border-bottom: none
+    vertical-align: top
+    text-align: right
+  td
+    width: 1%
 
 a
   color: $main-gray
@@ -52,7 +66,7 @@ hr
   height: 1px
   width: 100%
 body
-  background-color: #000000
+  background-color: $background-color
   width: 920px
   margin:
     left: auto

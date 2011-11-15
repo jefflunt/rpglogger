@@ -1,0 +1,21 @@
+=render :partial => 'partials/log_book_nav', :locals=>{:log_book => @world_object.section.log_book}
+
+.page-title
+  ='Edit ' + @world_object.section.name.singularize
+
+=form_for @world_object, :url => {:controller => :world_objects, :action => :update} do |obj_form|
+  .detail
+    %table
+      %tr
+        %th{:class=>'min-width'}
+          =obj_form.label :name
+        %td
+          =obj_form.text_field :name
+      =obj_form.fields_for :world_object_properties do |world_object_property_fields|
+        %tr
+          %th=world_object_property_fields.label world_object_property_fields.object.section_property.name.to_sym
+          %td=world_object_property_fields.object.correct_form_field(world_object_property_fields)
+      %tr
+        %td
+        %td{:class=>'right'}
+          =obj_form.submit 'Save'
