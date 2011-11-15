@@ -3,9 +3,9 @@
     ='List of games'
   %table
     %tr
-      %th{:class=>'column-integer'}='no. of characters'
+      %th{:class=>'column-integer'}='log books'
       %th='name/title'
     - @games.each do |game|
       %tr
-        %td{:class=>'column-integer'}=game.characters.count
+        %td{:class=>'column-integer'}=game.log_books.count
         %td=link_to game.name, game

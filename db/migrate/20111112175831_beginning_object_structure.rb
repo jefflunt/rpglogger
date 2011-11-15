@@ -53,7 +53,6 @@ class BeginningObjectStructure < ActiveRecord::Migration
     end
     
     create_table :world_objects do |t|
-      t.string  :type, :null => false
       t.integer :section_id, :null => false
       t.integer :parent_object_id
       

@@ -1,9 +1,10 @@
 =render :partial => 'partials/log_book_nav', :locals=>{:log_book => @world_object.section.log_book}
 
 .page-title
-  ='Edit ' + @world_object.section.name.singularize
+  =@world_object.section.name.singularize.titleize
 
-=form_for @world_object, :url => {:controller => :world_objects, :action => :update} do |obj_form|
+=form_for @world_object do |obj_form|
+  =obj_form.hidden_field :section_id
   .detail
     %table
       %tr
@@ -13,6 +14,7 @@
           =obj_form.text_field :name
       =obj_form.fields_for :world_object_properties do |world_object_property_fields|
         %tr
+          =world_object_property_fields.hidden_field :section_property_id
           %th=world_object_property_fields.label world_object_property_fields.object.section_property.name.to_sym
           %td=world_object_property_fields.object.correct_form_field(world_object_property_fields)
       %tr

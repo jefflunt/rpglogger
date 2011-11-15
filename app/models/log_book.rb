@@ -4,8 +4,4 @@ class LogBook < ActiveRecord::Base
   
   has_many :sections
   has_many :world_objects,  :through => :sections
-  has_many :characters,     :through => :sections
-  has_many :locations,      :through => :sections
-  has_many :quests,         :through => :sections
-  has_many :notes_entries,  :through => :sections
 end

@@ -1,2 +1,0 @@
-class NotesEntry < WorldObject
-end

@@ -6,19 +6,12 @@ class WorldObjectsController < ApplicationController
   end
   
   def new
-    section = Section.find_by_name(params[:section])
-    case section.name
-    when "character"
-      @world_object = Character.new(:section=>section)
-    when "location"
-      @world_object = Location.new(:section=>section)
-    when "journal"
-      @world_object = NotesEntry.new(:section=>section)
-    when "quest"
-      @world_object = Quest.new(:section=>section)
+    model_section = Section.find_by_name(params[:section])
+    @world_object = WorldObject.new(:section => model_section)
+    model_section.section_properties.each do |sp|
+      @world_object.world_object_properties.build(:section_property_id => sp.id)
     end
     
-    #debugger
     render 'world_object_form'
   end
   

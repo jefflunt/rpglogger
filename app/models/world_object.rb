@@ -7,12 +7,7 @@ class WorldObject < ActiveRecord::Base
 
   has_many :child_objects, :class_name => 'WorldObject'
   has_many :world_object_properties
-  
-  scope :characters, :conditions => ["type = 'Character'"]
-  scope :locations, :conditions => ["type = 'Location'"]
-  scope :notes_entries, :conditions => ["type = 'NotesEntry'"]
-  scope :quests, :conditions => ["type = 'Quest'"]
-  
+    
   accepts_nested_attributes_for :world_object_properties
   
   def fake_fill_properties

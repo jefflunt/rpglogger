@@ -1,2 +1,0 @@
-class Location < WorldObject
-end

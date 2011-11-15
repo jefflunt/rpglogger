@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(:version => 20111112175831) do
   end
 
   create_table "world_objects", :force => true do |t|
-    t.string  "type",             :null => false
     t.integer "section_id",       :null => false
     t.integer "parent_object_id"
     t.string  "name",             :null => false
