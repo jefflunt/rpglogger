@@ -1,5 +1,11 @@
-#log_book_nav{:class=>'compact'}
-  %table
-    %tr
-      -log_book.sections.each do |s|
-        %th=link_to s.name, "/log_books/#{log_book.id}?section=#{s.name}"
+#log_book_nav
+  .compact
+    %table
+      %tr
+        %th{:class=>'min-width center lowercase'}=link_to 'edit sections', edit_log_book_path(log_book)
+        -log_book.sections.each_with_index do |s, index|
+          -if index > 0 && index % 8 == 0
+            %tr
+          -if index > 0 && index % 8 == 0
+            %td
+          %th=link_to s.name, "/log_books/#{log_book.id}?section=#{s.name}"

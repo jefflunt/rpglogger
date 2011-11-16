@@ -6,18 +6,19 @@
 =form_for @world_object do |obj_form|
   =obj_form.hidden_field :section_id
   .detail
-    %table
-      %tr
-        %th{:class=>'min-width'}
-          =obj_form.label :name
-        %td
-          =obj_form.text_field :name
-      =obj_form.fields_for :world_object_properties do |world_object_property_fields|
+    .right
+      %table
         %tr
-          =world_object_property_fields.hidden_field :section_property_id
-          %th=world_object_property_fields.label world_object_property_fields.object.section_property.name.to_sym
-          %td=world_object_property_fields.object.correct_form_field(world_object_property_fields)
-      %tr
-        %td
-        %td{:class=>'right'}
-          =obj_form.submit 'Save'
+          %th{:class=>'min-width'}
+            =obj_form.label :name
+          %td
+            =obj_form.text_field :name
+        =obj_form.fields_for :world_object_properties do |world_object_property_fields|
+          %tr
+            =world_object_property_fields.hidden_field :section_property_id
+            %th=world_object_property_fields.label world_object_property_fields.object.section_property.name.to_sym
+            %td=world_object_property_fields.object.correct_form_field(world_object_property_fields)
+        %tr
+          %td
+          %td{:class=>'right'}
+            =obj_form.submit 'Save'

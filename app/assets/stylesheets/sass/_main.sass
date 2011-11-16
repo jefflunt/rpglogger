@@ -1,16 +1,41 @@
 @import 'globals'
 
+.content-border
+  border: 5px solid
+  width: 920px
+  margin:
+    left: auto
+    right: auto
+
+.content
+  padding: 10px
+  border: 1px
+  border-style: double
+  background: url('/content-background.png') repeat center top
+
+  margin:
+    left: auto
+    right: auto
+  color: $main-gray
+  font:
+    family: $serif
+    size: 15px
+
 .site-title
   text-transform: lowercase
   text-align: left
   border-bottom: none
+  font:
+    family: $site-and-page-title
 
 .page-title
-  color: $main-blue-gray
+  text-transform: lowercase
+  color: $page-orange
+  padding: 5px
   font:
+    family: $site-and-page-title
     size: $big-titles-size
     weight: bold
-  letter-spacing: 1px
 
 .compact
   table
@@ -30,7 +55,7 @@
       text-align: left
   td
     vertical-align: top
-    border-right: $background-color solid 10px
+    border-right: transparent solid 10px
     font:
       family: $sans
       size: $typical-text-size
@@ -66,16 +91,26 @@ hr
   height: 1px
   width: 100%
 body
-  background-color: $background-color
-  width: 920px
-  margin:
-    left: auto
-    right: auto
-  color: $main-gray
-  font:
-    family: $serif
-    size: 15px
+  background: #000 url('/site-background-image.jpg') no-repeat left top
 h1
   font:
     size: 16px
-    
+input
+  color: $main-white
+  background-color: $main-dark-gray
+  border: none
+  padding: 5px
+  width: 300px
+  height: 15px
+textarea
+  @extend input
+  width: 450px
+  height: 250px
+.narrow-input
+  @extend input
+  width: 225px
+.styled-button
+  @extend input
+  background-color: $main-dark-red
+  width: auto
+  height: auto

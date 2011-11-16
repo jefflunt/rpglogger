@@ -1,13 +1,11 @@
 =render :partial => 'partials/log_book_nav', :locals => {:log_book => @log_book}
+%br
+%br
 #details-div
   %table
     %tr
-      %td
-        =render :partial => 'partials/section_title'
-      %td{:width=>"20%"}
-        =render :partial => 'partials/section_filter'
+      %td{:class=>'border-right max-width'}=render :partial => 'partials/section_title'
+      %td=render :partial => 'partials/section_filter'
     %tr
-      %td
-        =render :partial => 'partials/section_detail'
-      %td
-        =render :partial => 'partials/section_meta'
+      %td{:class=>'border-right'}=render :partial => 'partials/section_detail'
+      %td=render :partial => 'partials/section_meta'

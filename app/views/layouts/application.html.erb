@@ -7,9 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render :partial => 'partials/site_nav' %>
-  <div class="content">
-    <%= yield %>
+  <div class='content-border'>
+    <div class="content">
+      <%= render :partial => 'partials/site_nav' %>
+      <%= yield %>
+    </div>
   </div>
 </body>
 </html>

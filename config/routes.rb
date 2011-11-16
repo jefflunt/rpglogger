@@ -5,10 +5,8 @@ Rpglogger::Application.routes.draw do
   resources :games
   resources :users
   resources :log_books
+  resources :sections
   resources :world_objects
-  resources :locations
-  resources :quests
-  resources :notes_entries
-  resources :characters
+  
   root :to => 'log_books#index'
 end

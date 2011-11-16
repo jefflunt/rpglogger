@@ -4,4 +4,6 @@ class LogBook < ActiveRecord::Base
   
   has_many :sections
   has_many :world_objects,  :through => :sections
+  
+  accepts_nested_attributes_for :sections
 end
