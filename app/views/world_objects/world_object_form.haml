@@ -1,5 +1,5 @@
 =render :partial => 'partials/log_book_nav', :locals=>{:log_book => @world_object.section.log_book}
-
+%br
 .page-title
   =@world_object.section.name.singularize.titleize
 
@@ -15,10 +15,11 @@
             =obj_form.text_field :name
         =obj_form.fields_for :world_object_properties do |world_object_property_fields|
           %tr
-            =world_object_property_fields.hidden_field :section_property_id
             %th=world_object_property_fields.label world_object_property_fields.object.section_property.name.to_sym
-            %td=world_object_property_fields.object.correct_form_field(world_object_property_fields)
+            %td
+              =world_object_property_fields.object.correct_form_field(world_object_property_fields)
+              =world_object_property_fields.hidden_field :section_property_id
         %tr
           %td
           %td{:class=>'right'}
-            =obj_form.submit 'Save'
+            =obj_form.submit 'Save', :class => 'styled-button-dark-red'

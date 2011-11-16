@@ -2,10 +2,9 @@
 
 .content-border
   border: 5px solid
-  width: 920px
-  margin:
-    left: auto
-    right: auto
+  min-width: 920px
+  margin: 5px 25px 25px 25px
+  color: $main-black
 
 .content
   padding: 10px
@@ -79,6 +78,12 @@
   td
     width: 1%
 
+.small-caps-serif
+  font:
+    family: $serif
+    size: $typical-text-size
+  text-transform: uppercase
+
 a
   color: $main-gray
   text-decoration: none
@@ -92,6 +97,7 @@ hr
   width: 100%
 body
   background: #000 url('/site-background-image.jpg') no-repeat left top
+  color: $main-white
 h1
   font:
     size: 16px
@@ -106,11 +112,21 @@ textarea
   @extend input
   width: 450px
   height: 250px
+select
+  @extend input
+  width: 225px
+  height: auto
+  option
+    border: 0px
 .narrow-input
   @extend input
   width: 225px
 .styled-button
-  @extend input
-  background-color: $main-dark-red
   width: auto
   height: auto
+.styled-button-dark-red
+  @extend .styled-button
+  background-color: $main-dark-red
+.styled-button-blue-gray
+  @extend .styled-button
+  background-color: $main-blue-gray

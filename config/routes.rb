@@ -6,7 +6,7 @@ Rpglogger::Application.routes.draw do
   resources :users
   resources :log_books
   resources :sections
+  resources :section_properties
   resources :world_objects
-  
   root :to => 'log_books#index'
 end

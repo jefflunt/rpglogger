@@ -48,8 +48,6 @@ class BeginningObjectStructure < ActiveRecord::Migration
       t.string :name, :null => false
       t.string :data_type, :null => false
       t.integer :sort_order, :null => false
-      
-      t.string :entry_type
     end
     
     create_table :world_objects do |t|
@@ -67,8 +65,6 @@ class BeginningObjectStructure < ActiveRecord::Migration
       t.boolean   :boolean_value
       t.string    :string_value
       t.text      :text_value
-      t.datetime  :datetime_value
-      t.string    :lookup_value
             
       t.timestamps
     end

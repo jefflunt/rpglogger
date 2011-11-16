@@ -1,5 +1,9 @@
 class SectionsController < ApplicationController
   
+  def edit
+    @section = Section.find(params[:id])
+  end
+  
   def create
     @log_book = LogBook.find(params[:log_book_id])
     

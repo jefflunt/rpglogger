@@ -7,13 +7,15 @@ class WorldObjectProperty < ActiveRecord::Base
     when 'integer'
       return integer_value
     when 'boolean'
-      return boolean_value
+      if boolean_value
+        return "✓"
+      else
+        return "NO"
+      end
     when 'string'
       return string_value
     when 'text'
       return text_value
-    when 'datetime'
-      return datetime_value
     end
   end
   
@@ -27,8 +29,6 @@ class WorldObjectProperty < ActiveRecord::Base
       return form.text_field  :string_value
     when 'text'
       return form.text_area   :text_value
-    when 'datetime'
-      return form.text_field  :datetime_value
     end
   end
 end
