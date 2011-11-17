@@ -7,6 +7,7 @@ gem 'capistrano'
 gem 'jquery-rails'
 gem 'authlogic', '~> 3.1.0'
 gem 'haml'
+gem 'heroku'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,5 +28,5 @@ group :development, :cucumber, :test do
   gem "cucumber"
   gem "cucumber-rails"
   gem "database_cleaner"
-  gem "ruby-debug"
+  # gem "ruby-debug"
 end
