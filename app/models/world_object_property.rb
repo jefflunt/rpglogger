@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class WorldObjectProperty < ActiveRecord::Base
   belongs_to :section_property
   belongs_to :world_object
@@ -10,7 +12,7 @@ class WorldObjectProperty < ActiveRecord::Base
       return integer_value
     when 'boolean'
       if boolean_value
-        return "\u2713" # a.k.a. the check mark: "✓"
+        return "✓"
       else
         return "NO"
       end
