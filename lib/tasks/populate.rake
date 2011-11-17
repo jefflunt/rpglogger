@@ -1,12 +1,15 @@
 namespace :db do
-  desc "Erase and fill database"
-  task :populate => :environment do
-    require 'populator'
-    require 'faker'
-    
-    puts "Populating. Enjoy this random pattern generator while you wait..."
+  desc "Erase database"
+  task :erase => :environment do
+    puts "Erasing..."
     
     [Game, User, LogBook, Section, SectionProperty, WorldObject, WorldObjectProperty].each(&:delete_all)
+  end
+  
+  desc "Erase and fill database"
+  task :populate => [:environment, :erase] do
+    require 'populator'
+    require 'faker'
     
     Game.populate 5 do |game|
       game.name = Populator.words(1..2).titleize
