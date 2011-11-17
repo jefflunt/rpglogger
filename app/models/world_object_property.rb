@@ -2,6 +2,8 @@ class WorldObjectProperty < ActiveRecord::Base
   belongs_to :section_property
   belongs_to :world_object
   
+  validate :boolean_properties_cannot_be_nil
+  
   def raw_value
     case section_property.data_type
     when 'integer'
@@ -31,4 +33,14 @@ class WorldObjectProperty < ActiveRecord::Base
       return form.text_area   :text_value
     end
   end
+  
+  private 
+    def boolean_properties_cannot_be_nil
+      if section_property.data_type.eql?("boolean")
+        unless !boolean_value.nil?
+          errors.add("Boolean properties must have a default value - they cannot be nil.")
+        end
+      end
+    end
+  
 end
