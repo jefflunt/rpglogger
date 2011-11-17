@@ -10,7 +10,7 @@ class WorldObjectProperty < ActiveRecord::Base
       return integer_value
     when 'boolean'
       if boolean_value
-        return "✓"
+        return "\u2713" # a.k.a. the check mark: "✓"
       else
         return "NO"
       end

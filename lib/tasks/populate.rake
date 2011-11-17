@@ -11,6 +11,8 @@ namespace :db do
     require 'populator'
     require 'faker'
     
+    puts "Populating: enjoy this random pattern generator while you wait..."
+    
     Game.populate 5 do |game|
       game.name = Populator.words(1..2).titleize
     end
