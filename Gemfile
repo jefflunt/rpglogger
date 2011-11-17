@@ -16,13 +16,13 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :development, :cucumber, :test,:hudson do
+group :development, :cucumber, :test do
   gem "populator"
   gem "factory_girl"
   gem "faker"
-  gem "rspec"
-  gem "rspec-rails"
   gem "webrat"  
+  gem "rspec-rails"
+  gem "webrat"
   gem "capybara"
   gem "cucumber"
   gem "cucumber-rails"
