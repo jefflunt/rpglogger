@@ -10,6 +10,6 @@
     %tr
       %th{:class=>'small-caps-serif right'}='choose your game'
     %tr
-      %td{:class=>'right'}=collection_select :game, :name, Game.all.collect{|g| g.name}.uniq.sort, :to_s, :to_s
-    %tr
-      %td{:class=>'styled-dark-red-button'}=log_book_form.submit 'create'
+      %td{:class=>'right'}
+        %span=collection_select :game, :name, Game.all.collect{|g| g.name}.uniq.sort, :to_s, :to_s
+        %span=log_book_form.submit 'create', :class=>'center styled-button-dark-red'
