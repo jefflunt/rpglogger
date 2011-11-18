@@ -1,7 +1,7 @@
 rpglogger
 =========
 
-**rpglogger** is a web appliction for logging your progress though an RPG. It allows you to track:
+**rpglogger** is a web appliction for logging your progress though an RPG. It allows you to track objects in the game, which can include just about anything. Examples of wht you might track include:
 
 -   quests
 -   player and non-player characters

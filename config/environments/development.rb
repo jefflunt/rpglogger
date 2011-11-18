@@ -1,4 +1,5 @@
 Rpglogger::Application.configure do
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on

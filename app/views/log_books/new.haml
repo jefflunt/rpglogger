@@ -1,0 +1,11 @@
+=form_for @log_book do |log_book_form|
+  =log_book_form.hidden_field :user_id
+  %table
+    %tr
+      %th='log book title'
+    %tr
+      %td=log_book_form.text_field :title
+    %tr
+      %th='choose your game'
+    %tr
+      %td=collection_select :game, :name, Game.all.collect{|g| g.name}.uniq.sort, :to_s, :to_s

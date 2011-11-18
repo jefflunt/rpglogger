@@ -1,15 +1,19 @@
-#log-book-index{:class=>'compact left'}
+#log-book-index
   .page-title
     ='List of log books'
-  %table
-    %tr
-      %th{:class=>'column-string'}='title'
-      %th{:class=>'column-string'}='game'
-      %th{:class=>'column-string'}='user'
-      %th{:class=>'column-integer'}='objects logged'
-    - @log_books.each do |log_book|
+    %span{:class=>'small-caps-serif'}=link_to '&nbsp;&nbsp;&nbsp;'.html_safe + 'create new', new_log_book_path
+    %br
+    %br
+  .compact
+    %table
       %tr
-        %td{:class=>'column-string'}=link_to log_book.title, log_book
-        %td{:class=>'column-string'}=link_to log_book.game.name, log_book.game
-        %td{:class=>'column-string'}=link_to log_book.user.login, log_book.user
-        %td{:class=>'column-string'}=link_to log_book.world_objects.count, log_book      
+        %th{:class=>'column-string'}='title'
+        %th{:class=>'column-string'}='game'
+        %th{:class=>'column-string'}='user'
+        %th{:class=>'column-integer'}='objects logged'
+      - @log_books.each do |log_book|
+        %tr
+          %td{:class=>'column-string'}=link_to log_book.title, log_book
+          %td{:class=>'column-string'}=link_to log_book.game.name, log_book.game
+          %td{:class=>'column-string'}=link_to log_book.user.nickname, log_book.user
+          %td{:class=>'column-string'}=link_to log_book.world_objects.count, log_book      

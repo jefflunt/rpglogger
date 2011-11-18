@@ -3,7 +3,8 @@ class Game < ActiveRecord::Base
 
   validate :name, :presence => true
 
-  def characters
-    log_books.collect{|lb| lb.world_objects.characters}
+  def self.all_game_names
+    Game.find_by_sql("SELECT DISTINCT name FROM games ORDER BY name")
   end
+  
 end

@@ -1,5 +1,17 @@
 class LogBooksController < ApplicationController
   
+  def new
+    @log_book = LogBook.new(:user_id => current_user.id)
+  end
+  
+  def create
+    new_log_book = LogBook.create!(params[:log_book]) do |log_book|
+      log_book.game_id = Game.find_by_name(params[:game][:name])
+    end
+    
+    redirect_to log_books_path
+  end
+  
   def index
     @log_books = LogBook.all
   end

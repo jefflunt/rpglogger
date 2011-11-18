@@ -9,4 +9,7 @@
             %tr
               %th=link_to 'games', games_path
               %th=link_to 'log books', log_books_path
-              %th='login/username'
+              -if current_user
+                %th=current_user.nickname.nil? ? current_user.name : current_user.nickname
+              -else
+                %th=link_to 'Sign in', '/auth/twitter'

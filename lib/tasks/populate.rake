@@ -1,4 +1,12 @@
 namespace :db do
+  desc "Create default games"
+  task :insert_default_games => :environment do
+    ["Skyrim"].each do |game_name|
+      puts "Inserting #{game_name}..."
+      Game.find_or_create_by_name(:name => game_name)
+    end
+  end
+  
   desc "Erase database"
   task :erase => :environment do
     puts "Erasing..."

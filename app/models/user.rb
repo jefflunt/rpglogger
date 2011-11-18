@@ -1,8 +1,11 @@
 class User < ActiveRecord::Base
-  acts_as_authentic
-  
   has_many :log_books, :dependent => :destroy
   
-  validate :login, :presence => true
-  validate :crypted_password, :presence => true
+  def self.create_with_omniauth(auth)
+    create! do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.name = auth["user_info"]["name"]
+    end
+  end
 end

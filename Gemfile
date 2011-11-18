@@ -3,10 +3,9 @@ source 'http://rubygems.org'
 gem 'rails'
 gem 'sqlite3'
 gem 'json'
-gem 'capistrano'
 gem 'jquery-rails'
-gem 'authlogic', '~> 3.1.0'
 gem 'haml'
+gem 'omniauth'
 
 # heroku stuff
 gem 'heroku'
