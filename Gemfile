@@ -8,7 +8,7 @@ gem 'haml'
 gem 'omniauth','~>1.0.0'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
-
+gem 'omniauth-openid'
 
 # heroku stuff
 gem 'heroku'
