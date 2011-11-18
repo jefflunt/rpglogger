@@ -46,7 +46,7 @@ namespace :db do
       
       locations_section  = Section.create(:log_book_id => log_book.id, :name => 'locations')
       
-      quests_section     = Section.create(:log_book_id => log_book.id, :name => 'quests')
+      quests_section  = Section.create(:log_book_id => log_book.id, :name => 'quests')
       quest_detail    = SectionProperty.create(:section => quests_section, :name => 'detail',     :data_type => 'text',    :sort_order => 1)
       quest_completed = SectionProperty.create(:section => quests_section, :name => 'completed?', :data_type => 'boolean', :sort_order => 2)
       

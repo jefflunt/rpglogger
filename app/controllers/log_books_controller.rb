@@ -9,6 +9,8 @@ class LogBooksController < ApplicationController
       log_book.game_id = Game.find_by_name(params[:game][:name])
     end
     
+    new_log_book.create_default_sections
+    
     redirect_to log_books_path
   end
   
@@ -30,6 +32,11 @@ class LogBooksController < ApplicationController
   def show
     @log_book = LogBook.find(params[:id])
     @section = params[:section].nil? ? @log_book.sections.first : @log_book.sections.find_by_name(params[:section])
+    
+    if @log_book.sections.count == 0
+      @log_book.create_default_sections
+      redirect_to log_book_path(@log_book)
+    end
   end
   
 end
