@@ -10,6 +10,12 @@
               %th=link_to 'games', games_path
               %th=link_to 'log books', log_books_path
               -if current_user
-                %th=current_user.nickname.nil? ? current_user.name : current_user.nickname
+                %th=current_user.nickname.nil? ? (link_to current_user.name + ' / log out', signout_path) : (link_to current_user.nickname + ' / log out', signout_path)
               -else
-                %th=link_to 'Sign in', '/auth/twitter'
+                %th
+                  =link_to 'Sign in with twitter', '/auth/twitter'
+                  %br
+                  =link_to 'Sign in with facebook', '/auth/facebook'
+                  %br
+                  =link_to 'Sign in with Google', '/auth/google'
+                

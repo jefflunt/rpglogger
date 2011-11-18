@@ -5,7 +5,10 @@ gem 'sqlite3'
 gem 'json'
 gem 'jquery-rails'
 gem 'haml'
-gem 'omniauth'
+gem 'omniauth','~>1.0.0'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+
 
 # heroku stuff
 gem 'heroku'

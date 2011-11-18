@@ -1,7 +1,11 @@
 class LogBooksController < ApplicationController
   
   def new
-    @log_book = LogBook.new(:user_id => current_user.id)
+    if !current_user
+      redirect_to '/auth/twitter'
+    else
+      @log_book = LogBook.new(:user_id => current_user.id)
+    end
   end
   
   def create

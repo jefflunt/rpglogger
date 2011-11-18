@@ -5,7 +5,15 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.name = auth["user_info"]["name"]
+      
+      case user.provider
+      when "twitter"
+        user.name     = auth["user_info"]["name"]
+        user.nickname = auth["user_info"]["nickname"]
+      when "facebook"
+        user.name     = auth["info"]["name"]
+        user.nickname = auth["info"]["nickname"]
+      end
     end
   end
 end
