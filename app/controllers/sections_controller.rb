@@ -12,6 +12,13 @@ class SectionsController < ApplicationController
     redirect_to edit_log_book_path(@log_book.id)
   end
   
+  def update
+    section = Section.find(params[:id])
+    section.update_attributes(params[:section])
+    
+    redirect_to log_book_path(section.log_book) + "?section=#{section.name}"
+  end
+  
   def destroy
     section = Section.find(params[:id])
     log_book = section.log_book

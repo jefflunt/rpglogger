@@ -5,7 +5,7 @@ Rpglogger::Application.routes.draw do
   match "/auth/failure" => "sessions#failure"
   match "/signout" => "sessions#destroy", :as => :signout
   
-  resource :user_sessions
+  resource :sessions
   resource :account, :controller => "users"
   
   resources :games

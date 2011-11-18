@@ -12,10 +12,4 @@
               -if current_user
                 %th=current_user.nickname.nil? ? (link_to current_user.name + ' / log out', signout_path) : (link_to current_user.nickname + ' / log out', signout_path)
               -else
-                %th
-                  =link_to 'Sign in with twitter', '/auth/twitter'
-                  %br
-                  =link_to 'Sign in with facebook', '/auth/facebook'
-                  %br
-                  =link_to 'Sign in with Google', '/auth/google'
-                
+                %th=link_to 'log in', '/sessions/new'                
