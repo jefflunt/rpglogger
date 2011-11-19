@@ -1,25 +1,34 @@
 =render :partial => 'partials/section_nav', :locals=>{:log_book => @world_object.section.log_book}
 %br
 #section_title{:class=>'serif-sc-font big-font-size'}
-  %span{:class=>'color-orange'}='New item in '
+  %span{:class=>'color-orange'}='in '
   %span=link_to @world_object.section.name, log_book_path(@world_object.section.log_book) + "?section=#{@world_object.section.name}"
 =form_for @world_object do |obj_form|
   =obj_form.hidden_field :section_id
   #new_object_form{:class=>'serif-sc-font compact-form right'}
     %table
       %tr
-        %th
-          =obj_form.label :name
-      %tr
         %td
-          =obj_form.text_field :name
-      =obj_form.fields_for :world_object_properties do |world_object_property_fields|
-        %tr
-          %th=world_object_property_fields.label world_object_property_fields.object.section_property.name.to_sym
-        %tr
-          %td
-            =world_object_property_fields.object.correct_form_field(world_object_property_fields)
-            =world_object_property_fields.hidden_field :section_property_id
-      %tr
-        %td{:class=>'right'}
-          =obj_form.submit 'Save', :class => 'styled-button-dark-red'
+          %table
+            %tr
+              %th
+                =obj_form.label :name
+            %tr
+              %td
+                =obj_form.text_field :name
+            =obj_form.fields_for :world_object_properties do |world_object_property_fields|
+              %tr
+                %th=world_object_property_fields.label world_object_property_fields.object.section_property.name.to_sym
+              %tr
+                %td
+                  =world_object_property_fields.object.correct_form_field(world_object_property_fields)
+                  =world_object_property_fields.hidden_field :section_property_id
+            %tr
+              %td
+                =obj_form.submit 'Save', :class => 'styled-button-dark-red'
+        %td{:class=>'left'}
+          -if @world_object.errors.any?
+            %h2{:class=>'serif-normal-font'}='Whoa, we got some issues here:'
+            %ul
+              -@world_object.errors.full_messages.each do |msg|
+                %li=msg

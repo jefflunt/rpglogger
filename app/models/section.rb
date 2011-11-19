@@ -6,5 +6,5 @@ class Section < ActiveRecord::Base
   
   accepts_nested_attributes_for :section_properties
   
-  validate :name, :presence => true
+  validates :name, :presence => true
 end

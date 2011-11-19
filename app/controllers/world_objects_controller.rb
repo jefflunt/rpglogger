@@ -16,9 +16,13 @@ class WorldObjectsController < ApplicationController
   end
   
   def create
-    world_object = WorldObject.create(params[:world_object])
+    @world_object = WorldObject.new(params[:world_object])
     
-    redirect_to log_book_path(world_object.section.log_book) + "?section=#{world_object.section.name}"
+    if @world_object.save
+      redirect_to log_book_path(@world_object.section.log_book) + "?section=#{@world_object.section.name}"
+    else
+      render 'world_object_form'
+    end
   end
   
   def edit

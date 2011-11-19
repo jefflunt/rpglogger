@@ -8,7 +8,7 @@ class WorldObject < ActiveRecord::Base
   has_many :child_objects, :class_name => 'WorldObject', :dependent => :nullify
   has_many :world_object_properties, :dependent => :destroy
   
-  validate :name, :presence => true
+  validates :name, :presence => true
     
   accepts_nested_attributes_for :world_object_properties
   
