@@ -22,10 +22,12 @@ class SectionPropertiesController < ApplicationController
       new_section_names = comma_separated_list_of_names.split(',').collect{|s| s.strip}.each_with_index do |name, index|
         new_section_property = SectionProperty.create(:name=>name, :data_type=>data_type, :sort_order=>next_sort_order+index, :section_id=>@section.id) unless name.empty? || name.blank?
         
-        if data_type.eql?('boolean')
-          @section.world_objects.each do |wo|
-            WorldObjectProperty.create(:section_property=>new_section_property, :world_object=>wo, :boolean_value=>false)
-          end
+        @section.world_objects.each do |wo|
+          WorldObjectProperty.create(
+            :section_property=>new_section_property,
+            :world_object=>wo,
+            :boolean_value=>false
+          )
         end
       end
     end

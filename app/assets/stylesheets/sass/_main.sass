@@ -66,13 +66,12 @@
   table
     td
       vertical-align: top
-
+      
 a
   color: $color-gray
   text-decoration: none
   &:hover
     color: $color-blue-gray
-
 hr
   color: $color-gray
   background-color: $color-gray
@@ -90,6 +89,10 @@ input
   border: none
   padding: 5px
   width: 300px
+  &[type=checkbox]
+    width: auto
+  &[type=submit]
+    width: auto
   height: 15px
 textarea
   @extend input
@@ -101,3 +104,18 @@ select
   height: auto
   option
     border: 0px
+    
+/* input fields */
+
+.narrow-input
+  @extend input
+  width: 225px
+.styled-button
+  width: auto
+  height: auto
+.styled-button-dark-red
+  @extend .styled-button
+  background-color: $color-dark-red
+.styled-button-blue-gray
+  @extend .styled-button
+  background-color: $color-blue-gray
