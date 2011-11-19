@@ -5,7 +5,7 @@ class WorldObject < ActiveRecord::Base
   belongs_to :section
   belongs_to :parent_object, :class_name => 'WorldObject', :foreign_key => 'parent_object_id'
 
-  has_many :child_objects, :class_name => 'WorldObject', :dependent => :nullify
+  has_many :child_objects, :class_name => 'WorldObject', :foreign_key => 'parent_object_id', :dependent => :nullify
   has_many :world_object_properties, :dependent => :destroy
   
   validates :name, :presence => true
