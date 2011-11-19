@@ -29,7 +29,7 @@ class SectionsController < ApplicationController
   
   private
     def create_new_sections_from(comma_separated_list_of_names)
-      new_section_names = comma_separated_list_of_names.split(',').collect{|s| s.downcase.strip}.each do |name|
+      new_section_names = comma_separated_list_of_names.split(',').collect{|s| s.strip}.each do |name|
         Section.create(:name=>name, :log_book_id=>@log_book.id) unless name.empty? || name.blank?
       end
     end

@@ -28,7 +28,7 @@ class WorldObjectProperty < ActiveRecord::Base
     when 'integer'
       return form.text_field  :integer_value
     when 'boolean'
-      return form.check_box   :boolean_value
+      return form.check_box   :boolean_value, :class=>'center'
     when 'string'
       return form.text_field  :string_value
     when 'text'

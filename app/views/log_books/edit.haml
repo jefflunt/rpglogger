@@ -1,37 +1,37 @@
 =render :partial => 'partials/section_nav', :locals=>{:log_book => @log_book}
 
 .section-title
-  ='sections'
-.detail
-  .right
-    %table
-      %tr
-        %td
-          =form_for @log_book do |log_book_form|
-            %table
+  %br
+  %span{:class=>'serif-sc-font big-font-size'}='Edit sections'
+#sections_form{:class=>'serif-sc-font compact-form right'}
+  %table
+    %tr
+      %td
+        =form_for @log_book do |log_book_form|
+          %table
+            %tr
+              %th='Log Book Title'
+              %td
+            %tr
+              %td=log_book_form.text_field :title
+              %td
+            %tr
+              %th='Sections'
+              %td
+            =log_book_form.fields_for :sections do |section_form|
               %tr
-                %th='log book title'
-                %td
-              %tr
-                %td=log_book_form.text_field :title
-                %td
-              %tr
-                %th='sections'
-                %td
-              =log_book_form.fields_for :sections do |section_form|
-                %tr
-                  %td=section_form.text_field :name
-                  %th=link_to 'delete!', section_path(section_form.object), {:method => :delete}
-              %tr
-                %td=log_book_form.submit 'Save', :class => 'styled-button-dark-red'
-        %td
-          =form_for :new_sections, :url=>{:controller=>:sections} do |new_sections_form|
-            =hidden_field_tag :log_book_id, @log_book.id.to_s
-            %table
-              %tr
-                %th='new sections (comma-separated)'
-              %tr
-                %td=new_sections_form.text_field :names
-              %tr
-                %td=new_sections_form.submit ">>", :class => 'styled-button-dark-red'
-                
+                %td=section_form.text_field :name
+                %th=link_to 'delete!', section_path(section_form.object), {:method => :delete}
+            %tr
+              %td=log_book_form.submit 'Save', :class => 'styled-button-dark-red'
+      %td
+        =form_for :new_sections, :url=>{:controller=>:sections} do |new_sections_form|
+          =hidden_field_tag :log_book_id, @log_book.id.to_s
+          %table
+            %tr
+              %th='New Sections (comma-separated)'
+            %tr
+              %td=new_sections_form.text_field :names
+            %tr
+              %td=new_sections_form.submit "Add sections", :class => 'styled-button-dark-red'
+              

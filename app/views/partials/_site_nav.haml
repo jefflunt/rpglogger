@@ -4,11 +4,11 @@
       %th{:class=>'site-title left'}
         %span=link_to 'rpglogger', root_path
       %th
-        #site-links{:class => 'compact center'}
+        #site-links{:class => 'compact-table center'}
           %table
             %tr
               %th=link_to 'Log Books', log_books_path
               -if current_user
-                %th=current_user.nickname.nil? ? (link_to current_user.name + ' / logout', signout_path) : (link_to current_user.nickname + ' / logout', signout_path)
+                %th=current_user.nickname.nil? ? (link_to current_user.name + ' / Logout', signout_path) : (link_to current_user.nickname + ' / Logout', signout_path)
               -else
-                %th=link_to 'login', '/sessions/new'
+                %th=link_to 'Login', '/sessions/new'

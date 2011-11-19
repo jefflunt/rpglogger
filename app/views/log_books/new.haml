@@ -1,15 +1,19 @@
 %br
+%span{:class=>'big-font-size color-orange'}='New log book'
+%br
 %br
 =form_for @log_book do |log_book_form|
   =log_book_form.hidden_field :user_id
   %table
     %tr
-      %th{:class=>'small-caps-serif right'}='log book title'
+      %th{:class=>'serif-sc-font right'}='Log Book Title'
     %tr
       %td=log_book_form.text_field :title
     %tr
-      %th{:class=>'small-caps-serif right'}='choose your game'
+      %th{:class=>'serif-sc-font right'}='Choose Your Game'
     %tr
       %td{:class=>'right'}
         %span=collection_select :game, :name, Game.all.collect{|g| g.name}.uniq.sort, :to_s, :to_s
-        %span=log_book_form.submit 'create', :class=>'center styled-button-dark-red'
+        %br
+        %br
+        %span=log_book_form.submit 'Create', :class=>'center styled-button-dark-red'

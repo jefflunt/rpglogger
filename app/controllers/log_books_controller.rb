@@ -20,7 +20,7 @@ class LogBooksController < ApplicationController
   
   def index
     if current_user
-      return @log_books = LogBook.find(:all, :conditions => "user_id = #{current_user.id}")
+      return @log_books = LogBook.find(:all, :conditions => "user_id = #{current_user.id}", :order => 'title ASC')
     else
       return redirect_to new_sessions_path
     end
@@ -40,6 +40,7 @@ class LogBooksController < ApplicationController
   def show
     @log_book = LogBook.find(params[:id])
     @section = params[:section].nil? ? @log_book.sections.first : @log_book.sections.find_by_name(params[:section])
+    @world_objects = WorldObject.find(:all, :conditions => "section_id = #{@section.id}", :order => 'name ASC')
     
     if @log_book.sections.count == 0
       @log_book.create_default_sections
