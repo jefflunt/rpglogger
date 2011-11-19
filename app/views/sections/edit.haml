@@ -22,7 +22,7 @@
             =section_form.fields_for :section_properties do |section_properties_form|
               %tr
                 %td=section_properties_form.text_field :name
-                %th=link_to 'delete!', section_property_path(section_form.object), {:method => :delete}
+                %th=link_to 'delete!', section_property_path(section_properties_form.object), {:method => :delete}
             %tr
               %td=section_form.submit 'Save', :class => 'styled-button-dark-red'
       %td

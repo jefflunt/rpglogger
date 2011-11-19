@@ -19,7 +19,7 @@ class SectionPropertiesController < ApplicationController
   
   private
     def create_new_section_properties_from(comma_separated_list_of_names, data_type, next_sort_order)
-      new_section_names = comma_separated_list_of_names.split(',').collect{|s| s.downcase.strip}.each_with_index do |name, index|
+      new_section_names = comma_separated_list_of_names.split(',').collect{|s| s.strip}.each_with_index do |name, index|
         new_section_property = SectionProperty.create(:name=>name, :data_type=>data_type, :sort_order=>next_sort_order+index, :section_id=>@section.id) unless name.empty? || name.blank?
         
         if data_type.eql?('boolean')
