@@ -1,10 +1,12 @@
-@import 'globals'
+@import 'primitives'
+
+/* divs */
 
 .content-border
   border: 5px solid
   min-width: 920px
   margin: 5px 25px 25px 25px
-  color: $main-black
+  color: $color-black
 
 .content
   padding: 10px
@@ -15,98 +17,81 @@
   margin:
     left: auto
     right: auto
-  color: $main-gray
+  color: $color-gray
   font:
-    family: $serif
+    family: $serif-normal-font
     size: 15px
 
-.site-title
-  text-transform: lowercase
-  text-align: left
-  border-bottom: none
+.site-shoutout
+  color: $color-gray
   font:
-    family: $site-and-page-title
+    family: $serif-sc-font
+    size: $small-font-size
 
-.page-title
-  text-transform: lowercase
-  color: $page-orange
-  padding: 5px
+.site-title
+  color: $color-gray
   font:
-    family: $site-and-page-title
-    size: $big-titles-size
-    weight: bold
+    family: $site-title-font
+    size: $site-title-font-size
+  letter-spacing: 1px
+  
+.section-title
+  color: $color-orange
 
 .compact
   table
     width: 100%
   th
     vertical-align: bottom
-    border-bottom: $main-gray solid thin
+    border-bottom: $color-gray solid thin
     font:
-      family: $serif
-      size: $typical-text-size
-    text-transform: uppercase
-    .detail-integer
+      family: $serif-sc-font
+      size: $small-font-size
+    .column-integer
       text-align: right
-    .detail-string
+      width: 1%
+    .column-string
       text-align: left
-    .detail-text
+    .column-text
       text-align: left
+    .column-boolean
+      text-align: center
   td
     vertical-align: top
     border-right: transparent solid 10px
     font:
-      family: $sans
-      size: $typical-text-size
-    .detail-integer
+      family: $serif-normal-font
+      size: $small-font-size
+    .column-integer
       text-align: right
-    .detail-string
+      width: 1%
+    .column-string
       text-align: left
-    .detail-text
+    .column-text
       text-align: left
-
-.detail
-  @extend .compact
-  table
-    width: 55%
-  th
-    padding: 5px
-    padding-right: 8px
-    border-bottom: none
-    vertical-align: top
-    text-align: right
-  td
-    width: 1%
-
-.small-caps-serif
-  font:
-    family: $serif
-    size: $typical-text-size
-  text-transform: uppercase
-
-.huge-text
-  font-size: 36px
+    .column-boolean
+      text-align: center
 
 a
-  color: $main-gray
+  color: $color-gray
   text-decoration: none
   &:hover
-    color: $main-blue-gray
+    color: $color-blue-gray
 
 hr
-  color: $main-gray
-  background-color: $main-gray
+  color: $color-gray
+  background-color: $color-gray
   height: 1px
   width: 100%
 body
   background: #000 url('/site-background-image.jpg') no-repeat left top
-  color: $main-white
+  color: $color-white
 h1
   font:
     size: 16px
 input
-  color: $main-white
-  background-color: $main-dark-gray
+  color: $color-white
+  background-color: $color-dark-gray
   border: none
   padding: 5px
   width: 300px
@@ -121,15 +106,3 @@ select
   height: auto
   option
     border: 0px
-.narrow-input
-  @extend input
-  width: 225px
-.styled-button
-  width: auto
-  height: auto
-.styled-button-dark-red
-  @extend .styled-button
-  background-color: $main-dark-red
-.styled-button-blue-gray
-  @extend .styled-button
-  background-color: $main-blue-gray

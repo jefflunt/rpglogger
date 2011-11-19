@@ -1,6 +1,6 @@
-=render :partial => 'partials/log_book_nav', :locals=>{:log_book => @section.log_book}
+=render :partial => 'partials/section_nav', :locals=>{:log_book => @section.log_book}
 
-.page-title
+.section-title
   %span=link_to "#{@section.name.singularize} ", log_book_path(@section.log_book) + "?section=#{@section.name}"
   %span='attributes'
 .detail

@@ -1,6 +1,6 @@
-=render :partial => 'partials/log_book_nav', :locals=>{:log_book => @world_object.section.log_book}
+=render :partial => 'partials/section_nav', :locals=>{:log_book => @world_object.section.log_book}
 %br
-.page-title
+.section-title
   =@world_object.section.name.singularize.titleize
 
 =form_for @world_object do |obj_form|

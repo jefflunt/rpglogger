@@ -1,8 +1,8 @@
 .compact
-  #log_book_nav
+  #section_nav
     %table
       %tr
-        %th{:class=>'min-width center lowercase'}=link_to 'edit sections', edit_log_book_path(log_book)
+        %th{:class=>'min-width center'}=link_to 'Edit Sections', edit_log_book_path(log_book)
         -log_book.sections.each_with_index do |s, index|
           -if index > 0 && index % 8 == 0
             %tr

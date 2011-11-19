@@ -1,0 +1,90 @@
+$background-image: image-url("site-background-image.jpg")
+
+/* colors */
+
+$color-black: #000
+$color-white: #fff
+$color-gray: #c0c0c0
+$color-blue-gray: #007c84
+$color-dark-gray: #272727
+$color-dark-red: #640502
+$color-orange: #bb4f1b
+
+/* color styles */
+
+.color-black
+  color: $color-black
+.color-white
+  color: $color-white
+.color-gray
+  color: $color-gray
+.color-blue-gray
+  color: $color-blue-gray
+.color-dark-gray
+  color: $color-dark-gray
+.color-dark-red
+  color: $color-dark-red
+.color-orange
+  color: $color-orange
+
+/* fonts */
+
+$site-title-font: 'UnifrakturCook', cursive
+$serif-sc-font: 'IM Fell French Canon SC', serif
+$serif-normal-font: 'IM Fell French Canon', serif
+
+$small-font-size: 16px
+$big-font-size: 24px
+$site-title-font-size: 40px
+
+/* font styles */
+
+.small-font-size
+  font-size: $small-font-size
+.big-font-size
+  font-size: $big-font-size
+  
+.serif-sc-font
+  font-family: $serif-sc-font
+.serif-normal-font
+  font-family: $serif-normal-font
+
+/* style primitives */
+
+.right
+  text-align: right
+.left
+  text-align: left
+.center
+  text-align: center
+.uppercase
+  text-transform: uppercase
+.lowercase
+  text-transform: lowercase
+.italic
+  font-style: italic
+.oblique
+  font-style: oblique
+
+.min-width
+  width: 1%
+.max-width
+  width: 100%
+
+.border-right
+  border-right: 1px solid
+
+/* input fields */
+
+.narrow-input
+  @extend input
+  width: 225px
+.styled-button
+  width: auto
+  height: auto
+.styled-button-dark-red
+  @extend .styled-button
+  background-color: $color-dark-red
+.styled-button-blue-gray
+  @extend .styled-button
+  background-color: $color-blue-gray
