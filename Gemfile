@@ -9,6 +9,7 @@ gem 'omniauth','~>1.0.0'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-openid'
+gem 'cancan'
 
 # heroku stuff
 gem 'heroku'
@@ -23,8 +24,9 @@ group :assets do
 end
 
 group :development, :cucumber, :test do
+  gem "ruby-debug"
   gem "populator"
-  gem "factory_girl"
+  gem "factory_girl_rails"
   gem "faker"
   gem "webrat"  
   gem "rspec-rails"

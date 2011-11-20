@@ -1,4 +1,5 @@
 class SectionsController < ApplicationController
+  load_and_authorize_resource
   
   def edit
     @section = Section.find(params[:id])

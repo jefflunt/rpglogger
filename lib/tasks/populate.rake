@@ -26,16 +26,10 @@ namespace :db do
     end
     
     User.populate 50 do |user|
-      user.login = Faker::Internet.user_name
-      user.email = Faker::Internet.email
-      
-      user.crypted_password     = "password"
-      user.password_salt        = "salt"
-      user.persistence_token    = "persistence-token"
-      user.single_access_token  = "single-access-token"
-      user.perishable_token     = "perishable_token"
-      user.login_count          = 0
-      user.failed_login_count   = 0
+      user.provider = Populator.words(1)
+      user.uid = rand(9000) + 999
+      user.name = Faker::Internet.user_name
+      user.nickname = Faker::Internet.user_name
     end
     
     LogBook.populate 15 do |log_book|

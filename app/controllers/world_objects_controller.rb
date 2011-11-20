@@ -1,4 +1,5 @@
 class WorldObjectsController < ApplicationController
+  load_and_authorize_resource
   
   def show
     @world_object = WorldObject.find(params[:id])
@@ -15,9 +16,7 @@ class WorldObjectsController < ApplicationController
     render 'world_object_form'
   end
   
-  def create
-    @world_object = WorldObject.new(params[:world_object])
-    
+  def create    
     if @world_object.save
       redirect_to log_book_path(@world_object.section.log_book) + "?section=#{@world_object.section.name}"
     else
