@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   check_authorization
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    flash[:error] = "You don't have access to that page."
+    redirect_back_or root_url
   end
 
   private

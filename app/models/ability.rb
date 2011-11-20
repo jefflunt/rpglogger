@@ -2,9 +2,15 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :manage, LogBook, :id => user.id
+    user ||= User.new
+    
+    can :manage, LogBook, :user_id => user.id
     can :manage, WorldObject do |world_object|
       world_object.section.log_book.user == user
+    end
+    
+    can :manage, Section do |section|
+      section.log_book.user == user
     end
     
     # Define abilities for the passed in user here. For example:

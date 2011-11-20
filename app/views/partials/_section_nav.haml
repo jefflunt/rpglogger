@@ -1,11 +1,8 @@
-.compact-table
-  #section_nav
-    %table
-      %tr
-        %th{:class=>'min-width center'}=link_to 'Edit Sections', edit_log_book_path(log_book)
-        -log_book.sections.each_with_index do |s, index|
-          -if index > 0 && index % 8 == 0
-            %tr
-          -if index > 0 && index % 8 == 0
-            %td
-          %th=link_to s.name, "/log_books/#{log_book.id}?section=#{s.name}"
+%span{:class=>'color-orange'}='SECTIONS '
+%span=link_to '(edit)', edit_log_book_path(@log_book)
+%table{:class=>'max-width'}
+  %tr
+    %td
+      %ul{:class=>'list-no-markers'}
+        -@log_book.sections.each_with_index do |s, index|
+          %li=link_to '>&nbsp;'.html_safe+s.name, "/log_books/#{@log_book.id}?section=#{s.name}"

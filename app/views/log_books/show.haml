@@ -1,9 +1,6 @@
-=render :partial => 'partials/section_nav', :locals => {:log_book => @log_book}
-%br
-#details-div
-  %table
-    %tr
-      %td{:class=>'border-right max-width'}=render :partial => 'partials/section_title'
-    %tr
-      %td{:class=>'border-right'}=render :partial => 'partials/section_detail'
+%table{:class=>'max-width'}
+  %tr
+    %td=render :partial => 'partials/section_title'
+  %tr
+    %td=render :partial => 'partials/section_detail'
   

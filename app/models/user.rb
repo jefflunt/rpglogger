@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :log_books, :dependent => :destroy
   
+  validates :uid, :uniqueness => {:scope => :provider}
+  
   def self.create_with_omniauth(auth)
     create! do |user|
       user.provider = auth["provider"]

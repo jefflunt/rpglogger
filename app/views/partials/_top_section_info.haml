@@ -1,0 +1,12 @@
+%table{:class=>'max-width'}
+  %tr
+    %th{:class=>'site-title left', :width=>'30%'}
+      %span
+        =image_tag '/logo_small.png', :align=>'left'
+      %span=link_to '&nbsp;rpglogger'.html_safe, root_path
+    %td=center_message
+    %th{:width=>'8%'}=link_to 'Log Books', log_books_path
+    -if current_user
+      %th{:width=>'8%'}=current_user.nickname.nil? ? (link_to 'Logout', signout_path) : (link_to 'Logout', signout_path)
+    -else
+      %th=link_to 'Login', '/sessions/new'

@@ -1,5 +1,9 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 
+Given /^"([^"]*)" user "([^"]*)" with name "([^"]*)" and uid "([^"]*)"$/ do |provider, nickname, full_name, uid|
+  Factory.create(:user, :provider=>provider, :nickname=>nickname, :name=>full_name, :uid=>uid)
+end
+
 Given /^I am signed in with "([^"]*)"$/ do |provider|
   visit "/auth/#{provider.downcase}"
 end

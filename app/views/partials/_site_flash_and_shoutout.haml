@@ -1,0 +1,10 @@
+.content-border
+  -if flash[:notice]
+    .notice-messages
+      =render :partial => 'partials/top_section_info', :locals => {:center_message => flash[:notice]}
+  -elsif flash[:error]
+    .error-messages
+      =render :partial => 'partials/top_section_info', :locals => {:center_message => flash[:error]}
+  -else
+    .site-shoutout
+      =render :partial => 'partials/top_section_info', :locals => {:center_message => '<span class="color-white">celebrating the launch of </span><a href="http://elderscrolls.com">elder scrolls v: skyrim</a>'.html_safe}

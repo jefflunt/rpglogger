@@ -42,9 +42,9 @@ class LogBooksController < ApplicationController
   end
   
   def show
-    @log_book = LogBook.find(params[:id])
     @section = params[:section].nil? ? @log_book.sections.first : @log_book.sections.find_by_name(params[:section])
     @world_objects = WorldObject.find(:all, :conditions => "section_id = #{@section.id}", :order => 'name ASC')
+#    @world_objects.count == 0 ? @world_objects = [WorldObject.new(:name=>"--------")]
     
     if @log_book.sections.count == 0
       @log_book.create_default_sections
