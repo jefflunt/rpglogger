@@ -1,18 +1,23 @@
 class LogBooksController < ApplicationController
   load_and_authorize_resource
   
+  def show
+    @log_book.create_default_sections unless @log_book.sections.count > 0
+        
+    redirect_to section_path(@log_book.sections.first)
+  end
+  
+  
   def new
     if !current_user
       redirect_to '/sessions/new'
     else
-      @log_book = LogBook.new(:user_id => current_user.id)
+      @log_book.user_id = current_user.id
     end
   end
   
   def create
-    @log_book = LogBook.new(params[:log_book]) do |log_book|
-      log_book.game_id = Game.find_by_name(params[:game][:name])
-    end
+    @log_book = LogBook.new(params[:log_book])
     
     if @log_book.save
       @log_book.create_default_sections
@@ -26,6 +31,7 @@ class LogBooksController < ApplicationController
     if current_user
       return @log_books = LogBook.find(:all, :conditions => "user_id = #{current_user.id}", :order => 'title ASC')
     else
+      flash.keep
       return redirect_to new_sessions_path
     end
   end
@@ -37,7 +43,7 @@ class LogBooksController < ApplicationController
   def update
     @log_book.update_attributes(params[:log_book])
     
-    if (params[:sections][:new_names])
+    if (params[:sections])
       new_names = params[:sections][:new_names].split(', ').collect{|s| s.strip}.each do |new_name|
         Section.create!(:name=>new_name, :log_book_id=>@log_book.id)
       end
@@ -45,16 +51,5 @@ class LogBooksController < ApplicationController
     
     redirect_to edit_log_book_path(@log_book)
   end
-  
-  def show
-    @section = params[:section].nil? ? @log_book.sections.first : @log_book.sections.find_by_name(params[:section])
-    @world_objects = WorldObject.find(:all, :conditions => "section_id = #{@section.id}", :order => 'name ASC')
-#    @world_objects.count == 0 ? @world_objects = [WorldObject.new(:name=>"--------")]
     
-    if @log_book.sections.count == 0
-      @log_book.create_default_sections
-      redirect_to log_book_path(@log_book)
-    end
-  end
-  
 end

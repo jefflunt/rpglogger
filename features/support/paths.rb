@@ -7,9 +7,8 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-    when /the log_books index/
+    when /the LogBooks index/
       log_books_path
-    # when /the new portals page/
     #   new_portals_path
     # 
     # when /administrations page/

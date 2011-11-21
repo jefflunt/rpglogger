@@ -1,8 +1,5 @@
-=render :partial => 'partials/section_nav', :locals=>{:log_book => @section.log_book}
-
 .section-title
-  %br
-  %span{:class=>'serif-sc-font big-font-size'}=link_to "#{@section.name} ", log_book_path(@section.log_book) + "?section=#{@section.name}"
+  %span{:class=>'serif-sc-font big-font-size'}=link_to "#{@section.name} ", section_path(@section)
   %span{:class=>'serif-sc-font big-font-size'}='attributes'
 #attributes_form{:class=>'serif-sc-font compact-form right'}
   %table
@@ -25,18 +22,17 @@
                 %th=link_to 'delete!', section_property_path(section_properties_form.object), {:method => :delete}
             %tr
               %td=section_form.submit 'Save', :class => 'styled-button-dark-red'
-      %td
-        =form_for :new_properties, :url=>{:controller=>:section_properties} do |new_section_properties_form|
-          =hidden_field_tag :section_id, @section.id.to_s
-          %table
-            %tr
-              %th='New Attributes (comma-separated)'
-            %tr
-              %td=new_section_properties_form.text_field :names
-            %tr
-              %th='Attribute Type'
-            %tr
-              %td=collection_select new_section_properties_form.object, :data_type, SectionProperty.all_data_types, :to_s, :to_s
-            %tr
-              %td=new_section_properties_form.submit "Add attributes", :class => 'styled-button-dark-red'
+          =fields_for :section_properties do |new_section_properties_form|
+            %td        
+              %table
+                %tr
+                  %th='New Attributes (comma-separated)'
+                %tr
+                  %td=new_section_properties_form.text_field :new_section_property_names
+                %tr
+                  %th='Attribute Type'
+                %tr
+                  %td=collection_select new_section_properties_form.object, :data_type, SectionProperty.all_data_types, :to_s, :to_s
+                %tr
+                  %td=section_form.submit "Add attributes", :class => 'styled-button-dark-red'
     

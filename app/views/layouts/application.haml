@@ -7,14 +7,6 @@
     =javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=180331025392280";
-    fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     %table{:class=>'min-width-920'}
       %tr
         %td
@@ -28,8 +20,8 @@
         %td{:class=>'top left width-250 serif-sc-font'}
           .content-border
             #side-bar{:class=>'content'}
-              -if @log_book
-                =render :partial => 'partials/section_nav'
+              -if @section || (@log_book && @log_book.title.present?)
+                =render :partial => 'partials/log_book_nav', :locals=>{:log_book=>@log_book || @section.log_book}
               -else
                 =render :partial => 'partials/about'
               

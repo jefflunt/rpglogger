@@ -1,15 +1,10 @@
 class WorldObjectsController < ApplicationController
   load_and_authorize_resource
   
-  def show
-    @world_object = WorldObject.find(params[:id])
-    render 'world_object_form'
-  end
-  
   def new
-    model_section = Section.find_by_name(params[:section])
-    @world_object = WorldObject.new(:section => model_section)
-    model_section.section_properties.each do |sp|
+    section = Section.find(params[:section_id])
+    @world_object.section = section
+    @world_object.section.section_properties.each do |sp|
       @world_object.world_object_properties.build(:section_property_id => sp.id)
     end
     
@@ -24,6 +19,11 @@ class WorldObjectsController < ApplicationController
     end
   end
   
+  def show
+    @world_object = WorldObject.find(params[:id])
+    render 'world_object_form'
+  end
+    
   def edit
     @world_object = WorldObject.find(params[:id])
     render 'world_object_form'

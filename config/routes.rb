@@ -8,10 +8,14 @@ Rpglogger::Application.routes.draw do
   resource :sessions
   resource :account, :controller => "users"
   
-  resources :games
-  resources :users
-  resources :log_books
-  resources :sections
-  resources :section_properties
-  resources :world_objects
+  resources :games, :users
+
+  resources :log_books do
+    resources :sections
+  end
+  
+  resources :sections do
+    resources :world_objects
+  end
+  
 end

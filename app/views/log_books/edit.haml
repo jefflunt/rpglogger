@@ -1,5 +1,7 @@
 .section-title
-  %span{:class=>'serif-sc-font big-font-size'}='Edit sections'
+  %span{:class=>'serif-sc-font big-font-size'}
+    ="in "
+    =link_to @log_book.title, @log_book
 #sections_form{:class=>'serif-sc-font compact-form right'}
   %table
     %tr

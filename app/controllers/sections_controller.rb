@@ -1,15 +1,23 @@
 class SectionsController < ApplicationController
   load_and_authorize_resource
   
+  def show
+  end
+  
   def edit
-    @section = Section.find(params[:id])
   end
   
   def update
-    section = Section.find(params[:id])
-    section.update_attributes(params[:section])
+    @section.update_attributes(params[:section])
     
-    redirect_to log_book_path(section.log_book) + "?section=#{section.name}"
+    if params[:section_properties][:new_section_property_names]
+      highest_existing_sort_order = @section.section_properties.collect{|sp| sp.sort_order}.max
+      new_names = params[:section_properties][:new_section_property_names].split(',').collect{|sp| sp.strip}.each_with_index do |new_section_property_name, index|
+        SectionProperty.create!(:section_id=>@section.id, :name=>new_section_property_name, :sort_order=>highest_existing_sort_order+index+1, :data_type=>params[:data_type])
+      end
+    end
+    
+    redirect_to log_book_path(@section.log_book) + "?section=#{@section.name}"
   end
   
   def destroy

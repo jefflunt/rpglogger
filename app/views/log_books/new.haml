@@ -15,7 +15,7 @@
             %th{:class=>'serif-sc-font right'}='Choose Your Game'
           %tr
             %td{:class=>'right'}
-              %span=collection_select :game, :name, Game.all.collect{|g| g.name}.uniq.sort, :to_s, :to_s
+              %span=collection_select :log_book, :game_id, Game.all.sort{|g1, g2| g1.name <=> g2.name}, :id, :name
               %br
               %br
               %span=log_book_form.submit 'Create', :class=>'center styled-button-dark-red'

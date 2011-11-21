@@ -1,9 +1,7 @@
-=render :partial => 'partials/section_nav', :locals=>{:log_book => @world_object.section.log_book}
-%br
 #section_title{:class=>'serif-sc-font big-font-size'}
   %span{:class=>'color-orange'}='in '
   %span=link_to @world_object.section.name, log_book_path(@world_object.section.log_book) + "?section=#{@world_object.section.name}"
-=form_for @world_object do |obj_form|
+=form_for [:section, @world_object] do |obj_form|
   =obj_form.hidden_field :section_id
   #new_object_form{:class=>'serif-sc-font compact-form right'}
     %table
