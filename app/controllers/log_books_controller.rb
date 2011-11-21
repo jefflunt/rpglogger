@@ -35,10 +35,15 @@ class LogBooksController < ApplicationController
   end
   
   def update
-    log_book = LogBook.find(params[:id])
-    log_book.update_attributes(params[:log_book])
+    @log_book.update_attributes(params[:log_book])
     
-    redirect_to log_book
+    if (params[:sections][:new_names])
+      new_names = params[:sections][:new_names].split(', ').collect{|s| s.strip}.each do |new_name|
+        Section.create!(:name=>new_name, :log_book_id=>@log_book.id)
+      end
+    end
+    
+    redirect_to edit_log_book_path(@log_book)
   end
   
   def show

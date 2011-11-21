@@ -5,14 +5,6 @@ class SectionsController < ApplicationController
     @section = Section.find(params[:id])
   end
   
-  def create
-    @log_book = LogBook.find(params[:log_book_id])
-    
-    create_new_sections_from(params[:new_sections][:names])
-    
-    redirect_to edit_log_book_path(@log_book.id)
-  end
-  
   def update
     section = Section.find(params[:id])
     section.update_attributes(params[:section])
@@ -21,9 +13,8 @@ class SectionsController < ApplicationController
   end
   
   def destroy
-    section = Section.find(params[:id])
-    log_book = section.log_book
-    section.destroy
+    log_book = @section.log_book
+    @section.destroy
     
     redirect_to edit_log_book_path(log_book)
   end

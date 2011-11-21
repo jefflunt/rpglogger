@@ -10,7 +10,7 @@ class Ability
     end
     
     can :manage, Section do |section|
-      section.log_book.user == user
+      section.log_book.user == user unless section.log_book.nil?
     end
     
     # Define abilities for the passed in user here. For example:

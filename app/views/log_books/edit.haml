@@ -22,13 +22,13 @@
             %tr
               %td=log_book_form.submit 'Save', :class => 'styled-button-dark-red'
       %td
-        =form_for :new_sections, :url=>{:controller=>:sections} do |new_sections_form|
-          =hidden_field_tag :log_book_id, @log_book.id.to_s
-          %table
-            %tr
-              %th='New Sections (comma-separated)'
-            %tr
-              %td=new_sections_form.text_field :names
-            %tr
-              %td=new_sections_form.submit "Add sections", :class => 'styled-button-dark-red'
+        =form_for @log_book do |log_book_form|
+          =fields_for :sections do |new_sections_form|
+            %table
+              %tr
+                %th='New Sections (comma-separated)'
+              %tr
+                %td=new_sections_form.text_field :new_names
+              %tr
+                %td=log_book_form.submit "Add sections", :class => 'styled-button-dark-red'
               
