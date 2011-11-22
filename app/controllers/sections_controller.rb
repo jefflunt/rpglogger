@@ -11,7 +11,7 @@ class SectionsController < ApplicationController
     @section.update_attributes(params[:section])
     
     if params[:section_properties][:new_section_property_names]
-      highest_existing_sort_order = @section.section_properties.collect{|sp| sp.sort_order}.max
+      highest_existing_sort_order = @section.section_properties.collect{|sp| sp.sort_order}.max || 0
       new_names = params[:section_properties][:new_section_property_names].split(',').collect{|sp| sp.strip}.each_with_index do |new_section_property_name, index|
         SectionProperty.create!(:section_id=>@section.id, :name=>new_section_property_name, :sort_order=>highest_existing_sort_order+index+1, :data_type=>params[:data_type])
       end

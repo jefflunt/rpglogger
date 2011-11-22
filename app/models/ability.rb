@@ -14,5 +14,9 @@ class Ability
     can :manage, WorldObject do |world_object|
       user.world_objects.include?(world_object) || world_object.new_record?
     end
+    
+    can :manage, SectionProperty do |section_property|
+      user.section_properties.include?(section_property)
+    end
   end
 end

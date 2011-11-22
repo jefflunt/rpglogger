@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :log_books, :dependent => :destroy
   has_many :sections, :through => :log_books
+  has_many :section_properties, :through => :sections
   has_many :world_objects, :through => :log_books
   
   validates :uid, :uniqueness => {:scope => :provider}

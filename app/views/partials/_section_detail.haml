@@ -1,7 +1,7 @@
 #section-detail{:class => 'compact-table'}
   %table
     %tr
-      %td{:class=>'min-width'}=link_to '+', new_section_world_object_path(@section.id)
+      %th{:class=>'min-width'}=link_to '+', new_section_world_object_path(@section.id)
       %th{:class=>'column-string'}='Name/Title'
       -@section.section_properties.each do |sp|
         %th{:class=>'column-' + sp.data_type}=sp.name

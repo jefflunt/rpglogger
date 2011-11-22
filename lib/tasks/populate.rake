@@ -38,18 +38,18 @@ namespace :db do
       
       log_book.title = Populator.words(1..4).titleize
       
-      locations_section  = Section.create(:log_book_id => log_book.id, :name => 'locations')
+      locations_section  = Section.create(:log_book_id => log_book.id, :name => 'Locations')
       
-      quests_section  = Section.create(:log_book_id => log_book.id, :name => 'quests')
-      quest_detail    = SectionProperty.create(:section => quests_section, :name => 'detail',     :data_type => 'text',    :sort_order => 1)
-      quest_completed = SectionProperty.create(:section => quests_section, :name => 'completed?', :data_type => 'boolean', :sort_order => 2)
+      quests_section  = Section.create(:log_book_id => log_book.id, :name => 'Quests')
+      quest_detail    = SectionProperty.create(:section => quests_section, :name => 'Detail',     :data_type => 'text',    :sort_order => 1)
+      quest_completed = SectionProperty.create(:section => quests_section, :name => 'Completed?', :data_type => 'boolean', :sort_order => 2)
       
-      journal_section = Section.create(:log_book_id => log_book.id, :name => 'journal')
-      jounral_entry   = SectionProperty.create(:section => journal_section, :name => 'entry', :data_type => 'text',   :sort_order => 1)
+      journal_section = Section.create(:log_book_id => log_book.id, :name => 'Journal')
+      jounral_entry   = SectionProperty.create(:section => journal_section, :name => 'Entry', :data_type => 'text',   :sort_order => 1)
       
-      characters_section = Section.create(:log_book_id => log_book.id, :name => 'characters')
-      character_level = SectionProperty.create(:section => characters_section, :name => 'level',      :data_type => 'integer', :sort_order => 1)
-      character_story = SectionProperty.create(:section => characters_section, :name => 'back story', :data_type => 'text',    :sort_order => 2)
+      characters_section = Section.create(:log_book_id => log_book.id, :name => 'Characters')
+      character_level = SectionProperty.create(:section => characters_section, :name => 'Level',      :data_type => 'integer', :sort_order => 1)
+      character_story = SectionProperty.create(:section => characters_section, :name => 'Back Story', :data_type => 'text',    :sort_order => 2)
       
       rand(80).times do
         new_location = WorldObject.new(:name => Populator.words(1..3), :section => locations_section)
