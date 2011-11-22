@@ -2,11 +2,10 @@ class LogBooksController < ApplicationController
   load_and_authorize_resource
   
   def show
-    @log_book.create_default_sections unless @log_book.sections.count > 0
+    @log_book.create_empty_section if @log_book.sections.count == 0
         
     redirect_to section_path(@log_book.sections.first)
   end
-  
   
   def new
     if !current_user
@@ -17,11 +16,9 @@ class LogBooksController < ApplicationController
   end
   
   def create
-    @log_book = LogBook.new(params[:log_book])
-    
     if @log_book.save
       @log_book.create_default_sections
-      redirect_to log_books_path
+      redirect_to @log_book
     else
       render 'new'
     end

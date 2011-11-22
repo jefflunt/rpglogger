@@ -8,9 +8,7 @@ Scenario: A user can create a new LogBook
   And I fill in "log_book[title]" with "My new LogBook"
   And I press "Create"
   
-  Then I should see "Your log books"
-  And I should see "My new LogBook"
-  And I should see "create new"
+  Then I should see "SECTIONS (edit)"
 
 Scenario: A user can access LogBooks that they own
   Given I am signed in with "facebook"

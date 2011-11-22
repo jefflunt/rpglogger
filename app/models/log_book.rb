@@ -9,6 +9,10 @@ class LogBook < ActiveRecord::Base
   
   accepts_nested_attributes_for :sections
   
+  def create_empty_section
+    empty_section = Section.create(:log_book_id=>self.id, :name=>'New Section')
+  end
+  
   def create_default_sections
     locations_section  = Section.create(:log_book_id => self.id, :name => 'Locations')
   
