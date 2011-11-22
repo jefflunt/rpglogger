@@ -1,5 +1,10 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 
+When /^I manually enter the information for a new LogBook called "([^"]*)"$/ do |new_log_book_name|
+  visit new_log_book_path
+  fill_in "log_book[title]", :with => new_log_book_name
+end
+
 Given /^a LogBook exists called "([^"]*)" for game "([^"]*)" and owned by "([^"]*)"$/ do |log_book_title, game_name, nickname|
   user = User.find_or_create_by_nickname(nickname)
   game = Factory.create(:game, :name=>game_name)

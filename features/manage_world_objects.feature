@@ -33,10 +33,10 @@ Scenario: A user can create new WorldObjects
   And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
   And a Section exists called "Test Section" in "Test LogBook"
   
-  When I create a new WorldObject called "The new WorldObject" in "Test Section"
-  Then I should see "The new WorldObject"
+  When I go to the new WorldObjects page of section "Test Section"
+  And I fill in "world_object[name]" with "The new WorldObject"
+  And I press "Save"
+  Then I should see "Test Section"
+  And I should see "The new WorldObject"
   And I should see "+"
   And I should see "Name/Title"
-
-Scenario: A user can create new LogBooks
-  Given pending

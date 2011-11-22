@@ -20,7 +20,7 @@ class SectionsController < ApplicationController
       end
     end
     
-    redirect_to log_book_path(@section.log_book) + "?section=#{@section.name}"
+    redirect_to @section
   end
   
   def destroy

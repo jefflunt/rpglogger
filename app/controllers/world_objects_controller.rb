@@ -14,7 +14,7 @@ class WorldObjectsController < ApplicationController
   
   def create    
     if @world_object.save
-      redirect_to log_book_path(@world_object.section.log_book) + "?section=#{@world_object.section.name}"
+      redirect_to section_path(@world_object.section)
     else
       render 'world_object_form'
     end

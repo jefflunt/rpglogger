@@ -10,7 +10,7 @@ class LogBooksController < ApplicationController
   
   def new
     if !current_user
-      redirect_to '/sessions/new'
+      redirect_to new_sessions_path
     else
       @log_book.user_id = current_user.id
     end

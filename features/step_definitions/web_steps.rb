@@ -9,7 +9,10 @@ Given /^pending$/ do
   pending
 end
 
-# Then I should see a link named "Buy this widget" in the "Product Details" section
+When /^(?:|I )fill in "([^\"]*)" with "([^\"]*)"$/ do |field, value|
+  fill_in(field, :with => value)
+end
+
 Then /^I should see "([^"]*)"$/ do |text|
   page.should have_content(text)
 end
@@ -28,6 +31,10 @@ end
 
 Then /^show me the page$/ do
   save_and_open_page
+end
+
+When /^(?:|I )press "([^\"]*)"$/ do |button|
+  click_button(button)
 end
 
 Then /^debug$/ do

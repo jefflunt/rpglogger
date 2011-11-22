@@ -55,4 +55,14 @@ Scenario: Access denied message appears for trying to edit SectionProperties on 
   Then I should see "You don't have access to that."
   
 Scenario: A user can create new Sections
-  Given pending
+  Given I am signed in with "facebook"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  
+  When I go to the edit LogBook page for "Test LogBook"
+  And I fill in "sections[new_names]" with "new section 1, new section 2"
+  And I press "Add sections"
+  
+  Then I should see "in Test LogBook"
+  And I should see "new section 1"
+  And I should see "new section 2"
+  And I should not see ","

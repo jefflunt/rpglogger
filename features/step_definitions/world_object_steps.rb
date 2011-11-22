@@ -19,10 +19,3 @@ When /^I edit the WorldObject "([^"]*)" in "([^"]*)"$/ do |obj_name, section_nam
   
   visit edit_section_world_object_path(section, world_object)
 end
-
-When /^I create a new WorldObject called "([^"]*)" in "([^"]*)"$/ do |obj_name, section_name|
-  section = Section.find_by_name(section_name)
-  
-  visit new_section_world_object_path
-  # fill_in 
-end
