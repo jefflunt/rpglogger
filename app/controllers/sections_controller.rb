@@ -3,9 +3,11 @@ class SectionsController < ApplicationController
   
   def show
     @section.world_objects.sort!{|w1,w2| w1.name.downcase <=> w2.name.downcase}
+    @log_book = @section.log_book
   end
   
   def edit
+    @log_book = @section.log_book
   end
   
   def update

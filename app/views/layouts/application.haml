@@ -20,8 +20,8 @@
         %td{:class=>'top left width-250 serif-sc-font'}
           .content-border
             #side-bar{:class=>'content'}
-              -if @section || (@log_book && @log_book.title.present?)
-                =render :partial => 'partials/log_book_nav', :locals=>{:log_book=>@log_book || @section.log_book}
+              -if @log_book
+                =render :partial => 'partials/log_book_nav', :locals=>{:log_book=>@log_book}
               -else
                 =render :partial => 'partials/about'
               

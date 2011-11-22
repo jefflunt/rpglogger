@@ -3,6 +3,7 @@ class WorldObjectsController < ApplicationController
   
   def new
     section = Section.find(params[:section_id])
+    @log_book = section.log_book
     @world_object.section = section
     @world_object.section.section_properties.each do |sp|
       @world_object.world_object_properties.build(:section_property_id => sp.id)
@@ -18,14 +19,9 @@ class WorldObjectsController < ApplicationController
       render 'world_object_form'
     end
   end
-  
-  def show
-    @world_object = WorldObject.find(params[:id])
-    render 'world_object_form'
-  end
-    
+      
   def edit
-    @world_object = WorldObject.find(params[:id])
+    @log_book = @world_object.section.log_book
     render 'world_object_form'
   end
   
