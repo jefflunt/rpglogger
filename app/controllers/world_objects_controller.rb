@@ -33,7 +33,7 @@ class WorldObjectsController < ApplicationController
     world_object = WorldObject.find(params[:id])
     world_object.update_attributes!(params[world_object.class.name.underscore.to_sym])
     
-    redirect_to log_book_path(world_object.section.log_book) + "?section=#{world_object.section.name}"
+    redirect_to section_path(world_object.section) + "?section=#{world_object.section.name}"
   end
   
   def destroy
