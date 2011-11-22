@@ -9,6 +9,7 @@ Scenario: A user can create a new LogBook
   And I press "Create"
   
   Then I should see "SECTIONS (edit)"
+  And the total number of Sections should be "4"
 
 Scenario: A user can access LogBooks that they own
   Given I am signed in with "facebook"

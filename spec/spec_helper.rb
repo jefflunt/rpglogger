@@ -7,7 +7,16 @@ require 'rspec/rails'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+require "webrat"
+require 'webrat/core/matchers'
+include Webrat::Methods
+
 RSpec.configure do |config|
   config.mock_with :rspec
   config.use_transactional_fixtures = true
 end
+
+Webrat.configure do |config|
+  config.mode = :rack
+end
+

@@ -20,8 +20,6 @@
               %tr
                 %td=section_properties_form.text_field :name
                 %th=link_to 'delete!', section_section_property_path(@section, section_properties_form.object), {:method => :delete}
-            %tr
-              %td=section_form.submit 'Save', :class => 'styled-button-dark-red'
           =fields_for :section_properties do |new_section_properties_form|
             %td        
               %table
@@ -34,5 +32,8 @@
                 %tr
                   %td=collection_select new_section_properties_form.object, :data_type, SectionProperty.all_data_types, :to_s, :to_s
                 %tr
-                  %td=section_form.submit "Add attributes", :class => 'styled-button-dark-red'
+                  %td
+                    %br
+                    %br
+                    =section_form.submit "Update attributes", :class => 'styled-button-dark-red'
     

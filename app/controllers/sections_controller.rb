@@ -13,14 +13,13 @@ class SectionsController < ApplicationController
   def update
     @section.update_attributes(params[:section])
     
-    if params[:section_properties][:new_section_property_names]
-      highest_existing_sort_order = @section.section_properties.collect{|sp| sp.sort_order}.max || 0
-      new_names = params[:section_properties][:new_section_property_names].split(',').collect{|sp| sp.strip}.each_with_index do |new_section_property_name, index|
-        SectionProperty.create!(:section_id=>@section.id, :name=>new_section_property_name, :sort_order=>highest_existing_sort_order+index+1, :data_type=>params[:data_type])
-      end
+    new_section_property_names = params[:section_properties][:new_section_property_names]
+    if new_section_property_names.present?
+      highest_sort_order = @section.section_properties.collect{|sp| sp.sort_order}.max || 0
+      create_new_section_and_world_object_properties_from(new_section_property_names, params[:data_type], highest_sort_order)
     end
     
-    redirect_to @section
+    redirect_to edit_section_path(@section)
   end
   
   def destroy
@@ -34,6 +33,16 @@ class SectionsController < ApplicationController
     def create_new_sections_from(comma_separated_list_of_names)
       new_section_names = comma_separated_list_of_names.split(',').collect{|s| s.strip}.each do |name|
         Section.create(:name=>name, :log_book_id=>@log_book.id) unless name.empty? || name.blank?
+      end
+    end
+    
+    def create_new_section_and_world_object_properties_from(comma_separated_list_of_names, data_type, highest_sort_order)
+      new_section_names = comma_separated_list_of_names.split(',').collect{|s| s.strip}.each_with_index do |name, index|
+        new_section_property = SectionProperty.create(:name=>name, :data_type=>data_type, :sort_order=>highest_sort_order+index+1, :section_id=>@section.id) unless name.empty? || name.blank?
+        
+        @section.world_objects.each do |obj|
+          WorldObjectProperty.create(:section_property=>new_section_property, :world_object=>obj, :boolean_value=>false)
+        end
       end
     end
   

@@ -66,3 +66,39 @@ Scenario: A user can create new Sections
   And I should see "new section 1"
   And I should see "new section 2"
   And I should not see ","
+  
+Scenario: When user adds new attributes to a Section, the existing WorldObjects get those attributes
+  Given I am signed in with "facebook"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a Section exists called "Test Section" in "Test LogBook"
+  And a WorldObject exists called "Test WorldObject 1" in "Test Section"
+  And a WorldObject exists called "Test WorldObject 2" in "Test Section"
+  Then the total number of SectionProperties should be "0"
+  And the total number of WorldObjectProperties should be "0"
+  And I should not see "delete!"
+  
+  When I go to the edit page for the first section in LogBook "Test LogBook"
+  And I fill in "section_properties[new_section_property_names]" with "new attribute 1, new attribute 2"
+  And I press "Update attributes"
+  Then the total number of SectionProperties should be "2"
+  And the total number of WorldObjectProperties should be "4"
+  
+  And I should see "delete!"
+  
+Scenario: When user removes exiting attributes from a Section, the WorldObjectProperties attaches to those SectionProperties are also removed (destroyed)
+  Given I am signed in with "facebook"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a Section exists called "Test Section" in "Test LogBook"
+  And a WorldObject exists called "Test WorldObject 1" in "Test Section"
+  And a WorldObject exists called "Test WorldObject 2" in "Test Section"
+
+  When I go to the edit page for the first section in LogBook "Test LogBook"
+  And I fill in "section_properties[new_section_property_names]" with "new attribute 1, new attribute 2"
+  And I press "Update attributes"
+
+  Then the total number of SectionProperties should be "2"
+  And the total number of WorldObjectProperties should be "4"
+  
+  When I follow "delete!"
+  Then the total number of SectionProperties should be "1"
+  And the total number of WorldObjectProperties should be "2"
