@@ -26,10 +26,12 @@ class WorldObjectsController < ApplicationController
   end
   
   def update
-    world_object = WorldObject.find(params[:id])
-    world_object.update_attributes!(params[world_object.class.name.underscore.to_sym])
-    
-    redirect_to section_path(world_object.section)
+    @log_book = @world_object.section.log_book
+    if @world_object.update_attributes(params[:world_object])
+      redirect_to section_path(@world_object.section)
+    else
+      render 'world_object_form'
+    end
   end
   
   def destroy
