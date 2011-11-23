@@ -6,6 +6,10 @@ class WorldObjectProperty < ActiveRecord::Base
   
   validate :boolean_properties_cannot_be_nil
   
+  def sort_order
+    section_property.sort_order
+  end
+  
   def raw_value
     case section_property.data_type
     when 'integer'
