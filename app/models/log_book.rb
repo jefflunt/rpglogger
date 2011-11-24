@@ -9,6 +9,10 @@ class LogBook < ActiveRecord::Base
   
   accepts_nested_attributes_for :sections
   
+  def sorted_sections
+    sections.sort{|s1, s2| s1.name.downcase <=> s2.name.downcase}
+  end
+  
   def create_empty_section
     empty_section = Section.create(:log_book_id=>self.id, :name=>'New Section')
   end
