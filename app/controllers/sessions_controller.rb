@@ -6,7 +6,12 @@ class SessionsController < ApplicationController
 
     user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_with_omniauth(auth)
     session[:user_id] = user.id
-    redirect_to log_books_path, :notice => "Signed in."
+    
+    if user.log_books.count == 0
+      redirect_to new_log_book_path, :notice => "Signed in."
+    else
+      redirect_to log_books_path, :notice => "Signed in."
+    end
   end
 
   def destroy
