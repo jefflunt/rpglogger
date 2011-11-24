@@ -11,11 +11,56 @@ Scenario: A user can create a new LogBook
   Then I should see "SECTIONS (edit)"
   And the total number of Sections should be "4"
 
+Scenario: A user can delete LogBooks they own, and all the Sections, SectionProperties, WorldObjects, and WorldObjectProperties go with it
+  Given I am signed in with "facebook"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a Section exists called "Test Section" in "Test LogBook"
+  And a WorldObject exists called "Test WorldObject" in "Test Section"
+  And a SectionProperty exists called "Section Attribute" in "Test Section"
+  And a WorldObjectProperty exists that points to SectionProperty "Section Attribute" and WorldObject "Test WorldObject" with a value "false"
+  
+  When I go to the LogBooks index page
+  Then I should see "Test LogBook"
+  And the total number of LogBooks should be "1"
+  And the total number of Sections should be "1"
+  And the total number of WorldObjects should be "1"
+  And the total number of WorldObjectProperties should be "1"
+  
+  When I go to the LogBooks index page
+  And I follow "X"
+  And I go to the LogBooks index page
+  Then I should not see "Test LogBook"
+  And the total number of LogBooks should be "0"
+  And the total number of Sections should be "0"
+  And the total number of WorldObjects should be "0"
+  And the total number of WorldObjectProperties should be "0"
+  
+Scenario: A user cannot delete LogBooks they do not own
+  Given I am signed in with "facebook"
+  And a LogBook exists called "Someone else's LogBook" for game "Skyrim" and owned by "someoneelse"
+  And a Section exists called "Someone else's Section" in "Someone else's LogBook"
+  And a WorldObject exists called "Someone else's WorldObject" in "Someone else's Section"
+  And a SectionProperty exists called "Someone else's Attribute" in "Someone else's Section"
+  And a WorldObjectProperty exists that points to SectionProperty "Someone else's Attribute" and WorldObject "Someone else's WorldObject" with a value "false"
+  
+  When I go to the LogBooks index page
+  Then I should not see "Someone else's LogBook"
+  And the total number of LogBooks should be "1"
+  And the total number of Sections should be "1"
+  And the total number of WorldObjects should be "1"
+  And the total number of WorldObjectProperties should be "1"
+  
+  When I try to manually destroy the LogBook "Someone else's LogBook"
+  And the total number of LogBooks should be "1"
+  And the total number of Sections should be "1"
+  And the total number of WorldObjects should be "1"
+  And the total number of WorldObjectProperties should be "1"
+
 Scenario: A user can access LogBooks that they own
   Given I am signed in with "facebook"
   And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
-  When I go to "the LogBooks index"
   
+  When I go to the LogBooks index page
   Then I should see "Test LogBook"
   And I should see "Skyrim"
   And I should see "No. of Items"
@@ -24,7 +69,7 @@ Scenario: A user can access LogBooks that they own
 Scenario: A user cannot access LogBooks that they do not own
   Given I am signed in with "facebook"
   And a LogBook exists called "Someone else's log book" for game "Skyrim" and owned by "someoneelse"
-  When I go to "the LogBooks index"
+  When I go to the LogBooks index page
   Then I should not see "Someone else's log book"
   
 Scenario: Access denied message appears for trying to access LogBooks you do not own

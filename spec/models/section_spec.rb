@@ -14,7 +14,7 @@ describe Section do
     
     last_sort_order = 0
     sorted_section_properties.each do |prop|
-      prop.sort_order.should > last_sort_order
+      prop.sort_order.should >= last_sort_order
       last_sort_order = prop.sort_order
     end
   end

@@ -21,3 +21,7 @@ end
 Then /^the total number of SectionProperties should be "([^"]*)"$/ do |prop_count|
   SectionProperty.count.should == prop_count.to_i
 end
+
+Given /^a SectionProperty exists called "([^"]*)" in "([^"]*)"$/ do |prop_name, section_name|
+  Factory.create(:section_property, :name=>prop_name, :section_id=>Section.find_by_name(section_name).id)
+end

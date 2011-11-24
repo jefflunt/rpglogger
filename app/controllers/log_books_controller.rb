@@ -48,5 +48,11 @@ class LogBooksController < ApplicationController
     
     redirect_to edit_log_book_path(@log_book)
   end
+  
+  def destroy
+    @log_book.destroy
+    
+    redirect_back_or log_books_path
+  end
     
 end

@@ -1,7 +1,7 @@
 module NavigationHelpers
   def path_to(page_name)
     case page_name
-    when /the LogBooks index/
+    when /the LogBooks index page/
       log_books_path
     when /the new LogBooks page/
       new_log_book_path

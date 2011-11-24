@@ -15,7 +15,7 @@ describe WorldObject do
     
     last_sort_order = 0
     sorted_world_object_properties.each do |prop|
-      prop.sort_order.should > last_sort_order
+      prop.sort_order.should >= last_sort_order
       last_sort_order = prop.sort_order
     end
   end
