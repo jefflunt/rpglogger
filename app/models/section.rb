@@ -5,10 +5,11 @@ class Section < ActiveRecord::Base
   has_many :section_properties, :dependent => :destroy
   
   accepts_nested_attributes_for :section_properties
+  accepts_nested_attributes_for :world_objects
   
   validates :name, :presence => true
   
-  def sorted_properties
+  def sorted_section_properties
     section_properties.sort{|p1, p2| p1.sort_order <=> p2.sort_order}
   end
 end

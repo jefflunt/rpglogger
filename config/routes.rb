@@ -15,8 +15,10 @@ Rpglogger::Application.routes.draw do
   end
   
   resources :sections do
-    resources :world_objects
     resources :section_properties
+    resources :world_objects do
+      resources :world_object_properties
+    end
   end
   
 end

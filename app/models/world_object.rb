@@ -12,7 +12,7 @@ class WorldObject < ActiveRecord::Base
     
   accepts_nested_attributes_for :world_object_properties
   
-  def sorted_properties
+  def sorted_world_object_properties
     world_object_properties.sort{|p1, p2| p1.sort_order <=> p2.sort_order}
   end
   

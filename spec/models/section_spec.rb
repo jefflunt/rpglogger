@@ -9,8 +9,8 @@ describe Section do
     end
   end
   
-  it "should have a method called 'sorted_properties' the returns its SectionProperties in sort_order" do
-    sorted_section_properties = @section.sorted_properties
+  it "should have a method called 'sorted_section_properties' the returns its SectionProperties in sort_order" do
+    sorted_section_properties = @section.sorted_section_properties
     
     last_sort_order = 0
     sorted_section_properties.each do |prop|
