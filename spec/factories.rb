@@ -45,6 +45,7 @@ FactoryGirl.define do
     world_object
     section_property
   
+    w.sort_order      {section_property.sort_order}
     w.integer_value   {rand(1000)}
     w.boolean_value   {[true, false][rand(2)]}
     w.string_value    {Populator.words(1..5)}

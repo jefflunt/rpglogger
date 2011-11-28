@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111112175831) do
+ActiveRecord::Schema.define(:version => 20111128204914) do
 
   create_table "games", :force => true do |t|
     t.string   "name",       :null => false
@@ -48,14 +48,15 @@ ActiveRecord::Schema.define(:version => 20111112175831) do
   end
 
   create_table "world_object_properties", :force => true do |t|
-    t.integer  "world_object_id",     :null => false
-    t.integer  "section_property_id", :null => false
+    t.integer  "world_object_id",                    :null => false
+    t.integer  "section_property_id",                :null => false
     t.integer  "integer_value"
     t.boolean  "boolean_value"
     t.string   "string_value"
     t.text     "text_value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sort_order",          :default => 0, :null => false
   end
 
   create_table "world_objects", :force => true do |t|

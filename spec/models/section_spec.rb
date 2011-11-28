@@ -9,11 +9,9 @@ describe Section do
     end
   end
   
-  it "should have a method called 'sorted_section_properties' the returns its SectionProperties in sort_order" do
-    sorted_section_properties = @section.sorted_section_properties
-    
+  it "should return its SectionProperties in the correctly sorted order" do
     last_sort_order = 0
-    sorted_section_properties.each do |prop|
+    @section.section_properties.each do |prop|
       prop.sort_order.should >= last_sort_order
       last_sort_order = prop.sort_order
     end

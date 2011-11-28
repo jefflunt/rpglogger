@@ -10,11 +10,9 @@ describe WorldObject do
     end
   end
   
-  it "should have a method called 'sorted_world_object_properties' the returns its WorldObjectProperties in sort_order" do
-    sorted_world_object_properties = @world_object.sorted_world_object_properties
-    
+  it "should return its WorldObjectProperties in the correctly sorted order" do
     last_sort_order = 0
-    sorted_world_object_properties.each do |prop|
+    @world_object.world_object_properties.each do |prop|
       prop.sort_order.should >= last_sort_order
       last_sort_order = prop.sort_order
     end

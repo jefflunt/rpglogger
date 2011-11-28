@@ -7,6 +7,7 @@ class WorldObjectProperty < ActiveRecord::Base
   validate :boolean_properties_cannot_be_nil
   #validates :world_object_id, :presence => true
   validates :section_property_id, :presence => true
+  validates :sort_order, :presence => true
   
   def sort_order
     section_property.sort_order
