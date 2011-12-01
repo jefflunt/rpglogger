@@ -1,17 +1,5 @@
 Feature: Manage LogBooks
 
-Scenario: When a user with zero LogBooks logs in, they are taken to the new LogBook page
-  Given I am signed in with "facebook"
-  Then I should see "Log Book Title"
-  And I should see "Choose Your Game"
-  
-Scenario: When a user with one or more Logbook logs in, they are taken to the LogBook index page
-  Given a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
-  Then the total number of LogBooks should be "1"
-  
-  Given I am signed in with "facebook"
-  Then I should see "Your log books"
-
 Scenario: A user can create a new LogBook
   Given I am signed in with "facebook"
   And a game exists called "Some game name"

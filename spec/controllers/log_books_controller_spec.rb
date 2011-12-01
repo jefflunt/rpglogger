@@ -4,7 +4,7 @@ describe LogBooksController do
   it "should redirect to the log_books_controller#new action when a user logs in who owns zero LogBooks" do    
     visit '/auth/facebook'
     
-    response.should redirect_to new_log_book_path
+    URI.parse(current_url).path.should == new_log_book_path
   end
   
   it "should redirect to the log_books_controller#index action when a user logs in who owns one or more LogBooks" do
@@ -16,6 +16,6 @@ describe LogBooksController do
     
     visit '/auth/facebook'
     
-    response.should redirect_to log_books_path
+    URI.parse(current_url).path.should == log_books_path
   end
 end
