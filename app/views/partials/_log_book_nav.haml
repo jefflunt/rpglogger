@@ -4,5 +4,5 @@
   %tr
     %td
       %ul{:class=>'list-no-markers'}
-        -log_book.sorted_sections.each do |s|
+        -log_book.sections.each do |s|
           %li=link_to '>&nbsp;'.html_safe+s.name, section_path(s)

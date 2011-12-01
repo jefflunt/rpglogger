@@ -2,16 +2,12 @@ class LogBook < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
   
-  has_many :sections, :dependent => :destroy
-  has_many :world_objects, :through => :sections
+  has_many :sections, :dependent=>:destroy, :order=>:name
+  has_many :world_objects, :through=>:sections
   
   validates :title, :presence => true
   
   accepts_nested_attributes_for :sections
-  
-  def sorted_sections
-    sections.sort{|s1, s2| s1.name.downcase <=> s2.name.downcase}
-  end
   
   def create_empty_section
     empty_section = Section.create(:log_book_id=>self.id, :name=>'New Section')
