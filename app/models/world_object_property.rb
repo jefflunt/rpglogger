@@ -9,10 +9,6 @@ class WorldObjectProperty < ActiveRecord::Base
   validates :section_property_id, :presence => true
   validates :sort_order, :presence => true
   
-  def sort_order
-    section_property.sort_order
-  end
-  
   def raw_value
     case section_property.data_type
     when 'integer'
