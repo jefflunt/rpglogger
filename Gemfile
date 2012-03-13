@@ -10,6 +10,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-openid'
 gem 'cancan'
+gem 'therubyracer'
 
 # heroku stuff
 gem 'heroku'
@@ -34,6 +35,13 @@ group :development, :cucumber, :test do
   gem "capybara"
   gem "cucumber"
   gem "cucumber-rails"
+  gem "launchy"
   gem "database_cleaner"
+  
+  gem "ruby_gntp", "~> 0.3.4"
+  gem "guard"
+  gem "guard-rspec"
+  gem "guard-cucumber"
+  
   # gem "ruby-debug"
 end
