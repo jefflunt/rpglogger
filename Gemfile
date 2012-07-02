@@ -25,7 +25,6 @@ group :assets do
 end
 
 group :development, :cucumber, :test do
-  gem "ruby-debug"
   gem "populator"
   gem "factory_girl_rails"
   gem "faker"
@@ -42,6 +41,4 @@ group :development, :cucumber, :test do
   gem "guard"
   gem "guard-rspec"
   gem "guard-cucumber"
-  
-  # gem "ruby-debug"
 end
