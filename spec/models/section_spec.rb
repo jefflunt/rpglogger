@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe Section do
   before(:each) do
-    @section = Factory.create(:section)
+    @section = FactoryGirl.create(:section)
     
     for i in 1..20 do
-      section_property = Factory.create(:section_property, :section_id=>@section.id, :name=>"property#{i}", :data_type=>"string", :sort_order=>rand(10000))
+      section_property = FactoryGirl.create(:section_property, :section_id=>@section.id, :name=>"property#{i}", :data_type=>"string", :sort_order=>rand(10000))
     end
   end
   

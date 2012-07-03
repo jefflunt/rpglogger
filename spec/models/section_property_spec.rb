@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe SectionProperty do
   before(:each) do
-    @world_object = Factory.create(:world_object)
+    @world_object = FactoryGirl.create(:world_object)
     
     for i in 1..20 do
-      section_property = Factory.create(:section_property, :section_id=>@world_object.section.id, :name=>"property#{i}", :data_type=>"string", :sort_order=>rand(10000))
-      Factory.create(:world_object_property, :section_property_id=>section_property.id, :world_object_id=>@world_object.id, :string_value=>"value#{i}")
+      section_property = FactoryGirl.create(:section_property, :section_id=>@world_object.section.id, :name=>"property#{i}", :data_type=>"string", :sort_order=>rand(10000))
+      FactoryGirl.create(:world_object_property, :section_property_id=>section_property.id, :world_object_id=>@world_object.id, :string_value=>"value#{i}")
     end
   end
   
