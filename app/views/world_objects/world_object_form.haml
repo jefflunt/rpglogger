@@ -15,10 +15,6 @@
               %td
                 =obj_form.text_field :name
             =obj_form.fields_for :world_object_properties do |properties_form|
-              -Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!"
-              -Rails.logger.info obj_form.object.world_object_properties.count
-              -Rails.logger.info properties_form.object.inspect
-              -Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!"
               %tr
                 %th=properties_form.label properties_form.object.section_property.name.to_sym
               %tr
