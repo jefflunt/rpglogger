@@ -6,11 +6,15 @@ class WorldObject < ActiveRecord::Base
   belongs_to :parent_object, :class_name=>'WorldObject', :foreign_key=>'parent_object_id'
 
   has_many :child_objects, :class_name=>'WorldObject', :foreign_key=>'parent_object_id', :dependent=>:nullify
-  has_many :world_object_properties, :order=>'sort_order', :dependent=>:destroy
+  has_many :world_object_properties, :dependent=>:destroy
   
   validates :name, :presence => true
     
   accepts_nested_attributes_for :world_object_properties
+  
+  def sorted_properties
+    world_object_properties.sort_by{|property| property.sort_order}
+  end
   
   def fake_fill_properties
     name = Populator.words(1..4)

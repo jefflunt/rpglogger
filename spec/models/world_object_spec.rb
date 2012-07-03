@@ -12,7 +12,7 @@ describe WorldObject do
   
   it "should return its WorldObjectProperties in the correctly sorted order" do
     last_sort_order = 0
-    @world_object.world_object_properties.each do |prop|
+    @world_object.sorted_properties.each do |prop|
       prop.sort_order.should >= last_sort_order
       last_sort_order = prop.sort_order
     end
