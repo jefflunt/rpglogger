@@ -14,13 +14,17 @@
             %tr
               %td
                 =obj_form.text_field :name
-            =obj_form.fields_for :world_object_properties do |world_object_property_fields|
+            =obj_form.fields_for :world_object_properties do |properties_form|
+              -Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!"
+              -Rails.logger.info obj_form.object.world_object_properties.count
+              -Rails.logger.info properties_form.object.inspect
+              -Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!"
               %tr
-                %th=world_object_property_fields.label world_object_property_fields.object.section_property.name.to_sym
+                %th=properties_form.label properties_form.object.section_property.name.to_sym
               %tr
                 %td
-                  =world_object_property_fields.object.correct_form_field(world_object_property_fields)
-                  =world_object_property_fields.hidden_field :section_property_id
+                  =auto_field_for(properties_form, properties_form.object)
+                  =properties_form.hidden_field :section_property_id
             %tr
               %td
                 =obj_form.submit 'Save', :class => 'styled-button-dark-red'

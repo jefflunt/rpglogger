@@ -12,10 +12,6 @@ class WorldObject < ActiveRecord::Base
     
   accepts_nested_attributes_for :world_object_properties
   
-  def sorted_properties
-    world_object_properties.sort_by{|property| property.sort_order}
-  end
-  
   def fake_fill_properties
     name = Populator.words(1..4)
     section.section_properties.each do |sp|

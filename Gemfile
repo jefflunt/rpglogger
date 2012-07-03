@@ -23,6 +23,10 @@ group :assets do
   gem 'uglifier'
 end
 
+group :development do
+  gem "ruby-debug19"
+end
+
 group :test do
   gem "cucumber"
   gem "cucumber-rails"
