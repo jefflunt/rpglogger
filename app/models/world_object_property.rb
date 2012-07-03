@@ -3,9 +3,11 @@
 class WorldObjectProperty < ActiveRecord::Base
   belongs_to :section_property
   belongs_to :world_object
+
+  scope :sort_order, order: "sort_order ASC"
   
   validate :boolean_properties_cannot_be_nil
-  #validates :world_object_id, :presence => true
+
   validates :section_property_id, :presence => true
   validates :sort_order, :presence => true
   

@@ -4,7 +4,9 @@ class SectionProperty < ActiveRecord::Base
   
   belongs_to :section
   
-  has_many :world_object_properties, :dependent => :destroy
+  has_many :world_object_properties, dependent: :destroy
+  
+  scope :sort_order, order: "sort_order ASC"
   
   validates :name, :presence => true
   validates :data_type, :presence => true

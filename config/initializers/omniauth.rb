@@ -1,8 +1,6 @@
-require 'openid/store/filesystem'
-
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :twitter, ENV['TW_CONSUMER_KEY'], ENV['TW_CONSUMER_SECRET']
-  provider :facebook, ENV['RPGLOGGER_FB_APP_ID'], ENV['RPGLOGGER_FB_APP_SECRET'], {:scope => 'user_about_me'}
+  provider :twitter, ENV['RPG_TW_CONSUMER_KEY'], ENV['RPG_TW_CONSUMER_SECRET']
+  provider :facebook, ENV['RPG_FB_APP_ID'], ENV['RPG_FB_APP_SECRET'], {:scope => 'user_about_me'}
   
   # TODO
   # provider :google, 'rpglogger.com', 'oauth_secret', :scope => 'https://mail.google.com/mail/feed/atom/'

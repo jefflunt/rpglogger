@@ -5,10 +5,9 @@ gem 'sqlite3'
 gem 'json'
 gem 'jquery-rails'
 gem 'haml'
-gem 'omniauth','~>1.0.0'
+gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
-gem 'omniauth-openid'
 gem 'cancan'
 gem 'therubyracer'
 
@@ -19,9 +18,9 @@ gem 'pg'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.1.4'
-  gem 'coffee-rails', '~> 3.1.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
 end
 
 group :development, :cucumber, :test do
@@ -37,7 +36,7 @@ group :development, :cucumber, :test do
   gem "launchy"
   gem "database_cleaner"
   
-  gem "ruby_gntp", "~> 0.3.4"
+  gem "ruby_gntp"
   gem "guard"
   gem "guard-rspec"
   gem "guard-cucumber"

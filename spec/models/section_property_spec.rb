@@ -11,7 +11,7 @@ describe SectionProperty do
   end
   
   it "should update the `sort_order` value of all child WorldObjectProperties upon saving" do
-    section_property = @world_object.section.section_properties.first
+    section_property = @world_object.section.section_properties.sort_order.first
     
     current_sort_order = section_property.sort_order
     new_sort_order = current_sort_order+25
