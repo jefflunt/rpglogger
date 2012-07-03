@@ -23,6 +23,11 @@ group :assets do
   gem 'uglifier'
 end
 
+group :test do
+  gem "cucumber"
+  gem "cucumber-rails"
+end
+
 group :development, :cucumber, :test do
   gem "populator"
   gem "factory_girl_rails"
@@ -31,8 +36,6 @@ group :development, :cucumber, :test do
   gem "rspec-rails"
   gem "webrat"
   gem "capybara"
-  gem "cucumber"
-  gem "cucumber-rails"
   gem "launchy"
   gem "database_cleaner"
   
