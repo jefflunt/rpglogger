@@ -16,3 +16,12 @@ test: &test
 
 cucumber:
   <<: *test
+  
+production:
+  adapter: postgresql
+  host: localhost
+  pool: 10
+  database: rpgloggerlocalprod
+  username: rpglogger
+  password: localdevpassword
+  
