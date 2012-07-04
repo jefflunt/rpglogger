@@ -5,11 +5,14 @@ gem 'sqlite3'
 gem 'json'
 gem 'jquery-rails'
 gem 'haml'
-gem 'omniauth'
-gem 'omniauth-twitter'
-gem 'omniauth-facebook'
-gem 'cancan'
 gem 'therubyracer'
+
+# Authentication & authorization
+gem 'cancan'
+gem 'omniauth'
+gem "omniauth-google-oauth2"
+gem "omniauth-facebook"
+gem "omniauth-twitter"
 
 # heroku stuff
 gem 'heroku'
