@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120703021440) do
+ActiveRecord::Schema.define(:version => 20120704031721) do
 
   create_table "games", :force => true do |t|
     t.string   "name",       :null => false
@@ -60,9 +60,8 @@ ActiveRecord::Schema.define(:version => 20120703021440) do
   end
 
   create_table "world_objects", :force => true do |t|
-    t.integer "section_id",       :null => false
-    t.integer "parent_object_id"
-    t.string  "name",             :null => false
+    t.integer "section_id", :null => false
+    t.string  "name",       :null => false
   end
 
 end
