@@ -29,9 +29,22 @@ $color-orange: #bb4f1b
 
 /* fonts */
 
-$site-title-font: 'UnifrakturCook', cursive
-$serif-sc-font: 'IM Fell French Canon SC', serif
-$serif-normal-font: 'IM Fell French Canon', serif
+@font-face
+  font-family: UnifrakturCook
+  src: url(/assets/UnifrakturCookBold.ttf)
+
+@font-face
+  font-family: IMFellFrenchCanonSC
+  src: url(/assets/IMFellSC.ttf)
+
+@font-face
+  font-family: IMFellFrenchCanon
+  src: url(/assets/IMFell.ttf)
+
+
+$site-title-font: UnifrakturCook
+$serif-sc-font: IMFellFrenchCanonSC
+$serif-normal-font: IMFellFrenchCanon
 
 $small-font-size: 16px
 $big-font-size: 24px

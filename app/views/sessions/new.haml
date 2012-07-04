@@ -1,8 +1,6 @@
 %center
   %p
-    %span{:class=>'huge-font-size'}='Build your own strategy guide for Skyrim!'
-  %p
-    %span{:class=>'huge-font-size'}='Log into '
-    %span{:class=>'huge-font-size site-title-font a-little-letter-spacing color-blue-gray'}='rpglogger'
-    %span{:class=>'huge-font-size'}='with facebook by clicking on the logo'
-  %span=link_to (image_tag '/login_with_facebook.png'), '/auth/facebook'
+    %span{:class=>'huge-font-size'}='Login with:'
+  %span=link_to (image_tag 'login_buttons/google_oauth2_64.png'),  '/auth/google_oauth2'
+  %span=link_to (image_tag 'login_buttons/facebook_64.png'),        '/auth/facebook'
+  %span=link_to (image_tag 'login_buttons/twitter_64.png'),         '/auth/twitter'
