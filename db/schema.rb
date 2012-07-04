@@ -15,16 +15,16 @@ ActiveRecord::Schema.define(:version => 20120704031721) do
 
   create_table "games", :force => true do |t|
     t.string   "name",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "log_books", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.integer  "game_id",    :null => false
     t.string   "title",      :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "section_properties", :force => true do |t|
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(:version => 20120704031721) do
     t.string   "uid"
     t.string   "name"
     t.string   "nickname"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "world_object_properties", :force => true do |t|
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(:version => 20120704031721) do
     t.boolean  "boolean_value"
     t.string   "string_value"
     t.text     "text_value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "world_objects", :force => true do |t|
