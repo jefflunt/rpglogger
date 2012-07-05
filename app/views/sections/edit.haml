@@ -8,16 +8,20 @@
         =form_for @section do |section_form|
           %table
             %tr
+              %td
               %th='Section Title'
               %td
             %tr
+              %td
               %td=section_form.text_field :name
               %td
             %tr
+              %td
               %th='Section Attributes'
               %td
             =section_form.fields_for :section_properties do |section_properties_form|
               %tr
+                %td=section_properties_form.object.data_type
                 %td=section_properties_form.text_field :name
                 %th=link_to 'Delete', section_section_property_path(@section, section_properties_form.object), {method: :delete, class: 'styled-button-dark-red'}
           =fields_for :section_properties do |new_section_properties_form|
