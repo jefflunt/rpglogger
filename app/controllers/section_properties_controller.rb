@@ -7,7 +7,7 @@ class SectionPropertiesController < ApplicationController
     
     create_new_section_properties_from(params[:new_properties][:names], params[:data_type], next_sort_order)
     
-    redirect_to edit_section_path(@section.id)
+    redirect_to edit_section_path(@section.id), notice: "Attribute added"
   end
   
   def destroy
@@ -15,7 +15,7 @@ class SectionPropertiesController < ApplicationController
     section = section_property.section
     section_property.destroy
     
-    redirect_to edit_section_path(section)
+    redirect_to edit_section_path(section), notice: "Attribute deleted"
   end
   
   private

@@ -18,7 +18,7 @@ class LogBooksController < ApplicationController
   def create
     if @log_book.save
       @log_book.create_default_sections
-      redirect_to @log_book
+      redirect_to @log_book, notice: "Log book created"
     else
       render 'new'
     end
@@ -46,13 +46,13 @@ class LogBooksController < ApplicationController
       end
     end
     
-    redirect_to edit_log_book_path(@log_book)
+    redirect_to edit_log_book_path(@log_book), notice: "Log book updated"
   end
   
   def destroy
     @log_book.destroy
     
-    redirect_back_or log_books_path
+    redirect_back_or log_books_path, notice: "Log book deleted"
   end
     
 end

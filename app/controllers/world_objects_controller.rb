@@ -14,7 +14,7 @@ class WorldObjectsController < ApplicationController
   
   def create    
     if @world_object.save
-      redirect_to section_path(@world_object.section)
+      redirect_to section_path(@world_object.section), notice: "Created"
     else
       render 'world_object_form'
     end
@@ -28,7 +28,7 @@ class WorldObjectsController < ApplicationController
   def update
     @log_book = @world_object.section.log_book
     if @world_object.update_attributes(params[:world_object])
-      redirect_to section_path(@world_object.section)
+      redirect_to section_path(@world_object.section), notice: "Updated"
     else
       render 'world_object_form'
     end
@@ -37,7 +37,7 @@ class WorldObjectsController < ApplicationController
   def destroy
     @world_object.destroy
     
-    redirect_to section_path(@world_object.section)
+    redirect_to section_path(@world_object.section), notice: "Deleted"
   end
   
 end

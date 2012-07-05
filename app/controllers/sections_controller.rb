@@ -19,14 +19,14 @@ class SectionsController < ApplicationController
       create_new_section_and_world_object_properties_from(new_section_property_names, params[:data_type], highest_sort_order)
     end
     
-    redirect_to edit_section_path(@section)
+    redirect_to edit_section_path(@section), notice: "Section updated"
   end
   
   def destroy
     log_book = @section.log_book
     @section.destroy
     
-    redirect_to edit_log_book_path(log_book)
+    redirect_to edit_log_book_path(log_book), notice: "Section deleted"
   end
   
   private
