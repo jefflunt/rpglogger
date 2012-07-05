@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class WorldObjectProperty < ActiveRecord::Base
   belongs_to :section_property
   belongs_to :world_object
@@ -21,9 +19,9 @@ class WorldObjectProperty < ActiveRecord::Base
       return integer_value
     when 'boolean'
       if boolean_value
-        return "✓"
+        return "\u2714"
       else
-        return "NO"
+        return "\u2716"
       end
     when 'string'
       return string_value
