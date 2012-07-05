@@ -75,7 +75,7 @@ Scenario: When user adds new attributes to a Section, the existing WorldObjects 
   And a WorldObject exists called "Test WorldObject 2" in "Test Section"
   Then the total number of SectionProperties should be "0"
   And the total number of WorldObjectProperties should be "0"
-  And I should not see "delete!"
+  And I should not see "Delete"
   
   When I go to the edit page for the first section in LogBook "Test LogBook"
   And I fill in "section_properties[new_section_property_names]" with "new attribute 1, new attribute 2"
@@ -83,7 +83,7 @@ Scenario: When user adds new attributes to a Section, the existing WorldObjects 
   Then the total number of SectionProperties should be "2"
   And the total number of WorldObjectProperties should be "4"
   
-  And I should see "delete!"
+  And I should see "Delete"
   
 Scenario: When user removes exiting attributes from a Section, the WorldObjectProperties attaches to those SectionProperties are also removed (destroyed)
   Given I am signed in with "facebook"
@@ -99,6 +99,6 @@ Scenario: When user removes exiting attributes from a Section, the WorldObjectPr
   Then the total number of SectionProperties should be "2"
   And the total number of WorldObjectProperties should be "4"
   
-  When I follow "delete!"
+  When I follow "Delete"
   Then the total number of SectionProperties should be "1"
   And the total number of WorldObjectProperties should be "2"
