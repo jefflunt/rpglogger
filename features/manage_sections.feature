@@ -82,6 +82,7 @@ Scenario: When user adds new attributes to a Section, the existing WorldObjects 
   And I press "Update attributes"
   Then the total number of SectionProperties should be "2"
   And the total number of WorldObjectProperties should be "4"
+  And I should see "boolean"
   
   And I should see "Delete"
   
