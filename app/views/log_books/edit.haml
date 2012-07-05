@@ -20,7 +20,7 @@
             =log_book_form.fields_for :sections do |section_form|
               %tr
                 %td=section_form.text_field :name
-                %th=button_to 'Delete', section_path(section_form.object), {method: :delete, class: 'styled-button-dark-red'}
+                %th=link_to 'Delete', section_path(section_form.object), {method: :delete, class: 'styled-button-dark-red'}
             %tr
               %td=log_book_form.submit 'Save', :class => 'styled-button-dark-red'
       %td
