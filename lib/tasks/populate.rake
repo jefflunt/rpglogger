@@ -1,17 +1,9 @@
 namespace :db do
-  desc "Create default games"
-  task :insert_default_games => :environment do
-    ["Skyrim"].each do |game_name|
-      puts "Inserting #{game_name}..."
-      Game.find_or_create_by_name(:name => game_name)
-    end
-  end
-  
   desc "Erase database"
   task :erase => :environment do
     puts "Erasing..."
     
-    [Game, User, LogBook, Section, SectionProperty, WorldObject, WorldObjectProperty].each(&:delete_all)
+    [User, LogBook, Section, SectionProperty, WorldObject, WorldObjectProperty].each(&:delete_all)
   end
   
   desc "Erase and fill database"
@@ -21,10 +13,6 @@ namespace :db do
     
     puts "Populating: enjoy this random pattern generator while you wait..."
     
-    Game.populate 5 do |game|
-      game.name = Populator.words(1..2).titleize
-    end
-    
     User.populate 50 do |user|
       user.provider = Populator.words(1)
       user.uid = rand(9000) + 999
@@ -33,8 +21,8 @@ namespace :db do
     end
     
     LogBook.populate 15 do |log_book|
-      log_book.game_id = Game.all.collect{|g| g.id}
       log_book.user_id = User.all.collect{|u| u.id}
+      log_book.game_name = Populator.words(1..4)
       
       log_book.title = Populator.words(1..4).titleize
       
