@@ -27,7 +27,7 @@ Scenario: A user can delete LogBooks they own, and all the Sections, SectionProp
   And the total number of WorldObjectProperties should be "1"
   
   When I go to the LogBooks index page
-  And I follow "X"
+  And I follow "✖"
   And I go to the LogBooks index page
   Then I should not see "Test LogBook"
   And the total number of LogBooks should be "0"
