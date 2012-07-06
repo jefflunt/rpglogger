@@ -14,5 +14,5 @@
         %tr
           %td=link_to "\u2716", log_book_path(log_book), :method => :delete
           %td{:class=>'column-string'}=link_to log_book.title.html_safe, log_book
-          %td{:class=>'column-string'}=log_book.game.name.html_safe
+          %td{:class=>'column-string'}=log_book.game_name.html_safe
           %td{:class=>'column-integer'}=log_book.world_objects.count

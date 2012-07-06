@@ -1,15 +1,15 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 
-When /^I manually enter the information for a new LogBook called "([^"]*)"$/ do |new_log_book_name|
+When /^I manually enter the information for a new LogBook called "([^"]*)" with game name "([^"]*)"$/ do |new_log_book_name, game_name|
   visit new_log_book_path
   fill_in "log_book[title]", :with => new_log_book_name
+  fill_in "log_book[game_name]", :with => game_name
 end
 
 Given /^a LogBook exists called "([^"]*)" for game "([^"]*)" and owned by "([^"]*)"$/ do |log_book_title, game_name, nickname|
   user = User.find_or_create_by_nickname(nickname)
-  game = FactoryGirl.create(:game, :name=>game_name)
   
-  log_book = FactoryGirl.create(:log_book, :title=>log_book_title, :game_id=>game.id, :user_id=>user.id)
+  log_book = FactoryGirl.create(:log_book, :title=>log_book_title, :game_name=>game_name, :user_id=>user.id)
 end
 
 Given /^a WorldObject exists called "([^"]*)" in section "([^"]*)" of "([^"]*)"$/ do |object_name, section_name, log_book_title|

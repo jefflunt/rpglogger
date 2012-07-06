@@ -10,15 +10,11 @@ FactoryGirl.define do
     u.nickname        {Faker::Internet.user_name}
   end
 
-  factory :game do |g|
-    g.name            {Populator.words(1..3)}
-  end
-
   factory :log_book do |l|
     user
-    game
     
     l.title           {Populator.words(1..4)}
+    l.game_name       {Populator.words(1..4)}
   end
 
   factory :section do |s|

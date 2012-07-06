@@ -2,7 +2,6 @@ Feature: Manage LogBooks
 
 Scenario: A user can create a new LogBook
   Given I am signed in with "facebook"
-  And a game exists called "Some game name"
   
   When I go to the new LogBooks page
   And I fill in "log_book[title]" with "My new LogBook"
