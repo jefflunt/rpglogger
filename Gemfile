@@ -6,6 +6,7 @@ gem 'json'
 gem 'jquery-rails'
 gem 'haml'
 gem 'therubyracer'
+gem 'bluecloth'
 
 # Authentication & authorization
 gem 'cancan'
