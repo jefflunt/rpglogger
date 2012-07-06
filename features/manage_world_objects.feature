@@ -38,5 +38,5 @@ Scenario: A user can create new WorldObjects
   And I press "Save"
   Then I should see "Test Section"
   And I should see "The new WorldObject"
-  And I should see "+"
+  And I should see "✚"
   And I should see "Name/Title"
