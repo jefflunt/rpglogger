@@ -22,7 +22,7 @@
                 %td=section_form.text_field :name
                 %th=link_to 'Delete', section_path(section_form.object), {method: :delete, class: 'styled-button-dark-red'}
             %tr
-              %td=log_book_form.submit 'Save', :class => 'styled-button-dark-red'
+              %td=log_book_form.submit 'Save', :class => 'styled-button-blue-gray'
       %td
         =form_for @log_book do |log_book_form|
           =fields_for :sections do |new_sections_form|
@@ -32,5 +32,5 @@
               %tr
                 %td=new_sections_form.text_field :new_names
               %tr
-                %td=log_book_form.submit "Add sections", :class => 'styled-button-dark-red'
+                %td=log_book_form.submit "Add sections", :class => 'styled-button-blue-gray'
               
