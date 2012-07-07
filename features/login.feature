@@ -1,4 +1,4 @@
-Feature:Login
+Feature: Login
 
 Scenario: A user can login via facebook and sees the welcome
   Given I am signed in with "facebook"

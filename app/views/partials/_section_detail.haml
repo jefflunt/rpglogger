@@ -8,6 +8,6 @@
     -@section.world_objects.each do |obj|
       %tr
         %td=link_to "\u2716", section_world_object_path(@section, obj), method: :delete
-        %td=link_to obj.name, edit_section_world_object_path(@section, obj)
+        %td=link_to markdown_parse(obj.name), edit_section_world_object_path(@section, obj)
         -obj.world_object_properties.each do |prop|
           %td{:class=>'column-' + prop.section_property.data_type}=simple_format prop.raw_value.to_s
