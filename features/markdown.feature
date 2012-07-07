@@ -11,18 +11,9 @@ Scenario: Markdown is parsed as expected in text fields when displayed
   And I fill in "world_object[name]" with "Text with `some code` in it"
   And I press "Save"
   Then I should see a "code" tag around the text "some code"
-    
-Scenario: Markdown is parsed as expected in string fields when displayed
-  Given pending
-
-Scenario: Markdown is ignored in integer fields
-  Given pending
 
 Scenario: Markdown is sanitized of all script tags
-  Given pending
-
-Scenario: Markdown sanitized against SQL injection
-  Given pending
-
-Scenario: Markdown is otherwise sanitized as expected
-  Given pending
+  When I edit the WorldObject "Test WorldObject" in "Test Section"
+  And I fill in "world_object[name]" with "<script>alert('Hey!')</script> - text outside script"
+  And I press "Save"
+  Then I should see a "p" tag around the text " - text outside script"

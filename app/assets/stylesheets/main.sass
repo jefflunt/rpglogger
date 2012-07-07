@@ -56,22 +56,26 @@
       text-align: left
     .column-boolean
       text-align: center
-  th
-    vertical-align: bottom
-    border-bottom: $color-gray solid thin
-    font:
-      family: $serif-sc-font
-      size: $small-font-size
-      weight: 400
-  td
-    vertical-align: top
-    font:
-      family: $serif-normal-font
-      size: $small-font-size
-      weight: 400
-    p
-      margin-top: 0px
-      margin-bottom: 8px
+    tr
+      overflow-y: hidden
+      max-height: 100px
+      th
+        vertical-align: bottom
+        border-bottom: $color-gray solid thin
+        font:
+          family: $serif-sc-font
+          size: $small-font-size
+          weight: 400
+      td
+        vertical-align: top
+        font:
+          family: $serif-normal-font
+          size: $small-font-size
+          weight: 400
+        p
+          margin-top: 0px
+          margin-bottom: 8px
+
 .compact-form
   table
     td
@@ -83,6 +87,8 @@
   table
     td
       vertical-align: top
+
+/* styles for basic tags */
 
 a
   color: $color-gray
@@ -97,6 +103,24 @@ hr
 body
   background: #000 url('themes/site-background-image.jpg') no-repeat left top
   color: $color-white
+blockquote
+  margin: 1em 0.5em
+  border-left: 2px solid #999
+  padding-left: 1em
+blockquote p:first-child:first-letter
+  float: left
+  margin: 0.3em 0em 0.5em 0em
+  font-family: UnifrakturCook
+  font-variant: small-caps
+  font-size: 300%
+  font-weight: bold
+blockquote p:first-child:first-line
+  font-variant: small-caps
+blockquote p
+  line-height: 1.2em
+  
+/* input fields */
+
 input
   color: $color-white
   background-color: $color-dark-gray
@@ -118,8 +142,7 @@ select
   height: auto
   option
     border: 0px
-    
-/* input fields */
+
 
 .narrow-input
   @extend input
