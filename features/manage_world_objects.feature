@@ -7,7 +7,7 @@ Scenario: A user can access WorldObjects that they own
   And a WorldObject exists called "Test WorldObject" in "Test Section"
   
   When I access the Section "Test Section"
-  Then I should see "Test WorldObject"
+  Then I should see the text "Test WorldObject"
   
 Scenario: A user can edit WorldObjectProperties on WorldObjects that they own
   Given I am signed in with "facebook"
@@ -16,8 +16,9 @@ Scenario: A user can edit WorldObjectProperties on WorldObjects that they own
   And a WorldObject exists called "Test WorldObject" in "Test Section"
   
   When I edit the WorldObject "Test WorldObject" in "Test Section"
-  Then I should see "in Test Section"
-  And I should see "Name"
+  Then I should see all of the texts:
+    | in Test Section |
+    | Name            |
 
 Scenario: Access denied message appears for trying to edit WorldObjectProperties on a WorldObjects you do not own
   Given I am signed in with "facebook"
@@ -26,7 +27,7 @@ Scenario: Access denied message appears for trying to edit WorldObjectProperties
   And a WorldObject exists called "Someone else's WorldObject" in "Someone else's Section"
   
   When I edit the WorldObject "Someone else's WorldObject" in "Someone else's Section"
-  Then I should see "You don't have access to that."
+  Then I should see the text "You don't have access to that."
   
 Scenario: A user can create new WorldObjects
   Given I am signed in with "facebook"
@@ -36,7 +37,8 @@ Scenario: A user can create new WorldObjects
   When I go to the new WorldObjects page of section "Test Section"
   And I fill in "world_object[name]" with "The new WorldObject"
   And I press "Save"
-  Then I should see "Test Section"
-  And I should see "The new WorldObject"
-  And I should see "✚"
-  And I should see "Name/Title"
+  Then I should see all of the texts:
+    | Test Section        |
+    | The new WorldObject |
+    | ✚                   |
+    | Name/Title          |

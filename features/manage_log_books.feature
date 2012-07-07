@@ -7,7 +7,7 @@ Scenario: A user can create a new LogBook
   And I fill in "log_book[title]" with "My new LogBook"
   And I press "Create"
   
-  Then I should see "SECTIONS (edit)"
+  Then I should see the text "SECTIONS (edit)"
   And the total number of Sections should be "4"
 
 Scenario: A user can delete LogBooks they own, and all the Sections, SectionProperties, WorldObjects, and WorldObjectProperties go with it
@@ -19,7 +19,7 @@ Scenario: A user can delete LogBooks they own, and all the Sections, SectionProp
   And a WorldObjectProperty exists that points to SectionProperty "Section Attribute" and WorldObject "Test WorldObject" with a value "false"
   
   When I go to the LogBooks index page
-  Then I should see "Test LogBook"
+  Then I should see the text "Test LogBook"
   And the total number of LogBooks should be "1"
   And the total number of Sections should be "1"
   And the total number of WorldObjects should be "1"
@@ -28,7 +28,7 @@ Scenario: A user can delete LogBooks they own, and all the Sections, SectionProp
   When I go to the LogBooks index page
   And I follow "✖"
   And I go to the LogBooks index page
-  Then I should not see "Test LogBook"
+  Then I should not see the text "Test LogBook"
   And the total number of LogBooks should be "0"
   And the total number of Sections should be "0"
   And the total number of WorldObjects should be "0"
@@ -43,7 +43,7 @@ Scenario: A user cannot delete LogBooks they do not own
   And a WorldObjectProperty exists that points to SectionProperty "Someone else's Attribute" and WorldObject "Someone else's WorldObject" with a value "false"
   
   When I go to the LogBooks index page
-  Then I should not see "Someone else's LogBook"
+  Then I should not see the text "Someone else's LogBook"
   And the total number of LogBooks should be "1"
   And the total number of Sections should be "1"
   And the total number of WorldObjects should be "1"
@@ -60,34 +60,36 @@ Scenario: A user can access LogBooks that they own
   And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
   
   When I go to the LogBooks index page
-  Then I should see "Test LogBook"
-  And I should see "Skyrim"
-  And I should see "No. of Items"
-  And I should see "0"
+  Then I should see the text "Test LogBook"
+  And I should see all of the texts:
+    | Skyrim        |
+    | No. of Items  |
+    | 0             |
     
 Scenario: A user cannot access LogBooks that they do not own
   Given I am signed in with "facebook"
   And a LogBook exists called "Someone else's log book" for game "Skyrim" and owned by "someoneelse"
   When I go to the LogBooks index page
-  Then I should not see "Someone else's log book"
+  Then I should not see the text "Someone else's log book"
   
 Scenario: Access denied message appears for trying to access LogBooks you do not own
   Given I am signed in with "facebook"
   And a LogBook exists called "Someone else's log book" for game "Skyrim" and owned by "someoneelse"
   When I access the LogBook "Someone else's log book"
-  Then I should see "You don't have access to that."
+  Then I should see the text "You don't have access to that."
   
 Scenario: A user can edit Sections on a LogBook that they own
   Given I am signed in with "facebook"
   And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
   When I edit the LogBook "Test LogBook"
-  Then I should see "Log Book Title"
-  And I should see "Sections"
-  And I should see "New Sections (comma-separated)"
+  Then I should see all of the texts:
+    | Log Book Title                  |
+    | Sections                        |
+    | New Sections (comma-separated)  |
 
 Scenario: Access denied message appears for trying to edit Sections on a LogBook you do not own
   Given I am signed in with "facebook"
   And a LogBook exists called "Someone else's log book" for game "Skyrim" and owned by "someoneelse"
   
   When I edit the LogBook "Someone else's log book"
-  Then I should see "You don't have access to that."
+  Then I should see the text "You don't have access to that."
