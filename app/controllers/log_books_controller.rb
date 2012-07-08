@@ -5,7 +5,7 @@ class LogBooksController < ApplicationController
     @public_log_books = LogBook.public
     
     if current_user
-      return @log_books = LogBook.find(:all, :conditions => "user_id = #{current_user.id}", :order => 'title ASC')
+      return @owned_and_shared_log_books = current_user.owned_and_shared_log_books
     else
       flash.keep
     end
