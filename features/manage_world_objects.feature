@@ -2,7 +2,7 @@ Feature: Manage WorldObjects
 
 Scenario: A user can access WorldObjects that they own
   Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   And a WorldObject exists called "Test WorldObject" in "Test Section"
   
@@ -11,7 +11,7 @@ Scenario: A user can access WorldObjects that they own
   
 Scenario: A user can edit WorldObjectProperties on WorldObjects that they own
   Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   And a WorldObject exists called "Test WorldObject" in "Test Section"
   
@@ -31,7 +31,7 @@ Scenario: Access denied message appears for trying to edit WorldObjectProperties
   
 Scenario: A user can create new WorldObjects
   Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   
   When I go to the new WorldObjects page of section "Test Section"

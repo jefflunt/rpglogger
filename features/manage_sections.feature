@@ -2,7 +2,7 @@ Feature: Manage Sections
 
 Scenario: A user can access Sections that they own
   Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   
   When I access the LogBook "Test LogBook"
@@ -13,7 +13,7 @@ Scenario: A user can access Sections that they own
       
 Scenario: A user cannot access Sections that they do not own
   Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   
   When I access the LogBook "Test LogBook"
@@ -35,7 +35,7 @@ Scenario: Access denied message appears for trying to access Sections you do not
   
 Scenario: A user can edit SectionProperties on a Section that they own
   Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   
   When I edit the Section "Test Section"
@@ -57,7 +57,7 @@ Scenario: Access denied message appears for trying to edit SectionProperties on 
   
 Scenario: A user can create new Sections
   Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   
   When I go to the edit LogBook page for "Test LogBook"
   And I fill in "sections[new_names]" with "new section 1, new section 2"
@@ -71,7 +71,7 @@ Scenario: A user can create new Sections
   
 Scenario: When user adds new attributes to a Section, the existing WorldObjects get those attributes
   Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   And a WorldObject exists called "Test WorldObject 1" in "Test Section"
   And a WorldObject exists called "Test WorldObject 2" in "Test Section"
@@ -90,7 +90,7 @@ Scenario: When user adds new attributes to a Section, the existing WorldObjects 
   
 Scenario: When user removes exiting attributes from a Section, the WorldObjectProperties attaches to those SectionProperties are also removed (destroyed)
   Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   And a WorldObject exists called "Test WorldObject 1" in "Test Section"
   And a WorldObject exists called "Test WorldObject 2" in "Test Section"

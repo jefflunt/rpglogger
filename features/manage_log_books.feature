@@ -12,7 +12,7 @@ Scenario: A user can create a new LogBook
 
 Scenario: A user can delete LogBooks they own, and all the Sections, SectionProperties, WorldObjects, and WorldObjectProperties go with it
   Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   And a WorldObject exists called "Test WorldObject" in "Test Section"
   And a SectionProperty exists called "Section Attribute" in "Test Section"
@@ -57,7 +57,7 @@ Scenario: A user cannot delete LogBooks they do not own
 
 Scenario: A user can access LogBooks that they own
   Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   
   When I go to the LogBooks index page
   Then I should see the text "Test LogBook"
@@ -80,7 +80,7 @@ Scenario: Access denied message appears for trying to access LogBooks you do not
   
 Scenario: A user can edit Sections on a LogBook that they own
   Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   When I edit the LogBook "Test LogBook"
   Then I should see all of the texts:
     | Log Book Title                  |

@@ -2,7 +2,7 @@ Feature: Markdown parsing and sanitization
 
 Background:
   Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "fooman"
+  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   And a WorldObject exists called "Test WorldObject" in "Test Section"
 
