@@ -8,7 +8,12 @@ Background:
   Given a Section exists called "Private Section" in "Private LogBook"
   Given a WorldObject exists called "Private WorldObject" in "Private Section"
   Given the LogBook "Private LogBook" is marked as private
-  Given the LogBook "Private LogBook" is shared with "google_user"
+  
+  Given a LogBook exists called "Shared LogBook" for game "Skyrim" and owned by "facebook_user"
+  Given a Section exists called "Shared Section" in "Shared LogBook"
+  Given a WorldObject exists called "Shared WorldObject" in "Shared Section"
+  Given the LogBook "Shared LogBook" is marked as private
+  Given the LogBook "Shared LogBook" is shared with "google_user"
   
   Given a LogBook exists called "Public LogBook" for game "Skyrim" and owned by "facebook_user"
   Given a Section exists called "Public Section" in "Public LogBook"
@@ -18,38 +23,62 @@ Background:
   Given I am signed in with "google_oauth2"
   
 Scenario: Registered users can see public LogBooks
-  
+  When I go to the LogBooks index page
+  Then I should see the text "Public LogBook"
+  And I should not see the text "✖"
   
 Scenario: Registered users can see LogBooks that are shared with them
   Given the number of LogBooks shared with "google_user" is 1
   When I go to the LogBooks index page
-  Then I should see the text "Private LogBook"
+  Then I should see the text "Shared LogBook"
   And I should see the text "⥮"
-  And I should not see the text "✖"
-  
+  And I should not see the text "✖"  
 
 Scenario: Registered users cannot view a LogBook that is not shared with them
-  Given pending
+  When I go to the LogBooks index page
+  Then I should not see the text "Private LogBook"
+  And I should not see the text "✖"
   
-Scenario: Registered users cannot change a WorldObject in a LogBook with read-only access
-  Given pending
+Scenario: Registered users cannot edit a WorldObject in a LogBook with read-only access
+  When I go to the edit WorldObject page for "Shared WorldObject" in "Shared Section" of "Shared LogBook"
+  Then I should see the text "You don't have access to that."
+  
+  When I try to change the name of WorldObject "Shared WorldObject" in "Shared Section" of "Shared LogBook" to "Vandalised object"
+  Then I should see the text "You don't have access to that."  
 
 Scenario: Registered users cannot delete a WorldObject in a LogBook with read-only access
-  Given pending
+  Given the total number of WorldObjects should be 3
+  When I try to delete the WorldObject "Shared WorldObject" in "Shared Section" of "Shared LogBook"
+  Then I should see the text "Signed in."
+  And the total number of WorldObjects should be 3
   
-Scenario: Registered users cannot change a Section in a LogBook with read-only access
-  Given pending
+Scenario: Registered users cannot edit a Section in a LogBook with read-only access
+  When I go to the edit page for the first section in LogBook "Shared LogBook"
+  Then I should see the text "You don't have access to that."
+  
+  When I try to change the name of Section "Shared Section" of "Shared LogBook" to "Vandalised section"
+  Then I should see the text "You don't have access to that."
 
 Scenario: Registered users cannot delete a Section in a LogBook with read-only access
-  Given pending
+  Given the total number of Sections should be 3
+  When I try to delete the Section "Shared Section" of "Shared LogBook"
+  Then I should see the text "Signed in."
+  And the total number of Sections should be 3
   
-Scenario: Registered users cannot change a LogBook with read-only access
-  Given pending
+Scenario: Registered users change edit a LogBook with read-only access
+  When I go to the edit LogBook page for "Shared LogBook"
+  Then I should see the text "You don't have access to that."
+
+  When I try to change the name of LogBook "Shared LogBook" to "Vandalised log book"
+  Then I should see the text "You don't have access to that."
 
 Scenario: Registered users cannot delete a LogBook with read-only access
-  Given pending
+  Given the total number of LogBooks should be 3
+  When I try to delete the LogBook "Shared LogBook"
+  Then I should see the text "Signed in."
+  And the total number of LogBooks should be 3
 
-Scenario: Registered users cannot change the list of users that have access to a LogBook that they do not own
+Scenario: Registered users cannot edit the list of users that have access to a LogBook that they do not own
   Given pending
   
 Scenario: Registered users lose access to shared LogBooks when the owner takes that access away
