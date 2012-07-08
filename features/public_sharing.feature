@@ -1,4 +1,4 @@
-Feature: Public sharing
+Feature: Public sharing with an anonymous user
 
 Background:
   Given I am signed in with "facebook"
