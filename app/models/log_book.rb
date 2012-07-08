@@ -9,6 +9,8 @@ class LogBook < ActiveRecord::Base
   
   validates :title, :presence => true
   
+  scope :public, where(["is_public = ?", true])
+  
   accepts_nested_attributes_for :sections
   
   def create_empty_section

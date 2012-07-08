@@ -1,6 +1,16 @@
 class LogBooksController < ApplicationController
   load_and_authorize_resource
   
+  def index
+    @public_log_books = LogBook.public
+    
+    if current_user
+      return @log_books = LogBook.find(:all, :conditions => "user_id = #{current_user.id}", :order => 'title ASC')
+    else
+      flash.keep
+    end
+  end
+  
   def show
     @log_book.create_empty_section if @log_book.sections.count == 0
         
@@ -9,7 +19,7 @@ class LogBooksController < ApplicationController
   
   def new
     if !current_user
-      redirect_to new_sessions_path
+      redirect_to new_sessions_path, notice: "You must be logged in to create a log book"
     else
       @log_book.user_id = current_user.id
     end
@@ -21,15 +31,6 @@ class LogBooksController < ApplicationController
       redirect_to @log_book, notice: "Log book created"
     else
       render 'new'
-    end
-  end
-  
-  def index
-    if current_user
-      return @log_books = LogBook.find(:all, :conditions => "user_id = #{current_user.id}", :order => 'title ASC')
-    else
-      flash.keep
-      return redirect_to new_sessions_path
     end
   end
   
