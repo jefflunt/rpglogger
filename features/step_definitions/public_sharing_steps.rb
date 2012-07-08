@@ -35,3 +35,15 @@ When /^I try to delete the Section "(.*?)" of "(.*?)"$/ do |section_name, log_bo
   
   delete section_path(@section)
 end
+
+When /^I try to change the name of LogBook "(.*?)" to "(.*?)"$/ do |log_book_title, new_log_book_title|
+  @log_book = LogBook.find_by_title(log_book_title)
+  
+  put log_book_path(@log_book), log_book: {title: new_log_book_title}
+end
+
+When /^I try to delete the LogBook "(.*?)"$/ do |log_book_title|
+  @log_book = LogBook.find_by_title(log_book_title)
+  
+  delete log_book_path(@log_book)
+end

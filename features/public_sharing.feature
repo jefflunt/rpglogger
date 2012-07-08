@@ -49,8 +49,18 @@ Scenario: Anonymous users cannot delete a Section
   Then I should see the text "Signed out."
   And the total number of Sections should be 1
 
-Scenario: Anonymous users can neither change nor delete a LogBook
-  Given pending
+Scenario: Anonymous users cannot change a LogBook
+  When I go to the edit LogBook page for "Test LogBook"
+  Then I should see the text "You don't have access to that."
+
+  When I try to change the name of LogBook "Test LogBook" to "Vandalised log book"
+  Then I should see the text "You don't have access to that."
+
+Scenario: Anonymous users cannot delete a LogBook
+  Given the total number of LogBooks should be 1
+  When I try to delete the LogBook "Test LogBook"
+  Then I should see the text "Signed out."
+  And the total number of LogBooks should be 1
   
-Scenario: Anonymous users can neither change the permissions on a LogBook
+Scenario: Anonymous users cannot change the list of users that have access to a LogBook
   Given pending
