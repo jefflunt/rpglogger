@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120708013247) do
+ActiveRecord::Schema.define(:version => 20120708051212) do
 
   create_table "log_books", :force => true do |t|
     t.integer  "user_id",                       :null => false
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(:version => 20120708013247) do
     t.integer "log_book_id", :null => false
     t.string  "name",        :null => false
   end
+
+  create_table "shares", :id => false, :force => true do |t|
+    t.integer "log_book_id"
+    t.integer "user_id"
+    t.string  "access_level", :default => "read-only"
+  end
+
+  add_index "shares", ["log_book_id", "user_id"], :name => "index_shares_on_log_book_id_and_user_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "provider"

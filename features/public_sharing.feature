@@ -9,7 +9,7 @@ Background:
   Then I sign out
 
 Scenario: Anonymous users can see public LogBooks
-  And I go to the LogBooks index page
+  When I go to the LogBooks index page
   Then I should see the text "Test LogBook"
   And I should not see the text "✖"
 

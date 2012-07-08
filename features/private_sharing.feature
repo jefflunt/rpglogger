@@ -1,15 +1,21 @@
 Feature: Private sharing between a facebook and google user
 
 Background:
-  Given a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
-  And a Section exists called "Test Section" in "Test LogBook"
-  And a WorldObject exists called "Test WorldObject" in "Test Section"
-  And the LogBook "Test LogBook" is marked as private
+  Given a user named "google_user" with provider "google_oauth2" exists
+  Given a user named "facebook_user" with provider "facebook" exists
   
-  And I am signed in with "google_oauth2"
+  Given a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
+  Given a Section exists called "Test Section" in "Test LogBook"
+  Given a WorldObject exists called "Test WorldObject" in "Test Section"
+  Given the LogBook "Test LogBook" is marked as private
+  Given the LogBook "Test LogBook" is shared with "google_user"
+  
+  Given I am signed in with "google_oauth2"
 
 Scenario: Registered users can see public LogBooks
-  Given pending
+  When I go to the LogBooks index page
+  Then I should see the text "Test LogBook"
+  And I should not see the text "✖"
   
 Scenario: Registered users can see LogBooks that are shared with them
   Given pending
@@ -36,6 +42,9 @@ Scenario: Registered users cannot delete a LogBook with read-only access
   Given pending
 
 Scenario: Registered users cannot change the list of users that have access to a LogBook that they do not own
+  Given pending
+  
+Scenario: Registered users lose access to shared LogBooks when the owner takes that access away
   Given pending
 
 Scenario: Registered users CAN change permissions on LogBooks that they own
