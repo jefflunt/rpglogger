@@ -1,4 +1,4 @@
-Feature: Share permissions
+Feature: Public sharing
 
 Background:
   Given I am signed in with "facebook"
@@ -14,7 +14,9 @@ Scenario: Anonymous users can see public LogBooks
   And I should not see the text "✖"
 
 Scenario: Anonymous cannot see a LogBook in the public list that is not shared publicly
-  Given pending
+  When the LogBook "Test LogBook" is marked as private
+  And I go to the LogBooks index page
+  Then I should not see the text "Test LogBook"
 
 Scenario: Anonymous users cannot view a LogBook that is not shared publicly
   When I go to the show LogBook page for "Test LogBook"
