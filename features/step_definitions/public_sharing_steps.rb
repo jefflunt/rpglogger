@@ -28,3 +28,10 @@ When /^I try to change the name of Section "(.*?)" of "(.*?)" to "(.*?)"$/ do |s
   
   put section_path(@section), section: {name: new_section_name}
 end
+
+When /^I try to delete the Section "(.*?)" of "(.*?)"$/ do |section_name, log_book_title|
+  @log_book = LogBook.find_by_title(log_book_title)
+  @section = @log_book.sections.find_by_name(section_name)
+  
+  delete section_path(@section)
+end

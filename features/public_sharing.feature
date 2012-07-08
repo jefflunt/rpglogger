@@ -44,7 +44,10 @@ Scenario: Anonymous users cannot edit a Section
   Then I should see the text "You don't have access to that."
 
 Scenario: Anonymous users cannot delete a Section
-  Given pending
+  Given the total number of Sections should be 1
+  When I try to delete the Section "Test Section" of "Test LogBook"
+  Then I should see the text "Signed out."
+  And the total number of Sections should be 1
 
 Scenario: Anonymous users can neither change nor delete a LogBook
   Given pending
