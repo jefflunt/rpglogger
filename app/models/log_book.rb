@@ -1,4 +1,6 @@
 class LogBook < ActiveRecord::Base
+  attr_protected :is_public
+  
   belongs_to :user
   belongs_to :game
   

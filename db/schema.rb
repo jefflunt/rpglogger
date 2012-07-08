@@ -11,14 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120706012422) do
+ActiveRecord::Schema.define(:version => 20120708013247) do
 
   create_table "log_books", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.string   "title",      :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "user_id",                       :null => false
+    t.string   "title",                         :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "game_name"
+    t.boolean  "is_public",  :default => false
   end
 
   create_table "section_properties", :force => true do |t|
