@@ -27,7 +27,7 @@ Scenario: Anonymous users cannot edit a WorldObject
   When I go to the edit WorldObject page for "Test WorldObject" in "Test Section" of "Test LogBook"
   Then I should see the text "You don't have access to that."
   
-  When I try to change the name of "Test WorldObject" in "Test Section" of "Test LogBook" to "Vandalised object"
+  When I try to change the name of WorldObject "Test WorldObject" in "Test Section" of "Test LogBook" to "Vandalised object"
   Then I should see the text "You don't have access to that."
   
 Scenario: Anonymous users cannot delete a WorldObject
@@ -36,7 +36,14 @@ Scenario: Anonymous users cannot delete a WorldObject
   Then I should see the text "Signed out."
   And the total number of WorldObjects should be 1
 
-Scenario: Anonymous users can neither change nor delete a Section
+Scenario: Anonymous users cannot edit a Section
+  When I go to the edit page for the first section in LogBook "Test LogBook"
+  Then I should see the text "You don't have access to that."
+  
+  When I try to change the name of Section "Test Section" of "Test LogBook" to "Vandalised section"
+  Then I should see the text "You don't have access to that."
+
+Scenario: Anonymous users cannot delete a Section
   Given pending
 
 Scenario: Anonymous users can neither change nor delete a LogBook
