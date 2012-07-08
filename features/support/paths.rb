@@ -13,9 +13,18 @@ module NavigationHelpers
     when /the edit LogBook page for "([^\"]*)"/
       log_book = LogBook.find_by_title($1)
       edit_log_book_path(log_book)
-    when /the edit page for the first section in LogBook "([^\"]*)/
+    when /the edit page for the first section in LogBook "([^\"]*)"/
       log_book = LogBook.find_by_title($1)
       edit_section_path(log_book.sections.first)
+    when /the edit WorldObject page for "([^\"]*)" in "([^\"]*)" of "([^\"]*)"/
+      # params:
+      #   $1 = the name of a WorldObject
+      #   $2 = the name of a Section
+      #   $3 = the title of a LogBook
+      
+      log_book = LogBook.find_by_title($3)
+      section = log_book.sections.find_by_name($2)
+      edit_section_world_object_path(section, section.world_objects.find_by_name($1))
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"

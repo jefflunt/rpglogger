@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
     end
     
+    def current_ability
+      @current_ability ||= Ability.new(current_user, params)
+    end
+    
     def redirect_back_or(path, response_status = {})
       redirect_to :back, response_status
       rescue ActionController::RedirectBackError

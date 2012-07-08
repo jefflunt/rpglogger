@@ -12,4 +12,8 @@ class SectionProperty < ActiveRecord::Base
   def self.all_data_types
     ['boolean', 'integer', 'string', 'text']
   end
+  
+  def is_public?
+    section.is_public?
+  end
 end

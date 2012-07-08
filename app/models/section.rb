@@ -8,4 +8,8 @@ class Section < ActiveRecord::Base
   accepts_nested_attributes_for :world_objects
   
   validates :name, :presence => true
+  
+  def is_public?
+    log_book.is_public?
+  end
 end

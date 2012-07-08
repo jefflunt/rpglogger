@@ -31,7 +31,7 @@ When /^I edit the LogBook "([^"]*)"$/ do |log_book_title|
   visit edit_log_book_path(LogBook.find_by_title(log_book_title))
 end
 
-Then /^the total number of LogBooks should be "([^"]*)"$/ do |log_book_count|
+Then /^the total number of LogBooks should be (\d+)$/ do |log_book_count|
   LogBook.count.should == log_book_count.to_i
 end
 

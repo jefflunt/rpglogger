@@ -19,11 +19,22 @@ Scenario: Anonymous cannot see a LogBook in the public list that is not shared p
   Then I should not see the text "Test LogBook"
 
 Scenario: Anonymous users cannot view a LogBook that is not shared publicly
-  When I go to the show LogBook page for "Test LogBook"
+  When the LogBook "Test LogBook" is marked as private
+  And I go to the show LogBook page for "Test LogBook"
   Then I should see the text "You don't have access to that."
 
-Scenario: Anonymous users can neither change nor delete a WorldObject
-  Given pending
+Scenario: Anonymous users cannot edit a WorldObject
+  When I go to the edit WorldObject page for "Test WorldObject" in "Test Section" of "Test LogBook"
+  Then I should see the text "You don't have access to that."
+  
+  When I try to change the name of "Test WorldObject" in "Test Section" of "Test LogBook" to "Vandalised object"
+  Then I should see the text "You don't have access to that."
+  
+Scenario: Anonymous users cannot delete a WorldObject
+  Given the total number of WorldObjects should be 1
+  When I try to delete the WorldObject "Test WorldObject" in "Test Section" of "Test LogBook"
+  Then I should see the text "Signed out."
+  And the total number of WorldObjects should be 1
 
 Scenario: Anonymous users can neither change nor delete a Section
   Given pending
