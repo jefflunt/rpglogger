@@ -4,23 +4,29 @@ Background:
   Given a user named "google_user" with provider "google_oauth2" and uid "1234" exists
   Given a user named "facebook_user" with provider "facebook" and uid "1234" exists
   
-  Given a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
-  Given a Section exists called "Test Section" in "Test LogBook"
-  Given a WorldObject exists called "Test WorldObject" in "Test Section"
-  Given the LogBook "Test LogBook" is marked as private
-  Given the LogBook "Test LogBook" is shared with "google_user"
+  Given a LogBook exists called "Private LogBook" for game "Skyrim" and owned by "facebook_user"
+  Given a Section exists called "Private Section" in "Private LogBook"
+  Given a WorldObject exists called "Private WorldObject" in "Private Section"
+  Given the LogBook "Private LogBook" is marked as private
+  Given the LogBook "Private LogBook" is shared with "google_user"
+  
+  Given a LogBook exists called "Public LogBook" for game "Skyrim" and owned by "facebook_user"
+  Given a Section exists called "Public Section" in "Public LogBook"
+  Given a WorldObject exists called "Public WorldObject" in "Public Section"
+  Given the LogBook "Public LogBook" is marked as public
   
   Given I am signed in with "google_oauth2"
   
 Scenario: Registered users can see public LogBooks
+  
+  
+Scenario: Registered users can see LogBooks that are shared with them
   Given the number of LogBooks shared with "google_user" is 1
   When I go to the LogBooks index page
-  Then I should see the text "Test LogBook"
+  Then I should see the text "Private LogBook"
   And I should see the text "⥮"
   And I should not see the text "✖"
   
-Scenario: Registered users can see LogBooks that are shared with them
-  Given pending
 
 Scenario: Registered users cannot view a LogBook that is not shared with them
   Given pending
