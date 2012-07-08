@@ -22,14 +22,14 @@ Scenario: Anonymous users cannot view a LogBook that is not shared publicly
   When I go to the show LogBook page for "Test LogBook"
   Then I should see the text "You don't have access to that."
 
-Scenario: Anonymous users cannot change nor delete a WorldObject
+Scenario: Anonymous users can neither change nor delete a WorldObject
   Given pending
 
-Scenario: Anonymous users cannot change nor delete a Section
+Scenario: Anonymous users can neither change nor delete a Section
   Given pending
 
-Scenario: Anonymous users cannot change nor delete a LogBook
+Scenario: Anonymous users can neither change nor delete a LogBook
   Given pending
   
-Scenario: Anonymous users cannot change the permissions on a LogBook
+Scenario: Anonymous users can neither change the permissions on a LogBook
   Given pending
