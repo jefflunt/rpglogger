@@ -1,7 +1,7 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 
-Given /^a user named "(.*?)" with provider "(.*?)" exists$/ do |nickname, provider|
-  FactoryGirl.create(:user, nickname: nickname, provider: provider)
+Given /^a user named "(.*?)" with provider "(.*?)" and uid "(.*?)" exists$/ do |nickname, provider, uid|
+  FactoryGirl.create(:user, nickname: nickname, provider: provider, uid: uid)
 end
 
 When /^the LogBook "(.*?)" is marked as private$/ do |title|
@@ -14,5 +14,9 @@ Given /^the LogBook "(.*?)" is shared with "(.*?)"$/ do |log_book_title, shared_
   log_book = LogBook.find_by_title(log_book_title)
   user = User.find_by_nickname(shared_user_nickname)
   
-  user.shared_log_books << log_book unless user.shared_log_books.include?(log_book)
+  user.shared_log_books << log_book unless log_book.shared_with?(user)
+end
+
+Given /^the number of LogBooks shared with "(.*?)" is (\d+)$/ do |user_nickname, num_shared_log_books|
+  User.find_by_nickname(user_nickname).shared_log_books.count.should be num_shared_log_books.to_i
 end

@@ -1,8 +1,8 @@
 Feature: Private sharing between a facebook and google user
 
 Background:
-  Given a user named "google_user" with provider "google_oauth2" exists
-  Given a user named "facebook_user" with provider "facebook" exists
+  Given a user named "google_user" with provider "google_oauth2" and uid "1234" exists
+  Given a user named "facebook_user" with provider "facebook" and uid "1234" exists
   
   Given a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   Given a Section exists called "Test Section" in "Test LogBook"
@@ -11,10 +11,12 @@ Background:
   Given the LogBook "Test LogBook" is shared with "google_user"
   
   Given I am signed in with "google_oauth2"
-
+  
 Scenario: Registered users can see public LogBooks
+  Given the number of LogBooks shared with "google_user" is 1
   When I go to the LogBooks index page
   Then I should see the text "Test LogBook"
+  And I should see the text "⥮"
   And I should not see the text "✖"
   
 Scenario: Registered users can see LogBooks that are shared with them
