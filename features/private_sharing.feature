@@ -78,8 +78,17 @@ Scenario: Registered users cannot delete a LogBook with read-only access
   Then I should see the text "Signed in."
   And the total number of LogBooks should be 3
 
-Scenario: Registered users cannot edit the list of users that have access to a LogBook that they do not own
+Scenario: Registered users CANNOT edit the list of users on LogBooks to which they have read-only access
   Given the number of users who have shared access to "Shared LogBook" should be 1
   When I try to change the access list of LogBook "Shared LogBook" to add "google_user"
   Then I should see the text "Signed in."
   And the number of users who have shared access to "Shared LogBook" should be 1
+
+Scenario: Registered users CANNOT edit the list of users on LogBooks to which they have read-wright access
+  Given pending
+
+Scenario: Registered users CAN view LogBooks AND Sections (containing lists of WorldObjects) on LogBooks that are shared with read-only access to them
+  Given pending
+  
+Scenario: Registered users CAN edit AND delete WorldObjects on LogBook that are shared with read-write access to them
+  Given pending
