@@ -7,7 +7,7 @@ Scenario: A user can create a new LogBook
   And I fill in "log_book[title]" with "My new LogBook"
   And I press "Create"
   
-  Then I should see the text "SECTIONS (edit)"
+  Then I should see the text "My new LogBook | edit"
   And the total number of Sections should be 4
 
 Scenario: A user can delete LogBooks they own, and all the Sections, SectionProperties, WorldObjects, and WorldObjectProperties go with it
