@@ -1,14 +1,14 @@
-%table{:class=>'max-width'}
+%table.max-width
   %tr
-    %th{:class=>'site-title left', :width=>'30%'}
+    %th.site-title.left{width: '30%'}
       %span
-        =image_tag 'logo_small.png', :align=>'left'
+        =image_tag 'logo_small.png', align: 'left'
       %span=link_to '&nbsp;rpglogger'.html_safe, root_path
     %td=center_message
     
     -if current_user
-      %th{:width=>'8%'}=link_to username_for_top_section(current_user), log_books_path
-      %th{:width=>'8%'}=current_user.nickname.nil? ? (link_to 'Logout', signout_path) : (link_to 'Logout', signout_path)
+      %th{width: '8%'}=link_to username_for_top_section(current_user), log_books_path
+      %th{width: '8%'}=current_user.nickname.nil? ? (link_to 'Logout', signout_path) : (link_to 'Logout', signout_path)
     -else
-      %th
-      %th=link_to 'Login', '/sessions/new'
+      %th{width: '8%'}
+      %th{width: '8%'}=link_to 'Login', '/sessions/new'
