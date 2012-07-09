@@ -1,8 +1,8 @@
 .section-title
-  %span{:class=>'serif-sc-font big-font-size'}
+  %span.serif-sc-font.big-font-size
     ="in "
     =link_to @log_book.title, @log_book
-#sections_form{:class=>'serif-sc-font compact-form right'}
+#sections_form.serif-sc-font.compact-form.right
   %table
     %tr
       %td
@@ -33,4 +33,42 @@
                 %td=new_sections_form.text_field :new_names
               %tr
                 %td=log_book_form.submit "Add sections", :class => 'styled-button-blue-gray'
-              
+                
+%span.serif-sc-font.big-font-size.left="Sharing"
+#sharing_form.serif-sc-font.compact-form.right
+  %table
+    %tr
+      %td
+        =form_for @log_book do |sharing_form|
+          %table
+            %tr
+              %th="Current users"
+              %td
+            -if @log_book.shared_users.count > 0
+              -@log_book.shared_users.each do |shared_user|
+                %tr
+                  %td=username_for_top_section(shared_user)
+                  %td.left=link_to 'Remove access', log_book_path(@log_book, remove_shared_user_id: shared_user.id), {method: :put, class: 'styled-button-dark-red'}
+            -else
+              %tr
+                %th="(none)"
+                %td
+            %tr
+              %td
+                %br
+              %td
+            %tr
+              %th="Add users"
+              %td
+            %tr
+              %td=text_field_tag "shares[new_google_user]"
+              %th.left='Google (email address)'
+            %tr
+              %td=text_field_tag "shares[new_facebook_user]"
+              %th.left='Facebook (nickname)'
+            %tr
+              %td=text_field_tag "shares[new_twitter_user]"
+              %th.left='Twitter (username)'
+            %tr
+              %th=sharing_form.submit "Add users", :class => 'styled-button-blue-gray'
+              %td

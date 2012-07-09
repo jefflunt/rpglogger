@@ -14,6 +14,7 @@ class LogBook < ActiveRecord::Base
   scope :public, where(["is_public = ?", true])
   
   accepts_nested_attributes_for :sections
+  accepts_nested_attributes_for :shares
   
   def owned_by?(user)
     user_id == user.id

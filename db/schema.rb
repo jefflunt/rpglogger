@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20120708051212) do
     t.string  "name",        :null => false
   end
 
-  create_table "shares", :id => false, :force => true do |t|
+  create_table "shares", :force => true do |t|
     t.integer "log_book_id"
     t.integer "user_id"
     t.string  "access_level", :default => "read-only"

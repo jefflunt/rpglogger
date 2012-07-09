@@ -99,11 +99,11 @@ Scenario: Registered users CAN change permissions on LogBooks that they own
   When I sign out
   And I am signed in with "facebook"
   
-  Given the number of users who have shared access to "Shared LogBook" should be 0
+  Given the number of users who have shared access to "Private LogBook" should be 0
   
   When I go to the LogBooks index page
-  Then I should see the text "Shared LogBook"
-  When I try to change the access list of LogBook "Shared LogBook" to add "google_user"
+  Then I should see the text "Private LogBook"
+  When I try to change the access list of LogBook "Private LogBook" to add "google_user"
   Then I should see the text "Updated"
   
-  And the number of users who have shared access to "Shared LogBook" should be 1
+  And the number of users who have shared access to "Private LogBook" should be 1

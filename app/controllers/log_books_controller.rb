@@ -47,6 +47,24 @@ class LogBooksController < ApplicationController
       end
     end
     
+    if (params[:shares])
+      params[:shares][:new_google_user].delete    if params[:shares][:new_google_user].blank?
+      params[:shares][:new_facebook_user].delete  if params[:shares][:new_facebook_user].blank?
+      params[:shares][:new_twitter_user].delete   if params[:shares][:new_twitter_user].blank?
+      
+      @new_google_user    = User.find_by_nickname_and_provider(params[:shares][:new_google_user],   "google_oauth2")
+      @new_facebook_user  = User.find_by_nickname_and_provider(params[:shares][:new_facebook_user], "facebook")
+      @new_twitter_user   = User.find_by_nickname_and_provider(params[:shares][:new_twitter_user],  "twitter")
+      
+      @log_book.shared_users << @new_google_user unless @new_google_user.nil? || @log_book.shared_users.include?(@new_google_user)
+      @log_book.shared_users << @new_facebook_user unless @new_facebook_user.nil? || @log_book.shared_users.include?(@new_facebook_user)
+      @log_book.shared_users << @new_twitter_user unless @new_twitter_user.nil? || @log_book.shared_users.include?(@new_twitter_user)
+    end
+    
+    if (params[:remove_shared_user_id])
+      @log_book.shared_users.delete(User.find(params[:remove_shared_user_id]))
+    end
+    
     redirect_to edit_log_book_path(@log_book), notice: "Log book updated"
   end
   

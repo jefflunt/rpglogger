@@ -12,6 +12,7 @@ Rpglogger::Application.routes.draw do
 
   resources :log_books do
     resources :sections
+    resources :shares
   end
   
   resources :sections do

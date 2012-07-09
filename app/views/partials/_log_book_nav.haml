@@ -1,8 +1,9 @@
-%span{:class=>'color-orange'}='SECTIONS '
-%span=link_to '(edit)', edit_log_book_path(log_book)
-%table{:class=>'max-width'}
+%span.color-orange=truncate(log_book.title, length: 22)
+| 
+%span=link_to 'edit', edit_log_book_path(log_book)
+%table.max-width
   %tr
     %td
-      %ul{:class=>'list-no-markers'}
+      %ul.list-no-markers
         -log_book.sections.each do |s|
           %li=link_to '>&nbsp;'.html_safe+s.name, section_path(s)
