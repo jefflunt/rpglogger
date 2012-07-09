@@ -83,27 +83,3 @@ Scenario: Registered users cannot edit the list of users that have access to a L
   When I try to change the access list of LogBook "Shared LogBook" to add "google_user"
   Then I should see the text "Signed in."
   And the number of users who have shared access to "Shared LogBook" should be 1
-  
-Scenario: Registered users lose access to shared LogBooks when the owner takes that access away
-  When I go to the LogBooks index page
-  Then I should see the text "Shared LogBook"
-  
-  Given the number of users who have shared access to "Shared LogBook" should be 1
-  When the LogBook "Shared LogBook" is NOT shared with "google_user"
-  And the number of users who have shared access to "Shared LogBook" should be 0
-  
-  When I go to the LogBooks index page
-  Then I should not see the text "Shared LogBook"
-
-Scenario: Registered users CAN change permissions on LogBooks that they own
-  When I sign out
-  And I am signed in with "facebook"
-  
-  Given the number of users who have shared access to "Private LogBook" should be 0
-  
-  When I go to the LogBooks index page
-  Then I should see the text "Private LogBook"
-  When I try to change the access list of LogBook "Private LogBook" to add "google_user"
-  Then I should see the text "Updated"
-  
-  And the number of users who have shared access to "Private LogBook" should be 1

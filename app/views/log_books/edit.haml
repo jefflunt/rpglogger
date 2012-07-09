@@ -22,7 +22,7 @@
                 %td=section_form.text_field :name
                 %th=link_to 'Delete', section_path(section_form.object), {method: :delete, class: 'styled-button-dark-red'}
             %tr
-              %td=log_book_form.submit 'Save', :class => 'styled-button-blue-gray'
+              %td=log_book_form.submit 'Save sections', :class => 'styled-button-blue-gray'
       %td
         =form_for @log_book do |log_book_form|
           =fields_for :sections do |new_sections_form|
@@ -44,15 +44,14 @@
             %tr
               %th="Current users"
               %td
-            -if @log_book.shared_users.count > 0
-              -@log_book.shared_users.each do |shared_user|
-                %tr
-                  %td=username_for_top_section(shared_user)
-                  %td.left=link_to 'Remove access', log_book_path(@log_book, remove_shared_user_id: shared_user.id), {method: :put, class: 'styled-button-dark-red'}
-            -else
+            -if @log_book.shared_users.count == 0
               %tr
                 %th="(none)"
-                %td
+                %td            
+            -@log_book.shared_users.each do |shared_user|
+              %tr
+                %td{height: "25px"}=username_for_top_section(shared_user)
+                %th.left=link_to 'Remove access', log_book_path(@log_book, remove_shared_user_id: shared_user.id), {method: :put, class: 'styled-button-dark-red'}
             %tr
               %td
                 %br
