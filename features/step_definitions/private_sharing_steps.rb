@@ -10,11 +10,16 @@ When /^the LogBook "(.*?)" is marked as private$/ do |title|
   @log_book.reload
 end
 
-Given /^the LogBook "(.*?)" is shared with "(.*?)"$/ do |log_book_title, shared_user_nickname|
+Given /^the LogBook "(.*?)" is shared with "(.*?)" with "(.*?)" access$/ do |log_book_title, shared_user_nickname, access_level|
   log_book = LogBook.find_by_title(log_book_title)
   user = User.find_by_nickname(shared_user_nickname)
+  share = Share.find_or_create_by_log_book_id_and_user_id(log_book.id, user.id)
   
-  user.shared_log_books << log_book unless log_book.owned_by?(user) || log_book.shared_with?(user)
+  share.log_book_id = log_book.id
+  share.user_id = user.id
+  share.access_level = access_level
+
+  share.save
 end
 
 Given /^the LogBook "(.*?)" is NOT shared with "(.*?)"$/ do |log_book_title, not_shared_user_nickname|

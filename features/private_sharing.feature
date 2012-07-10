@@ -3,6 +3,7 @@ Feature: Private sharing between a facebook and google user
 Background:
   Given a user named "google_user" with provider "google_oauth2" and uid "1234" exists
   Given a user named "facebook_user" with provider "facebook" and uid "1234" exists
+  Given a user named "rpglogger_user" with provider "rpglogger-auth" and uid "1234" exists
   
   Given a LogBook exists called "Private LogBook" for game "Skyrim" and owned by "facebook_user"
   Given a Section exists called "Private Section" in "Private LogBook"
@@ -13,7 +14,7 @@ Background:
   Given a Section exists called "Shared Section" in "Shared LogBook"
   Given a WorldObject exists called "Shared WorldObject" in "Shared Section"
   Given the LogBook "Shared LogBook" is marked as private
-  Given the LogBook "Shared LogBook" is shared with "google_user"
+  Given the LogBook "Shared LogBook" is shared with "google_user" with "read-only" access
   
   Given a LogBook exists called "Public LogBook" for game "Skyrim" and owned by "facebook_user"
   Given a Section exists called "Public Section" in "Public LogBook"
@@ -80,15 +81,26 @@ Scenario: Registered users cannot delete a LogBook with read-only access
 
 Scenario: Registered users CANNOT edit the list of users on LogBooks to which they have read-only access
   Given the number of users who have shared access to "Shared LogBook" should be 1
-  When I try to change the access list of LogBook "Shared LogBook" to add "google_user"
+  When I try to change the access list of LogBook "Shared LogBook" to add "rpglogger_user"
   Then I should see the text "Signed in."
   And the number of users who have shared access to "Shared LogBook" should be 1
 
-Scenario: Registered users CANNOT edit the list of users on LogBooks to which they have read-wright access
-  Given pending
-
 Scenario: Registered users CAN view LogBooks AND Sections (containing lists of WorldObjects) on LogBooks that are shared with read-only access to them
-  Given pending
+  When I go to the show LogBook page for "Shared LogBook"
+  Then I should see the text "Shared WorldObject"
+
+Scenario: Registered users CANNOT edit the list of users on LogBooks to which they have read-write access
+  Given the LogBook "Shared LogBook" is shared with "google_user" with "read-write" access
+  And the number of users who have shared access to "Shared LogBook" should be 1
+  When I try to change the access list of LogBook "Shared LogBook" to add "rpglogger_user"
+  Then I should see the text "Signed in."
+  And the number of users who have shared access to "Shared LogBook" should be 1
   
 Scenario: Registered users CAN edit AND delete WorldObjects on LogBook that are shared with read-write access to them
-  Given pending
+  Given the LogBook "Shared LogBook" is shared with "google_user" with "read-write" access
+  When I go to the show LogBook page for "Shared LogBook"
+  And I follow "Shared WorldObject"
+  Then I should see all of the texts:
+    | in Shared Section |
+    | Name              |
+    | Save              |
