@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe LogBooksController do
-  it "should redirect to the log_books_controller#new action when a user logs in who owns zero LogBooks" do    
+  it "should redirect to the log_books_controller#new action when a user logs in who owns zero LogBooks" do
     visit '/auth/facebook'
     
     URI.parse(current_url).path.should == new_log_book_path

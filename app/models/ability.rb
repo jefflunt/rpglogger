@@ -11,6 +11,8 @@ class Ability
     end
     
     unless user.new_record?
+      can [:new], LogBook
+      
       can [:edit, :update], LogBook do |log_book|
         user.can_write_to?(log_book)
       end

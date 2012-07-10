@@ -1,6 +1,4 @@
 class SectionsController < ApplicationController
-  load_and_authorize_resource
-  
   def show
     @section.world_objects.sort!{|w1,w2| w1.name.downcase <=> w2.name.downcase}
     @log_book = @section.log_book

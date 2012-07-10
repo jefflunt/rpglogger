@@ -5,9 +5,7 @@ class LogBooksController < ApplicationController
     @public_log_books = LogBook.public
     
     if current_user
-      return @owned_and_shared_log_books = current_user.owned_and_shared_log_books
-    else
-      flash.keep
+      @owned_and_shared_log_books = current_user.owned_and_shared_log_books
     end
   end
   
