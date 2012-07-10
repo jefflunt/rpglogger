@@ -1,5 +1,5 @@
 class SectionPropertiesController < ApplicationController
-  load_and_authorize_resource
+#  load_and_authorize_resource
   
   def create
     @section = Section.find(params[:section_id])

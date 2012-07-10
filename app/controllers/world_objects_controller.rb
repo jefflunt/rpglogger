@@ -1,5 +1,5 @@
 class WorldObjectsController < ApplicationController
-  load_and_authorize_resource
+#  load_and_authorize_resource
   
   def new
     section = Section.find(params[:section_id])

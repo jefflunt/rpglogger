@@ -30,6 +30,13 @@ FactoryGirl.define do
     s.data_type               {['boolean', 'string', 'text', 'integer'][rand(4)]}
     s.sequence(:sort_order)   {|sort_order| sort_order}
   end
+  
+  factory :share do |s|
+    log_book
+    user
+    
+    s.access_level  {"read-only"}
+  end
 
   factory :world_object do |w|
     section

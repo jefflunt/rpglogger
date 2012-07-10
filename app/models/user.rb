@@ -11,11 +11,11 @@ class User < ActiveRecord::Base
   end
   
   def can_read_from?(log_book)
-    log_book.is_public? || log_book.shared_with?(self) || log_book.owned_by?(self)
+    log_book.owned_by?(self) || log_book.is_public? || log_book.shared_with?(self)
   end
   
   def can_write_to?(log_book)
-    log_book.owned_by?(self)
+    log_book.owned_by?(self) || log_book.shares.find_by_user_id_and_access_level(self.id, "read-write") != nil
   end
   
   def self.create_with_omniauth(auth)

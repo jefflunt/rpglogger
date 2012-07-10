@@ -4,29 +4,19 @@ class Ability
   def initialize(user, params=nil)
     user ||= User.new
     
-    can :read, LogBook do |log_book|
-      user.can_read_from?(log_book) # log_book.is_public? || log_book.shared_users.include?(user)
-    end
+    can :index, LogBook
     
-    can :read, Section do |section|
-      user.can_read_from?(section.log_book) # section.log_book.is_public? || section.log_book.shared_users.include?(user)
+    can [:index, :show], LogBook do |log_book|
+      user.can_read_from?(log_book)
     end
     
     unless user.new_record?
-      can :manage, LogBook do |log_book|
+      can [:edit, :update], LogBook do |log_book|
         user.can_write_to?(log_book)
       end
-    
-      can :manage, Section do |section|
-        user.can_write_to?(section.log_book)
-      end
-    
-      can :manage, WorldObject do |world_object|
-        user.can_write_to?(world_object.section.log_book)
-      end
-    
-      can :manage, SectionProperty do |section_property|
-        user.can_write_to?(section_property.section.log_book)
+      
+      can :manage, LogBook do |log_book|
+        log_book.owned_by?(user)
       end
     end
   end
