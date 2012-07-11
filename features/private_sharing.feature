@@ -81,7 +81,7 @@ Scenario: Registered users cannot delete a LogBook with read-only access
 
 Scenario: Registered users CANNOT edit the list of users on LogBooks to which they have read-only access
   Given the number of users who have read-only access to "Shared LogBook" should be 1
-  When I try to change the access list of LogBook "Shared LogBook" to add "rpglogger_user"
+  When I try to change the access list of LogBook "Shared LogBook" to add "rpglogger_user" with "read-only" access
   Then I should see the text "Signed in."
   And the number of users who have read-only access to "Shared LogBook" should be 1
 
@@ -92,7 +92,7 @@ Scenario: Registered users CAN view LogBooks AND Sections (containing lists of W
 Scenario: Registered users CANNOT edit the list of users on LogBooks to which they have read-write access
   Given the LogBook "Shared LogBook" is shared with "google_user" with "read-write" access
   And the number of users who have read-write access to "Shared LogBook" should be 1
-  When I try to change the access list of LogBook "Shared LogBook" to add "rpglogger_user"
+  When I try to change the access list of LogBook "Shared LogBook" to add "rpglogger_user" with "read-only" access
   Then I should see the text "Signed in."
   And the number of users who have read-write access to "Shared LogBook" should be 1
   

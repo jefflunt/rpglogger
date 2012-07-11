@@ -67,6 +67,6 @@ Scenario: Anonymous users cannot delete a LogBook
   
 Scenario: Anonymous users cannot edit the list of users that have access to a LogBook
   Given the number of users who have read-only access to "Public LogBook" should be 0
-  When I try to change the access list of LogBook "Public LogBook" to add "google_user"
+  When I try to change the access list of LogBook "Public LogBook" to add "google_user" with "read-only" access
   Then I should see the text "Signed out."
   Given the number of users who have read-only access to "Public LogBook" should be 0

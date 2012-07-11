@@ -23,6 +23,9 @@ Scenario: LogBook owners can add and remove private read-only access
   And I press "Add users"
   Then the number of users who have read-only access to "Shared LogBook" should be 1
   
+  When I follow "Remove access"
+  Then the number of users who have read-only access to "Shared LogBook" should be 0
+  
 Scenario: LogBook owners can add and remove private read-write access
   Given pending
   
