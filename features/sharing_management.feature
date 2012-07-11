@@ -14,8 +14,14 @@ Background:
   Given a WorldObject exists called "Public WorldObject" in "Public Section"
   Given the LogBook "Public LogBook" is marked as public
   
+  Given I am signed in with "facebook"
+  
 Scenario: LogBook owners can add and remove private read-only access
-  Given pending
+  Given the number of users who have read-only access to "Shared LogBook" should be 0
+  When I go to the edit LogBook page for "Shared LogBook"
+  And I fill in "shares[new_google_user]" with "google_user"
+  And I press "Add users"
+  Then the number of users who have read-only access to "Shared LogBook" should be 1
   
 Scenario: LogBook owners can add and remove private read-write access
   Given pending
