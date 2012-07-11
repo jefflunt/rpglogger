@@ -47,10 +47,3 @@ When /^I try to delete the LogBook "(.*?)"$/ do |log_book_title|
   
   delete log_book_path(@log_book)
 end
-
-When /^I try to change the access list of LogBook "(.*?)" to add "(.*?)"$/ do |log_book_title, user_nickname|
-  log_book = LogBook.find_by_title(log_book_title)
-  user = User.find_by_nickname(user_nickname)
-  
-  put log_book_path(log_book), log_book: {add_shared_user_id: user.id}
-end
