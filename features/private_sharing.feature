@@ -80,10 +80,10 @@ Scenario: Registered users cannot delete a LogBook with read-only access
   And the total number of LogBooks should be 3
 
 Scenario: Registered users CANNOT edit the list of users on LogBooks to which they have read-only access
-  Given the number of users who have shared access to "Shared LogBook" should be 1
+  Given the number of users who have read-only access to "Shared LogBook" should be 1
   When I try to change the access list of LogBook "Shared LogBook" to add "rpglogger_user"
   Then I should see the text "Signed in."
-  And the number of users who have shared access to "Shared LogBook" should be 1
+  And the number of users who have read-only access to "Shared LogBook" should be 1
 
 Scenario: Registered users CAN view LogBooks AND Sections (containing lists of WorldObjects) on LogBooks that are shared with read-only access to them
   When I go to the show LogBook page for "Shared LogBook"
@@ -91,10 +91,10 @@ Scenario: Registered users CAN view LogBooks AND Sections (containing lists of W
 
 Scenario: Registered users CANNOT edit the list of users on LogBooks to which they have read-write access
   Given the LogBook "Shared LogBook" is shared with "google_user" with "read-write" access
-  And the number of users who have shared access to "Shared LogBook" should be 1
+  And the number of users who have read-write access to "Shared LogBook" should be 1
   When I try to change the access list of LogBook "Shared LogBook" to add "rpglogger_user"
   Then I should see the text "Signed in."
-  And the number of users who have shared access to "Shared LogBook" should be 1
+  And the number of users who have read-write access to "Shared LogBook" should be 1
   
 Scenario: Registered users CAN edit AND delete WorldObjects on LogBook that are shared with read-write access to them
   Given the LogBook "Shared LogBook" is shared with "google_user" with "read-write" access

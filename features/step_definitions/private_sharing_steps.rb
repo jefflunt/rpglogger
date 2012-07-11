@@ -36,7 +36,7 @@ end
 
 Given /^the number of users who have read\-write access to "(.*?)" should be (\d+)$/ do |log_book_title, num_read_write_users|
   log_book = LogBook.find_by_title(log_book_title)
-  log_book.shares.find_all_by_access_level("read-write").count.should be num_read_only_users.to_i  
+  log_book.shares.find_all_by_access_level("read-write").count.should be num_read_write_users.to_i  
 end
 
 Given /^the number of LogBooks shared with "(.*?)" is (\d+)$/ do |user_nickname, num_shared_log_books|
