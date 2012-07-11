@@ -1,14 +1,23 @@
 class SectionsController < ApplicationController
   def show
+    @section = Section.find(params[:id])
+    authorize! :show, @section.log_book
+    
     @section.world_objects.sort!{|w1,w2| w1.name.downcase <=> w2.name.downcase}
     @log_book = @section.log_book
   end
   
   def edit
+    @section = Section.find(params[:id])
+    authorize! :edit, @section.log_book
+    
     @log_book = @section.log_book
   end
   
   def update
+    @section = Section.find(params[:id])
+    authorize! :update, @section.log_book
+    
     @section.update_attributes(params[:section])
     
     new_section_property_names = params[:section_properties][:new_section_property_names]
@@ -21,6 +30,9 @@ class SectionsController < ApplicationController
   end
   
   def destroy
+    @section = Section.find(params[:id])
+    authorize! :update, @section.log_book
+    
     log_book = @section.log_book
     @section.destroy
     

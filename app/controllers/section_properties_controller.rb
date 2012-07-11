@@ -1,8 +1,9 @@
 class SectionPropertiesController < ApplicationController
-#  load_and_authorize_resource
-  
   def create
     @section = Section.find(params[:section_id])
+    
+    authorize! :update, @section.log_book
+    
     next_sort_order = @section.section_properties.count == 0 ? 1 : @section.section_properties.collect{|sp| sp.sort_order}.max + 1
     
     create_new_section_properties_from(params[:new_properties][:names], params[:data_type], next_sort_order)
@@ -12,6 +13,8 @@ class SectionPropertiesController < ApplicationController
   
   def destroy
     section_property = SectionProperty.find(params[:id])
+    authorize! :update, section_property.section.log_book
+    
     section = section_property.section
     section_property.destroy
     

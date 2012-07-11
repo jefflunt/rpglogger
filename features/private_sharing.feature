@@ -103,4 +103,3 @@ Scenario: Registered users CAN edit AND delete WorldObjects on LogBook that are 
   Then I should see all of the texts:
     | in Shared Section |
     | Name              |
-    | Save              |

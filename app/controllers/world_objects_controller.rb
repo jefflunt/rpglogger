@@ -1,8 +1,9 @@
 class WorldObjectsController < ApplicationController
-#  load_and_authorize_resource
-  
   def new
+    @world_object = WorldObject.new
     section = Section.find(params[:section_id])
+    authorize! :update, section.log_book
+    
     @log_book = section.log_book
     @world_object.section = section
     @world_object.section.section_properties.each do |sp|
@@ -12,7 +13,10 @@ class WorldObjectsController < ApplicationController
     render 'world_object_form'
   end
   
-  def create    
+  def create
+    @world_object = WorldObject.new(params[:world_object])
+    authorize! :update, @world_object.section.log_book
+    
     if @world_object.save
       redirect_to section_path(@world_object.section), notice: "Created"
     else
@@ -21,11 +25,17 @@ class WorldObjectsController < ApplicationController
   end
       
   def edit
+    @world_object = WorldObject.find(params[:id])
+    authorize! :update, @world_object.section.log_book
+    
     @log_book = @world_object.section.log_book
     render 'world_object_form'
   end
   
   def update
+    @world_object = WorldObject.find(params[:id])
+    authorize! :update, @world_object.section.log_book
+    
     @log_book = @world_object.section.log_book
     if @world_object.update_attributes(params[:world_object])
       redirect_to section_path(@world_object.section), notice: "Updated"
@@ -35,6 +45,9 @@ class WorldObjectsController < ApplicationController
   end
   
   def destroy
+    @world_object = WorldObject.find(params[:id])
+    authorize! :update, @world_object.section.log_book
+    
     @world_object.destroy
     
     redirect_to section_path(@world_object.section), notice: "Deleted"

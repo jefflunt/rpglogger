@@ -1,7 +1,8 @@
 class LogBooksController < ApplicationController
-  load_and_authorize_resource
-  
   def index
+    authorize! :index, LogBook
+    @log_books = LogBook.all
+    
     @public_log_books = LogBook.public
     
     if current_user
@@ -10,12 +11,18 @@ class LogBooksController < ApplicationController
   end
   
   def show
+    @log_book = LogBook.find(params[:id])
+    authorize! :show, @log_book
+    
     @log_book.create_empty_section if @log_book.sections.count == 0
         
     redirect_to section_path(@log_book.sections.first)
   end
   
   def new
+    @log_book = LogBook.new
+    authorize! :new, @log_book
+    
     if !current_user
       redirect_to new_sessions_path, notice: "You must be logged in to create a log book"
     else
@@ -24,6 +31,9 @@ class LogBooksController < ApplicationController
   end
   
   def create
+    @log_book = LogBook.new(params[:log_book])
+    authorize! :create, LogBook
+    
     if @log_book.save
       @log_book.create_default_sections
       redirect_to @log_book, notice: "Log book created"
@@ -34,9 +44,15 @@ class LogBooksController < ApplicationController
   
   def edit
     @log_book = LogBook.find(params[:id])
+    authorize! :edit, @log_book
+    
+    @log_book = LogBook.find(params[:id])
   end
   
   def update
+    @log_book = LogBook.find(params[:id])
+    authorize! :update, @log_book
+    
     @log_book.update_attributes(params[:log_book])
     
     if (params[:sections])
@@ -67,6 +83,9 @@ class LogBooksController < ApplicationController
   end
   
   def destroy
+    @log_book = LogBook.find(params[:id])
+    authorize! :destroy, @log_book
+    
     @log_book.destroy
     
     redirect_back_or log_books_path, notice: "Log book deleted"
