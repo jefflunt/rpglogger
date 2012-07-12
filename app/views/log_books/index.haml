@@ -39,6 +39,8 @@
               %td=link_to "\u2716", log_book_path(log_book), :method => :delete
             -elsif current_user.can_manage_world_objects_in?(log_book)
               %td="\u296e"
+            -else
+              %td
           -else
             %td
           %td{:class=>'column-string'}=link_to log_book.title.html_safe, log_book
