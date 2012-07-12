@@ -38,7 +38,7 @@ describe Ability do
     Ability.new(@editor_user).can?(:new, LogBook).should be true
     Ability.new(@editor_user).can?(:create, LogBook).should be true
     
-    Ability.new(@anonymous_user).can?(:new, LogBook).should be false
+    Ability.new(@anonymous_user).can?(:new, LogBook).should be true
     Ability.new(@anonymous_user).can?(:create, LogBook).should be false
   end
   

@@ -4,15 +4,13 @@ class Ability
   def initialize(user, params=nil)
     user ||= User.new
     
-    can :index, LogBook
+    can [:new, :index], LogBook
     
     can :show, LogBook do |log_book|
       user.can_view_world_objects_in?(log_book)
     end
     
     unless user.new_record?
-      can [:new], LogBook
-      
       can :manage, LogBook do |log_book|
         log_book.owned_by?(user)
       end
