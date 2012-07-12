@@ -1,7 +1,7 @@
 Feature: Manage Sections
 
 Scenario: A user can access Sections that they own
-  Given I am signed in with "facebook"
+  Given I am signed in with provider "facebook"
   And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   
@@ -12,7 +12,7 @@ Scenario: A user can access Sections that they own
   Then I should see the text "Name/Title"
       
 Scenario: A user cannot access Sections that they do not own
-  Given I am signed in with "facebook"
+  Given I am signed in with provider "facebook"
   And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   
@@ -23,7 +23,7 @@ Scenario: A user cannot access Sections that they do not own
   Then I should see the text "Name/Title"
 
 Scenario: Access denied message appears for trying to access Sections you do not own
-  Given I am signed in with "facebook"
+  Given I am signed in with provider "facebook"
   And a LogBook exists called "Someone else's LogBook" for game "Skyrim" and owned by "someoneelse"
   And a Section exists called "Someone else's Section" in "Someone else's LogBook"
   
@@ -34,7 +34,7 @@ Scenario: Access denied message appears for trying to access Sections you do not
   Then I should see the text "You don't have access to that."
   
 Scenario: A user can edit SectionProperties on a Section that they own
-  Given I am signed in with "facebook"
+  Given I am signed in with provider "facebook"
   And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   
@@ -45,7 +45,7 @@ Scenario: A user can edit SectionProperties on a Section that they own
     | New Attributes (comma-separated)  |
 
 Scenario: Access denied message appears for trying to edit SectionProperties on a Section you do not own
-  Given I am signed in with "facebook"
+  Given I am signed in with provider "facebook"
   And a LogBook exists called "Someone else's LogBook" for game "Skyrim" and owned by "someoneelse"
   And a Section exists called "Someone else's Section" in "Someone else's LogBook"
   
@@ -56,7 +56,7 @@ Scenario: Access denied message appears for trying to edit SectionProperties on 
   Then I should see the text "You don't have access to that."
   
 Scenario: A user can create new Sections
-  Given I am signed in with "facebook"
+  Given I am signed in with provider "facebook"
   And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   
   When I go to the edit LogBook page for "Test LogBook"
@@ -70,7 +70,7 @@ Scenario: A user can create new Sections
   And I should not see the text ","
   
 Scenario: When user adds new attributes to a Section, the existing WorldObjects get those attributes
-  Given I am signed in with "facebook"
+  Given I am signed in with provider "facebook"
   And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   And a WorldObject exists called "Test WorldObject 1" in "Test Section"
@@ -89,7 +89,7 @@ Scenario: When user adds new attributes to a Section, the existing WorldObjects 
     | Delete  |
   
 Scenario: When user removes exiting attributes from a Section, the WorldObjectProperties attaches to those SectionProperties are also removed (destroyed)
-  Given I am signed in with "facebook"
+  Given I am signed in with provider "facebook"
   And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   And a WorldObject exists called "Test WorldObject 1" in "Test Section"

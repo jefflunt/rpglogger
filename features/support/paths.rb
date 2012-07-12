@@ -5,7 +5,7 @@ module NavigationHelpers
       log_books_path
     when /the show LogBook page for "([^\"]*)"/
       log_book_path(LogBook.find_by_title($1))
-    when /the new LogBooks page/
+    when /the new LogBook page/
       new_log_book_path
     when /the new WorldObjects page of section "([^\"]*)"/
       section = Section.find_by_name($1)

@@ -32,3 +32,8 @@ end
 Given /^the number of LogBooks shared with "(.*?)" with the "(.*?)" role is (\d+)$/ do |user_nickname, role, num_shared_log_books|
   User.find_by_nickname(user_nickname).shared_log_books.count.should be num_shared_log_books.to_i
 end
+
+Then /^I should see an edit WorldObject link to "(.*?)"$/ do |world_object_name|
+  world_object = WorldObject.find_by_name(world_object_name)
+  step "I should see a link that points to \"#{edit_section_world_object_path(world_object.section, world_object)}\""
+end

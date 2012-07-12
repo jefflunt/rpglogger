@@ -22,6 +22,7 @@ Then /^the total number of SectionProperties should be (\d+)$/ do |prop_count|
   SectionProperty.count.should == prop_count.to_i
 end
 
-Given /^a SectionProperty exists called "([^"]*)" in "([^"]*)"$/ do |prop_name, section_name|
-  FactoryGirl.create(:section_property, :name=>prop_name, :section_id=>Section.find_by_name(section_name).id)
+Given /^a SectionProperty exists called "(.*?)" of data type "(.*?)" in "(.*?)"$/ do |prop_name, data_type, section_name|
+  section = Section.find_by_name(section_name)
+  section.section_properties.create(name: prop_name, data_type: data_type)
 end

@@ -34,10 +34,11 @@
         %th{:class=>'column-integer'}='No.&nbsp;of&nbsp;Items'.html_safe
       - @public_log_books.each do |log_book|
         %tr
-          -if current_user.can_fully_manage?(log_book)
-            %td=link_to "\u2716", log_book_path(log_book), :method => :delete
-          -elsif current_user.can_edit_world_objects_in?(log_book)
-            %td="\u296e"
+          -if current_user
+            -if current_user.can_fully_manage?(log_book)
+              %td=link_to "\u2716", log_book_path(log_book), :method => :delete
+            -elsif current_user.can_edit_world_objects_in?(log_book)
+              %td="\u296e"
           -else
             %td
           %td{:class=>'column-string'}=link_to log_book.title.html_safe, log_book

@@ -1,10 +1,11 @@
 Feature: Markdown parsing and sanitization
 
 Background:
-  Given I am signed in with "facebook"
-  And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
-  And a Section exists called "Test Section" in "Test LogBook"
-  And a WorldObject exists called "Test WorldObject" in "Test Section"
+  Given I am signed in with provider "facebook"
+
+  Given a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
+  Given a Section exists called "Test Section" in "Test LogBook"
+  Given a WorldObject exists called "Test WorldObject" in "Test Section"
 
 Scenario: Markdown is parsed as expected in text fields when displayed
   When I edit the WorldObject "Test WorldObject" in "Test Section"
