@@ -19,11 +19,7 @@ class LogBook < ActiveRecord::Base
   def owned_by?(user)
     user_id == user.id
   end
-  
-  def shared_with?(user)
-    shared_users.include?(user)
-  end
-  
+    
   def create_empty_section
     empty_section = Section.create(log_book_id: self.id, name: 'New Section')
   end

@@ -3,7 +3,7 @@ class CreateSharesTable < ActiveRecord::Migration
     create_table :shares do |t|
       t.integer :log_book_id
       t.integer :user_id
-      t.string  :access_level, default: "read-only"
+      t.string  :role, default: "editor"
     end
     
     add_index(:shares, [:log_book_id, :user_id], unique: true)

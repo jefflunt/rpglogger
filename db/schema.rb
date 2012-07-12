@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20120708051212) do
   create_table "shares", :force => true do |t|
     t.integer "log_book_id"
     t.integer "user_id"
-    t.string  "access_level", :default => "read-only"
+    t.string  "role",        :default => "editor"
   end
 
   add_index "shares", ["log_book_id", "user_id"], :name => "index_shares_on_log_book_id_and_user_id", :unique => true

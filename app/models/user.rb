@@ -10,14 +10,22 @@ class User < ActiveRecord::Base
     LogBook.select("DISTINCT ON (LOWER(log_books.title), log_books.id) log_books.id, log_books.user_id, log_books.title, log_books.game_name").joins("LEFT OUTER JOIN shares ON log_books.id = shares.log_book_id").where(["log_books.user_id = ? OR shares.user_id = ?", id, id]).order("LOWER(log_books.title) ASC")
   end
   
-  def can_read_from?(log_book)
-    log_book.owned_by?(self) || log_book.is_public? || log_book.shared_with?(self)
+  def can_view_world_objects_in?(log_book)
+    share_on_log_book = shares.find_by_log_book_id(log_book.id)
+    role_on_log_book = share_on_log_book.nil? ? nil : share_on_log_book.role
+    log_book.is_public? || log_book.owned_by?(self) || role_on_log_book == "viewer" || role_on_log_book == "editor"
   end
   
-  def can_write_to?(log_book)
-    log_book.owned_by?(self) || log_book.shares.find_by_user_id_and_access_level(self.id, "read-write") != nil
+  def can_edit_world_objects_in?(log_book)
+    share_on_log_book = shares.find_by_log_book_id(log_book.id)
+    role_on_log_book = share_on_log_book.nil? ? nil : share_on_log_book.role
+    log_book.owned_by?(self) || role_on_log_book == "editor"
   end
   
+  def can_fully_manage?(log_book)
+    log_book.owned_by?(self)
+  end
+    
   def self.create_with_omniauth(auth)
     create! do |user|
       user.provider = auth["provider"]

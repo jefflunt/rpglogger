@@ -1,5 +1,12 @@
 Capybara.default_host = 'http://rpglogger.com'
 OmniAuth.config.test_mode = true
+OmniAuth.config.add_mock(:google_oauth2, {
+  :info => {
+    :uid => '1234',
+    :email => 'google_user'
+  }
+})
+
 OmniAuth.config.add_mock(:facebook, {
   :info => {
     :uid => '1234',
@@ -8,10 +15,10 @@ OmniAuth.config.add_mock(:facebook, {
   }
 })
 
-OmniAuth.config.add_mock(:google_oauth2, {
+OmniAuth.config.add_mock(:twitter, {
   :info => {
     :uid => '1234',
-    :name => 'Google user',
-    :nickname => 'google_user',
+    :name => 'Twitter user',
+    :nickname => 'twitter_user',
   }
 })

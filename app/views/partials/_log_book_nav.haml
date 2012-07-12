@@ -1,6 +1,7 @@
 %span.color-orange=truncate(log_book.title, length: 22)
-| 
-%span=link_to 'edit', edit_log_book_path(log_book)
+-if can?(:edit, log_book)
+  | 
+  %span=link_to 'edit', edit_log_book_path(log_book)
 %table.max-width
   %tr
     %td

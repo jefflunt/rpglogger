@@ -1,6 +1,6 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 
-Given /^I am signed in with "([^"]*)"$/ do |provider|
+Given /^I am signed in with provider "([^"]*)"$/ do |provider|
   visit "/auth/#{provider.downcase}"
 end
 
