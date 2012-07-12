@@ -1,8 +1,9 @@
 class WorldObjectsController < ApplicationController
+  
   def new
     @world_object = WorldObject.new
     section = Section.find(params[:section_id])
-    authorize! :update, section.log_book
+    authorize! :new, WorldObject
     
     @log_book = section.log_book
     @world_object.section = section
@@ -15,7 +16,7 @@ class WorldObjectsController < ApplicationController
   
   def create
     @world_object = WorldObject.new(params[:world_object])
-    authorize! :update, @world_object.section.log_book
+    authorize! :create, WorldObject
     
     if @world_object.save
       redirect_to section_path(@world_object.section), notice: "Created"
@@ -26,7 +27,7 @@ class WorldObjectsController < ApplicationController
       
   def edit
     @world_object = WorldObject.find(params[:id])
-    authorize! :update, @world_object.section.log_book
+    authorize! :edit, @world_object
     
     @log_book = @world_object.section.log_book
     render 'world_object_form'
@@ -34,7 +35,7 @@ class WorldObjectsController < ApplicationController
   
   def update
     @world_object = WorldObject.find(params[:id])
-    authorize! :update, @world_object.section.log_book
+    authorize! :update, @world_object
     
     @log_book = @world_object.section.log_book
     if @world_object.update_attributes(params[:world_object])
@@ -46,7 +47,7 @@ class WorldObjectsController < ApplicationController
   
   def destroy
     @world_object = WorldObject.find(params[:id])
-    authorize! :update, @world_object.section.log_book
+    authorize! :destory, @world_object
     
     @world_object.destroy
     

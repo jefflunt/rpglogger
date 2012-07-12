@@ -123,7 +123,7 @@ describe Ability do
     Ability.new(@anonymous_user).can?(:destroy, @private_log_book.sections.first.section_properties.first).should be false          # no access
   end
   
-  it "authorizes owners and editors to edit WorldObjects, but not anonymous users." do
+  it "authorizes owners and editors to edit WorldObjects, but anonymous users cannot edit anything." do
     Ability.new(@owner_user).can?(:edit, @public_log_book.world_objects.first).should be true                 # owner
     Ability.new(@owner_user).can?(:edit, @editor_access_log_book.world_objects.first).should be true          # owner
     Ability.new(@owner_user).can?(:edit, @private_log_book.world_objects.first).should be true                # owner
