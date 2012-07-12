@@ -1,13 +1,15 @@
 #section-detail{:class => 'compact-table'}
   %table
     %tr
-      %th{:class=>'min-width'}=link_to "\u271a", new_section_world_object_path(@section.id)
+      -if current_user && current_user.can_manage_world_objects_in?(@section.log_book)
+        %th{:class=>'min-width'}=link_to "\u271a", new_section_world_object_path(@section.id)
       %th{:class=>'column-string'}='Name/Title'
       -@section.section_properties.each do |sp|
         %th{:class=>'column-' + sp.data_type}=sp.name
     -@section.world_objects.each do |obj|
       %tr
-        %td=link_to "\u2716", section_world_object_path(@section, obj), method: :delete
+        -if can?(:destroy, obj)
+          %td=link_to "\u2716", section_world_object_path(@section, obj), method: :delete
         %td=link_to markdown_parse(obj.name), edit_section_world_object_path(@section, obj)
         -obj.world_object_properties.each do |prop|
           %td{:class=>'column-' + prop.section_property.data_type}=markdown_parse(prop.raw_value)
