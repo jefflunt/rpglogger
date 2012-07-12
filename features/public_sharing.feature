@@ -16,12 +16,12 @@ Scenario: Anonymous users can see public LogBooks
   Then I should see the text "Public LogBook"
   And I should not see the text "✖"
 
-Scenario: Anonymous cannot see a LogBook in the public list that is not shared publicly
+Scenario: Anonymous users do not see private LogBooks in the public list
   When the LogBook "Public LogBook" is marked as private
   And I go to the LogBooks index page
   Then I should not see the text "Public LogBook"
 
-Scenario: Anonymous users cannot view a LogBook that is not shared publicly
+Scenario: Anonymous users cannot access the show action of a LogBook that is not shared publicly
   When the LogBook "Public LogBook" is marked as private
   And I go to the show LogBook page for "Public LogBook"
   Then I should see the text "You don't have access to that."
