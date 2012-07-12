@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
     log_book.is_public? || log_book.owned_by?(self) || role_on_log_book == "viewer" || role_on_log_book == "editor"
   end
   
-  def can_edit_world_objects_in?(log_book)
+  def can_manage_world_objects_in?(log_book)
     share_on_log_book = shares.find_by_log_book_id(log_book.id)
     role_on_log_book = share_on_log_book.nil? ? nil : share_on_log_book.role
     log_book.owned_by?(self) || role_on_log_book == "editor"

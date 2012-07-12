@@ -35,7 +35,7 @@ FactoryGirl.define do
     log_book
     user
     
-    s.access_level  {"read-only"}
+    s.role  {"viewer"}
   end
 
   factory :world_object do |w|
