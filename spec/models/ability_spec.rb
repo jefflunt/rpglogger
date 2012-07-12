@@ -123,6 +123,30 @@ describe Ability do
     Ability.new(@anonymous_user).can?(:destroy, @private_log_book.sections.first.section_properties.first).should be false          # no access
   end
   
-  it "authorizes owners and editors to edit WorldObjects, but not anonymous users."
+  it "authorizes owners and editors to edit WorldObjects, but not anonymous users." do
+    Ability.new(@owner_user).can?(:edit, @public_log_book.world_objects.first).should be true                 # owner
+    Ability.new(@owner_user).can?(:edit, @editor_access_log_book.world_objects.first).should be true          # owner
+    Ability.new(@owner_user).can?(:edit, @private_log_book.world_objects.first).should be true                # owner
+    
+    Ability.new(@owner_user).can?(:update, @public_log_book.world_objects.first).should be true               # owner
+    Ability.new(@owner_user).can?(:update, @editor_access_log_book.world_objects.first).should be true        # owner
+    Ability.new(@owner_user).can?(:update, @private_log_book.world_objects.first).should be true              # owner
+    
+    Ability.new(@editor_user).can?(:edit, @public_log_book.world_objects.first).should be false               # public
+    Ability.new(@editor_user).can?(:edit, @editor_access_log_book.world_objects.first).should be true         # editor
+    Ability.new(@editor_user).can?(:edit, @private_log_book.world_objects.first).should be false              # no access
+    
+    Ability.new(@editor_user).can?(:update, @public_log_book.world_objects.first).should be false             # public
+    Ability.new(@editor_user).can?(:update, @editor_access_log_book.world_objects.first).should be true       # editor
+    Ability.new(@editor_user).can?(:update, @private_log_book).should be false                                # no access
+    
+    Ability.new(@anonymous_user).can?(:edit, @public_log_book.world_objects.first).should be false            # public
+    Ability.new(@anonymous_user).can?(:edit, @editor_access_log_book.world_objects.first).should be false     # no access
+    Ability.new(@anonymous_user).can?(:edit, @private_log_book.world_objects.first).should be false           # no access
+    
+    Ability.new(@anonymous_user).can?(:update, @public_log_book.world_objects.first).should be false          # public
+    Ability.new(@anonymous_user).can?(:update, @editor_access_log_book.world_objects.first).should be false   # no access
+    Ability.new(@anonymous_user).can?(:update, @private_log_book.world_objects.first).should be false         # no access
+  end
   
 end
