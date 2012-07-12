@@ -21,6 +21,5 @@ Scenario: Editor role users do not see the LogBook editing link on the LogBook s
 
 Scenario: Editor role users can see the edit and delete controls for WorldObjects on LogBooks that are shared with them
   When I go to the show LogBook page for "Shared LogBook"
-  Then show me the page
   Then I should see a "a" tag around the text "Shared WorldObject"
   And I should see the text "✖"
