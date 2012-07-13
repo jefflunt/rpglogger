@@ -11,6 +11,7 @@ Scenario: When I trash a LogBook, the `deleted_at` attribute is set
   When I go to the LogBooks index page
   And I follow "✖"
   Then the LogBook "Test LogBook" should be marked as deleted
+  And I should see the text "Log book deleted (undo)"
 
 Scenario: When I untrash a LogBook, the `deleted_at` attribute is cleared to nil
   Given pending
@@ -20,6 +21,7 @@ Scenario: When I trash a Section, the `deleted_at` attribute is set
   And I follow "edit"
   And I follow "Delete"
   Then the Section "Test Section" in "Test LogBook" should be marked as deleted
+  And I should see the text "Section deleted (undo)"
 
 Scenario: When I untrash a Section, the `deleted_at` attribute is cleared to nil
   Given pending
@@ -29,7 +31,7 @@ Scenario: When I trash a WorldObject, the `deleted_at` attribute is set
   And I follow "Test Section"
   And I follow "✖"
   Then the WorldObject "Test WorldObject" in "Test Section" in "Test LogBook" should be marked as deleted
-  
+  And I should see the text "Deleted (undo)"
 
 Scenario: When I untrash a WorldObject, the `deleted_at` attribute is cleared to nil
   Given pending

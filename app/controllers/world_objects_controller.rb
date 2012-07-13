@@ -51,7 +51,7 @@ class WorldObjectsController < ApplicationController
     
     @world_object.destroy
     
-    redirect_to section_path(@world_object.section), notice: "Deleted"
+    redirect_to section_path(@world_object.section), notice: "Deleted (undo)"
   end
   
 end

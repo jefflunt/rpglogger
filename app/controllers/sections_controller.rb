@@ -36,7 +36,7 @@ class SectionsController < ApplicationController
     log_book = @section.log_book
     @section.destroy
     
-    redirect_to edit_log_book_path(log_book), notice: "Section deleted"
+    redirect_to edit_log_book_path(log_book), notice: "Section deleted (undo)"
   end
   
   private

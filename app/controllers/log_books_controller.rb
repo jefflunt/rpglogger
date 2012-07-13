@@ -87,7 +87,7 @@ class LogBooksController < ApplicationController
     
     @log_book.destroy
     
-    redirect_back_or log_books_path, notice: "Log book deleted"
+    redirect_back_or log_books_path, notice: "Log book deleted (undo)"
   end
     
 end
