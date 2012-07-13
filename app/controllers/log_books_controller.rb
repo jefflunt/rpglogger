@@ -87,7 +87,17 @@ class LogBooksController < ApplicationController
     
     @log_book.destroy
     
-    redirect_back_or log_books_path, notice: "Log book deleted (undo)"
+    redirect_back_or log_books_path, notice: "Log book deleted (<a href=\"#{untrash_log_book_path(@log_book.id)}\" data-method=\"put\">undo</a>)".html_safe
   end
+  
+  # PUT /log_books/:id/untrash
+  # Using the `paranoia` gem, this method clears the `deleted_at` field
+  def untrash
+    @log_book = LogBook.only_deleted.find(params[:id])
+    authorize! :untrash, @log_book
     
+    @log_book.update_attribute(:deleted_at, nil)
+    
+    redirect_back_or log_books_path, notice: "Log book restored"
+  end
 end

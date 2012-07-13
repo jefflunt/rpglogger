@@ -70,6 +70,20 @@ describe Ability do
     Ability.new(@anonymous_user).can?(:destroy, @private_log_book).should be false
   end
   
+  it "only allows a LogBook's owner to untrash said LogBook" do
+    Ability.new(@owner_user).can?(:untrash, @public_log_book).should be true
+    Ability.new(@owner_user).can?(:untrash, @editor_access_log_book).should be true
+    Ability.new(@owner_user).can?(:untrash, @private_log_book).should be true
+    
+    Ability.new(@editor_user).can?(:untrash, @public_log_book).should be false
+    Ability.new(@editor_user).can?(:untrash, @editor_access_log_book).should be false
+    Ability.new(@editor_user).can?(:untrash, @private_log_book).should be false
+    
+    Ability.new(@anonymous_user).can?(:untrash, @public_log_book).should be false
+    Ability.new(@anonymous_user).can?(:untrash, @editor_access_log_book).should be false
+    Ability.new(@anonymous_user).can?(:untrash, @private_log_book).should be false
+  end
+  
   it "only allows a LogBook's owner to edit and update the LogBook (which includes Sections and their names, as well as user roles)" do
     Ability.new(@owner_user).can?(:edit, @public_log_book).should be true                 # owner
     Ability.new(@owner_user).can?(:edit, @editor_access_log_book).should be true          # owner
@@ -98,29 +112,43 @@ describe Ability do
   
   
   it "only allows a LogBook's owner to delete Sections and SectionProperties" do
-    Ability.new(@owner_user).can?(:destroy, @public_log_book.sections.first).should be true                                   # owner
-    Ability.new(@owner_user).can?(:destroy, @editor_access_log_book.sections.first).should be true                            # owner
-    Ability.new(@owner_user).can?(:destroy, @private_log_book.sections.first).should be true                                  # owner
+    Ability.new(@owner_user).can?(:destroy, @public_log_book.sections.first).should be true                                         # owner
+    Ability.new(@owner_user).can?(:destroy, @editor_access_log_book.sections.first).should be true                                  # owner
+    Ability.new(@owner_user).can?(:destroy, @private_log_book.sections.first).should be true                                        # owner
     
     Ability.new(@owner_user).can?(:destroy, @public_log_book.sections.first.section_properties.first).should be true                # owner
     Ability.new(@owner_user).can?(:destroy, @editor_access_log_book.sections.first.section_properties.first).should be true         # owner
     Ability.new(@owner_user).can?(:destroy, @private_log_book.sections.first.section_properties.first).should be true               # owner
     
-    Ability.new(@editor_user).can?(:destroy, @public_log_book.sections.first).should be false                                 # public
-    Ability.new(@editor_user).can?(:destroy, @editor_access_log_book.sections.first).should be false                          # editor
-    Ability.new(@editor_user).can?(:destroy, @private_log_book.sections.first).should be false                                # no accesss
+    Ability.new(@editor_user).can?(:destroy, @public_log_book.sections.first).should be false                                       # public
+    Ability.new(@editor_user).can?(:destroy, @editor_access_log_book.sections.first).should be false                                # editor
+    Ability.new(@editor_user).can?(:destroy, @private_log_book.sections.first).should be false                                      # no accesss
     
     Ability.new(@editor_user).can?(:destroy, @public_log_book.sections.first.section_properties.first).should be false              # public
     Ability.new(@editor_user).can?(:destroy, @editor_access_log_book.sections.first.section_properties.first).should be false       # editor
     Ability.new(@editor_user).can?(:destroy, @private_log_book.sections.first.section_properties.first).should be false             # no-access
     
-    Ability.new(@anonymous_user).can?(:destroy, @public_log_book).should be false                                             # public
-    Ability.new(@anonymous_user).can?(:destroy, @editor_access_log_book).should be false                                      # no access
-    Ability.new(@anonymous_user).can?(:destroy, @private_log_book).should be false                                            # no access
+    Ability.new(@anonymous_user).can?(:destroy, @public_log_book.sections.first).should be false                                    # public
+    Ability.new(@anonymous_user).can?(:destroy, @editor_access_log_book.sections.first).should be false                             # no access
+    Ability.new(@anonymous_user).can?(:destroy, @private_log_book.sections.first).should be false                                   # no access
     
     Ability.new(@anonymous_user).can?(:destroy, @public_log_book.sections.first.section_properties.first).should be false           # public
     Ability.new(@anonymous_user).can?(:destroy, @editor_access_log_book.sections.first.section_properties.first).should be false    # no access
     Ability.new(@anonymous_user).can?(:destroy, @private_log_book.sections.first.section_properties.first).should be false          # no access
+  end
+  
+  it "only allows a LogBook's owner to untrash Sections" do
+    Ability.new(@owner_user).can?(:untrash, @public_log_book.sections.first).should be true
+    Ability.new(@owner_user).can?(:untrash, @editor_access_log_book.sections.first).should be true
+    Ability.new(@owner_user).can?(:untrash, @private_log_book.sections.first).should be true
+    
+    Ability.new(@editor_user).can?(:untrash, @public_log_book.sections.first).should be false
+    Ability.new(@editor_user).can?(:untrash, @editor_access_log_book.sections.first).should be false
+    Ability.new(@editor_user).can?(:untrash, @private_log_book.sections.first).should be false
+    
+    Ability.new(@anonymous_user).can?(:untrash, @public_log_book.sections.first).should be false
+    Ability.new(@anonymous_user).can?(:untrash, @editor_access_log_book.sections.first).should be false
+    Ability.new(@anonymous_user).can?(:untrash, @private_log_book.sections.first).should be false
   end
   
   it "authorizes owners and editors to edit WorldObjects, but anonymous users cannot edit anything." do
@@ -147,6 +175,20 @@ describe Ability do
     Ability.new(@anonymous_user).can?(:update, @public_log_book.world_objects.first).should be false          # public
     Ability.new(@anonymous_user).can?(:update, @editor_access_log_book.world_objects.first).should be false   # no access
     Ability.new(@anonymous_user).can?(:update, @private_log_book.world_objects.first).should be false         # no access
+  end
+  
+  it "authorizes only owners and editors to untrash WorldObjects" do
+    Ability.new(@owner_user).can?(:untrash, @public_log_book.world_objects.first).should be true
+    Ability.new(@owner_user).can?(:untrash, @editor_access_log_book.world_objects.first).should be true
+    Ability.new(@owner_user).can?(:untrash, @private_log_book.sections.first).should be true
+    
+    Ability.new(@editor_user).can?(:untrash, @public_log_book.world_objects.first).should be false
+    Ability.new(@editor_user).can?(:untrash, @editor_access_log_book.world_objects.first).should be true
+    Ability.new(@editor_user).can?(:untrash, @private_log_book.world_objects.first).should be false
+    
+    Ability.new(@anonymous_user).can?(:untrash, @public_log_book.world_objects.first).should be false
+    Ability.new(@anonymous_user).can?(:untrash, @editor_access_log_book.world_objects.first).should be false
+    Ability.new(@anonymous_user).can?(:untrash, @private_log_book.world_objects.first).should be false
   end
   
 end

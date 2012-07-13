@@ -31,12 +31,21 @@ class SectionsController < ApplicationController
   
   def destroy
     @section = Section.find(params[:id])
-    authorize! :update, @section.log_book
+    authorize! :destroy, @section.log_book
     
     log_book = @section.log_book
     @section.destroy
     
-    redirect_to edit_log_book_path(log_book), notice: "Section deleted (undo)"
+    redirect_to edit_log_book_path(log_book), notice: "Section deleted (<a href=\"#{untrash_section_path(@section.id)}\" data-method=\"put\">undo</a>)".html_safe
+  end
+  
+  def untrash
+    @section = Section.only_deleted.find(params[:id])
+    authorize! :untrash, @section
+    
+    @section.update_attribute(:deleted_at, nil)
+    
+    redirect_to edit_log_book_path(@section.log_book), notice: "Section restored"
   end
   
   private
