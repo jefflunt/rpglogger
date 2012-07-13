@@ -1,13 +1,13 @@
 class User < ActiveRecord::Base
   has_many :log_books, dependent: :destroy
-  has_many :shares
+  has_many :shares, dependent: :destroy
   has_many :shared_log_books, through: :shares
   
   validates :uid, :uniqueness => {:scope => :provider}
   
   def owned_and_shared_log_books
     # Gets a list of all LogBooks that this user has access to (both owned, and shared from other users), ordered by the title, case INsensitive.
-    LogBook.select("DISTINCT ON (LOWER(log_books.title), log_books.id) log_books.id, log_books.user_id, log_books.title, log_books.game_name").joins("LEFT OUTER JOIN shares ON log_books.id = shares.log_book_id").where(["log_books.user_id = ? OR shares.user_id = ?", id, id]).order("LOWER(log_books.title) ASC")
+    LogBook.select("DISTINCT ON (LOWER(log_books.title), log_books.id) log_books.id, log_books.user_id, log_books.title, log_books.game_name, log_books.deleted_at").joins("LEFT OUTER JOIN shares ON log_books.id = shares.log_book_id").where(["log_books.user_id = ? OR shares.user_id = ?", id, id]).order("LOWER(log_books.title) ASC")
   end
   
   def can_view_world_objects_in?(log_book)

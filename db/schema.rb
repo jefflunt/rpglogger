@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120708051212) do
+ActiveRecord::Schema.define(:version => 20120713011421) do
 
   create_table "log_books", :force => true do |t|
     t.integer  "user_id",                       :null => false
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20120708051212) do
     t.datetime "updated_at",                    :null => false
     t.string   "game_name"
     t.boolean  "is_public",  :default => false
+    t.datetime "deleted_at"
   end
 
   create_table "section_properties", :force => true do |t|
@@ -30,8 +31,9 @@ ActiveRecord::Schema.define(:version => 20120708051212) do
   end
 
   create_table "sections", :force => true do |t|
-    t.integer "log_book_id", :null => false
-    t.string  "name",        :null => false
+    t.integer  "log_book_id", :null => false
+    t.string   "name",        :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "shares", :force => true do |t|
@@ -63,8 +65,9 @@ ActiveRecord::Schema.define(:version => 20120708051212) do
   end
 
   create_table "world_objects", :force => true do |t|
-    t.integer "section_id", :null => false
-    t.string  "name",       :null => false
+    t.integer  "section_id", :null => false
+    t.string   "name",       :null => false
+    t.datetime "deleted_at"
   end
 
 end

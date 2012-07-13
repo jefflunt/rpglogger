@@ -2,8 +2,10 @@ class WorldObject < ActiveRecord::Base
   require 'populator'
   require 'faker'
   
+  acts_as_paranoid
+  
   belongs_to :section
-  has_many :world_object_properties, :dependent=>:destroy
+  has_many :world_object_properties
   
   validates :name, :presence => true
     

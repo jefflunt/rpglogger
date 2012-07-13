@@ -1,12 +1,14 @@
 class LogBook < ActiveRecord::Base
+  acts_as_paranoid
+  
   attr_protected :is_public
   
   belongs_to :user
   belongs_to :game
   
-  has_many :shares
+  has_many :shares, dependent: :destroy
   has_many :shared_users, through: :shares
-  has_many :sections, dependent: :destroy, order: :name
+  has_many :sections, order: :name
   has_many :world_objects, through: :sections
   
   validates :title, :presence => true

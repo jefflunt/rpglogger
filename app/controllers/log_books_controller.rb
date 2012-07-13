@@ -1,7 +1,6 @@
 class LogBooksController < ApplicationController
   def index
     authorize! :index, LogBook
-    @log_books = LogBook.all
     
     @public_log_books = LogBook.public
     
