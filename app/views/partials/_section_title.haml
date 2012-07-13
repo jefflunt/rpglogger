@@ -1,6 +1,13 @@
-%span{:class=>'big-font-size color-orange'}=@section.name
-%br
--if current_user && current_user.can_fully_manage?(@section.log_book)
-  %span{:class=>'serif-sc-font small-font-size'}=link_to '&nbsp;&nbsp;&nbsp;'.html_safe + 'edit columns', edit_section_path(@section)
+%table{width: "100%"}
+  %tr
+    %td.big-font-size.color-orange=@section.name
+    -if current_user && current_user.can_fully_manage?(@section.log_book)
+      %td.right=link_to "Show deleted", url_for(show_deleted: true), {class: "styled-button-blue-gray"}
+    -else
+      %td
+  -if current_user && current_user.can_fully_manage?(@section.log_book)
+    %tr
+      %td.serif-sc-font.small-font-size=link_to '&nbsp;&nbsp;&nbsp;'.html_safe + 'edit columns', edit_section_path(@section)
+      %td
 %br
 %br

@@ -38,3 +38,17 @@ Scenario: When I trash a WorldObject, the `deleted_at` attribute is set
   When I follow "undo"
   Then the WorldObject "Test WorldObject" in "Test Section" in "Test LogBook" should NOT be marked as deleted
   And I should see the text "Restored"
+
+Scenario: I should be able to see trashed items with a control in the UI, and then restore them
+  When I go to the LogBooks index page
+  And I follow "✖"
+  Then I should not see the text "Test LogBook"
+  And the LogBook "Test LogBook" should be marked as deleted
+  
+  When I follow "Show deleted"
+  Then I should see the text "Test LogBook"
+  
+  When I follow "⟲"
+  And I follow "Hide deleted"
+  Then I should see the text "Test LogBook"
+  And the LogBook "Test LogBook" should NOT be marked as deleted
