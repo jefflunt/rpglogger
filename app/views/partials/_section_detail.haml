@@ -5,7 +5,7 @@
         %th.min-width=link_to "\u271a", new_section_world_object_path(section.id)
       %th.column-string='Name/Title'
       -section.section_properties.each do |sp|
-        %th{:class=>'column-' + sp.data_type}=sp.name
+        %th{class: 'column-' + sp.data_type}=sp.name
     -list_of_world_objects.each do |obj|
       %tr
         -if current_user && current_user.can_manage_world_objects_in?(section.log_book)
@@ -16,4 +16,4 @@
         
         %td=link_to markdown_parse(obj.name), edit_section_world_object_path(section.id, obj.id)  
         -obj.world_object_properties.each do |prop|
-          %td{:class=>'column-' + prop.section_property.data_type}=markdown_parse(prop.raw_value)
+          %td{class: 'column-' + prop.section_property.data_type}=markdown_parse(prop.raw_value)
