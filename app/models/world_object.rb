@@ -17,6 +17,10 @@ class WorldObject < ActiveRecord::Base
     section.is_public?
   end
   
+  def deleted?
+    deleted_at != nil
+  end
+  
   def fake_fill_properties
     name = Populator.words(1..4)
     section.section_properties.each do |sp|

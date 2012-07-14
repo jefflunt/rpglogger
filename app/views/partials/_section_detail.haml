@@ -7,13 +7,17 @@
       -section.section_properties.each do |sp|
         %th{class: 'column-' + sp.data_type}=sp.name
     -list_of_world_objects.each do |obj|
-      %tr
+      %tr{class: '' + (obj.deleted? ? 'deleted' : '')}
         -if current_user && current_user.can_manage_world_objects_in?(section.log_book)
-          -if obj.deleted_at.nil?
-            %td=link_to "\u2716", section_world_object_path(section.id, obj.id), method: :delete
-          -else
+          -if obj.deleted?
             %td=link_to "\u27f2", untrash_section_world_object_path(section.id, obj.id), method: :put
+          -else
+            %td=link_to "\u2716", section_world_object_path(section.id, obj.id), method: :delete
         
-        %td=link_to markdown_parse(obj.name), edit_section_world_object_path(section.id, obj.id)  
+        -if obj.deleted?
+          %td=markdown_parse(obj.name)
+        -else
+          %td=link_to markdown_parse(obj.name), edit_section_world_object_path(section.id, obj.id)  
+          
         -obj.world_object_properties.each do |prop|
           %td{class: 'column-' + prop.section_property.data_type}=markdown_parse(prop.raw_value)

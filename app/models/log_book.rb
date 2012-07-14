@@ -18,6 +18,10 @@ class LogBook < ActiveRecord::Base
   accepts_nested_attributes_for :sections
   accepts_nested_attributes_for :shares
   
+  def deleted?
+    deleted_at != nil
+  end
+  
   def owned_by?(user)
     user_id == user.id
   end

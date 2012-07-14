@@ -46,6 +46,7 @@
 
 .compact-table
   table
+    border-collapse: collapse
     width: 100%
     .column-integer
       text-align: right
@@ -64,30 +65,17 @@
         size: $small-font-size
         weight: 400
     tr.deleted
-      td
-        background-color: $color-dark-red
-        vertical-align: top
-        font:
-          family: $serif-normal-font
-          size: $small-font-size
-          weight: 400
-        p
-          margin-top: 0px
-          margin-bottom: 8px
-      
-    tr
-      td
-        vertical-align: top
-        font:
-          family: $serif-normal-font
-          size: $small-font-size
-          weight: 400
-        p
-          margin-top: 0px
-          margin-bottom: 8px
-
-.deleted
-
+      background-color: #300000
+    td
+      margin: 2px
+      vertical-align: top
+      font:
+        family: $serif-normal-font
+        size: $small-font-size
+        weight: 400
+      p
+        margin-top: 0px
+        margin-bottom: 8px
 
 .compact-form
   table
