@@ -1,0 +1,9 @@
+-section.world_objects.sorted_by_title.each do |obj|
+  %tr
+    -if current_user && current_user.can_manage_world_objects_in?(section.log_book)
+      %td=link_to "\u2716", section_world_object_path(section, obj), method: :delete
+      %td=link_to markdown_parse(obj.name), edit_section_world_object_path(section, obj)
+    -else
+      %td=markdown_parse(obj.name)
+    -obj.world_object_properties.each do |prop|
+      %td{:class=>'column-' + prop.section_property.data_type}=markdown_parse(prop.raw_value)

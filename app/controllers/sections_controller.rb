@@ -3,8 +3,12 @@ class SectionsController < ApplicationController
     @section = Section.find(params[:id])
     authorize! :show, @section.log_book
     
-    @section.world_objects.sort!{|w1,w2| w1.name.downcase <=> w2.name.downcase}
-    @log_book = @section.log_book
+    if params[:show_deleted]
+      @deleted_items_being_shown = params[:show_deleted]
+      @list_of_world_objects = WorldObject.unscoped.where(["section_id = ?", @section.id]).order("LOWER(name) ASC")
+    else
+      @list_of_world_objects = @section.world_objects.sorted_by_title
+    end
   end
   
   def edit
@@ -41,11 +45,11 @@ class SectionsController < ApplicationController
   
   def untrash
     @section = Section.only_deleted.find(params[:id])
-    authorize! :untrash, @section
+    authorize! :untrash, @section.log_book
     
     @section.update_attribute(:deleted_at, nil)
     
-    redirect_to edit_log_book_path(@section.log_book), notice: "Section restored"
+    redirect_back_or edit_log_book_path(@section.log_book), notice: "Section restored"
   end
   
   private

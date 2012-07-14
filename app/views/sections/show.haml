@@ -2,5 +2,5 @@
   %tr
     %td=render :partial => 'partials/section_title'
   %tr
-    %td=render :partial => 'partials/section_detail'
+    %td=render :partial => 'partials/section_detail', locals: {section: @section, list_of_world_objects: @list_of_world_objects}
   

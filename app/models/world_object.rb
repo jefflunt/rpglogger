@@ -11,6 +11,8 @@ class WorldObject < ActiveRecord::Base
     
   accepts_nested_attributes_for :world_object_properties
   
+  scope :sorted_by_title, order("LOWER(name) ASC")
+  
   def is_public?
     section.is_public?
   end
