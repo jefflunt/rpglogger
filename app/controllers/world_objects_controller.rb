@@ -51,7 +51,7 @@ class WorldObjectsController < ApplicationController
     
     @world_object.destroy
     
-    redirect_to section_path(@world_object.section), notice: "Deleted (<a href=\"#{untrash_section_world_object_path(@world_object.section.id, @world_object.id)}\" data-method=\"put\">undo</a>)".html_safe
+    redirect_back_or section_path(@world_object.section), notice: "Deleted (<a href=\"#{untrash_section_world_object_path(@world_object.section.id, @world_object.id)}\" data-method=\"put\">undo</a>)".html_safe
   end
   
   def untrash

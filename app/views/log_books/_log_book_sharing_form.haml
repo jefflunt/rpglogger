@@ -1,0 +1,37 @@
+%span.serif-sc-font.big-font-size.left="Sharing"
+#sharing_form.serif-sc-font.compact-form.right
+  %table
+    %tr
+      %td
+        =form_for @log_book do |sharing_form|
+          %table
+            %tr
+              %th="Current users"
+              %td
+            -if @log_book.shared_users.count == 0
+              %tr
+                %th="(none)"
+                %td            
+            -@log_book.shared_users.each do |shared_user|
+              %tr
+                %td{height: "25px"}=username_for_top_section(shared_user)
+                %th.left=link_to 'Remove access', log_book_path(@log_book, remove_shared_user_id: shared_user.id), {method: :put, class: 'styled-button-dark-red'}
+            %tr
+              %td
+                %br
+              %td
+            %tr
+              %th="Add users"
+              %td
+            %tr
+              %td=text_field_tag "shares[new_google_user]"
+              %th.left='Google (email address)'
+            %tr
+              %td=text_field_tag "shares[new_facebook_user]"
+              %th.left='Facebook (nickname)'
+            %tr
+              %td=text_field_tag "shares[new_twitter_user]"
+              %th.left='Twitter (username)'
+            %tr
+              %th=sharing_form.submit "Add users", :class => 'styled-button-blue-gray'
+              %td

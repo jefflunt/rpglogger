@@ -40,7 +40,7 @@ class SectionsController < ApplicationController
     log_book = @section.log_book
     @section.destroy
     
-    redirect_to edit_log_book_path(log_book), notice: "Section deleted (<a href=\"#{untrash_section_path(@section.id)}\" data-method=\"put\">undo</a>)".html_safe
+    redirect_back_or edit_log_book_path(log_book), notice: "Section deleted (<a href=\"#{untrash_section_path(@section.id)}\" data-method=\"put\">undo</a>)".html_safe
   end
   
   def untrash

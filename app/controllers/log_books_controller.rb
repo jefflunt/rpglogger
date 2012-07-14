@@ -46,7 +46,13 @@ class LogBooksController < ApplicationController
     @log_book = LogBook.find(params[:id])
     authorize! :edit, @log_book
     
-    @log_book = LogBook.find(params[:id])
+    if params[:show_deleted]
+      @show_deleted_sections = params[:show_deleted]
+      @list_of_sections = Section.unscoped.where(["log_book_id = ?", @log_book.id]).order("LOWER(name) ASC")
+    else
+      @list_of_sections = @log_book.sections.order_by_name
+    end
+    
   end
   
   def update

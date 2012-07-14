@@ -11,7 +11,13 @@ class Section < ActiveRecord::Base
   
   validates :name, :presence => true
   
+  scope :order_by_name, order("LOWER(name) ASC")
+  
   def is_public?
     log_book.is_public?
+  end
+  
+  def deleted?
+    deleted_at != nil
   end
 end

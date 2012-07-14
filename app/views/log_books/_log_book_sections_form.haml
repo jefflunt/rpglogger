@@ -1,0 +1,35 @@
+#sections_form.serif-sc-font.compact-form.right
+  %table
+    %tr
+      %td
+        =form_for @log_book do |log_book_form|
+          %table
+            %tr
+              %th='Log Book Title'
+              %td
+            %tr
+              %td=log_book_form.text_field :title
+              %td
+            %tr
+              %th='Sections'
+              %td
+            -list_of_sections.each do |section|
+              =log_book_form.fields_for :sections, section do |section_form|
+                %tr
+                  %td=section_form.text_field :name
+                  -if section.deleted?
+                    %th=link_to 'Restore', untrash_section_path(section_form.object.id), {method: :put, class: 'styled-button-blue-gray'}
+                  -else
+                    %th.left=link_to 'Delete', section_path(section_form.object.id), {method: :delete, class: 'styled-button-dark-red'}
+            %tr
+              %td=log_book_form.submit 'Save sections', :class => 'styled-button-blue-gray'
+      %td
+        =form_for @log_book do |log_book_form|
+          =fields_for :sections do |new_sections_form|
+            %table
+              %tr
+                %th='New Sections (comma-separated)'
+              %tr
+                %td=new_sections_form.text_field :new_names
+              %tr
+                %td=log_book_form.submit "Add sections", :class => 'styled-button-blue-gray'
