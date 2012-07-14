@@ -1,0 +1,30 @@
+-if current_user
+  .section-title
+    %table{width: "100%"}
+      %tr
+        %td.serif-sc-font.big-font-size.color-orange='Your log books'
+        -if current_user
+          -if show_deleted_items
+            %td.right=link_to "Hide deleted", log_books_path, {class: "styled-button-blue-gray"}
+          -else
+            %td.right=link_to "Show deleted", log_books_path(show_deleted: true), {class: "styled-button-blue-gray"}
+    %br
+  .compact-table
+    %table
+      %tr
+        %th.min-width=link_to "\u271a", new_log_book_path
+        %th.column-string='Title'
+        %th.column-string='Game'
+        %th.column-integer='No.&nbsp;of&nbsp;Items'.html_safe
+      -private_log_books.each do |log_book|
+        %tr
+          -if current_user.can_fully_manage?(log_book)
+            -if log_book.deleted_at.nil?
+              %td=link_to "\u2716", log_book_path(log_book.id), :method => :delete
+            -else
+              %td.deleted=link_to "\u27f2", untrash_log_book_path(log_book.id), :method => :put
+          -elsif current_user.can_manage_world_objects_in?(log_book)
+            %td="\u296e"
+          %td.column-string=link_to log_book.title.html_safe, log_book
+          %td.column-string=log_book.game_name.html_safe
+          %td.column-integer=log_book.world_objects.count

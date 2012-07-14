@@ -5,8 +5,8 @@ class LogBooksController < ApplicationController
     @public_log_books = LogBook.public
     
     if current_user
-      @deleted_items_being_shown = params[:show_deleted]
-      @owned_and_shared_log_books = current_user.owned_and_shared_log_books(params[:show_deleted])
+      @show_deleted_items = params[:show_deleted]
+      @private_log_books = current_user.owned_and_shared_log_books(params[:show_deleted])
     end
   end
   
