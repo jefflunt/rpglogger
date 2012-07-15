@@ -4,7 +4,7 @@ class SectionsController < ApplicationController
     authorize! :show, @section.log_book
     
     if params[:show_deleted]
-      @deleted_items_being_shown = params[:show_deleted]
+      @show_deleted_objects = params[:show_deleted]
       @list_of_world_objects = WorldObject.unscoped.where(["section_id = ?", @section.id]).order("LOWER(name) ASC")
     else
       @list_of_world_objects = @section.world_objects.sorted_by_title
@@ -15,7 +15,12 @@ class SectionsController < ApplicationController
     @section = Section.find(params[:id])
     authorize! :edit, @section.log_book
     
-    @log_book = @section.log_book
+    if params[:show_deleted]
+      @show_deleted_properties = params[:show_deleted]
+      @list_of_properties = SectionProperty.unscoped.where(["section_id = ?", @section.id]).order("sort_order ASC")
+    else
+      @list_of_properties = @section.section_properties.sort_order
+    end
   end
   
   def update

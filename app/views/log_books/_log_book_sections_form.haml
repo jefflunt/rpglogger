@@ -18,9 +18,9 @@
                 %tr
                   %td=section_form.text_field :name
                   -if section.deleted?
-                    %th=link_to 'Restore', untrash_section_path(section_form.object.id), {method: :put, class: 'styled-button-blue-gray'}
+                    %th.left=link_to 'Restore', untrash_section_path(section.id), {method: :put, class: 'styled-button-blue-gray'}
                   -else
-                    %th.left=link_to 'Delete', section_path(section_form.object.id), {method: :delete, class: 'styled-button-dark-red'}
+                    %th.left=link_to 'Delete', section_path(section.id), {method: :delete, class: 'styled-button-dark-red'}
             %tr
               %td=log_book_form.submit 'Save sections', :class => 'styled-button-blue-gray'
       %td

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120713011421) do
+ActiveRecord::Schema.define(:version => 20120715014314) do
 
   create_table "log_books", :force => true do |t|
     t.integer  "user_id",                       :null => false
@@ -24,10 +24,11 @@ ActiveRecord::Schema.define(:version => 20120713011421) do
   end
 
   create_table "section_properties", :force => true do |t|
-    t.integer "section_id", :null => false
-    t.string  "name",       :null => false
-    t.string  "data_type",  :null => false
-    t.integer "sort_order", :null => false
+    t.integer  "section_id", :null => false
+    t.string   "name",       :null => false
+    t.string   "data_type",  :null => false
+    t.integer  "sort_order", :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "sections", :force => true do |t|

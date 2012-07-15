@@ -20,7 +20,10 @@ Rpglogger::Application.routes.draw do
   resources :sections do
     put :untrash, on: :member
     
-    resources :section_properties
+    resources :section_properties do
+      put :untrash, on: :member
+    end
+    
     resources :world_objects do
       put :untrash, on: :member
       

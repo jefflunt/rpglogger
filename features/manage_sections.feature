@@ -100,8 +100,6 @@ Scenario: When user removes exiting attributes from a Section, the WorldObjectPr
   And I press "Update attributes"
 
   Then the total number of SectionProperties should be 2
-  And the total number of WorldObjectProperties should be 4
   
   When I follow "Delete"
   Then the total number of SectionProperties should be 1
-  And the total number of WorldObjectProperties should be 2

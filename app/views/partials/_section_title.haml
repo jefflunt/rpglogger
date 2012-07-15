@@ -2,7 +2,7 @@
   %tr
     %td.big-font-size.color-orange=@section.name
     -if current_user && current_user.can_fully_manage?(@section.log_book)
-      -if @deleted_items_being_shown
+      -if @show_deleted_objects
         %td.right=link_to "Hide deleted", section_path(@section.id), {class: "styled-button-blue-gray"}
       -else
         %td.right=link_to "Show deleted", section_path(@section.id, show_deleted: true), {class: "styled-button-blue-gray"}

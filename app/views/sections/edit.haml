@@ -1,6 +1,17 @@
 .section-title
-  %span.serif-sc-font.big-font-size=link_to "#{@section.name} ", section_path(@section)
-  %span.serif-sc-font.big-font-size='attributes'
+  %table{width: "100%"}
+    %tr
+      %td
+        %span.serif-sc-font.big-font-size=link_to "#{@section.name} ", section_path(@section)
+        %span.serif-sc-font.big-font-size='attributes'
+      %td
+        -if current_user && current_user.can_fully_manage?(@section.log_book)
+          -Rails.logger.info "Show deleted attributes?: #{@show_deleted_attributes}"
+          -if @show_deleted_properties
+            %td.right=link_to "Hide deleted attributes", edit_section_path(@section.id), {class: "styled-button-blue-gray"}
+          -else
+            %td.right=link_to "Show deleted attributes", edit_section_path(@section.id, show_deleted: true), {class: "styled-button-blue-gray"}
+        
 #attributes_form.serif-sc-font.compact-form.right
   %table
     %tr
@@ -19,11 +30,16 @@
               %td
               %th='Section Attributes'
               %td
-            =section_form.fields_for :section_properties do |section_properties_form|
-              %tr
-                %td=section_properties_form.object.data_type
-                %td=section_properties_form.text_field :name
-                %th=link_to 'Delete', section_section_property_path(@section, section_properties_form.object), {method: :delete, class: 'styled-button-dark-red'}
+            -@list_of_properties.each do |property|
+              =section_form.fields_for :section_properties, property do |property_form|
+                %tr
+                  %td=property_form.object.data_type
+                  %td=property_form.text_field :name
+                  -if property.deleted?
+                    %th.left=link_to 'Restore', untrash_section_section_property_path(@section.id, property.id), {method: :put, class: 'styled-button-blue-gray'}
+                  -else
+                    %th.left=link_to 'Delete', section_section_property_path(@section.id, property.id), {method: :delete, class: 'styled-button-dark-red'}
+
           =fields_for :section_properties do |new_section_properties_form|
             %td        
               %table

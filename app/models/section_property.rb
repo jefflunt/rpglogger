@@ -1,7 +1,9 @@
 class SectionProperty < ActiveRecord::Base
+  acts_as_paranoid
+  
   belongs_to :section
   
-  has_many :world_object_properties, dependent: :destroy
+  has_many :world_object_properties
   
   scope :sort_order, order: "sort_order ASC"
   

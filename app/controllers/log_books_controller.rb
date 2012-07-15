@@ -52,7 +52,6 @@ class LogBooksController < ApplicationController
     else
       @list_of_sections = @log_book.sections.order_by_name
     end
-    
   end
   
   def update

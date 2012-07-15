@@ -7,7 +7,7 @@ class WorldObjectProperty < ActiveRecord::Base
   validates :section_property_id, :presence => true
   validates :sort_order, :presence => true
   
-  default_scope includes(:section_property).order("section_properties.sort_order ASC")
+  default_scope includes(:section_property).order("section_properties.sort_order ASC").where("section_properties.id = world_object_properties.section_property_id AND section_properties.deleted_at IS NULL")
   
   def sort_order
     section_property.sort_order
