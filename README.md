@@ -8,8 +8,7 @@ rpglogger
 Contributing
 ============
 
-* Check with me if you want to tackle something so we can chat about it (jefflunt@gmail.com).  I love contributions and pull requests, but I don't want you to do a bunch of work if there's some reason a particular issue can't be addressed right now (for example, there might be a blocking issue that you're not aware of). Just trying to save you some time.
-* The issues tagged `priority queue` are the things that will get worked on in the near future, but feel free to work on anything you want. The `priority queue` tag is just a simple way to group things, while letting the community know what's on the short list for development.
+* I take pull requests. If you have a question about a task you want to implement just send me an email. jefflunt@gmail.com
 * If the issue you want to work on is anything but a purely visual change, please include relevant tests in your pull request.
 
 About
