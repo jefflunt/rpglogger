@@ -1,4 +1,11 @@
-%span.serif-sc-font.big-font-size.left="Sharing"
+%table
+  %tr
+    %td.serif-sc-font.big-font-size.left="Sharing"
+    -if @log_book.is_public
+      %td=link_to "Make private", log_book_path(@log_book.id, log_book: {is_public: false}), {class: "styled-button-blue-gray", method: :put}
+    -else
+      %td=link_to "Make public", log_book_path(@log_book.id, log_book: {is_public: true}), {class: "styled-button-dark-red", method: :put}
+
 #sharing_form.serif-sc-font.compact-form.right
   %table
     %tr

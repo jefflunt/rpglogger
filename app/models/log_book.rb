@@ -1,8 +1,6 @@
 class LogBook < ActiveRecord::Base
   acts_as_paranoid
   
-  attr_protected :is_public
-  
   belongs_to :user
   belongs_to :game
   
