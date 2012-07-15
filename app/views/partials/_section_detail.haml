@@ -16,8 +16,10 @@
         
         -if obj.deleted?
           %td=markdown_parse(obj.name)
+        -elsif current_user && current_user.can_manage_world_objects_in?(section.log_book)
+          %td=link_to markdown_parse(obj.name), edit_section_world_object_path(section.id, obj.id)
         -else
-          %td=link_to markdown_parse(obj.name), edit_section_world_object_path(section.id, obj.id)  
+          %td=markdown_parse(obj.name)
           
         -obj.world_object_properties.each do |prop|
           %td{class: 'column-' + prop.section_property.data_type}=markdown_parse(prop.raw_value)
