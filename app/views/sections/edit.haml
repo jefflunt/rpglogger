@@ -6,7 +6,6 @@
         %span.serif-sc-font.big-font-size='attributes'
       %td
         -if current_user && current_user.can_fully_manage?(@section.log_book)
-          -Rails.logger.info "Show deleted attributes?: #{@show_deleted_attributes}"
           -if @show_deleted_properties
             %td=link_to "Hide deleted attributes", edit_section_path(@section.id), {class: "styled-button-blue-gray"}
           -else
