@@ -1,14 +1,14 @@
 #section-detail.compact-table
   %table
     %tr
-      -if current_user && current_user.can_manage_world_objects_in?(section.log_book)
+      -if @can_manage_world_objects
         %th.min-width=link_to "\u271a", new_section_world_object_path(section.id)
       %th.column-string='Name/Title'
       -section.section_properties.each do |sp|
         %th{class: 'column-' + sp.data_type}=sp.name
-    -list_of_world_objects.each do |obj|
+    -section.world_objects.each do |obj|
       %tr{class: '' + (obj.deleted? ? 'deleted' : '')}
-        -if current_user && current_user.can_manage_world_objects_in?(section.log_book)
+        -if @can_manage_world_objects
           -if obj.deleted?
             %td=link_to "\u27f2", untrash_section_world_object_path(section.id, obj.id), method: :put
           -else
@@ -16,7 +16,7 @@
         
         -if obj.deleted?
           %td=markdown_parse(obj.name)
-        -elsif current_user && current_user.can_manage_world_objects_in?(section.log_book)
+        -elsif @can_manage_world_objects
           %td=link_to markdown_parse(obj.name), edit_section_world_object_path(section.id, obj.id)
         -else
           %td=markdown_parse(obj.name)

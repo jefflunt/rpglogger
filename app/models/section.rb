@@ -3,7 +3,7 @@ class Section < ActiveRecord::Base
   
   belongs_to :log_book
   
-  has_many :world_objects
+  has_many :world_objects, order: "LOWER(name) ASC"
   has_many :section_properties, order: :sort_order
   
   accepts_nested_attributes_for :section_properties

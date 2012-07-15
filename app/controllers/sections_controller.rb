@@ -1,14 +1,14 @@
 class SectionsController < ApplicationController
   def show
-    @section = Section.find(params[:id])
-    authorize! :show, @section.log_book
-    
     if params[:show_deleted]
+      @section = Section.find(params[:id], include: [world_objects: [world_object_properties: [:section_property]]], conditions: "world_objects.deleted_at IS NOT NULL OR world_objects.deleted_at IS NULL")
       @show_deleted_objects = params[:show_deleted]
-      @list_of_world_objects = WorldObject.unscoped.where(["section_id = ?", @section.id]).order("LOWER(name) ASC")
     else
-      @list_of_world_objects = @section.world_objects.sorted_by_title
+      @section = Section.find(params[:id], include: [world_objects: [world_object_properties: [:section_property]]])
     end
+    
+    authorize! :show, @section.log_book
+    @can_manage_world_objects = current_user && current_user.can_manage_world_objects_in?(@section.log_book)
   end
   
   def edit
