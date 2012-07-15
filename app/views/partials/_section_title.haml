@@ -1,7 +1,7 @@
 %table{width: "100%"}
   %tr
     %td.big-font-size.color-orange=@section.name
-    -if current_user && current_user.can_fully_manage?(@section.log_book)
+    -if current_user && current_user.can_manage_world_objects_in?(@section.log_book)
       -if @show_deleted_objects
         %td.right=link_to "Hide deleted", section_path(@section.id), {class: "styled-button-blue-gray"}
       -else
