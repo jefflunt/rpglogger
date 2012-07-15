@@ -1,10 +1,10 @@
 .section-title
-  %table{width: "100%"}
+  %table
     %tr
       %td.serif-sc-font.big-font-size
         ="in "
         =link_to @log_book.title, @log_book
-      %td.right        
+      %td
         -if @show_deleted_sections
           %td.right=link_to "Hide deleted sections", edit_log_book_path(@log_book.id), {class: "styled-button-blue-gray"}
         -else

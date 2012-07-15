@@ -47,3 +47,11 @@ When /^I try to delete the LogBook "(.*?)"$/ do |log_book_title|
   
   delete log_book_path(@log_book)
 end
+
+Then /^"(.*?)" should be marked as public$/ do |log_book_title|
+  LogBook.find_by_title(log_book_title).is_public.should be true
+end
+
+Then /^"(.*?)" should be marked as private$/ do |log_book_title|
+  LogBook.find_by_title(log_book_title).is_public.should be false
+end

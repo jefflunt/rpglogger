@@ -1,11 +1,11 @@
-%table{width: "100%"}
+%table
   %tr
     %td.big-font-size.color-orange=@section.name
     -if current_user && current_user.can_manage_world_objects_in?(@section.log_book)
       -if @show_deleted_objects
-        %td.right=link_to "Hide deleted", section_path(@section.id), {class: "styled-button-blue-gray"}
+        %td=link_to "Hide deleted", section_path(@section.id), {class: "styled-button-blue-gray"}
       -else
-        %td.right=link_to "Show deleted", section_path(@section.id, show_deleted: true), {class: "styled-button-blue-gray"}
+        %td=link_to "Show deleted", section_path(@section.id, show_deleted: true), {class: "styled-button-blue-gray"}
     -else
       %td
   -if current_user && current_user.can_fully_manage?(@section.log_book)

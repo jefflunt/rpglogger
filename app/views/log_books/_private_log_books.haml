@@ -1,13 +1,13 @@
 -if current_user
   .section-title
-    %table{width: "100%"}
+    %table
       %tr
         %td.serif-sc-font.big-font-size.color-orange='Your log books'
         -if current_user
           -if show_deleted_items
-            %td.right=link_to "Hide deleted", log_books_path, {class: "styled-button-blue-gray"}
+            %td=link_to "Hide deleted", log_books_path, {class: "styled-button-blue-gray"}
           -else
-            %td.right=link_to "Show deleted", log_books_path(show_deleted: true), {class: "styled-button-blue-gray"}
+            %td=link_to "Show deleted", log_books_path(show_deleted: true), {class: "styled-button-blue-gray"}
     %br
   .compact-table
     %table
