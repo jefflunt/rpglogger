@@ -1,44 +1,52 @@
-%table
-  %tr
-    %td.serif-sc-font.big-font-size.left="Sharing"
-    -if @log_book.is_public
-      %td=link_to "Make private", log_book_path(@log_book.id, log_book: {is_public: false}), {class: "styled-button-blue-gray", method: :put}
-    -else
-      %td=link_to "Make public", log_book_path(@log_book.id, log_book: {is_public: true}), {class: "styled-button-dark-red", method: :put}
-
-#sharing_form.serif-sc-font.compact-form.right
-  %table
-    %tr
-      %td
-        =form_for @log_book do |sharing_form|
-          %table
-            %tr
-              %th="Current users"
-              %td
-            -if @log_book.shared_users.count == 0
-              %tr
-                %th="(none)"
-                %td            
-            -@log_book.shared_users.each do |shared_user|
-              %tr
-                %td{height: "25px"}=username_for_top_section(shared_user)
-                %th.left=link_to 'Remove access', log_book_path(@log_book, remove_shared_user_id: shared_user.id), {method: :put, class: 'styled-button-dark-red'}
-            %tr
-              %td
-                %br
-              %td
-            %tr
-              %th="Add users"
-              %td
-            %tr
-              %td=text_field_tag "shares[new_google_user]"
-              %th.left='Google (email address)'
-            %tr
-              %td=text_field_tag "shares[new_facebook_user]"
-              %th.left='Facebook (nickname)'
-            %tr
-              %td=text_field_tag "shares[new_twitter_user]"
-              %th.left='Twitter (username)'
-            %tr
-              %th=sharing_form.submit "Add users", :class => 'styled-button-blue-gray'
-              %td
+.row-fluid
+  .span12
+    .page-header
+      %h1
+        Sharing
+        %small
+          -if @log_book.is_public
+            =link_to "Make private", log_book_path(@log_book.id, log_book: {is_public: false}), :class => "btn btn-success btn-mini", :method => :put
+          -else
+            =link_to "Make public", log_book_path(@log_book.id, log_book: {is_public: true}), :class => "btn btn-danger btn-mini", :method => :put
+  .row-fluid
+    .span6
+      %h2
+        Authorized Users
+      %h3
+        Current Authorized Users
+      -if @log_book.shared_users.count == 0
+        %p
+          No other users are currently authorized to edit this log-book,
+          -if @log_book.is_public
+            though any person may read the data. 
+          -else
+            and the data is not publicly accessible.
+      -else
+        %ul
+          -@log_book.shared_users.each do |shared_user|
+            %li
+              ="#{username_for_top_section(shared_user)}&nbsp;".html_safe
+              =link_to 'Remove Access', log_book_path(@log_book, remove_shared_user_id: shared_user.id), :method => :put, :class => 'btn btn-danger btn-mini'
+    .span6
+      =form_for @log_book do |sharing_form|
+        %h3
+          Add Users
+        %label
+          Google (e-mail address)
+        .input-prepend
+          %span.add-on
+            <i class="icon-envelope"></i>
+          =text_field_tag "shares[new_google_user]", nil, :placeholder => "example@gmail.com"
+        %label
+          Facebook (nickname)
+        .input-prepend 
+          %span.add-on
+            <i class="icon-thumbs-up"></i>
+          =text_field_tag "shares[new_facebook_user]", nil, :placeholder => "davidantaramian"
+        %label
+          Twitter (username)
+        .input-prepend
+          %span.add-on
+            @
+          =text_field_tag "shares[new_twitter_user]", nil, :placeholder => "DavidAntaramian"
+        =sharing_form.submit "Add users", :class => 'styled-button-blue-gray'

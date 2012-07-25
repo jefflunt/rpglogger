@@ -1,11 +1,15 @@
-#games-index{:class=>'compact-table left'}
-  .section-title
-    ='List of games'
-  %table
-    %tr
-      %th{:class=>'column-integer'}='log books'
-      %th='name/title'
-    - @games.each do |game|
+.row-fluid
+  .span12
+    %h1
+      List of Games
+.row-fluid
+  %table.table.table-condensed
+    %thead
+      %th
+        No. of Log Books
+      %th
+        Name/Title
+    -@games.each do |game|
       %tr
         %td{:class=>'column-integer'}=game.log_books.count
         %td=link_to game.name, game

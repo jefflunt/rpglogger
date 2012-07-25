@@ -25,6 +25,7 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
+  gem 'twitter-bootstrap-rails'
 end
 
 group :development do

@@ -5,25 +5,18 @@
     =stylesheet_link_tag "application"
     =javascript_include_tag "application"
     = csrf_meta_tags
+    -# Import HTML 5 Shim code to enable HTML 5 in IE 8 and below
+    /[if lt IE 9]
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
   %body
-    %table{:class=>'min-width-920'}
-      %tr
-        %td
-          =render :partial => 'partials/site_flash_and_shoutout'
-        %td
-      %tr
-        %td{:class=>'top left'}
-          .content-border
-            .content
-              =yield
-        %td{:class=>'top left width-250 serif-sc-font'}
-          .content-border
-            #side-bar{:class=>'content'}
-              -if @section
-                =render :partial => 'partials/log_book_nav', :locals=>{:log_book=>@section.log_book}
-              -elsif @log_book && !@log_book.new_record?
-                =render :partial => 'partials/log_book_nav', :locals=>{:log_book=>@log_book}
-              -else
-                =render :partial => 'partials/about'
-              
-
+    =render :partial => 'partials/top_section_info'
+    .container-fluid
+      =render :partial => 'partials/site_flash_and_shoutout'
+      .row-fluid
+        .span3
+          .well
+            =render :partial => 'partials/about'
+        .span9
+          .well
+            =yield

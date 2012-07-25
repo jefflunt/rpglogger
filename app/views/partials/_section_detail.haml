@@ -1,25 +1,29 @@
-#section-detail.compact-table
-  %table
-    %tr
-      -if @can_manage_world_objects
-        %th.min-width=link_to "\u271a", new_section_world_object_path(section.id)
-      %th.column-string='Name/Title'
-      -section.section_properties.each do |sp|
-        %th{class: 'column-' + sp.data_type}=sp.name
-    -section.world_objects.each do |obj|
-      %tr{class: '' + (obj.deleted? ? 'deleted' : '')}
+%table.table.table-condensed
+  %thead
+    %th='Name/Title'
+    -section.section_properties.each do |sp|
+      %th{class: 'column-' + sp.data_type}=sp.name
+    -if @can_manage_world_objects
+      %th=link_to "\u271a", new_section_world_object_path(section.id)
+  -section.world_objects.sorted_by_title.each do |obj|
+    %tr{class: '' + (obj.deleted? ? 'deleted' : '')}
+      -# Object Title
+      %td
+        -if obj.deleted?
+          =markdown_parse(obj.name)
+        -elsif @can_manage_world_objects
+          =link_to markdown_parse(obj.name), edit_section_world_object_path(section.id, obj.id)
+        -else
+          =markdown_parse(obj.name)
+      -# Render other columns
+      -obj.world_object_properties.each do |prop|
+        %td{class: 'column-' + prop.section_property.data_type}=markdown_parse(prop.raw_value)
+      -# Delete or Untrash Object
+      %td
         -if @can_manage_world_objects
           -if obj.deleted?
-            %td=link_to "\u27f2", untrash_section_world_object_path(section.id, obj.id), method: :put
+            %a{:href => untrash_section_world_object_path(section.id, obj.id), :data => {:method => :put}, :rel => "nofollow", :title => "Restore Record"}
+              <i class="icon-refresh"></i>
           -else
-            %td=link_to "\u2716", section_world_object_path(section.id, obj.id), method: :delete
-        
-        -if obj.deleted?
-          %td=markdown_parse(obj.name)
-        -elsif @can_manage_world_objects
-          %td=link_to markdown_parse(obj.name), edit_section_world_object_path(section.id, obj.id)
-        -else
-          %td=markdown_parse(obj.name)
-          
-        -obj.world_object_properties.each do |prop|
-          %td{class: 'column-' + prop.section_property.data_type}=markdown_parse(prop.raw_value)
+            %a{:href => section_world_object_path(section.id, obj.id), :data => {:method => :delete}, :rel => "nofollow", :title => "Delete Record"}
+              <i class="icon-remove"></i>

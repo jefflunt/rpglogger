@@ -1,15 +1,14 @@
-%table
-  %tr
-    %td.big-font-size.color-orange=@section.name
-    -if current_user && current_user.can_manage_world_objects_in?(@section.log_book)
-      -if @show_deleted_objects
-        %td=link_to "Hide deleted", section_path(@section.id), {class: "styled-button-blue-gray"}
-      -else
-        %td=link_to "Show deleted", section_path(@section.id, show_deleted: true), {class: "styled-button-blue-gray"}
-    -else
-      %td
-  -if current_user && current_user.can_fully_manage?(@section.log_book)
-    %tr
-      %td.serif-sc-font.small-font-size=link_to '&nbsp;&nbsp;&nbsp;'.html_safe + 'edit columns', edit_section_path(@section)
-      %td
-%br
+.row-fluid
+  .span7
+    %h1=@section.name
+  .span5
+    .btn-toolbar.pull-right
+      .btn-group
+        -if current_user && current_user.can_fully_manage?(@section.log_book)
+          =link_to "&nbsp;Edit Columns".html_safe, edit_section_path(@section), :class => "btn btn-success btn-mini icon-pencil"
+      .btn-group
+        -if current_user && current_user.can_manage_world_objects_in?(@section.log_book)
+          -if @show_deleted_objects
+            =link_to "&nbsp;Hide Deleted".html_safe, section_path(@section.id), :class => "btn btn-warning btn-mini icon-eye-close"
+          -else
+            =link_to "&nbsp;Show Deleted".html_safe, section_path(@section.id, show_deleted: true), :class => "btn btn-danger btn-mini icon-eye-open"

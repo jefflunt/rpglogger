@@ -1,32 +1,20 @@
-#section_title{:class=>'serif-sc-font big-font-size'}
-  %span{:class=>'color-orange'}='in '
-  %span=link_to @world_object.section.name, section_path(@world_object.section)
-=form_for [:section, @world_object] do |obj_form|
-  =obj_form.hidden_field :section_id
-  #new_object_form{:class=>'serif-sc-font compact-form right'}
-    %table
-      %tr
-        %td
-          %table
-            %tr
-              %th
-                =obj_form.label :name
-            %tr
-              %td
-                =obj_form.text_field :name
-            =obj_form.fields_for :world_object_properties do |properties_form|
-              %tr
-                %th=properties_form.label properties_form.object.section_property.name.to_sym
-              %tr
-                %td
-                  =auto_field_for(properties_form, properties_form.object)
-                  =properties_form.hidden_field :section_property_id
-            %tr
-              %td
-                =obj_form.submit 'Save', :class => 'styled-button-blue-gray'
-        %td{:class=>'left'}
-          -if @world_object.errors.any?
-            %h2{:class=>'serif-normal-font'}='Whoa, we got some issues here:'
-            %ul
-              -@world_object.errors.full_messages.each do |msg|
-                %li=msg
+.row-fluid
+  .span12
+    %h1=link_to @world_object.section.name, section_path(@world_object.section)
+.row-fluid
+  .span12
+    =form_for [:section, @world_object] do |obj_form|
+      =obj_form.hidden_field :section_id
+      =obj_form.label :name
+      =obj_form.text_field :name
+      =obj_form.fields_for :world_object_properties do |properties_form|
+        -if properties_form.object.section_property.data_type == 'boolean'
+          %label
+            =properties_form.object.section_property.name.to_sym
+            =auto_field_for(properties_form, properties_form.object)
+        -else
+          =properties_form.label properties_form.object.section_property.name.to_sym
+          =auto_field_for(properties_form, properties_form.object)
+        =properties_form.hidden_field :section_property_id
+      %fieldset
+        =obj_form.submit 'Save', :class => 'btn btn-primary'
