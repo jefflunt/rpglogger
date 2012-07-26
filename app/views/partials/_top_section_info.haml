@@ -1,14 +1,22 @@
-%table.max-width
-  %tr
-    %th.site-title.left{width: '30%'}
-      %span
-        =image_tag 'logo_small.png', align: 'left'
-      %span=link_to '&nbsp;rpglogger'.html_safe, root_path
-    %td=center_message
-    
-    -if current_user
-      %th{width: '8%'}=link_to username_for_top_section(current_user), log_books_path
-      %th{width: '8%'}=current_user.nickname.nil? ? (link_to 'Logout', signout_path) : (link_to 'Logout', signout_path)
-    -else
-      %th{width: '8%'}
-      %th{width: '8%'}=link_to 'Login', '/sessions/new'
+%div{:class=>'navbar navbar-fixed-top'}
+  .navbar-inner
+    .container-fluid
+      %a.btn.btn-navbar{:href => ".nav-collapse", :data => {:toggle => "collapse"}}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      =link_to 'rpglogger'.html_safe, root_path, :class => 'brand'
+      %p{:class => 'navbar-text pull-left'}
+        Celebrating the launch of <a href="http://elderscrolls.com" target="_blank">Elder Scrolls V: Skyrim</a>
+      .nav-collapse
+        %ul{:class => "nav pull-right"}
+          -if current_user
+            %li.dropdown{:id => "user-menu"}
+              %a.dropdown-toggle{:href => "#user-menu", :data => {:toggle => "dropdown"}}
+                <i class="icon-user">&nbsp;</i>
+                =username_for_top_section(current_user)
+                &nbsp;<i class="caret"></i>
+              %ul.dropdown-menu
+                %li=current_user.nickname.nil? ? (link_to 'Logout', signout_path) : (link_to 'Logout', signout_path)
+          -else
+            %li=link_to 'Login', '/sessions/new'

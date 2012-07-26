@@ -1,33 +1,43 @@
 -if current_user
-  .section-title
-    %table
-      %tr
-        %td.serif-sc-font.big-font-size.color-orange='Your log books'
-        -if current_user
-          -if show_deleted_items
-            %td=link_to "Hide deleted", log_books_path, {class: "styled-button-blue-gray"}
-          -else
-            %td=link_to "Show deleted", log_books_path(show_deleted: true), {class: "styled-button-blue-gray"}
-    %br
-  .compact-table
-    %table
-      %tr
-        %th.min-width=link_to "\u271a", new_log_book_path
-        %th.column-string='Title'
-        %th.column-string='Game'
-        %th.column-integer='No.&nbsp;of&nbsp;Items'.html_safe
-      -private_log_books.each do |log_book|
-        %tr{class: '' + (log_book.deleted? ? 'deleted' : '')}
-          -if current_user.can_fully_manage?(log_book)
-            -if log_book.deleted?
-              %td=link_to "\u27f2", untrash_log_book_path(log_book.id), :method => :put
-            -else
-              %td=link_to "\u2716", log_book_path(log_book.id), :method => :delete
-          -elsif current_user.can_manage_world_objects_in?(log_book)
-            %td="\u296e"
-          -if log_book.deleted?
-            %td.column-string=log_book.title.html_safe
-          -else
-            %td.column-string=link_to log_book.title.html_safe, log_book
-          %td.column-string=log_book.game_name.html_safe
-          %td.column-integer=log_book.world_objects.count
+  .row-fluid
+    .span7
+      %h1='Your Log Books'
+    .span5
+      -if show_deleted_items
+        =link_to "Hide Deleted", log_books_path, {class: "btn btn-warning btn-mini pull-right"}
+      -else
+        =link_to "Show Deleted", log_books_path(show_deleted: true), {class: "btn btn-danger btn-mini pull-right"}
+  .row-fluid
+    .span12
+      %table.table.table-condensed
+        %thead
+          %tr
+            %th='Title'
+            %th='Game'
+            %th='No.&nbsp;of&nbsp;Items'.html_safe
+            %th
+              %a{:href => new_log_book_path}
+                <i class="icon-plus"></i>
+        -private_log_books.each do |log_book|
+          %tr{class: '' + (log_book.deleted? ? 'deleted' : '')}
+            -# Log Book Title
+            %td
+              -if log_book.deleted?
+                =log_book.title.html_safe
+              -else
+                =link_to log_book.title.html_safe, log_book
+            -# Game Title
+            %td=log_book.game_name.html_safe
+            -# Number of Objects in Log Book
+            %td=log_book.world_objects.count
+            -# Delete or Restore Log Book
+            %td
+              -if current_user.can_fully_manage?(log_book)
+                -if log_book.deleted?
+                  %a{:href => untrash_log_book_path(log_book.id), :data => {:method => :put}, :rel => "nofollow", :title => "Restore Log Book"}
+                    <i class="icon-refresh"></i>
+                -else
+                  %a{:href => log_book_path(log_book.id), :data => {:method => :delete}, :rel => "nofollow", :title => "Delete Log Book"}
+                    <i class="icon-remove"></i>
+              -elsif current_user.can_manage_world_objects_in?(log_book)
+                ="\u296e"

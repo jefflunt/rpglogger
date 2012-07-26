@@ -1,4 +1,7 @@
-%table{:class=>'max-width'}
-  %tr
-    %td
-      ="rpglogger lets you catalog everything you see, everywhere you go, and everything you do in a game".html_safe
+-if @section
+  =render :partial => 'partials/log_book_nav', :locals=>{:log_book=>@section.log_book}
+-elsif @log_book && !@log_book.new_record?
+  =render :partial => 'partials/log_book_nav', :locals=>{:log_book=>@log_book}
+-else
+  %p
+    <span class="brand">rpglogger</span> lets you catalog everything you <em>see</em>, everywhere you <em>go</em>, and everything you <em>do</em> in a game

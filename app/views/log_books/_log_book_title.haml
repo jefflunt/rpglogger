@@ -1,12 +1,8 @@
-.section-title
-  %table
-    %tr
-      %td.serif-sc-font.big-font-size
-        ="in "
-        =link_to @log_book.title, @log_book
-      %td
-        -if @show_deleted_sections
-          %td.right=link_to "Hide deleted sections", edit_log_book_path(@log_book.id), {class: "styled-button-blue-gray"}
-        -else
-          %td.right=link_to "Show deleted sections", edit_log_book_path(@log_book.id, show_deleted: true), {class: "styled-button-blue-gray"}
-
+.row-fluid
+  .span7
+    %h1=link_to @log_book.title, @log_book
+  .span5
+    -if @show_deleted_sections
+      =link_to "Hide Deleted Section", edit_log_book_path(@log_book.id), {class: "btn btn-warning btn-mini pull-right"}
+    -else
+      =link_to "Show deleted sections", edit_log_book_path(@log_book.id, show_deleted: true), {class: "btn btn-danger btn-mini pull-right"}

@@ -1,6 +1,11 @@
-%center
-  %p
-    %span{:class=>'huge-font-size'}='Login with:'
-  %span=link_to (image_tag 'login_buttons/google_oauth2_64.png'),  '/auth/google_oauth2'
-  %span=link_to (image_tag 'login_buttons/facebook_64.png'),        '/auth/facebook'
-  %span=link_to (image_tag 'login_buttons/twitter_64.png'),         '/auth/twitter'
+.row-fluid
+  .span12
+    %h1
+      Login with:
+.row-fluid
+  %div{:class => "span1 offset4"}
+    =link_to (image_tag 'login_buttons/google_oauth2_64.png'),  '/auth/google_oauth2'
+  .span1
+    =link_to (image_tag 'login_buttons/facebook_64.png'),       '/auth/facebook'
+  .span1
+    =link_to (image_tag 'login_buttons/twitter_64.png'),        '/auth/twitter'

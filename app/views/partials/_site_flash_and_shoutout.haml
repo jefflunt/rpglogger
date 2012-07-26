@@ -1,10 +1,30 @@
-.content-border
-  -if flash[:notice]
-    .notice-messages
-      =render :partial => 'partials/top_section_info', :locals => {:center_message => flash[:notice]}
-  -elsif flash[:error]
-    .error-messages
-      =render :partial => 'partials/top_section_info', :locals => {:center_message => flash[:error]}
-  -else
-    .site-shoutout
-      =render :partial => 'partials/top_section_info', :locals => {:center_message => '<span class="color-white">celebrating the launch of </span><a href="http://elderscrolls.com">elder scrolls v: skyrim</a>'.html_safe}
+#alert_space{:class => "row-fluid"}
+  .span12
+    -if flash[:notice]
+      %div{:class => "alert alert-success"}
+        %button{:class => "close", :data => {:dismiss => "alert"}}
+          x
+        =flash[:notice]
+    -if flash[:error] 
+      %div{:class => "alert alert-error"}
+        %button{:class => "close", :data => {:dismiss => "alert"}}
+          x
+        =flash[:error]
+    -if @log_book && @log_book.errors.any?
+      %div{:class => "alert alert-block alert-error"}
+        %button{:class => "close", :data => {:dismiss => "alert"}}
+          x
+        %h4.alert-heading
+          Whoa, we got some issues here:
+        %ul
+          -@log_book.errors.full_messages.each do |msg|
+            %li=msg
+    -if @world_object && @world_object.errors.any?
+      .alert.alert-block.alert-error
+        %button{:class => "close", :data => {:dismiss => "alert"}}
+          x
+        %h4.alert-heading
+          Whoa, we got some issues here:
+        %ul
+          -@world_object.errors.full_messages.each do |msg|
+            %li=msg

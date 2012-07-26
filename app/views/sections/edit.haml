@@ -1,58 +1,48 @@
-.section-title
-  %table
-    %tr
-      %td
-        %span.serif-sc-font.big-font-size=link_to "#{@section.name} ", section_path(@section)
-        %span.serif-sc-font.big-font-size='attributes'
-      %td
+.row_fluid
+  .span7
+    %h1
+      ="Editing&nbsp;".html_safe
+      =link_to "#{@section.name}", section_path(@section)
+      ="&nbsp;Attributes".html_safe
+  .span5
+    .btn-toolbar.pull-right
+      .btn-group
         -if current_user && current_user.can_fully_manage?(@section.log_book)
           -if @show_deleted_properties
-            %td=link_to "Hide deleted attributes", edit_section_path(@section.id), {class: "styled-button-blue-gray"}
+            =link_to "&nbsp;Hide Deleted Attributes".html_safe, edit_section_path(@section.id), :class => "btn btn-warning btn-mini icon-eye-close"
           -else
-            %td=link_to "Show deleted attributes", edit_section_path(@section.id, show_deleted: true), {class: "styled-button-blue-gray"}
-        
-#attributes_form.serif-sc-font.compact-form.right
-  %table
-    %tr
-      %td
-        =form_for @section do |section_form|
-          %table
-            %tr
-              %td
-              %th='Section Title'
-              %td
-            %tr
-              %td
-              %td=section_form.text_field :name
-              %td
-            %tr
-              %td
-              %th='Section Attributes'
-              %td
-            -@list_of_properties.each do |property|
-              =section_form.fields_for :section_properties, property do |property_form|
-                %tr
-                  %td=property_form.object.data_type
-                  %td=property_form.text_field :name
-                  -if property.deleted?
-                    %th.left=link_to 'Restore', untrash_section_section_property_path(@section.id, property.id), {method: :put, class: 'styled-button-blue-gray'}
-                  -else
-                    %th.left=link_to 'Delete', section_section_property_path(@section.id, property.id), {method: :delete, class: 'styled-button-dark-red'}
-
-          =fields_for :section_properties do |new_section_properties_form|
-            %td        
-              %table
-                %tr
-                  %th='New Attributes (comma-separated)'
-                %tr
-                  %td=new_section_properties_form.text_field :new_section_property_names
-                %tr
-                  %th='Attribute Type'
-                %tr
-                  %td=collection_select new_section_properties_form.object, :data_type, SectionProperty.all_data_types, :to_s, :to_s
-                %tr
-                  %td
-                    %br
-                    %br
-                    =section_form.submit "Update attributes", :class => 'styled-button-blue-gray'
-    
+            =link_to "&nbsp;Show deleted attributes".html_safe, edit_section_path(@section.id, show_deleted: true), :class => "btn btn-warning btn-mini icon-eye-open"
+=form_for @section, :html => {:class => "form-horizontal"} do |section_form|
+  .row-fluid
+    -# Form to edit current attributes
+    .span6
+      %fieldset
+        %h3
+          Section Title
+        =section_form.text_field :name, :html => {:class => "span3"}
+      %fieldset
+        %h3
+          Section Attributes
+        -@list_of_properties.each do |property|
+          =section_form.fields_for :section_properties, property do |property_form|
+            =property_form.text_field :name
+            -if property.deleted?
+              =link_to '&nbsp;Restore'.html_safe, untrash_section_section_property_path(@section.id, property.id), :method => :put, :class => 'btn btn-success'
+            -else
+              =link_to '&nbsp;Delete'.html_safe, section_section_property_path(@section.id, property.id), :method => :delete, :class => 'btn btn-danger'
+            %p.help-block
+              ="The above attribute is of type #{property_form.object.data_type}".html_safe
+            %br
+    -# Form to add new attributes
+    .span6
+      %h3
+        New Attributes
+      %fieldset
+        =fields_for :section_properties do |new_section_properties_form|
+          %label='Attribute Names (comma-separated)'
+          =new_section_properties_form.text_field :new_section_property_names
+          %label
+            Attribute Type
+          =collection_select new_section_properties_form.object, :data_type, SectionProperty.all_data_types, :to_s, :to_s
+      %br
+      =section_form.submit "Update Attributes", :class => 'btn btn-primary'

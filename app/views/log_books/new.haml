@@ -1,27 +1,10 @@
-%span{:class=>'big-font-size color-orange'}='New log book'
-%br
-%br
+%h1
+  New log book
 =form_for @log_book do |log_book_form|
   =log_book_form.hidden_field :user_id
-  %table
-    %tr
-      %td
-        %table
-          %tr
-            %td=log_book_form.text_field :title
-            %th{:class=>'serif-sc-font right'}='Log Book Title'
-          %tr
-            %td=log_book_form.text_field :game_name
-            %th.serif-sc-font='Game name'
-          %tr
-            %td.right
-              %span=log_book_form.submit 'Create', :class=>'center styled-button-blue-gray'
-      %td
-        %table
-          %tr
-            %td{:class=>'left'}
-              -if @log_book.errors.any?
-                %h2{:class=>'serif-normal-font'}='Whoa, we got some issues here:'
-                %ul
-                  -@log_book.errors.full_messages.each do |msg|
-                    %li=msg
+  %label='Log Book Title'
+  =log_book_form.text_field :title, :class => "span3", :placeholder => "Celentrium of Skyrim"
+  %label='Game Name'
+  =log_book_form.text_field :game_name, :class => "span3", :placeholder => "Skyrim"
+  %br
+  =log_book_form.submit 'Create', :class=>'btn btn-success'
