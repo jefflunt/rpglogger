@@ -1,6 +1,4 @@
 class Section < ActiveRecord::Base
-  acts_as_paranoid
-  
   belongs_to :log_book
   
   has_many :world_objects, order: "LOWER(name) ASC"

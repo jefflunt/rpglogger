@@ -1,6 +1,4 @@
-class SectionProperty < ActiveRecord::Base
-  acts_as_paranoid
-  
+class SectionProperty < ActiveRecord::Base  
   belongs_to :section
   
   has_many :world_object_properties

@@ -2,8 +2,6 @@ class WorldObject < ActiveRecord::Base
   require 'populator'
   require 'faker'
   
-  acts_as_paranoid
-  
   belongs_to :section
   has_many :world_object_properties
   
