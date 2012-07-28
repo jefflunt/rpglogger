@@ -20,7 +20,7 @@
         %tr{class: '' + (log_book.archived? ? 'deleted' : '')}
           -if current_user.can_fully_manage?(log_book)
             -if log_book.archived?
-              %td=link_to "\u27f2", untrash_log_book_path(log_book.id), :method => :put
+              %td=link_to "\u27f2", restore_log_book_path(log_book.id), :method => :put
             -else
               %td=link_to "\u2716", log_book_path(log_book.id), :method => :delete
           -elsif current_user.can_manage_world_objects_in?(log_book)

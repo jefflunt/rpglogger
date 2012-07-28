@@ -11,6 +11,10 @@ class SectionProperty < ActiveRecord::Base
   validates :data_type, :presence => true
   validates :sort_order, :presence => true
   
+  def archived?
+    archived_at != nil
+  end
+  
   def self.all_data_types
     ['boolean', 'integer', 'string', 'text']
   end

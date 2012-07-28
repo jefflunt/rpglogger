@@ -10,9 +10,9 @@
       %tr{class: '' + (obj.archived? ? 'deleted' : '')}
         -if @can_manage_world_objects
           -if obj.archived?
-            %td=link_to "\u27f2", untrash_section_world_object_path(section.id, obj.id), method: :put
+            %td=link_to "\u27f2", restore_section_world_object_path(section.id, obj.id), method: :put
           -else
-            %td=link_to "\u2716", section_world_object_path(section.id, obj.id), method: :delete
+            %td=link_to "\u2716", archive_section_world_object_path(section.id, obj.id), method: :put
         
         -if obj.archived?
           %td=markdown_parse(obj.name)

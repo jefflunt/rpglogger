@@ -17,9 +17,9 @@ class SectionsController < ApplicationController
     
     if params[:show_archived]
       @show_deleted_properties = params[:show_archived]
-      @list_of_properties = SectionProperty.unscoped.where(["section_id = ?", @section.id]).order("sort_order ASC")
-    else
       @list_of_properties = @section.section_properties.sort_order
+    else
+      @list_of_properties = SectionProperty.active.where(["section_id = ?", @section.id]).order("sort_order ASC")
     end
   end
   

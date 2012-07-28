@@ -48,9 +48,9 @@ class LogBooksController < ApplicationController
     
     if params[:show_deleted]
       @show_deleted_sections = params[:show_deleted]
-      @list_of_sections = Section.unscoped.where(["log_book_id = ?", @log_book.id]).order("LOWER(name) ASC")
-    else
       @list_of_sections = @log_book.sections.order_by_name
+    else
+      @list_of_sections = Section.active.where(["log_book_id = ?", @log_book.id]).order("LOWER(name) ASC")
     end
   end
   

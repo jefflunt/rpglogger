@@ -56,16 +56,16 @@ class WorldObjectsController < ApplicationController
   
   def archive
     @world_object = WorldObject.find(params[:id])
-    authorize! :untrash, @world_object
+    authorize! :archive, @world_object
     
     @world_object.update_attribute(:archived_at, nil)
     
     redirect_back_or log_book_path(@world_object.section.log_book), notice: "Archived (<a href=\"#{restore_section_world_object_path(@world_object.section.id, @world_object.id)}\" data-method=\"put\">undo</a>)"
   end
   
-  def untrash
+  def restore
     @world_object = WorldObject.find(params[:id])
-    authorize! :untrash, @world_object
+    authorize! :restore, @world_object
     
     @world_object.update_attribute(:archived_at, nil)
     
