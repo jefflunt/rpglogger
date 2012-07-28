@@ -4,10 +4,10 @@
       %tr
         %td.serif-sc-font.big-font-size.color-orange='Your log books'
         -if current_user
-          -if show_deleted_items
-            %td=link_to "Hide deleted", log_books_path, {class: "styled-button-blue-gray"}
+          -if @show_archived_items
+            %td=link_to "Hide archived", log_books_path, {class: "styled-button-blue-gray"}
           -else
-            %td=link_to "Show deleted", log_books_path(show_deleted: true), {class: "styled-button-blue-gray"}
+            %td=link_to "Show archived", log_books_path(show_archived: true), {class: "styled-button-blue-gray"}
     %br
   .compact-table
     %table
@@ -17,14 +17,14 @@
         %th.column-string='Game'
         %th.column-integer='No.&nbsp;of&nbsp;Items'.html_safe
       -private_log_books.each do |log_book|
-        %tr{class: '' + (log_book.archived? ? 'deleted' : '')}
+        %tr{class: '' + (log_book.archived? ? 'archived' : '')}
           -if current_user.can_fully_manage?(log_book)
             -if log_book.archived?
-              %td=link_to "\u27f2", restore_log_book_path(log_book.id), :method => :put
+              %td=link_to "⟲", restore_log_book_path(log_book.id), method: :put
             -else
-              %td=link_to "\u2716", log_book_path(log_book.id), :method => :delete
+              %td=link_to "✖", archive_log_book_path(log_book.id), method: :put
           -elsif current_user.can_manage_world_objects_in?(log_book)
-            %td="\u296e"
+            %td="⥮"
           -if log_book.archived?
             %td.column-string=log_book.title.html_safe
           -else
