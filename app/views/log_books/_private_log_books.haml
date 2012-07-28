@@ -4,9 +4,9 @@
       %h1='Your Log Books'
     .span5
       -if show_deleted_items
-        =link_to "Hide Deleted", log_books_path, {class: "btn btn-warning btn-mini pull-right"}
+        =link_to "Hide deleted", log_books_path, {class: "btn btn-warning btn-mini pull-right"}
       -else
-        =link_to "Show Deleted", log_books_path(show_deleted: true), {class: "btn btn-danger btn-mini pull-right"}
+        =link_to "Show deleted", log_books_path(show_deleted: true), {class: "btn btn-danger btn-mini pull-right"}
   .row-fluid
     .span12
       %table.table.table-condensed

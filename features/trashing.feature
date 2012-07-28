@@ -31,7 +31,6 @@ Scenario: When I trash a Section, the `deleted_at` attribute is set
 Scenario: When I trash a WorldObject, the `deleted_at` attribute is set
   When I go to the show LogBook page for "Test LogBook"
   And I follow "Test Section"
-  And show me the page
   And I follow "✖"
   Then the WorldObject "Test WorldObject" in "Test Section" in "Test LogBook" should be marked as deleted
   And I should see the text "Deleted (undo)"
@@ -45,6 +44,8 @@ Scenario: I should be able to see trashed LogBooks with a control in the UI, and
   And I follow "✖"
   Then I should not see the text "Test LogBook"
   And the LogBook "Test LogBook" should be marked as deleted
+  
+  And show me the page
   
   When I follow "Show deleted"
   Then I should see the text "Test LogBook"

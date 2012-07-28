@@ -9,7 +9,7 @@
       .btn-group
         -if current_user && current_user.can_fully_manage?(@section.log_book)
           -if @show_deleted_properties
-            =link_to "&nbsp;Hide Deleted Attributes".html_safe, edit_section_path(@section.id), :class => "btn btn-warning btn-mini icon-eye-close"
+            =link_to "&nbsp;Hide deleted Attributes".html_safe, edit_section_path(@section.id), :class => "btn btn-warning btn-mini icon-eye-close"
           -else
             =link_to "&nbsp;Show deleted attributes".html_safe, edit_section_path(@section.id, show_deleted: true), :class => "btn btn-warning btn-mini icon-eye-open"
 =form_for @section, :html => {:class => "form-horizontal"} do |section_form|
@@ -45,4 +45,4 @@
             Attribute Type
           =collection_select new_section_properties_form.object, :data_type, SectionProperty.all_data_types, :to_s, :to_s
       %br
-      =section_form.submit "Update Attributes", :class => 'btn btn-primary'
+      =section_form.submit "Update attributes", :class => 'btn btn-primary'
