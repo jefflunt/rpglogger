@@ -9,6 +9,7 @@ Background:
 
 Scenario: When I trash a LogBook, the `deleted_at` attribute is set
   When I go to the LogBooks index page
+  Then show me the page
   And I follow "✖"
   Then the LogBook "Test LogBook" should be marked as deleted
   And I should see the text "Log book deleted (undo)"
