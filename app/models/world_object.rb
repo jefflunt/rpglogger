@@ -10,6 +10,8 @@ class WorldObject < ActiveRecord::Base
   accepts_nested_attributes_for :world_object_properties
   
   scope :sorted_by_title, order("LOWER(name) ASC")
+  scope :active, where("archived_at IS NULL")
+  scope :archived, where("archived_at IS NOT NULL")
   
   def is_public?
     section.is_public?

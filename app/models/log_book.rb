@@ -10,6 +10,8 @@ class LogBook < ActiveRecord::Base
   validates :title, :presence => true
   
   scope :public, where(["is_public = ?", true])
+  scope :active, where("archived_at IS NULL")
+  scope :archived, where("archived_at IS NOT NULL")
   
   accepts_nested_attributes_for :sections
   accepts_nested_attributes_for :shares
