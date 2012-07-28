@@ -45,8 +45,6 @@ Scenario: I should be able to see trashed LogBooks with a control in the UI, and
   Then I should not see the text "Test LogBook"
   And the LogBook "Test LogBook" should be marked as deleted
   
-  And show me the page
-  
   When I follow "Show deleted"
   Then I should see the text "Test LogBook"
   

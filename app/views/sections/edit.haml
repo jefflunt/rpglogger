@@ -14,7 +14,6 @@
             =link_to "&nbsp;Show deleted attributes".html_safe, edit_section_path(@section.id, show_deleted: true), :class => "btn btn-warning btn-mini icon-eye-open"
 =form_for @section, :html => {:class => "form-horizontal"} do |section_form|
   .row-fluid
-    -# Form to edit current attributes
     .span6
       %fieldset
         %h3
@@ -33,7 +32,6 @@
             %p.help-block
               ="The above attribute is of type #{property_form.object.data_type}".html_safe
             %br
-    -# Form to add new attributes
     .span6
       %h3
         New Attributes
