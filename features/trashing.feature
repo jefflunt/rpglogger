@@ -9,7 +9,6 @@ Background:
 
 Scenario: When I trash a LogBook, the `deleted_at` attribute is set
   When I go to the LogBooks index page
-  Then show me the page
   And I follow "✖"
   Then the LogBook "Test LogBook" should be marked as deleted
   And I should see the text "Log book deleted (undo)"
@@ -20,7 +19,7 @@ Scenario: When I trash a LogBook, the `deleted_at` attribute is set
 
 Scenario: When I trash a Section, the `deleted_at` attribute is set
   When I go to the show LogBook page for "Test LogBook"
-  And I follow "edit"
+  And I follow "Edit"
   And I follow "Delete"
   Then the Section "Test Section" in "Test LogBook" should be marked as deleted
   And I should see the text "Section deleted (undo)"
