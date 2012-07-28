@@ -1,7 +1,7 @@
 class SectionProperty < ActiveRecord::Base  
   belongs_to :section
   
-  has_many :world_object_properties
+  has_many :world_object_properties, dependent: :destroy
   
   scope :sort_order, order: "sort_order ASC"
   scope :active, where("archived_at IS NULL")

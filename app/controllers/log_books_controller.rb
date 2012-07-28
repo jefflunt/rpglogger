@@ -5,8 +5,8 @@ class LogBooksController < ApplicationController
     @public_log_books = LogBook.public
     
     if current_user
-      @show_deleted_items = params[:show_deleted]
-      @private_log_books = current_user.owned_and_shared_log_books(params[:show_deleted])
+      @show_deleted_items = params[:show_archived]
+      @private_log_books = current_user.owned_and_shared_log_books(params[:show_archived])
     end
   end
   
@@ -24,7 +24,7 @@ class LogBooksController < ApplicationController
     authorize! :new, @log_book
     
     if !current_user
-      redirect_to new_sessions_path, notice: "You must be logged in to create a log book"
+      redirect_to new_sessions_path, notice: "You must be logged in to create a logbook"
     else
       @log_book.user_id = current_user.id
     end
@@ -36,7 +36,7 @@ class LogBooksController < ApplicationController
     
     if @log_book.save
       @log_book.create_default_sections
-      redirect_to @log_book, notice: "Log book created"
+      redirect_to @log_book, notice: "Logbook created"
     else
       render 'new'
     end
@@ -84,7 +84,7 @@ class LogBooksController < ApplicationController
       @log_book.shared_users.delete(User.find(params[:remove_shared_user_id]))
     end
     
-    redirect_to edit_log_book_path(@log_book), notice: "Log book updated"
+    redirect_to edit_log_book_path(@log_book), notice: "Logbook updated"
   end
   
   def destroy
@@ -93,17 +93,24 @@ class LogBooksController < ApplicationController
     
     @log_book.destroy
     
-    redirect_back_or log_books_path, notice: "Log book deleted (<a href=\"#{untrash_log_book_path(@log_book.id)}\" data-method=\"put\">undo</a>)".html_safe
+    redirect_back_or log_books_path, notice: "Logbook deleted".html_safe
   end
   
-  # PUT /log_books/:id/untrash
-  # Using the `paranoia` gem, this method clears the `deleted_at` field
-  def untrash
-    @log_book = LogBook.only_deleted.find(params[:id])
-    authorize! :untrash, @log_book
+  def archive
+    @log_book = LogBook.find(params[:id])
+    authorize! :archive, @log_book
     
-    @log_book.update_attribute(:deleted_at, nil)
+    @log_book.update_attribute(:archived_at, Time.now)
     
-    redirect_back_or log_books_path, notice: "Log book restored"
+    redirect_back_or log_books_path, notice: "Logbook archived (<a href=\"#{restore_log_book_path(@log_book.id)}\" data-method=\"put\">undo</a>)".html_safe
+  end
+  
+  def restore
+    @log_book = LogBook.find(params[:id])
+    authorize! :restore, @log_book
+    
+    @log_book.update_attribute(:archived_at, nil)
+    
+    redirect_back_or log_books_path, notice: "Logbook restored"
   end
 end

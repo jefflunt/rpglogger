@@ -1,8 +1,8 @@
 class Section < ActiveRecord::Base
   belongs_to :log_book
   
-  has_many :world_objects, order: "LOWER(name) ASC"
-  has_many :section_properties, order: :sort_order
+  has_many :world_objects, order: "LOWER(name) ASC", dependent: :destroy
+  has_many :section_properties, order: :sort_order, dependent: :destroy
   
   accepts_nested_attributes_for :section_properties
   accepts_nested_attributes_for :world_objects
@@ -17,7 +17,7 @@ class Section < ActiveRecord::Base
     log_book.is_public?
   end
   
-  def deleted?
-    deleted_at != nil
+  def archived?
+    archived_at != nil
   end
 end

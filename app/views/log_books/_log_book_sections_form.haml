@@ -17,7 +17,7 @@
               =log_book_form.fields_for :sections, section do |section_form|
                 %tr
                   %td=section_form.text_field :name
-                  -if section.deleted?
+                  -if section.archived?
                     %th.left=link_to 'Restore', untrash_section_path(section.id), {method: :put, class: 'styled-button-blue-gray'}
                   -else
                     %th.left=link_to 'Delete', section_path(section.id), {method: :delete, class: 'styled-button-dark-red'}

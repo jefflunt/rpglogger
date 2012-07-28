@@ -34,7 +34,7 @@
                 %tr
                   %td=property_form.object.data_type
                   %td=property_form.text_field :name
-                  -if property.deleted?
+                  -if property.archived?
                     %th.left=link_to 'Restore', untrash_section_section_property_path(@section.id, property.id), {method: :put, class: 'styled-button-blue-gray'}
                   -else
                     %th.left=link_to 'Delete', section_section_property_path(@section.id, property.id), {method: :delete, class: 'styled-button-dark-red'}

@@ -17,15 +17,15 @@
         %th.column-string='Game'
         %th.column-integer='No.&nbsp;of&nbsp;Items'.html_safe
       -private_log_books.each do |log_book|
-        %tr{class: '' + (log_book.deleted? ? 'deleted' : '')}
+        %tr{class: '' + (log_book.archived? ? 'deleted' : '')}
           -if current_user.can_fully_manage?(log_book)
-            -if log_book.deleted?
+            -if log_book.archived?
               %td=link_to "\u27f2", untrash_log_book_path(log_book.id), :method => :put
             -else
               %td=link_to "\u2716", log_book_path(log_book.id), :method => :delete
           -elsif current_user.can_manage_world_objects_in?(log_book)
             %td="\u296e"
-          -if log_book.deleted?
+          -if log_book.archived?
             %td.column-string=log_book.title.html_safe
           -else
             %td.column-string=link_to log_book.title.html_safe, log_book

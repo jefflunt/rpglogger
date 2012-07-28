@@ -3,7 +3,7 @@ class WorldObject < ActiveRecord::Base
   require 'faker'
   
   belongs_to :section
-  has_many :world_object_properties
+  has_many :world_object_properties, dependent: :destroy
   
   validates :name, :presence => true
     
@@ -17,8 +17,8 @@ class WorldObject < ActiveRecord::Base
     section.is_public?
   end
   
-  def deleted?
-    deleted_at != nil
+  def archived?
+    archived_at != nil
   end
   
   def fake_fill_properties

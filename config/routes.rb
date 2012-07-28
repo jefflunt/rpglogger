@@ -11,21 +11,25 @@ Rpglogger::Application.routes.draw do
   resources :games, :users
 
   resources :log_books do
-    put :untrash, on: :member
+    put :archive, on: :member
+    put :restore, on: :member
     
     resources :sections
     resources :shares
   end
   
   resources :sections do
-    put :untrash, on: :member
+    put :archive, on: :member
+    put :restore, on: :member
     
     resources :section_properties do
-      put :untrash, on: :member
+      put :archive, on: :member
+      put :restore, on: :member
     end
     
     resources :world_objects do
-      put :untrash, on: :member
+      put :archive, on: :member
+      put :restore, on: :member
       
       resources :world_object_properties
     end
