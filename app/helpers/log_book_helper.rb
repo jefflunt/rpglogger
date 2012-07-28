@@ -17,10 +17,12 @@ module LogBookHelper
   end
   
   def log_book_access_indicator_icon(log_book)
-    if current_user.can_fully_manage?(log_book)
-      log_book.deleted? ? untrash_log_book_link(log_book) : delete_log_book_link(log_book)
-    elsif current_user.can_manage_world_objects_in?(log_book)
-      "⥮"
+    if current_user
+      if current_user.can_fully_manage?(log_book)
+        log_book.deleted? ? untrash_log_book_link(log_book) : delete_log_book_link(log_book)
+      elsif current_user.can_manage_world_objects_in?(log_book)
+        "⥮"
+      end
     end
   end
 end
