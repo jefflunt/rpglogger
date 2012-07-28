@@ -26,7 +26,7 @@
           -@log_book.shared_users.each do |shared_user|
             %li
               ="#{username_for_top_section(shared_user)}&nbsp;".html_safe
-              =link_to 'Remove Access', log_book_path(@log_book, remove_shared_user_id: shared_user.id), :method => :put, :class => 'btn btn-danger btn-mini'
+              =link_to 'Remove access', log_book_path(@log_book, remove_shared_user_id: shared_user.id), :method => :put, :class => 'btn btn-danger btn-mini'
     .span6
       =form_for @log_book do |sharing_form|
         %h3
