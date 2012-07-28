@@ -15,29 +15,10 @@
             %th='Title'
             %th='Game'
             %th='No.&nbsp;of&nbsp;Items'.html_safe
-            %th
-              %a{:href => new_log_book_path}
-                <i class="icon-plus"></i>
+            %th=new_log_book_link
         -private_log_books.each do |log_book|
           %tr{class: '' + (log_book.deleted? ? 'deleted' : '')}
-            -# Log Book Title
-            %td
-              -if log_book.deleted?
-                =log_book.title.html_safe
-              -else
-                =link_to log_book.title.html_safe, log_book
-            -# Game Title
+            %td=log_book.deleted? ? log_book.title.html_safe : link_to(log_book.title.html_safe, log_book)
             %td=log_book.game_name.html_safe
-            -# Number of Objects in Log Book
             %td=log_book.world_objects.count
-            -# Delete or Restore Log Book
-            %td
-              -if current_user.can_fully_manage?(log_book)
-                -if log_book.deleted?
-                  %a{:href => untrash_log_book_path(log_book.id), :data => {:method => :put}, :rel => "nofollow", :title => "Restore Log Book"}
-                    <i class="icon-refresh"></i>
-                -else
-                  %a{:href => log_book_path(log_book.id), :data => {:method => :delete}, :rel => "nofollow", :title => "Delete Log Book"}
-                    <i class="icon-remove"></i>
-              -elsif current_user.can_manage_world_objects_in?(log_book)
-                ="\u296e"
+            %td=log_book_access_indicator_icon(log_book)
