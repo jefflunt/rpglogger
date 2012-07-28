@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 module LogBookHelper
   def new_log_book_link
     link_to "✚", new_log_book_path
