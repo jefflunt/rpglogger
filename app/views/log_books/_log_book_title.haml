@@ -1,6 +1,6 @@
 .row-fluid
   .span7
-    %h1=link_to @log_book.title, @log_book
+    %h1=link_to "editing #{@log_book.title}", @log_book
   .span5
     -if @show_deleted_sections
       =link_to "Hide deleted Section", edit_log_book_path(@log_book.id), {class: "btn btn-warning btn-mini pull-right"}

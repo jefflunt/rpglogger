@@ -1,9 +1,6 @@
 .row_fluid
   .span7
-    %h1
-      ="Editing&nbsp;".html_safe
-      =link_to "#{@section.name}", section_path(@section)
-      ="&nbsp;Attributes".html_safe
+    %h1=link_to "editing&nbsp;#{@section.name}".html_safe, section_path(@section)
   .span5
     .btn-toolbar.pull-right
       .btn-group
@@ -34,10 +31,10 @@
             %br
     .span6
       %h3
-        New Attributes
+        New Attributes 
+        %label='(comma-separated)'
       %fieldset
         =fields_for :section_properties do |new_section_properties_form|
-          %label='Attribute Names (comma-separated)'
           =new_section_properties_form.text_field :new_section_property_names
           %label
             Attribute Type

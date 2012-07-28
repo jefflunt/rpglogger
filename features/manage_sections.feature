@@ -64,10 +64,9 @@ Scenario: A user can create new Sections
   And I press "Add sections"
   
   Then I should see all of the texts: 
-    | in Test LogBook |
-    | new section 1   |
-    | new section 2   |
-  And I should not see the text ","
+    | editing Test LogBook  |
+    | new section 1         |
+    | new section 2         |
   
 Scenario: When user adds new attributes to a Section, the existing WorldObjects get those attributes
   Given I am signed in with provider "facebook"

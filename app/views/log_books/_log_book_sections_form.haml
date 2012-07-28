@@ -21,8 +21,8 @@
   .span6
     %h3
       New Sections
+      %label='(comma-separated)'
     =form_for @log_book, :html => {:class => "form-horizontal"} do |log_book_form|
       =fields_for :sections do |new_sections_form|
-        %label='New Section Names (comma-separated)'
         =new_sections_form.text_field :new_names, :html => {:class => "span3"}
       =log_book_form.submit "Add sections", :class => 'btn btn-primary'
