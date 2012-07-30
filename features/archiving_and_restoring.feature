@@ -11,13 +11,13 @@ Scenario: When I archive a LogBook, the `archived_at` attribute is set
   When I go to the LogBooks index page
   And I follow "✖"
   Then the LogBook "Test LogBook" should be marked as archived
-  And I should see the text "Log book archived (undo)"
+  And I should see the text "Logbook archived (undo)"
   
   When I follow "undo"
   Then the LogBook "Test LogBook" should NOT be marked as archived
-  And I should see the text "Log book restored"
+  And I should see the text "Logbook restored"
 
-Scenario: When I trash a Section, the `archived_at` attribute is set
+Scenario: When I archive a Section, the `archived_at` attribute is set
   When I go to the show LogBook page for "Test LogBook"
   And I follow "edit"
   And I follow "Archive"
@@ -28,7 +28,7 @@ Scenario: When I trash a Section, the `archived_at` attribute is set
   Then the Section "Test Section" in "Test LogBook" should NOT be marked as archived
   And I should see the text "Section restored"
 
-Scenario: When I trash a WorldObject, the `archived_at` attribute is set
+Scenario: When I archive a WorldObject, the `archived_at` attribute is set
   When I go to the show LogBook page for "Test LogBook"
   And I follow "Test Section"
   And I follow "✖"

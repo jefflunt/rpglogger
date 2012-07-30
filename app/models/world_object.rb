@@ -9,7 +9,7 @@ class WorldObject < ActiveRecord::Base
     
   accepts_nested_attributes_for :world_object_properties
   
-  scope :sorted_by_title, order("LOWER(name) ASC")
+  scope :sorted_by_name, order("LOWER(name) ASC")
   scope :active, where("archived_at IS NULL")
   scope :archived, where("archived_at IS NOT NULL")
   

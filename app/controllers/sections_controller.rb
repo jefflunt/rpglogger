@@ -1,10 +1,11 @@
 class SectionsController < ApplicationController
   def show
+    @section = Section.find(params[:id], select: "id, log_book_id, name")
     if params[:show_archived]
-      @section = Section.find(params[:id], include: [world_objects: [world_object_properties: [:section_property]]])
-      @show_deleted_objects = params[:show_archived]
+      @visible_world_objects = WorldObject.find_all_by_section_id(@section.id, include: [world_object_properties: [:section_property]], order: "LOWER(world_objects.name) ASC")
+      @show_archived_objects = params[:show_archived]
     else
-      @section = Section.find(params[:id], include: [world_objects: [world_object_properties: [:section_property]]], conditions: "world_objects.archived_at IS NULL")
+      @visible_world_objects = WorldObject.find_all_by_section_id(@section.id, conditions: "archived_at IS NULL", include: [world_object_properties: [:section_property]])
     end
     
     authorize! :show, @section.log_book

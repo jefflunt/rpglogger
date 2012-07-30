@@ -1,22 +1,22 @@
 #section-detail.compact-table
   %table
     %tr
-      -if @can_manage_world_objects
+      -if can_manage_world_objects
         %th.min-width=link_to "\u271a", new_section_world_object_path(section.id)
       %th.column-string='Name/Title'
       -section.section_properties.each do |sp|
         %th{class: 'column-' + sp.data_type}=sp.name
-    -section.world_objects.each do |obj|
+    -visible_world_objects.each do |obj|
       %tr{class: '' + (obj.archived? ? 'deleted' : '')}
-        -if @can_manage_world_objects
+        -if can_manage_world_objects
           -if obj.archived?
-            %td=link_to "\u27f2", restore_section_world_object_path(section.id, obj.id), method: :put
+            %td=link_to "⟲", restore_section_world_object_path(section.id, obj.id), method: :put
           -else
-            %td=link_to "\u2716", archive_section_world_object_path(section.id, obj.id), method: :put
+            %td=link_to "✖", archive_section_world_object_path(section.id, obj.id), method: :put
         
         -if obj.archived?
           %td=markdown_parse(obj.name)
-        -elsif @can_manage_world_objects
+        -elsif can_manage_world_objects
           %td=link_to markdown_parse(obj.name), edit_section_world_object_path(section.id, obj.id)
         -else
           %td=markdown_parse(obj.name)
