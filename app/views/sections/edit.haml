@@ -22,7 +22,7 @@
         -@list_of_properties.each do |property|
           =section_form.fields_for :section_properties, property do |property_form|
             =property_form.text_field :name
-            -if property.deleted?
+            -if property.archived?
               =link_to 'Restore'.html_safe, restore_section_section_property_path(@section.id, property.id), :method => :put, :class => 'btn btn-success'
             -else
               =link_to 'Archive'.html_safe, archive_section_section_property_path(@section.id, property.id), :method => :put, :class => 'btn btn-danger'

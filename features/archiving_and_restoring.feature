@@ -19,7 +19,7 @@ Scenario: When I archive a LogBook, the `archived_at` attribute is set
 
 Scenario: When I archive a Section, the `archived_at` attribute is set
   When I go to the show LogBook page for "Test LogBook"
-  And I follow "edit"
+  And I follow "Edit"
   And I follow "Archive"
   Then the Section "Test Section" in "Test LogBook" should be marked as archived
   And I should see the text "Section archived (undo)"

@@ -11,7 +11,7 @@
         -list_of_sections.each do |section|
           =log_book_form.fields_for :sections, section do |section_form|
             =section_form.text_field :name, :html => {:class => "span3"}
-            -if section.deleted?
+            -if section.archived?
               =link_to 'Restore'.html_safe, restore_section_path(section.id), :method => :put, :class => 'btn btn-success'
             -else
               =link_to 'Archive'.html_safe, archive_section_path(section.id), :method => :put, :class => 'btn btn-danger'

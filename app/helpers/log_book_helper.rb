@@ -5,7 +5,7 @@ module LogBookHelper
   end
   
   def archive_log_book_link(log_book)
-    link_to "✖", archive_log_book_path(log_book), method: :delete
+    link_to "✖", archive_log_book_path(log_book), method: :put
   end
   
   def restore_log_book_link(log_book)
@@ -19,7 +19,7 @@ module LogBookHelper
   def log_book_access_indicator_icon(log_book)
     if current_user
       if current_user.can_fully_manage?(log_book)
-        log_book.deleted? ? restore_log_book_link(log_book) : archive_log_book_link(log_book)
+        log_book.archived? ? restore_log_book_link(log_book) : archive_log_book_link(log_book)
       elsif current_user.can_manage_world_objects_in?(log_book)
         "⥮"
       end

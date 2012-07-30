@@ -3,7 +3,7 @@
     .span7
       %h1='Your Log Books'
     .span5
-      -if show_deleted_items
+      -if show_archived_items
         =link_to "Hide archived", log_books_path, {class: "btn btn-warning btn-mini pull-right"}
       -else
         =link_to "Show archived", log_books_path(show_archived: true), {class: "btn btn-danger btn-mini pull-right"}
@@ -17,8 +17,8 @@
             %th='No.&nbsp;of&nbsp;Items'.html_safe
             %th=new_log_book_link
         -private_log_books.each do |log_book|
-          %tr{class: '' + (log_book.deleted? ? 'deleted' : '')}
-            %td=log_book.deleted? ? log_book.title.html_safe : link_to(log_book.title.html_safe, log_book)
+          %tr{class: '' + (log_book.archived? ? 'archived' : '')}
+            %td=log_book.archived? ? log_book.title.html_safe : link_to(log_book.title.html_safe, log_book)
             %td=log_book.game_name.html_safe
             %td=log_book.world_objects.count
             %td=log_book_access_indicator_icon(log_book)

@@ -2,7 +2,7 @@
   .span7
     %h1=link_to "editing #{@log_book.title}", @log_book
   .span5
-    -if @show_deleted_sections
+    -if @show_archived_sections
       =link_to "Hide archived Section", edit_log_book_path(@log_book.id), {class: "btn btn-warning btn-mini pull-right"}
     -else
       =link_to "Show archived sections", edit_log_book_path(@log_book.id, show_archived: true), {class: "btn btn-danger btn-mini pull-right"}

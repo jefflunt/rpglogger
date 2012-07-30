@@ -5,7 +5,7 @@
       %th{class: 'column-' + sp.data_type}=sp.name
     %th=link_to("✚", new_section_world_object_path(section.id)) if @can_manage_world_objects
     
-  -section.world_objects.sorted_by_title.each do |obj|
+  -visible_world_objects.each do |obj|
     %tr{class: '' + (obj.archived? ? 'archived' : '')}
       %td=world_object_title_or_link(obj, @can_manage_world_objects)
       -obj.world_object_properties.each do |prop|
