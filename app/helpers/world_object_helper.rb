@@ -13,7 +13,7 @@ module WorldObjectHelper
   def archive_or_restore_world_object(world_object, can_manage_world_objects)
     if can_manage_world_objects
       if world_object.archived?
-        return link_to "⟲", restore_section_world_object_path(section.id, obj.id), method: :put, rel: "nofollow", title: "Restore Record"
+        return link_to "⟲", restore_section_world_object_path(world_object.section.id, world_object.id), method: :put, rel: "nofollow", title: "Restore Record"
       else
         return link_to "✖", archive_section_world_object_path(world_object.section.id, world_object.id), method: :put, rel: "nofollow", title: "Archive Record"
       end
