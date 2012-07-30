@@ -7,9 +7,9 @@
       %td
         -if current_user && current_user.can_fully_manage?(@section.log_book)
           -if @show_deleted_properties
-            %td=link_to "Hide deleted attributes", edit_section_path(@section.id), {class: "styled-button-blue-gray"}
+            %td=link_to "Hide archived attributes", edit_section_path(@section.id), {class: "styled-button-blue-gray"}
           -else
-            %td=link_to "Show deleted attributes", edit_section_path(@section.id, show_deleted: true), {class: "styled-button-blue-gray"}
+            %td=link_to "Show archived attributes", edit_section_path(@section.id, show_archived: true), {class: "styled-button-blue-gray"}
         
 #attributes_form.serif-sc-font.compact-form.right
   %table

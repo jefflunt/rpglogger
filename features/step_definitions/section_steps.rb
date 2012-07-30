@@ -14,12 +14,12 @@ When /^I edit the Section "([^"]*)"$/ do |section_name|
   visit edit_section_path(Section.find_by_name(section_name))
 end
 
-Then /^the total number of Sections should be (\d+)$/ do |section_num|
-  Section.count.should == section_num.to_i
+Then /^the total number of active Sections should be (\d+)$/ do |section_num|
+  Section.active.count.should == section_num.to_i
 end
 
-Then /^the total number of SectionProperties should be (\d+)$/ do |prop_count|
-  SectionProperty.count.should == prop_count.to_i
+Then /^the total number of active SectionProperties should be (\d+)$/ do |prop_count|
+  SectionProperty.active.count.should == prop_count.to_i
 end
 
 Given /^a SectionProperty exists called "(.*?)" of data type "(.*?)" in "(.*?)"$/ do |prop_name, data_type, section_name|

@@ -75,18 +75,18 @@ Scenario: When user adds new attributes to a Section, the existing WorldObjects 
   And a Section exists called "Test Section" in "Test LogBook"
   And a WorldObject exists called "Test WorldObject 1" in "Test Section"
   And a WorldObject exists called "Test WorldObject 2" in "Test Section"
-  Then the total number of SectionProperties should be 0
+  Then the total number of active SectionProperties should be 0
   And the total number of WorldObjectProperties should be 0
-  And I should not see the text "Delete"
+  And I should not see the text "Archive"
   
   When I go to the edit page for the first section in LogBook "Test LogBook"
   And I fill in "section_properties[new_section_property_names]" with "new attribute 1, new attribute 2"
   And I press "Update attributes"
-  Then the total number of SectionProperties should be 2
+  Then the total number of active SectionProperties should be 2
   And the total number of WorldObjectProperties should be 4
   And I should see all of the texts:
     | boolean |
-    | Delete  |
+    | Archive |
   
 Scenario: When user removes exiting attributes from a Section, the WorldObjectProperties attaches to those SectionProperties are also removed (destroyed)
   Given I am signed in with provider "facebook"
@@ -99,7 +99,7 @@ Scenario: When user removes exiting attributes from a Section, the WorldObjectPr
   And I fill in "section_properties[new_section_property_names]" with "new attribute 1, new attribute 2"
   And I press "Update attributes"
 
-  Then the total number of SectionProperties should be 2
+  Then the total number of active SectionProperties should be 2
   
-  When I follow "Delete"
-  Then the total number of SectionProperties should be 1
+  When I follow "Archive"
+  Then the total number of active SectionProperties should be 1
