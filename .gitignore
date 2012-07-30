@@ -4,3 +4,4 @@ log/*.log
 tmp/
 .sass-cache/
 public/.DS_Store
+.DS_Store
