@@ -15,7 +15,7 @@ class SectionPropertiesController < ApplicationController
     
     section_property.update_attribute(:archived_at, Time.now)
     
-    redirect_back_or log_books_path, notice: "Attribute archived (<a href=\"#{restore_section_section_property_path(section_property.id)}\" data-method=\"put\">undo</a>)"
+    redirect_back_or log_books_path, notice: "Attribute archived (<a href=\"#{restore_section_section_property_path(section_property.id)}\" data-method=\"put\">undo</a>)".html_safe
   end
   
   def restore
