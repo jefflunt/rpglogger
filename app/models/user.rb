@@ -5,12 +5,12 @@ class User < ActiveRecord::Base
   
   validates :uid, :uniqueness => {:scope => :provider}
   
-  def owned_and_shared_log_books(show_deleted=false)
+  def owned_and_shared_log_books(show_archived=false)
     # Gets a list of all LogBooks that this user has access to (both owned, and shared from other users), ordered by the title, case INsensitive.
-    if show_deleted
-      LogBook.unscoped.select("DISTINCT ON (LOWER(log_books.title), log_books.id) log_books.id, log_books.user_id, log_books.title, log_books.game_name, log_books.deleted_at").joins("LEFT OUTER JOIN shares ON log_books.id = shares.log_book_id").where(["log_books.user_id = ? OR shares.user_id = ?", id, id]).order("LOWER(log_books.title) ASC")
+    if show_archived
+      LogBook.select("DISTINCT ON (LOWER(log_books.title), log_books.id) log_books.id, log_books.user_id, log_books.title, log_books.game_name, log_books.archived_at").joins("LEFT OUTER JOIN shares ON log_books.id = shares.log_book_id").where(["log_books.user_id = ? OR shares.user_id = ?", id, id]).order("LOWER(log_books.title) ASC")
     else
-      LogBook.select("DISTINCT ON (LOWER(log_books.title), log_books.id) log_books.id, log_books.user_id, log_books.title, log_books.game_name, log_books.deleted_at").joins("LEFT OUTER JOIN shares ON log_books.id = shares.log_book_id").where(["log_books.user_id = ? OR shares.user_id = ?", id, id]).order("LOWER(log_books.title) ASC")
+      LogBook.active.select("DISTINCT ON (LOWER(log_books.title), log_books.id) log_books.id, log_books.user_id, log_books.title, log_books.game_name, log_books.archived_at").joins("LEFT OUTER JOIN shares ON log_books.id = shares.log_book_id").where(["log_books.user_id = ? OR shares.user_id = ?", id, id]).order("LOWER(log_books.title) ASC")
     end
   end
   

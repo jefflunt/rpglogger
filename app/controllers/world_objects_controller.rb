@@ -51,14 +51,23 @@ class WorldObjectsController < ApplicationController
     
     @world_object.destroy
     
-    redirect_back_or section_path(@world_object.section), notice: "Deleted (<a href=\"#{untrash_section_world_object_path(@world_object.section.id, @world_object.id)}\" data-method=\"put\">undo</a>)".html_safe
+    redirect_back_or section_path(@world_object.section), notice: "Deleted".html_safe
   end
   
-  def untrash
-    @world_object = WorldObject.only_deleted.find(params[:id])
-    authorize! :untrash, @world_object
+  def archive
+    @world_object = WorldObject.find(params[:id])
+    authorize! :archive, @world_object
     
-    @world_object.update_attribute(:deleted_at, nil)
+    @world_object.update_attribute(:archived_at, Time.now)
+    
+    redirect_back_or log_book_path(@world_object.section.log_book), notice: "Archived (<a href=\"#{restore_section_world_object_path(@world_object.section.id, @world_object.id)}\" data-method=\"put\">undo</a>)".html_safe
+  end
+  
+  def restore
+    @world_object = WorldObject.find(params[:id])
+    authorize! :restore, @world_object
+    
+    @world_object.update_attribute(:archived_at, nil)
     
     redirect_back_or log_book_path(@world_object.section.log_book), notice: "Restored"
   end

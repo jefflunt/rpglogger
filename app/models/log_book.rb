@@ -1,23 +1,24 @@
 class LogBook < ActiveRecord::Base
-  acts_as_paranoid
-  
   belongs_to :user
   belongs_to :game
   
   has_many :shares, dependent: :destroy
   has_many :shared_users, through: :shares
-  has_many :sections, order: :name
+  has_many :sections, order: :name, dependent: :destroy
   has_many :world_objects, through: :sections
   
   validates :title, :presence => true
   
   scope :public, where(["is_public = ?", true])
+  scope :active, where("archived_at IS NULL")
+  scope :archived, where("archived_at IS NOT NULL")
+  scope :order_by_title, order("LOWER(title) ASC")
   
   accepts_nested_attributes_for :sections
   accepts_nested_attributes_for :shares
   
-  def deleted?
-    deleted_at != nil
+  def archived?
+    archived_at != nil
   end
   
   def owned_by?(user)

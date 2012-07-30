@@ -6,8 +6,8 @@
     %th=link_to("✚", new_section_world_object_path(section.id)) if @can_manage_world_objects
     
   -section.world_objects.sorted_by_title.each do |obj|
-    %tr{class: '' + (obj.deleted? ? 'deleted' : '')}
+    %tr{class: '' + (obj.archived? ? 'archived' : '')}
       %td=world_object_title_or_link(obj, @can_manage_world_objects)
       -obj.world_object_properties.each do |prop|
         %td{class: 'column-' + prop.section_property.data_type}=markdown_parse(prop.raw_value)
-      %td=delete_or_untrash_world_object(obj, @can_manage_world_objects)
+      %td=archive_or_restore_world_object(obj, @can_manage_world_objects)

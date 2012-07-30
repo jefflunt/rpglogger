@@ -12,9 +12,9 @@
           =log_book_form.fields_for :sections, section do |section_form|
             =section_form.text_field :name, :html => {:class => "span3"}
             -if section.deleted?
-              =link_to '&nbsp;Restore'.html_safe, untrash_section_path(section.id), :method => :put, :class => 'btn btn-success'
+              =link_to 'Restore'.html_safe, restore_section_path(section.id), :method => :put, :class => 'btn btn-success'
             -else
-              =link_to '&nbsp;Delete'.html_safe, section_path(section.id), :method => :delete, :class => 'btn btn-danger'
+              =link_to 'Archive'.html_safe, archive_section_path(section.id), :method => :put, :class => 'btn btn-danger'
             %p.help-block
               %br
       =log_book_form.submit 'Save sections', :class => 'btn btn-primary'

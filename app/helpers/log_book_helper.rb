@@ -4,12 +4,12 @@ module LogBookHelper
     link_to "✚", new_log_book_path
   end
   
-  def delete_log_book_link(log_book)
-    link_to "✖", log_book_path(log_book), method: :delete
+  def archive_log_book_link(log_book)
+    link_to "✖", archive_log_book_path(log_book), method: :delete
   end
   
-  def untrash_log_book_link(log_book)
-    link_to "⟲", untrash_log_book_path(log_book.id), method: :put
+  def restore_log_book_link(log_book)
+    link_to "⟲", restore_log_book_path(log_book.id), method: :put
   end
   
   def shared_log_book_icon
@@ -19,7 +19,7 @@ module LogBookHelper
   def log_book_access_indicator_icon(log_book)
     if current_user
       if current_user.can_fully_manage?(log_book)
-        log_book.deleted? ? untrash_log_book_link(log_book) : delete_log_book_link(log_book)
+        log_book.deleted? ? restore_log_book_link(log_book) : archive_log_book_link(log_book)
       elsif current_user.can_manage_world_objects_in?(log_book)
         "⥮"
       end

@@ -20,8 +20,8 @@ When /^I edit the WorldObject "([^"]*)" in "([^"]*)"$/ do |obj_name, section_nam
   visit edit_section_world_object_path(section, world_object)
 end
 
-Then /^the total number of WorldObjects should be (\d+)$/ do |obj_num|
-  WorldObject.count.should == obj_num.to_i
+Then /^the total number of active WorldObjects should be (\d+)$/ do |obj_num|
+  WorldObject.active.count.should == obj_num.to_i
 end
 
 Then /^the total number of WorldObjectProperties should be (\d+)$/ do |obj_prop_num|

@@ -11,30 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120715014314) do
+ActiveRecord::Schema.define(:version => 20120728154134) do
 
   create_table "log_books", :force => true do |t|
-    t.integer  "user_id",                       :null => false
-    t.string   "title",                         :null => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.integer  "user_id",                        :null => false
+    t.string   "title",                          :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.string   "game_name"
-    t.boolean  "is_public",  :default => false
-    t.datetime "deleted_at"
+    t.boolean  "is_public",   :default => false
+    t.datetime "archived_at"
   end
 
   create_table "section_properties", :force => true do |t|
-    t.integer  "section_id", :null => false
-    t.string   "name",       :null => false
-    t.string   "data_type",  :null => false
-    t.integer  "sort_order", :null => false
-    t.datetime "deleted_at"
+    t.integer  "section_id",  :null => false
+    t.string   "name",        :null => false
+    t.string   "data_type",   :null => false
+    t.integer  "sort_order",  :null => false
+    t.datetime "archived_at"
   end
 
   create_table "sections", :force => true do |t|
     t.integer  "log_book_id", :null => false
     t.string   "name",        :null => false
-    t.datetime "deleted_at"
+    t.datetime "archived_at"
   end
 
   create_table "shares", :force => true do |t|
@@ -66,9 +66,9 @@ ActiveRecord::Schema.define(:version => 20120715014314) do
   end
 
   create_table "world_objects", :force => true do |t|
-    t.integer  "section_id", :null => false
-    t.string   "name",       :null => false
-    t.datetime "deleted_at"
+    t.integer  "section_id",  :null => false
+    t.string   "name",        :null => false
+    t.datetime "archived_at"
   end
 
 end

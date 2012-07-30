@@ -1,10 +1,11 @@
 class SectionsController < ApplicationController
   def show
-    if params[:show_deleted]
-      @section = Section.find(params[:id], include: [world_objects: [world_object_properties: [:section_property]]], conditions: "world_objects.deleted_at IS NOT NULL OR world_objects.deleted_at IS NULL")
-      @show_deleted_objects = params[:show_deleted]
+    @section = Section.find(params[:id], select: "id, log_book_id, name")
+    if params[:show_archived]
+      @visible_world_objects = WorldObject.find_all_by_section_id(@section.id, include: [world_object_properties: [:section_property]], order: "LOWER(world_objects.name) ASC")
+      @show_archived_objects = params[:show_archived]
     else
-      @section = Section.find(params[:id], include: [world_objects: [world_object_properties: [:section_property]]])
+      @visible_world_objects = WorldObject.find_all_by_section_id(@section.id, conditions: "archived_at IS NULL", include: [world_object_properties: [:section_property]])
     end
     
     authorize! :show, @section.log_book
@@ -15,11 +16,11 @@ class SectionsController < ApplicationController
     @section = Section.find(params[:id])
     authorize! :edit, @section.log_book
     
-    if params[:show_deleted]
-      @show_deleted_properties = params[:show_deleted]
-      @list_of_properties = SectionProperty.unscoped.where(["section_id = ?", @section.id]).order("sort_order ASC")
-    else
+    if params[:show_archived]
+      @show_deleted_properties = params[:show_archived]
       @list_of_properties = @section.section_properties.sort_order
+    else
+      @list_of_properties = SectionProperty.active.where(["section_id = ?", @section.id]).order("sort_order ASC")
     end
   end
   
@@ -45,14 +46,24 @@ class SectionsController < ApplicationController
     log_book = @section.log_book
     @section.destroy
     
-    redirect_back_or edit_log_book_path(log_book), notice: "Section deleted (<a href=\"#{untrash_section_path(@section.id)}\" data-method=\"put\">undo</a>)".html_safe
+    redirect_back_or edit_log_book_path(log_book), notice: "Section deleted"
   end
   
-  def untrash
-    @section = Section.only_deleted.find(params[:id])
-    authorize! :untrash, @section.log_book
+  def archive
+    @section = Section.find(params[:id])
+    authorize! :archive, @section.log_book
     
-    @section.update_attribute(:deleted_at, nil)
+    @section.update_attribute(:archived_at, Time.now)
+    
+    redirect_back_or edit_log_book_path(@section.log_book), notice: "Section archived (<a href=\"#{restore_section_path(@section.id)}\" data-method=\"put\">undo</a>)".html_safe
+    
+  end
+  
+  def restore
+    @section = Section.find(params[:id])
+    authorize! :restore, @section.log_book
+    
+    @section.update_attribute(:archived_at, nil)
     
     redirect_back_or edit_log_book_path(@section.log_book), notice: "Section restored"
   end
