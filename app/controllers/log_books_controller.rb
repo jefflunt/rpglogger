@@ -2,7 +2,7 @@ class LogBooksController < ApplicationController
   def index
     authorize! :index, LogBook
     
-    @public_log_books = LogBook.public
+    @public_log_books = LogBook.active.public
     
     if current_user
       @show_archived_items = params[:show_archived]
