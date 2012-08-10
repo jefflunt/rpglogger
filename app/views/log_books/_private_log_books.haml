@@ -4,9 +4,9 @@
       %h1='Your Log Books'
     .span5
       -if show_archived_items
-        =link_to " Hide archived", log_books_path, {class: "btn icon-eye-close btn-warning btn-mini pull-right"}
+        =link_to " Hide archived", log_books_path, {class: "btn icon-eye-close btn-danger btn-mini pull-right"}
       -else
-        =link_to " Show archived", log_books_path(show_archived: true), {class: "btn icon-eye-open btn-danger btn-mini pull-right"}
+        =link_to " Show archived", log_books_path(show_archived: true), {class: "btn icon-eye-open btn-success btn-mini pull-right"}
   .row-fluid
     .span12
       %table.table.table-condensed

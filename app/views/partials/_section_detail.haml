@@ -1,7 +1,7 @@
 %table.table.table-condensed
   %thead
     %th='Name/Title'
-    -section.section_properties.each do |sp|
+    -section.section_properties.active.each do |sp|
       %th{class: 'column-' + sp.data_type}=sp.name
     %th=link_to("✚", new_section_world_object_path(section.id)) if @can_manage_world_objects
     

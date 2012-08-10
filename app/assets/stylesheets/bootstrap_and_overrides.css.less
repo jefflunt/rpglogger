@@ -4,6 +4,10 @@ body {
 }
 
 @import "twitter/bootstrap/responsive";
+@dangerColor: #640502;
+@warningColor: #F89406;
+@successColor: #0e4900;
+@neutralColor: #003039;
 
 // Set the correct sprite paths
 @iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
@@ -112,6 +116,32 @@ h1 a:hover, h2 a:hover {
     text-decoration: underline;
 }
 
-.btn {
-    text-shadow: none;
+.btn-danger {
+  color: white;
+  background-color: @dangerColor;
+}
+
+.btn-danger:hover {
+  color: white;
+  background-color: lighten(@dangerColor, 10%);
+}
+
+.btn-success {
+  color: white;
+  background-color: @successColor;
+}
+
+.btn-success:hover {
+  color: white;
+  background-color: lighten(@successColor, 10%);
+}
+
+.btn-neutral {
+  color: white;
+  background-color: @neutralColor;
+}
+
+.btn-neutral:hover {
+  color: white;
+  background-color: lighten(@neutralColor, 10%);
 }

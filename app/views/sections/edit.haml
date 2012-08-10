@@ -6,9 +6,9 @@
       .btn-group
         -if current_user && current_user.can_fully_manage?(@section.log_book)
           -if @show_deleted_properties
-            =link_to "Hide archived Attributes".html_safe, edit_section_path(@section.id), :class => "btn btn-warning btn-mini icon-eye-close"
+            =link_to "Hide archived attributes", edit_section_path(@section.id), :class => "btn btn-danger"
           -else
-            =link_to "Show archived attributes".html_safe, edit_section_path(@section.id, show_archived: true), :class => "btn btn-warning btn-mini icon-eye-open"
+            =link_to "Show archived attributes", edit_section_path(@section.id, show_archived: true), :class => "btn btn-success btn-primary"
 =form_for @section, :html => {:class => "form-horizontal"} do |section_form|
   .row-fluid
     .span6
@@ -23,9 +23,9 @@
           =section_form.fields_for :section_properties, property do |property_form|
             =property_form.text_field :name
             -if property.archived?
-              =link_to 'Restore'.html_safe, restore_section_section_property_path(@section.id, property.id), :method => :put, :class => 'btn btn-success'
+              =link_to 'Restore', restore_section_section_property_path(@section.id, property.id), :method => :put, :class => 'btn btn-success'
             -else
-              =link_to 'Archive'.html_safe, archive_section_section_property_path(@section.id, property.id), :method => :put, :class => 'btn btn-danger'
+              =link_to 'Archive', archive_section_section_property_path(@section.id, property.id), :method => :put, :class => 'btn btn-danger'
             %p.help-block
               ="The above attribute is of type #{property_form.object.data_type}".html_safe
             %br
@@ -40,4 +40,4 @@
             Attribute Type
           =collection_select new_section_properties_form.object, :data_type, SectionProperty.all_data_types, :to_s, :to_s
       %br
-      =section_form.submit "Update attributes", :class => 'btn btn-primary'
+      =section_form.submit "Update attributes", :class => 'btn btn-primary btn-neutral'
