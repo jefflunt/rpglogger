@@ -11,8 +11,8 @@ class Section < ActiveRecord::Base
   validates :name, :presence => true
   
   scope :order_by_name, order("LOWER(name) ASC")
-  scope :active, where("archived_at IS NULL")
-  scope :archived, where("archived_at IS NOT NULL")
+  scope :active, where("sections.archived_at IS NULL")
+  scope :archived, where("sections.archived_at IS NOT NULL")
     
   def is_public?
     log_book.is_public?

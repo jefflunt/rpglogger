@@ -68,7 +68,7 @@ Scenario: A user can create new Sections
     | new section 1         |
     | new section 2         |
   
-Scenario: When user adds new attributes to a Section, the existing WorldObjects get those attributes
+Scenario: When a user adds new attributes to a Section, the existing WorldObjects get those attributes
   Given I am signed in with provider "facebook"
   And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"

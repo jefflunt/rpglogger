@@ -10,8 +10,8 @@ class LogBook < ActiveRecord::Base
   validates :title, :presence => true
   
   scope :public, where(["is_public = ?", true])
-  scope :active, where("archived_at IS NULL")
-  scope :archived, where("archived_at IS NOT NULL")
+  scope :active, where("log_books.archived_at IS NULL")
+  scope :archived, where("log_books.archived_at IS NOT NULL")
   scope :order_by_title, order("LOWER(title) ASC")
   
   accepts_nested_attributes_for :sections

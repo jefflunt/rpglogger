@@ -8,5 +8,5 @@
       =link_to 'Edit', edit_log_book_path(log_book)
   %li.nav-header
     Sections
-  -log_book.sections.each do |s|
+  -log_book.sections.active.each do |s|
     %li=link_to s.name, section_path(s)

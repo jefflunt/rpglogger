@@ -4,8 +4,8 @@ class SectionProperty < ActiveRecord::Base
   has_many :world_object_properties, dependent: :destroy
   
   scope :sort_order, order: "sort_order ASC"
-  scope :active, where("archived_at IS NULL")
-  scope :archived, where("archived_at IS NOT NULL")
+  scope :active, where("section_properties.archived_at IS NULL")
+  scope :archived, where("section_properties.archived_at IS NOT NULL")
   
   validates :name, :presence => true
   validates :data_type, :presence => true

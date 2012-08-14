@@ -6,7 +6,7 @@ module WorldObjectHelper
     elsif can_manage_world_objects
       link_to markdown_parse(world_object.name), edit_section_world_object_path(world_object.section.id, world_object.id)
     else
-      markdown_parse(obj.name)
+      markdown_parse(world_object.name)
     end
   end
   

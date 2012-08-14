@@ -13,5 +13,5 @@
         %tr
           %td=link_to log_book.title.html_safe, log_book
           %td=log_book.game_name.html_safe
-          %td=log_book.world_objects.count
+          %td=log_book.world_objects.active.count
           %td=log_book_access_indicator_icon(log_book)
