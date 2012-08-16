@@ -14,9 +14,9 @@ class LogBooksController < ApplicationController
     @log_book = LogBook.find(params[:id])
     authorize! :show, @log_book
     
-    @log_book.create_empty_section if @log_book.sections.count == 0
+    @log_book.create_empty_section if @log_book.sections.active.count == 0
         
-    redirect_to section_path(@log_book.sections.first)
+    redirect_to section_path(@log_book.sections.active.order_by_name.first)
   end
   
   def new

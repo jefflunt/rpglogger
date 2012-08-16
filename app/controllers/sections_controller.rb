@@ -1,6 +1,14 @@
 class SectionsController < ApplicationController
   def show
-    @section = Section.find(params[:id], select: "id, log_book_id, name")
+    @section = Section.find(params[:id], select: "id, log_book_id, name, archived_at")
+    authorize! :show, @section.log_book
+    
+    if @section.archived?
+      @section.log_book.create_empty_section if @section.log_book.does_not_have_active_sections
+      return redirect_to section_path(@section.log_book.sections.active.first)
+    end
+      
+    
     if params[:show_archived]
       @visible_world_objects = @section.world_objects.includes(world_object_properties: [:section_property]).order("LOWER(world_objects.name) ASC") # WorldObject.find_all_by_section_id(@section.id, include: [world_object_properties: [:section_property]], order: "LOWER(world_objects.name) ASC")
       @show_archived_objects = params[:show_archived]
@@ -8,7 +16,6 @@ class SectionsController < ApplicationController
       @visible_world_objects = @section.world_objects.active.includes(world_object_properties: [:section_property]).order("LOWER(world_objects.name) ASC") # WorldObject.find_all_by_section_id(@section.id, conditions: "archived_at IS NULL", include: [world_object_properties: [:section_property]])
     end
     
-    authorize! :show, @section.log_book
     @can_manage_world_objects = current_user && current_user.can_manage_world_objects_in?(@section.log_book)
   end
   

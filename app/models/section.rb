@@ -2,7 +2,6 @@ class Section < ActiveRecord::Base
   belongs_to :log_book
   
   has_many :world_objects, order: "LOWER(name) ASC", dependent: :destroy
-  has_many :active_world_objects, through: :world_objects, class_name: 'WorldObject'
   has_many :section_properties, order: :sort_order, dependent: :destroy
   
   accepts_nested_attributes_for :section_properties

@@ -24,7 +24,15 @@ class LogBook < ActiveRecord::Base
   def owned_by?(user)
     user_id == user.id
   end
-    
+  
+  def has_active_sections
+    sections.active.count != 0
+  end
+  
+  def does_not_have_active_sections
+    sections.active.count == 0
+  end
+  
   def create_empty_section
     empty_section = Section.create(log_book_id: self.id, name: 'New Section')
   end
