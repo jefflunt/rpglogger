@@ -14,10 +14,6 @@ gem "omniauth-google-oauth2"
 gem "omniauth-facebook"
 gem "omniauth-twitter"
 
-# heroku stuff
-gem 'heroku'
-gem 'pg'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -31,12 +27,17 @@ group :development do
   gem "ruby-debug19"
 end
 
+group :production do
+  gem "mysql2"
+end
+
 group :test do
   gem "cucumber"
   gem "cucumber-rails"
 end
 
 group :development, :cucumber, :test do
+  gem 'sqlite3'
   gem "populator"
   gem "factory_girl_rails"
   gem "faker"
