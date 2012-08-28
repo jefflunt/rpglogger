@@ -1,23 +1,27 @@
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
-  pool: 5
-  timeout: 5000
+  adapter: postgresql
+  host: localhost
+  pool: 10
+  database: rpglogger
+  username: rpglogger
+  password: localdevpassword
 
 test: &test
-  adapter: sqlite3
-  database: db/test.sqlite3
-  pool: 5
-  timeout: 5000
+  adapter: postgresql
+  host: localhost
+  pool: 10
+  database: rpgloggertest
+  username: rpglogger
+  password: localdevpassword
 
 cucumber:
   <<: *test
-
+  
 production:
-  adapter: mysql2
-  encoding: utf8
-  database: my_db_name
-  username: user
-  password: password
-  host: 127.0.0.1
-  port: 3306
+  adapter: postgresql
+  host: localhost
+  pool: 10
+  database: rpgloggerlocalprod
+  username: rpglogger
+  password: localdevpassword
+  

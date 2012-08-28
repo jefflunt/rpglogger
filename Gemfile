@@ -1,6 +1,10 @@
 source 'http://rubygems.org'
 
+gem 'capistrano'
+gem 'unicorn'
+
 gem 'rails'
+gem 'pg'
 gem 'json'
 gem 'jquery-rails'
 gem 'haml'
@@ -27,17 +31,12 @@ group :development do
   gem "ruby-debug19"
 end
 
-group :production do
-  gem "mysql2"
-end
-
 group :test do
   gem "cucumber"
   gem "cucumber-rails"
 end
 
 group :development, :cucumber, :test do
-  gem 'sqlite3'
   gem "populator"
   gem "factory_girl_rails"
   gem "faker"
