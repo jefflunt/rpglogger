@@ -1,4 +1,7 @@
 require "bundler/capistrano"
+require 'rvm/capistrano'
+set :rvm_ruby_string, 'ruby-1.9.2-p320'
+set :rvm_type, :system
 
 set :application, "rpglogger"
 set :user, "deployer"
@@ -18,7 +21,6 @@ set :branch do
   ref = Capistrano::CLI.ui.ask "Tag, branch, or commit to deploy [master]: "
   ref.empty? ? "master" : ref
 end
-
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
@@ -73,11 +75,6 @@ namespace :deploy do
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 
-  task :send_exceptional_deploy_alert, :roles => :app do
-    run "cd #{current_path}; bundle exec exceptional alert \"Deployed to production at #{Time.now.to_s}\""
-  end
-  after "deploy:cleanup", "deploy:send_exceptional_deploy_alert"
-
   desc "Make sure local git is in sync with remote."
   task :check_revision, :roles => :web do
     unless `git rev-parse HEAD` == `git rev-parse origin/master`
@@ -88,3 +85,12 @@ namespace :deploy do
   end
   before "deploy", "deploy:check_revision"
 end
+
+namespace :rvm do
+  desc 'Trust rvmrc file'
+  task :trust_rvmrc do
+    run "rvm rvmrc trust #{current_release}"
+  end
+end
+after "deploy:update_code", "rvm:trust_rvmrc"
+
