@@ -7,6 +7,7 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "kn-aws-servers.pem")]
+ssh_options[:forward_agent] = true
 
 set :scm, "git"
 set :repository, "git@github.com:normalocity/#{application}.git"
@@ -61,8 +62,7 @@ namespace :deploy do
     sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
-    put File.read("config/database.example.yml"), "#{shared_path}/config/database.example.yml"
-    put File.read("config/exceptional.yml"), "#{shared_path}/config/exceptional.yml"
+    put File.read("config/database.yml"), "#{shared_path}/config/database.yml"
     puts "Now edit the config files in #{shared_path}."
   end
   after "deploy:setup", "deploy:setup_config"
