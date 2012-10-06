@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'capistrano'
+gem 'rvm-capistrano'
 gem 'unicorn'
 
 gem 'rails'
