@@ -1,5 +1,5 @@
 root = "/home/deployer/apps/rpglogger"
-current = "#{rood}/current"
+current = "#{root}/current"
 shared = "#{root}/shared"
 
 working_directory root
