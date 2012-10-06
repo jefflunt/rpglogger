@@ -1,8 +1,12 @@
-root = "/home/deployer/apps/rpglogger/current"
+root = "/home/deployer/apps/rpglogger"
+current = "#{rood}/current"
+shared = "#{root}/shared"
+
 working_directory root
-pid "#{root}/tmp/pids/unicorn.rpglogger.pid"
-stderr_path "#{root}/log/unicorn.rpglogger.log"
-stdout_path "#{root}/log/unicorn.rpglogger.log"
+
+pid "#{shared}/pids/unicorn.rpglogger.pid"
+stderr_path "#{current}/log/unicorn.rpglogger.log"
+stdout_path "#{current}/log/unicorn.rpglogger.log"
 
 listen "/tmp/unicorn.rpglogger.sock"
 worker_processes 2
