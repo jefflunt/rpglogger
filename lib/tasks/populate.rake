@@ -24,7 +24,7 @@ namespace :db do
       LogBook.populate 3 do |log_book|
         log_book.user_id = user.id
         log_book.game_name = Populator.words(1..4)
-        log_book.is_public = true if rand(10) < 1
+        log_book.is_public = true if rand(3) < 1
 
         log_book.title = Populator.words(1..4).titleize
 
@@ -70,7 +70,8 @@ namespace :db do
       end
     end
     
-    Puts "Creating default facebook user for testing purposes..."
+    puts ""
+    puts "Creating default facebook user for testing purposes..."
     User.first.update_attributes({provider: "facebook", uid: "1545986953", name: "Jeff Lunt", nickname: "normalocity"})
     
     puts "Done."
