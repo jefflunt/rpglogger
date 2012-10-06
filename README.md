@@ -29,6 +29,6 @@ I personally use [**rpglogger**](http://rpglogger.com) for Skyrim (you might hav
 -   NPCs
 -   Rare items and books
 -   Alchemy notes and recipes
--   Character jounrals (recording important events in the game, that sort of thing)
+-   Character journals (recording important events in the game, that sort of thing)
 
 ...along with the statistics surrounding these things.
