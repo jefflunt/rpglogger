@@ -12,17 +12,16 @@ set -e
 
 # Feel free to change any of the following variables for your app:
 TIMEOUT=${TIMEOUT-60}
-APP_ROOT=/home/deployer/apps/rpglogger
-APP_CURR=$APP_ROOT/current
-APP_PID=$APP_ROOT/shared/pids/unicorn.rpglogger.pid
-CMD="cd $APP_CURR; bundle exec unicorn -D -c $APP_CURR/config/unicorn.rb -E staging"
+APP_ROOT=/home/deployer/apps/rpglogger/current
+PID=$APP_ROOT/tmp/pids/unicorn.rpglogger.pid
+CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E staging"
 AS_USER="deployer"
 set -u
 
-OLD_PIN="$APP_PID.oldbin"
+OLD_PIN="$PID.oldbin"
 
 sig () {
-  test -s "$APP_PID" && kill -$1 `cat $APP_PID`
+  test -s "$PID" && kill -$1 `cat $PID`
 }
 
 oldsig () {
