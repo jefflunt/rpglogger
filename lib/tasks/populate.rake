@@ -13,7 +13,7 @@ namespace :db do
     
     puts "Populating: enjoy this random pattern generator while you wait..."
     
-    User.populate 50 do |user|
+    User.populate 10 do |user|
       user.provider = "rpglogger-auth"
       user.uid = rand(9000) + 999
       user.name = Faker::Internet.user_name
@@ -70,6 +70,9 @@ namespace :db do
       end
     end
     
-    puts ""
+    Puts "Creating default facebook user for testing purposes..."
+    User.first.update_attributes({provider: "facebook", uid: "1545986953", name: "Jeff Lunt", nickname: "normalocity"})
+    
+    puts "Done."
   end
 end
