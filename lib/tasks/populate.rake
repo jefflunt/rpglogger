@@ -3,7 +3,7 @@ namespace :db do
   task :erase => :environment do
     puts "Erasing..."
     
-    [User.unscoped, LogBook.unscoped, Section.unscoped, SectionProperty.unscoped, Share.unscoped, WorldObject.unscoped, WorldObjectProperty.unscoped].each(&:delete_all)
+    [User, LogBook, Section, SectionProperty, Share, WorldObject, WorldObjectProperty].each(&:delete_all)
   end
   
   desc "Erase and fill database"
