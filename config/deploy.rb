@@ -1,17 +1,30 @@
 require "bundler/capistrano"
 require 'rvm/capistrano'
-set :rvm_ruby_string, 'ruby-1.9.2-p320'
-set :rvm_type, :system
 
+load "config/cap_recipes/cap_helpers"
+load "config/cap_recipes/apt"
+load "config/cap_recipes/nginx"
+load "config/cap_recipes/unicorn"
+
+# App deploy setting and config options
 set :application, "rpglogger"
 set :user, "deployer"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
-set :use_sudo, false
 
+# sudo and permissions
+set :use_sudo, false
+set :rvm_install_with_sudo, true
+set :rvm_ruby_string, 'ruby-1.9.2-p320'
+set :rvm_type, :system
+
+# Setup SSH stuff to things work as expected
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "kn-aws-servers.pem")]
 ssh_options[:forward_agent] = true
+default_run_options[:pty] = true
+ssh_options[:forward_agent] = true
 
+# Deploy branch/SCM options
 set :scm, "git"
 set :repository, "git@github.com:normalocity/#{application}.git"
 set :branch do
@@ -21,18 +34,13 @@ set :branch do
   ref = Capistrano::CLI.ui.ask "Tag, branch, or commit to deploy [master]: "
   ref.empty? ? "master" : ref
 end
-
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
-
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
+# App roles
 task :set_roles do
   role :app, app_server, :primary => true
   role :web, app_server, :primary => true
-#  role :db, app_server, :primary => true
 end
-
 
 # ------= Various deployment targets =------
 # Production
@@ -53,16 +61,7 @@ end
 
 # ------= Deploy tasks =------
 namespace :deploy do
-  %w[start stop restart].each do |command|
-    desc "#{command} unicorn server"
-    task command, :roles => :app, :except => {:no_release => true} do
-      run "/etc/init.d/unicorn_#{application} #{command}"
-    end
-  end
-
   task :setup_config, :roles => :app do
-    sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
-    sudo "ln -nfs #{current_path}/config/unicorn_init_#{rails_env}.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
     put File.read("config/database.yml"), "#{shared_path}/config/database.yml"
     puts "Now edit the config files in #{shared_path}."
@@ -84,12 +83,3 @@ namespace :deploy do
   end
   before "deploy", "deploy:check_revision"
 end
-
-namespace :rvm do
-  desc 'Trust rvmrc file'
-  task :trust_rvmrc do
-    run "rvm rvmrc trust #{current_release}"
-  end
-end
-after "deploy:update_code", "rvm:trust_rvmrc"
-
