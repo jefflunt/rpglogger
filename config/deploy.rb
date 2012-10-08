@@ -91,6 +91,7 @@ namespace :deploy do
   desc "Installs system packages required by the app"
   task :install_app_package_dependencies, roles: :app do
     required_packages = ["git-core",
+                         "libxml2",
                          "libpq-dev"]
     
     required_packages.each do |package|
