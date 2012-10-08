@@ -1,0 +1,26 @@
+development:
+  adapter: postgresql
+  host: localhost
+  pool: 10
+  database: rpglogger
+  username: rpglogger
+  password: localdevpassword
+
+test: &test
+  adapter: postgresql
+  host: localhost
+  pool: 10
+  database: rpgloggertest
+  username: rpglogger
+  password: localdevpassword
+
+cucumber:
+  <<: *test
+  
+production:
+  adapter: postgresql
+  host: localhost
+  pool: 10
+  database: rpgloggerlocalprod
+  username: rpglogger
+  password: localdevpassword
