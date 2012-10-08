@@ -57,25 +57,35 @@ end
 
 # ------= Deploy the actual app =------
 namespace :deploy do
-  desc "Deploy a working app to a completely blank OS image"
-  task :install do
-    # ASSUMPTIONS:
-    # Ubuntu 10.04 LTS
-    # User `deployer` has been created, is a sudoer, and has SSH `authorized_keys` setup
-    # OS has been fully patched (i.e. `apt-get update` and `apt-get upgrade`)
-    # The `build-essential` package has been installed
-    # You log out/login (to let the PATH updates take effect)
-    # RVM installed
-    # RVM `zlib` package installed: `rvm pkg install zlib --verify-downloads 1`
-    # Ruby ruby-1.9.2-p320 (under RVM installed)
-    
-    install_app_package_dependencies
-    nginx.install
-    install_bundler_gem
+  # ASSUMPTIONS when deploying this app:
+  # Ubuntu 10.04 LTS
+  # User `deployer` has been created, is a sudoer, and has SSH `authorized_keys` setup
+  # OS has been fully patched (i.e. `apt-get update` and `apt-get upgrade`)
+  #
+  # To setup app on new server:
+  # cap [env] deploy:bootstrap    <== Install RVM
+  # cap [env] deploy:install      <== Installs app version of Ruby, package dependencies
+  # cap [env] deploy:setup        <== Sets up magic app links, folders, etc.
+  # cap [env] deploy:cold         <== Initial deploy of the actual application
+  
+  desc "Bootstrap some of the most basic software requiments."
+  task :bootstrap do
+    run "#{sudo} apt-get -y install build-essential"
+    run "curl -L https://get.rvm.io | bash -s stable"
   end
   
-  desc "Installs the `bundler` gem for use in running `bundle install` on deploy"
-  task :install_bundler_gem, roles: :app do
+  desc "Install application dependencies and web server."
+  task :install do
+    install_ruby_and_bundler
+    install_app_package_dependencies
+    nginx.install
+    
+  end
+  
+  desc "Installs the `zlib` package, which is required to install the bunlder gem, and other things"
+  task :install_ruby_and_bundler do
+    run "rvm pkg install zlib --verify-downloads 1"   # Required to be done before installing Ruby
+    run "rvm install #{rvm_ruby_string}"
     run "gem install bundler --no-ri --no-rdoc"
   end
   
