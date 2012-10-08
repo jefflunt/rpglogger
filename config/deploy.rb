@@ -10,7 +10,6 @@ load "config/cap_recipes/unicorn"
 # App deploy setting and config options
 set :application, "rpglogger"
 set :user, "deployer"
-#set :user, "rpglogger"        # The name of the user who will deploy your app
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 
@@ -46,11 +45,18 @@ end
 namespace :deploy do
   desc "Deploy a working app to a completely blank OS image"
   task :from_scratch do
+    run_all_apt_updates
     install_package_prerequirements
     nginx.install
     rvm_and_ruby
     setup
     cold
+  end
+  
+  desc "Runs upgrade and update for all currently installed system packes"
+  task :run_all_apt_updates do
+    run "#{sudo} apt-get -y update"
+    run "#{sudo} apt-get -y upgrade"
   end
   
   desc "Installs system packages required by the app"
