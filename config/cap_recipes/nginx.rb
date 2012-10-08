@@ -10,7 +10,7 @@ namespace :nginx do
   task :regenerate_config, roles: :web do
     template "nginx_unicorn.erb", "/tmp/nginx_conf"
     run "#{sudo} mv /tmp/nginx_conf /etc/nginx/sites-enabled/#{application}"
-    run "#{sudo} rm -f /etc/nginx/site-enabled/default"
+    run "#{sudo} rm -f /etc/nginx/sites-enabled/default"
     restart 
   end
   after "deploy:update_code", "nginx:regenerate_config"
