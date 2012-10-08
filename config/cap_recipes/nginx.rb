@@ -21,4 +21,5 @@ namespace :nginx do
       run "#{sudo} service nginx #{command}"
     end
   end
+  after "nginx:regenerate_config", "nginx:restart"
 end

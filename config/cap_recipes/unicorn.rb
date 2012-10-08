@@ -13,4 +13,5 @@ namespace :unicorn do
       run "/etc/init.d/unicorn_#{application} #{command}"
     end
   end
+  after "unicorn:regenerate_config", "unicorn:restart"
 end
