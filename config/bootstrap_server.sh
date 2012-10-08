@@ -12,7 +12,7 @@ sudo chown -R deployer:deployer /home/deployer/.ssh/
 # Update all currently installed software, and install dependencies for further steps
 sudo apt-get -y update
 sudo apt-get -y upgrade
-sudo apt-get install git-core build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config
+sudo apt-get -y install git-core build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config
 
 # Install RVM + Ruby
 curl -L https://get.rvm.io | bash -s stable
