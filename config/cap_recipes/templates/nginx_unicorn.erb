@@ -4,7 +4,7 @@ upstream unicorn_<%= application %> {
 
 server {
   listen 80 default deferred;
-  server_name staging.<%= application %>.com;
+  server_name <%= app_server %>;
   root <%= current_path %>/public;
 
   location ^~ /assets/ {
