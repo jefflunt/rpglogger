@@ -90,9 +90,11 @@ namespace :deploy do
   
   desc "Installs system packages required by the app"
   task :install_app_package_dependencies, roles: :app do
-    required_packages = ["git-core",
-                         "libxml2",
-                         "libpq-dev"]
+    required_packages = ["git-core",      # Capistrano needs this to checkout code
+                         "libxml2",       # Required by `nokogiri` gem
+                         "libxslt-dev",   # Required by `nokogiri` gem
+                         "libxml2-dev",   # Required by `nokogiri` gem
+                         "libpq-dev"]     # Required by `pg` gem
     
     required_packages.each do |package|
       run "#{sudo} apt-get -y install #{package}"
