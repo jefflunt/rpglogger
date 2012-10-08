@@ -56,12 +56,6 @@ namespace :deploy do
     cold
   end
   
-  desc "Runs upgrade and update for all currently installed system packes"
-  task :run_all_apt_updates do
-    run "#{sudo} apt-get -y update"
-    run "#{sudo} apt-get -y upgrade"
-  end
-  
   desc "Installs system packages required by the app"
   task :install_package_prerequirements do
     required_packages = ["libpq-dev"]
@@ -70,13 +64,7 @@ namespace :deploy do
       run "#{sudo} apt-get -y install #{package}"
     end
   end
-  
-  desc "Installs RVM and sets up the required ruby version"
-  task :rvm_and_ruby do
-    run "curl -L https://get.rvm.io | bash -s stable"
-    run "rvm install #{rvm_ruby_string}"
-  end
-  
+    
   task :setup_config, :roles => :app do
     run "mkdir -p #{shared_path}/config"
     put File.read("config/database.yml"), "#{shared_path}/config/database.yml"
