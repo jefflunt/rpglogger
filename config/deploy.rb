@@ -63,10 +63,12 @@ namespace :deploy do
   # Ubuntu 10.04 LTS
   # User `deployer` has been created, is a sudoer, and has SSH `authorized_keys` setup
   # OS has been fully patched (i.e. `apt-get update` and `apt-get upgrade`)
+  # Install package dependencies `git-core build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config`
   # RVM is installed via `curl -L https://get.rvm.io | bash -s stable`
+  # Log out, log back in (PATH changes need to take effect)
   # RVM `zlib` package installed via `rvm pkg install zlib --verify-downloads 1`
   # Necessary Ruby version installed
-  # `bundler` gem installed
+  # `gem install bundler --no-ri --no-rdoc`
   #
   # ------# Now that you have a working version of Ruby installed =------
   #
@@ -83,8 +85,7 @@ namespace :deploy do
     
   desc "Installs system packages required by the app"
   task :install_app_package_dependencies, roles: :app do
-    required_packages = ["git-core",      # Capistrano needs this to checkout code
-                         "libxml2",       # Required by `nokogiri` gem
+    required_packages = ["libxml2",       # Required by `nokogiri` gem
                          "libxslt-dev",   # Required by `nokogiri` gem
                          "libxml2-dev",   # Required by `nokogiri` gem
                          "libpq-dev"]     # Required by `pg` gem
