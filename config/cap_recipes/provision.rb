@@ -3,13 +3,14 @@ namespace :provision do
   desc "Provisions a server from scratch"
   task :default do
     update_system_packages    
+    nginx.install
     setup_ruby_and_rvm
     install_app_specific_packages
   end
   
   desc "Updates the packages already installed on the system"
   task :update_system_packages do
-    run "#{sudo} apt-get update"
+    run "#{sudo} apt-get -y update"
     run "#{sudo} apt-get -y upgrade"
   end
   
