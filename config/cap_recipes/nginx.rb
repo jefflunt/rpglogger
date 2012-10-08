@@ -21,4 +21,5 @@ namespace :nginx do
       run "#{sudo} service nginx #{command}"
     end
   end
+  after "deploy:cold", "nginx:start"
 end
