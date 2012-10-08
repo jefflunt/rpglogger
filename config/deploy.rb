@@ -1,7 +1,6 @@
 require "bundler/capistrano"
 require 'rvm/capistrano'
 
-load "config/cap_recipes/provision"
 load "config/cap_recipes/cap_helpers"
 load "config/cap_recipes/env"
 load "config/cap_recipes/apt"
@@ -17,9 +16,7 @@ set :deploy_via, :remote_cache
 
 # sudo and permissions
 set :use_sudo, false
-set :rvm_install_with_sudo, true
 set :rvm_ruby_string, 'ruby-1.9.2-p320'
-set :rvm_type, :system
 
 # Setup SSH connection options
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "kn-aws-servers.pem")]
@@ -49,9 +46,27 @@ end
 namespace :deploy do
   desc "Deploy a working app to a completely blank OS image"
   task :from_scratch do
-    provision.default
+    install_package_prerequirements
+    nginx.install
+    rvm_and_ruby
     setup
     cold
+  end
+  
+  desc "Installs system packages required by the app"
+  task :install_package_prerequirements do
+    required_packages = ["build-essential",
+                         "libpq-dev"]
+    
+    required_packages.each do |package|
+      run "#{sudo} apt-get -y install #{package}"
+    end
+  end
+  
+  desc "Installs RVM and sets up the required ruby version"
+  task :rvm_and_ruby do
+    run "curl -L https://get.rvm.io | bash -s stable"
+    run "rvm install #{rvm_ruby_string}"
   end
   
   task :setup_config, :roles => :app do
