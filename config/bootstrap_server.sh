@@ -2,8 +2,8 @@
 # before RVM+Ruby is ready to go.
 
 # Setup the user and make them a sudoer
-sudo adduser deployer
-sudo visudo
+sudo adduser deployer --ingroup deployer
+sudo echo "deployer ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Copy the authorized keys over from the ubuntu user
 sudo cp -R /home/ubuntu/.ssh/ /home/deployer/
