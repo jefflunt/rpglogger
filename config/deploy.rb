@@ -63,33 +63,24 @@ namespace :deploy do
   # Ubuntu 10.04 LTS
   # User `deployer` has been created, is a sudoer, and has SSH `authorized_keys` setup
   # OS has been fully patched (i.e. `apt-get update` and `apt-get upgrade`)
+  # RVM is installed via `curl -L https://get.rvm.io | bash -s stable`
+  # RVM `zlib` package installed via `rvm pkg install zlib --verify-downloads 1`
+  # Necessary Ruby version installed
+  # `bundler` gem installed
+  #
+  # ------# Now that you have a working version of Ruby installed =------
   #
   # To setup app on new server (these are all one-time run tasks):
-  # cap [env] deploy:bootstrap    <== Install RVM
   # cap [env] deploy:install      <== Installs app version of Ruby, package dependencies
   # cap [env] deploy:setup        <== Sets up magic app links, folders, etc.
   # cap [env] deploy:cold         <== Initial deploy of the actual application
-  
-  desc "Bootstrap some of the most basic software requiments."
-  task :bootstrap do
-    run "#{sudo} apt-get -y install build-essential"
-    run "curl -L https://get.rvm.io | bash -s stable"
-  end
-  
+    
   desc "Install application dependencies and web server."
   task :install do
-    install_ruby_and_bundler
     install_app_package_dependencies
     nginx.install
   end
-  
-  desc "Installs the `zlib` package, which is required to install the `bunlder` gem, and other things"
-  task :install_ruby_and_bundler do
-    run "rvm pkg install zlib --verify-downloads 1"   # Required to be done before installing Ruby
-    run "rvm install #{rvm_ruby_string}"
-    run "gem install bundler --no-ri --no-rdoc"
-  end
-  
+    
   desc "Installs system packages required by the app"
   task :install_app_package_dependencies, roles: :app do
     required_packages = ["git-core",      # Capistrano needs this to checkout code
