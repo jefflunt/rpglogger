@@ -70,10 +70,16 @@ namespace :deploy do
     
     install_app_package_prerequirements
     nginx.install
+    install_bundler_gem
+  end
+  
+  desc "Installs the `bundler` gem for use in running `bundle install` on deploy"
+  task :install_bundler_gem, roles: :app do
+    run "gem install bundler --no-ri --no-rdoc"
   end
   
   desc "Installs system packages required by the app"
-  task :install_app_package_prerequirements do
+  task :install_app_package_prerequirements, roles: :app do
     required_packages = ["git-core",
                          "libpq-dev"]
     

@@ -13,7 +13,7 @@ namespace :nginx do
     run "#{sudo} rm -f /etc/nginx/site-enabled/default"
     restart 
   end
-  after "deploy:finalize_update", "nginx:regenerate_config"
+  after "deploy:update_code", "nginx:regenerate_config"
   
   %w[start stop restart].each do |command|
     desc "#{command} nginx"

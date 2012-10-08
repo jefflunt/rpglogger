@@ -6,7 +6,7 @@ namespace :unicorn do
     restart
   end
   
-  after "deploy:finalize_update", "unicorn:regenerate_config"
+  after "deploy:update_code", "unicorn:regenerate_config"
   
   %w[start stop restart].each do |command|
     desc "#{command} unicorn"
