@@ -64,8 +64,9 @@ namespace :deploy do
     # User `deployer` has been created, is a sudoer, and has SSH `authorized_keys` setup
     # OS has been fully patched (i.e. `apt-get update` and `apt-get upgrade`)
     # The `build-essential` package has been installed
+    # You log out/login (to let the PATH updates take effect)
     # RVM installed
-    # Ruby 1.9.3 (under RVM installed)
+    # Ruby ruby-1.9.2-p320 (under RVM installed)
     
     install_app_package_prerequirements
     nginx.install
@@ -73,7 +74,8 @@ namespace :deploy do
   
   desc "Installs system packages required by the app"
   task :install_app_package_prerequirements do
-    required_packages = ["libpq-dev"]
+    required_packages = ["git-core",
+                         "libpq-dev"]
     
     required_packages.each do |package|
       run "#{sudo} apt-get -y install #{package}"
