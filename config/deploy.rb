@@ -38,6 +38,7 @@ after "deploy", "deploy:cleanup" # keep only the last 5 releases
 task :set_roles do
   role :app, app_server, :primary => true
   role :web, app_server, :primary => true
+  role :db, app_server, :primary => true
 end
 
 # Deploy environments
