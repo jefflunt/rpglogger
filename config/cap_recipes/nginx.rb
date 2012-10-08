@@ -4,16 +4,16 @@ namespace :nginx do
     run "#{sudo} add-apt-repository ppa:nginx/stable"
     run "#{sudo} apt-get -y update"
     run "#{sudo} apt-get -y install nginx"
+    run "#{sudo} rm -f /etc/nginx/sites-enabled/default"
+    
+    regenerate_config
   end
   
   desc "Create the nginx config for this application"
   task :regenerate_config, roles: :web do
-    template "nginx_unicorn.erb", "/tmp/nginx_conf"
-    run "#{sudo} mv /tmp/nginx_conf /etc/nginx/sites-enabled/#{application}"
-    run "#{sudo} rm -f /etc/nginx/sites-enabled/default"
-    restart 
+    template "nginx_unicorn.erb", "/tmp/nginx_unicorn"
+    run "#{sudo} mv /tmp/nginx_unicorn /etc/nginx/sites-enabled/#{application}"
   end
-  after "deploy:update_code", "nginx:regenerate_config"
   
   %w[start stop restart].each do |command|
     desc "#{command} nginx"
@@ -21,5 +21,4 @@ namespace :nginx do
       run "#{sudo} service nginx #{command}"
     end
   end
-  after "nginx:regenerate_config", "nginx:restart"
 end

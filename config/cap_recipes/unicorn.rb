@@ -1,17 +1,27 @@
+set_default(:unicorn_user) { user }
+set_default(:unicorn_pid) { "#{current_path}/tmp/pids/unicorn.#{application}.pid" }
+set_default(:unicorn_config) { "#{shared_path}/config/unicorn.rb"}
+set_default(:unicorn_log) { "#{shared_path}/log/unicorn#{application}.log" }
+set_default(:unicorn_listen) { "/tmp/unicorn.#{application}.sock" }
+set_default(:unicorn_workers, 2)
+set_default(:unicorn_timeout, 30)
+
 namespace :unicorn do
   desc "Create the unicorn.rb file for configuring unicorn for this app"
-  task :regenerate_config, roles: :web do
-    template "unicorn.erb", "#{current_release}/config/unicorn.rb"
-    run "#{sudo} ln -nfs #{current_release}/config/unicorn_init_#{rails_env}.sh /etc/init.d/unicorn_#{application}"
-    restart
+  task :regenerate_config, roles: :app do
+    run "mkdir -p #{shared_path}/config"
+    template "unicorn.rb.erb", unicorn_config
+    template "unicorn_init.erb", "/tmp/unicorn_init"
+    run "chmod +x /tmp/unicorn_init"
+    run "#{sudo} mv /tmp/unicorn_init /etc/init.d/unicorn_#{application}"
+    run "#{sudo} update-rc.d -f unicorn_#{application} defaults"
   end
-  after "deploy:update_code", "unicorn:regenerate_config"
+  after "deploy:setup", "unicorn:regenerate_config"
   
   %w[start stop restart].each do |command|
     desc "#{command} unicorn"
-    task command, roles: :web do
+    task command, roles: :app do
       run "/etc/init.d/unicorn_#{application} #{command}"
     end
   end
-  after "unicorn:regenerate_config", "unicorn:restart"
 end

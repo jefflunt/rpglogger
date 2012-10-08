@@ -5,7 +5,7 @@ upstream unicorn_<%= application %> {
 server {
   listen 80 default deferred;
   server_name staging.<%= application %>.com;
-  root <%= current_release %>/public;
+  root <%= current_path %>/public;
 
   location ^~ /assets/ {
     gzip_static on;
