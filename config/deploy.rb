@@ -44,20 +44,23 @@ end
 # ------= Deploy the actual app =------
 namespace :deploy do
   desc "Deploy a working app to a completely blank OS image"
-  task :from_scratch do
+  task :install do
     # ASSUMPTIONS:
-    # Tested against Ubuntu 10.04 LTS, after the OS has been fully patched
-    #   and the `build-essential` package as well as RVM + Ruby 1.9.2 have 
-    #   been installed.
+    # Ubuntu 10.04 LTS
+    # User `deployer` has been created, is a sudoer, and has SSH `authorized_keys` setup
+    # OS has been fully patched (i.e. `apt-get update` and `apt-get upgrade`)
+    # The `build-essential` package has been installed
+    # RVM installed
+    # Ruby 1.9.3 (under RVM installed)
     
-    install_package_prerequirements
+    install_app_package_prerequirements
     nginx.install
     setup
     cold
   end
   
   desc "Installs system packages required by the app"
-  task :install_package_prerequirements do
+  task :install_app_package_prerequirements do
     required_packages = ["libpq-dev"]
     
     required_packages.each do |package|
