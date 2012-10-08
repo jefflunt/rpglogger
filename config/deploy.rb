@@ -49,7 +49,7 @@ end
 namespace :deploy do
   desc "Deploy a working app to a completely blank OS image"
   task :from_scratch do
-    provision
+    provision.default
     setup
     cold
   end
