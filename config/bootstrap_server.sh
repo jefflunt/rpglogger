@@ -7,7 +7,7 @@ sudo visudo
 
 # Copy the authorized keys over from the ubuntu user
 sudo cp -R /home/ubuntu/.ssh/ /home/deployer/
-sudo chown -R deployer:deployer /home
+sudo chown -R deployer:deployer /home/deployer/.ssh/
 
 # Update all currently installed software, and install dependencies for further steps
 sudo apt-get -y update
