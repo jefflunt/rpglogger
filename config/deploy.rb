@@ -2,7 +2,6 @@ require "bundler/capistrano"
 require 'rvm/capistrano'
 
 load "config/cap_recipes/cap_helpers"
-load "config/cap_recipes/env"
 load "config/cap_recipes/apt"
 load "config/cap_recipes/nginx"
 load "config/cap_recipes/unicorn"
@@ -41,6 +40,21 @@ task :set_roles do
   role :web, app_server, :primary => true
 end
 
+# Deploy environments
+desc "Set production settings"
+task :production do
+  set :app_server, "rpglogger.com"
+  set :rails_env, "production"
+  set_roles
+end
+
+desc "Set staging settings"
+task :staging do
+  set :app_server, "staging.rpglogger.com"
+  set :rails_env, "staging"
+  set_roles
+end
+
 # ------= Deploy the actual app =------
 namespace :deploy do
   desc "Deploy a working app to a completely blank OS image"
@@ -55,8 +69,6 @@ namespace :deploy do
     
     install_app_package_prerequirements
     nginx.install
-    setup
-    cold
   end
   
   desc "Installs system packages required by the app"
