@@ -52,7 +52,8 @@ end
 desc "Set staging settings"
 task :staging do
   set :app_server, "staging.rpglogger.com"
-  set :rails_env, "staging"
+  set :rails_env, "production"  # It's intentional that this also says "production" - we want staging and production to be
+                                # basically identical, except for the server URL to which they're deployed.
   set_roles
 end
 
