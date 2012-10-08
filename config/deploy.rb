@@ -81,7 +81,7 @@ namespace :deploy do
     nginx.install
   end
   
-  desc "Installs the `zlib` package, which is required to install the bunlder gem, and other things"
+  desc "Installs the `zlib` package, which is required to install the `bunlder` gem, and other things"
   task :install_ruby_and_bundler do
     run "rvm pkg install zlib --verify-downloads 1"   # Required to be done before installing Ruby
     run "rvm install #{rvm_ruby_string}"
