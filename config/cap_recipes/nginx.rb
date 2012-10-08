@@ -7,13 +7,13 @@ namespace :nginx do
   end
   
   desc "Create the nginx config for this application"
-  task :setup, roles: :web do
+  task :regenerate_config, roles: :web do
     template "nginx_unicorn.erb", "/tmp/nginx_conf"
     run "#{sudo} mv /tmp/nginx_conf /etc/nginx/sites-enabled/#{application}"
     run "#{sudo} rm -f /etc/nginx/site-enabled/default"
     restart 
   end
-  after "deploy:setup", "nginx:setup"
+  after "deploy:finalize_update", "nginx:regenerate_config"
   
   %w[start stop restart].each do |command|
     desc "#{command} nginx"
