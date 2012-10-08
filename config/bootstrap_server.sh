@@ -4,7 +4,6 @@
 # Setup the user and make them a sudoer
 sudo adduser deployer
 sudo visudo
-sudo login deployer
 
 # Copy the authorized keys over from the ubuntu user
 sudo cp -R /home/ubuntu/.ssh/ /home/deployer/
