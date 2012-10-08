@@ -18,8 +18,13 @@ rvm install ruby-1.9.2-p320
 gem install bundler --no-ri --no-rdoc
 
 # Done. Reboot.
-echo "\n=============================================="
+echo ""
+echo ""
+echo "=============================================="
 echo "Bootstrap finished! Rebooting."
 echo "Use `cap [env] deploy:install` to continue"
+echo "=============================================="
+echo ""
+echo ""
 
 sudo shutdown -r now
