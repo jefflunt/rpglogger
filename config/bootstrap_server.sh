@@ -3,10 +3,7 @@
 #
 # The `deployer` user must exist and be in the `sudeoers` file
 # by the time you run this.
-
-# Copy the authorized keys over from the ubuntu user
-sudo cp -R /home/ubuntu/.ssh/ /home/deployer/
-sudo chown -R deployer /home/deployer/.ssh/
+# You must also have the `deployer` user's SSH keys copied over.
 
 # Update all currently installed software, and install dependencies for further steps
 sudo apt-get -y update
