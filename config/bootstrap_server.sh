@@ -16,7 +16,7 @@ sudo apt-get -y install git-core build-essential openssl libreadline6 libreadlin
 
 # Install RVM + Ruby
 curl -L https://get.rvm.io | bash -s stable
-source ./.bashrc
+source ~/.bashrc
 rvm pkg install zlib --verify-downloads 1
 rvm install ruby-1.9.2-p320
 gem install bundler --no-ri --no-rdoc
