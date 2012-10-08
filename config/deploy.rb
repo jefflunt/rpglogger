@@ -62,7 +62,7 @@ namespace :deploy do
   # User `deployer` has been created, is a sudoer, and has SSH `authorized_keys` setup
   # OS has been fully patched (i.e. `apt-get update` and `apt-get upgrade`)
   #
-  # To setup app on new server:
+  # To setup app on new server (these are all one-time run tasks):
   # cap [env] deploy:bootstrap    <== Install RVM
   # cap [env] deploy:install      <== Installs app version of Ruby, package dependencies
   # cap [env] deploy:setup        <== Sets up magic app links, folders, etc.
@@ -79,7 +79,6 @@ namespace :deploy do
     install_ruby_and_bundler
     install_app_package_dependencies
     nginx.install
-    
   end
   
   desc "Installs the `zlib` package, which is required to install the bunlder gem, and other things"
