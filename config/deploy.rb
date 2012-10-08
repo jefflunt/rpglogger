@@ -66,9 +66,10 @@ namespace :deploy do
     # The `build-essential` package has been installed
     # You log out/login (to let the PATH updates take effect)
     # RVM installed
+    # RVM `zlib` package installed: `rvm pkg install zlib --verify-downloads 1`
     # Ruby ruby-1.9.2-p320 (under RVM installed)
     
-    install_app_package_prerequirements
+    install_app_package_dependencies
     nginx.install
     install_bundler_gem
   end
@@ -79,7 +80,7 @@ namespace :deploy do
   end
   
   desc "Installs system packages required by the app"
-  task :install_app_package_prerequirements, roles: :app do
+  task :install_app_package_dependencies, roles: :app do
     required_packages = ["git-core",
                          "libpq-dev"]
     
