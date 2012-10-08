@@ -1,13 +1,12 @@
 # This script will setup and install the things you need
 # before RVM+Ruby is ready to go.
-
-# Setup the user and make them a sudoer
-sudo adduser deployer --ingroup deployer
-sudo echo "deployer ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+#
+# The `deployer` user must exist and be in the `sudeoers` file
+# by the time you run this.
 
 # Copy the authorized keys over from the ubuntu user
 sudo cp -R /home/ubuntu/.ssh/ /home/deployer/
-sudo chown -R deployer:deployer /home/deployer/.ssh/
+sudo chown -R deployer /home/deployer/.ssh/
 
 # Update all currently installed software, and install dependencies for further steps
 sudo apt-get -y update
@@ -16,7 +15,7 @@ sudo apt-get -y install git-core build-essential openssl libreadline6 libreadlin
 
 # Install RVM + Ruby
 curl -L https://get.rvm.io | bash -s stable
-source ~/.bashrc
+source /home/deployer/.rvm/scripts/rvm
 rvm pkg install zlib --verify-downloads 1
 rvm install ruby-1.9.2-p320
 gem install bundler --no-ri --no-rdoc
