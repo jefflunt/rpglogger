@@ -1,8 +1,8 @@
 working_directory deploy_to
 
 pid "#{shared_path}/pids/unicorn.#{application}.pid"
-stderr_path "#{current_path}/log/unicorn.#{application}.log"
-stdout_path "#{current_path}/log/unicorn.#{application}.log"
+stderr_path "#{current_release}/log/unicorn.#{application}.log"
+stdout_path "#{current_release}/log/unicorn.#{application}.log"
 
 listen "/tmp/unicorn.#{application}.sock"
 worker_processes 2

@@ -5,7 +5,7 @@ upstream unicorn_rpglogger {
 server {
   listen 80 default deferred;
   server_name staging.rpglogger.com;
-  root <%= current_path %>/public;
+  root <%= current_release %>/public;
 
   location ^~ /assets/ {
     gzip_static on;
