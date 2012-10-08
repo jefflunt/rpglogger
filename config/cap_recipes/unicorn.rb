@@ -17,11 +17,4 @@ namespace :unicorn do
     run "#{sudo} update-rc.d -f unicorn_#{application} defaults"
   end
   after "deploy:setup", "unicorn:regenerate_config"
-  
-  %w[start stop restart].each do |command|
-    desc "#{command} unicorn"
-    task command, roles: :app do
-      run "/etc/init.d/unicorn_#{application} #{command}"
-    end
-  end
 end
