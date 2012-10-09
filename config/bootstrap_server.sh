@@ -15,7 +15,7 @@ sudo apt-get -y install git-core build-essential openssl libreadline6 libreadlin
 
 # RVM + Ruby
 echo "  ----> Installing RVM in single-user mode..."
-curl -L https://get.rvm.io | bash -s stable >> /tmp/rpglogger.bootstrap.log
+curl -sL https://get.rvm.io | bash -s stable >> /tmp/rpglogger.bootstrap.log
 source /home/deployer/.rvm/scripts/rvm >> /tmp/rpglogger.bootstrap.log
 echo "  ----> Installing RVM zlib package..."
 rvm pkg install zlib --verify-downloads 1 >> /tmp/rpglogger.bootstrap.log
