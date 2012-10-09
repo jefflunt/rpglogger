@@ -30,13 +30,10 @@ echo "  ----> Cleaning up packages that are no longer needed..."
 sudo apt-get -y autoremove >> /tmp/rpglogger.bootstrap.log
 
 # Done. Reboot.
-echo ""
-echo ""
+echo "  ----> Done. Rebooting."
 echo "=============================================="
-echo "Bootstrap finished. Rebooting."
+echo "Bootstrap finished. "
 echo "Use 'cap [env] deploy:install' to continue"
 echo "=============================================="
-echo ""
-echo ""
 
 sudo shutdown -r now >> /tmp/rpglogger.bootstrap.log
