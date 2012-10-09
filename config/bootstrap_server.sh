@@ -19,7 +19,7 @@ sudo apt-get -y upgrade &>> /tmp/rpglogger.bootstrap.log
 echo ""
 echo "======> Setting up Ruby environment <======"
 echo "------> (03/$total_steps) Installing RVM package dependencies..."
-sudo apt-get -y install git-core build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config >> /tmp/rpglogger.bootstrap.log
+sudo apt-get -y install git-core build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config &>> /tmp/rpglogger.bootstrap.log
 echo "------> (04/$total_steps) Installing RVM in single-user mode..."
 curl -sL https://get.rvm.io | bash -s stable &>> /tmp/rpglogger.bootstrap.log
 echo "------> (05/$total_steps) Reloading PATH so that RVM works..."
