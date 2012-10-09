@@ -12,7 +12,7 @@ echo ""
 echo "======> Updating OS & installed packages <======"
 echo "------> (01/$total_steps) Updating package sources..."
 sudo apt-get -y update &>> /tmp/rpglogger.bootstrap.log
-echo "------> (02/$total_steps) Upgrading already installed packages...patience..."
+echo "------> (02/$total_steps) Upgrading already installed packages (SLOW)..."
 sudo apt-get -y upgrade &>> /tmp/rpglogger.bootstrap.log
 
 # RVM + Ruby
@@ -26,7 +26,7 @@ echo "------> (05/$total_steps) Reloading PATH so that RVM works..."
 source /home/deployer/.rvm/scripts/rvm &>> /tmp/rpglogger.bootstrap.log
 echo "------> (06/$total_steps) Installing RVM zlib package..."
 rvm pkg install zlib --verify-downloads 1 &>> /tmp/rpglogger.bootstrap.log
-echo "------> (07/$total_steps) Installing Ruby 1.9.2. Compiling from source...patience..."
+echo "------> (07/$total_steps) Installing Ruby 1.9.2. Compiling from source (SLOW)..."
 rvm install ruby-1.9.2-p320 &>> /tmp/rpglogger.bootstrap.log
 echo "------> (08/$total_steps) Installing 'bundler' gem..."
 gem install bundler --no-ri --no-rdoc &>> /tmp/rpglogger.bootstrap.log
