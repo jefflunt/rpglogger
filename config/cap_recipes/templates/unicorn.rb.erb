@@ -7,3 +7,4 @@ stdout_path "<%= unicorn_log %>"
 listen "<%= unicorn_listen %>"
 worker_processes <%= unicorn_workers %>
 timeout <%= unicorn_timeout %>
+preload_app <%= should_preload_app %>

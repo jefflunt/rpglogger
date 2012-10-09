@@ -5,6 +5,7 @@ set_default(:unicorn_log) { "#{shared_path}/log/unicorn.#{application}.log" }
 set_default(:unicorn_listen) { "/tmp/unicorn.#{application}.sock" }
 set_default(:unicorn_workers, 2)
 set_default(:unicorn_timeout, 30)
+set_default(:should_preload_app, true)
 
 namespace :unicorn do
   desc "Create the unicorn.rb file for configuring unicorn for this app"
