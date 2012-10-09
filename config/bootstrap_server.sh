@@ -8,7 +8,8 @@ echo "====== rpglogger bootstrap - adventure awaits ======"
 # You must also have the `deployer` user's SSH keys copied over.
 
 # Package requirements
-echo "\n======> Updating OS <======"
+echo ""
+echo "======> Updating OS <======"
 echo "------> (01/$total_steps) Updating apt-get sources..."
 sudo apt-get -y update &>> /tmp/rpglogger.bootstrap.log
 echo "------> (02/$total_steps) Upgrading apt-get installed packages..."
@@ -17,7 +18,8 @@ echo "------> (03/$total_steps) Installing packages required to setup RVM and Ru
 sudo apt-get -y install git-core build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config >> /tmp/rpglogger.bootstrap.log
 
 # RVM + Ruby
-echo "\n======> Setting up Ruby environment <======"
+echo ""
+echo "======> Setting up Ruby environment <======"
 echo "------> (04/$total_steps) Installing RVM in single-user mode..."
 curl -sL https://get.rvm.io | bash -s stable &>> /tmp/rpglogger.bootstrap.log
 echo "------> (05/$total_steps) Ignoring RVM install notes (IGNORE ERRORS IN THIS STEP)"
@@ -31,7 +33,8 @@ echo "------> (08/$total_steps) Installing 'bundler' gem..."
 gem install bundler --no-ri --no-rdoc &>> /tmp/rpglogger.bootstrap.log
 
 # Cleanup
-echo "\n======> Finish <======"
+echo ""
+echo "======> Finish <======"
 echo "------> (09/$total_steps) Cleaning up packages that are no longer needed..."
 sudo apt-get -y autoremove &>> /tmp/rpglogger.bootstrap.log
 
