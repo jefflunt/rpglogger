@@ -1,5 +1,5 @@
 #!/bin/bash -xe
-set +o verbose
+set -o verbose
 
 echo "====== rpglogger bootstrap ======"
 
