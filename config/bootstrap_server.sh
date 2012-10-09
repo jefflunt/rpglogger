@@ -9,7 +9,7 @@ echo "====== rpglogger bootstrap - adventure awaits ======"
 
 # Package requirements
 echo ""
-echo "======> Updating OS <======"
+echo "======> Updating OS & installed packages <======"
 echo "------> (01/$total_steps) Updating apt-get sources..."
 sudo apt-get -y update &>> /tmp/rpglogger.bootstrap.log
 echo "------> (02/$total_steps) Upgrading apt-get installed packages..."
@@ -33,7 +33,7 @@ gem install bundler --no-ri --no-rdoc &>> /tmp/rpglogger.bootstrap.log
 
 # Cleanup
 echo ""
-echo "======> Finish <======"
+echo "======> Finish & reboot <======"
 echo "------> (09/$total_steps) Cleaning up packages that are no longer needed..."
 sudo apt-get -y autoremove &>> /tmp/rpglogger.bootstrap.log
 
