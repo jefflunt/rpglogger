@@ -13,7 +13,9 @@ namespace :nginx do
   task :regenerate_config, roles: :web do
     template "nginx_unicorn.erb", "/tmp/nginx_unicorn"
     run "#{sudo} mv /tmp/nginx_unicorn /etc/nginx/sites-enabled/#{application}"
+    restart
   end
+  after "deploy:setup", "nginx:regenerate_config"
   
   %w[start stop restart].each do |command|
     desc "#{command} nginx"
