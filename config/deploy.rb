@@ -66,7 +66,7 @@ namespace :deploy do
   #  |-> is a sudoer
   #  |-> and has SSH `authorized_keys` setup
   # You've run the "bootstrap.sh" script on the server to get RVM+Ruby installed.
-  # Ex: `curl -L [URL to bootstrap.sh script] | bash -s`
+  # Ex: `curl -sL [URL to bootstrap.sh script] | bash -s`
   #
   # ------# Now that you have a working version of Ruby installed =------
   #
