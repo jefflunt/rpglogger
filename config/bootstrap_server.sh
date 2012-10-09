@@ -39,9 +39,10 @@ sudo apt-get -y autoremove &>> /tmp/rpglogger.bootstrap.log
 
 # Done. Reboot.
 echo "------> (10/$total_steps) Done. Rebooting."
-echo "=============================================="
+echo "==============================================================="
 echo "Bootstrap finished. "
-echo "Use 'cap [env] deploy:install' to continue"
-echo "=============================================="
+echo "PLEASE REMEMBER to setup your ENV variables and aliases."
+echo "Use 'cap [env] deploy:install' to continue with app deployment."
+echo "==============================================================="
 
 sudo shutdown -r now &>> /tmp/rpglogger.bootstrap.log
