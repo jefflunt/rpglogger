@@ -14,12 +14,12 @@ echo "------> (01/$total_steps) Updating apt-get sources..."
 sudo apt-get -y update &>> /tmp/rpglogger.bootstrap.log
 echo "------> (02/$total_steps) Upgrading apt-get installed packages..."
 sudo apt-get -y upgrade &>> /tmp/rpglogger.bootstrap.log
-echo "------> (03/$total_steps) Installing packages required to setup RVM and Ruby..."
-sudo apt-get -y install git-core build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config >> /tmp/rpglogger.bootstrap.log
 
 # RVM + Ruby
 echo ""
 echo "======> Setting up Ruby environment <======"
+echo "------> (03/$total_steps) Installing RVM dependencies..."
+sudo apt-get -y install git-core build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config >> /tmp/rpglogger.bootstrap.log
 echo "------> (04/$total_steps) Installing RVM in single-user mode..."
 curl -sL https://get.rvm.io | bash -s stable &>> /tmp/rpglogger.bootstrap.log
 echo "------> (05/$total_steps) Ignoring RVM install notes (IGNORE ERRORS IN THIS STEP)"
