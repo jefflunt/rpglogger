@@ -8,7 +8,7 @@ gem 'pg'
 gem 'json'
 gem 'jquery-rails'
 gem 'haml'
-gem 'therubyracer'
+gem 'therubyracer', '0.10.1'
 gem 'bluecloth'
 
 # Authentication & authorization
@@ -24,7 +24,7 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'twitter-bootstrap-rails'
+  gem 'twitter-bootstrap-rails', '2.1.1'
 end
 
 group :development do
