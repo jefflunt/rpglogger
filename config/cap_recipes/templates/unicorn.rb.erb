@@ -8,3 +8,15 @@ listen "<%= unicorn_listen %>"
 worker_processes <%= unicorn_workers %>
 timeout <%= unicorn_timeout %>
 preload_app <%= should_preload_app %>
+
+# This before/after fork business is to resolve this problem:
+# http://stackoverflow.com/questions/11875180/pgerror-ssl-syscall-error-eof-detected
+before_fork do |server, worker|
+  defined?(ActiveRecord::Base) and
+      ActiveRecord::Base.connection.disconnect!
+end
+
+after_fork do |server, worker|
+   defined?(ActiveRecord::Base) and
+      ActiveRecord::Base.establish_connection
+end
