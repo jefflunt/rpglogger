@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'therubyracer', '0.10.1'
 gem 'bluecloth'
+gem 'carrierwave'
 
 # Authentication & authorization
 gem 'cancan'
