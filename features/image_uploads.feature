@@ -13,7 +13,6 @@ Scenario: A user should be able to create an attribute type of "image"
   And I should see an "input" with "value" of "Image"
   
 Scenario: A user can upload an image to a WorldObject
-  Then the total number of active SectionProperties should be 1
   When I go to the new WorldObject page of section "All city images"
   And I fill in "world_object[name]" with "My beautiful city"
   And I attach the file "features/sample_uploads/city-cinemascope.jpg" to form field "world_object[world_object_properties_attributes][0][image_value]"
@@ -22,5 +21,8 @@ Scenario: A user can upload an image to a WorldObject
   And I should see an "img" with "alt" of "Thumb_city-cinemascope"
   
 Scenario: File uploads that do not end with .jpg, .jpeg, .gif OR .png are disallowed
-  Given pending
-  
+  When I go to the new WorldObject page of section "All city images"
+  And I fill in "world_object[name]" with "My beautiful city"
+  And I attach the file "features/sample_uploads/i-heard-a-sound.mp3" to form field "world_object[world_object_properties_attributes][0][image_value]"
+  And I press "Save"
+  Then I should see the text "Whoa, we got some issues here:"
