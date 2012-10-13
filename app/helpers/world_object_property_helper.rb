@@ -3,6 +3,8 @@ module WorldObjectPropertyHelper
     case world_object_property.section_property.data_type
     when 'integer'
       return form_builder.text_field  :integer_value
+    when 'image'
+      return form_builder.file_field  :image_value
     when 'boolean'
       return form_builder.check_box   :boolean_value
     when 'string'

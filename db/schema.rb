@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120728154134) do
+ActiveRecord::Schema.define(:version => 20121013165520) do
 
   create_table "log_books", :force => true do |t|
     t.integer  "user_id",                        :null => false
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20120728154134) do
     t.text     "text_value"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.string   "image_value"
   end
 
   create_table "world_objects", :force => true do |t|

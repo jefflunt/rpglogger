@@ -13,6 +13,8 @@ module NavigationHelpers
     when /the edit LogBook page for "([^\"]*)"/
       log_book = LogBook.find_by_title($1)
       edit_log_book_path(log_book)
+    when /the edit Section page for Section "([^\"]*)"/
+      edit_section_path(Section.find_by_name($1))
     when /the edit page for the first section in LogBook "([^\"]*)"/
       log_book = LogBook.find_by_title($1)
       edit_section_path(log_book.sections.first)

@@ -16,7 +16,7 @@ class SectionProperty < ActiveRecord::Base
   end
   
   def self.all_data_types
-    ['boolean', 'integer', 'string', 'text']
+    ['boolean', 'image', 'integer', 'string', 'text']
   end
   
   def is_public?
