@@ -34,7 +34,7 @@ Scenario: A user can create new WorldObjects
   And a LogBook exists called "Test LogBook" for game "Skyrim" and owned by "facebook_user"
   And a Section exists called "Test Section" in "Test LogBook"
   
-  When I go to the new WorldObjects page of section "Test Section"
+  When I go to the new WorldObject page of section "Test Section"
   And I fill in "world_object[name]" with "The new WorldObject"
   And I press "Save"
   Then I should see all of the texts:

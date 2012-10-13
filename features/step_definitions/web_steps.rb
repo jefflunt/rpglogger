@@ -17,8 +17,8 @@ When /^(?:|I )fill in "([^\"]*)" with "([^\"]*)"$/ do |field, value|
   fill_in(field, :with => value)
 end
 
-When /^I select "(.*)" from "(.*)"$/ do |value, field_name|
-  select(value, :from => field_name) 
+When /^I select "([^\"]*)" from "([^\"]*)"$/ do |value, dropdown|
+  select(value, from: dropdown) 
 end
 
 Then /^I should see the text "([^"]*)"$/ do |text|
@@ -45,6 +45,10 @@ Then /^I should see all of the images:?$/ do |table|
   end
 end
 
+Then /^I attach the file "([^"]*)" to form field "([^"]*)"$/ do |filename, field_name|
+  attach_file(field_name, File.join(Rails.root, filename))
+end
+
 Then /^I should see the HTML5 audio source "([^"]*)"$/ do |audio_name|
   page.should have_xpath("//audio[contains(@src, \"#{audio_name}\")] | //audio/source[contains(@src, \"#{audio_name}\")]")
 end
@@ -65,7 +69,7 @@ Then /^I should see all of the HTML5 video sources:$/ do |table|
   end
 end
 
-Then /^I should see a link that points to "([^"]*)"$/ do |href_destination|
+Then /^I should see an? link that points to "([^"]*)"$/ do |href_destination|
   page.should have_xpath("//a[@href='#{href_destination}']")
 end
 

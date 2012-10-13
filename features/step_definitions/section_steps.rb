@@ -21,8 +21,3 @@ end
 Then /^the total number of active SectionProperties should be (\d+)$/ do |prop_count|
   SectionProperty.active.count.should == prop_count.to_i
 end
-
-Given /^a SectionProperty exists called "(.*?)" of data type "(.*?)" in "(.*?)"$/ do |prop_name, data_type, section_name|
-  section = Section.find_by_name(section_name)
-  section.section_properties.create(name: prop_name, data_type: data_type)
-end
