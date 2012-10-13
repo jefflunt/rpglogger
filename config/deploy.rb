@@ -95,6 +95,7 @@ namespace :deploy do
     
   task :setup_config, :roles => :app do
     run "mkdir -p #{shared_path}/config"
+    run "mkdir -p #{shared_path}/uploads"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.example.yml"
     puts "Now edit the config files in #{shared_path}."
   end
@@ -102,6 +103,7 @@ namespace :deploy do
 
   task :symlink_config, :roles => :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/uploads  #{release_path}/public/uploads"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 
