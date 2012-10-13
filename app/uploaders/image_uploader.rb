@@ -14,7 +14,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # For display in the section table
   version :thumb do
-    process :resize_to_limit => [50, 50]
+    process :resize_to_fill => [50, 50]
   end
   
   # Limit upload types to images only
