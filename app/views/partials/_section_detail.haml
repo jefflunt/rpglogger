@@ -9,5 +9,9 @@
     %tr{class: '' + (obj.archived? ? 'archived' : '')}
       %td=world_object_title_or_link(obj, @can_manage_world_objects)
       -obj.world_object_properties.each do |prop|
-        %td{class: 'column-' + prop.section_property.data_type}=markdown_parse(prop.raw_value)
+        -case prop.section_property.data_type
+          -when 'image'
+            %td{class: 'column-' + prop.section_property.data_type}=image_tag prop.image_value_url.to_s
+          -default
+            %td{class: 'column-' + prop.section_property.data_type}=markdown_parse(prop.raw_value)
       %td=archive_or_restore_world_object(obj, @can_manage_world_objects)

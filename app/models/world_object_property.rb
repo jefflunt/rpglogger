@@ -1,6 +1,7 @@
 class WorldObjectProperty < ActiveRecord::Base
   belongs_to :section_property
   belongs_to :world_object
+  mount_uploader :image_value, ImageUploader
   
   validate :boolean_properties_cannot_be_nil
 
