@@ -10,7 +10,7 @@ namespace :s3ql do
     run "mkdir -p /home/#{user}/.s3ql"
     
     template "s3ql.conf.erb",     "#{shared_path}/config/s3ql.conf"
-    template "s3ql_authinfo.erb", "#{shared_path}/connfig/s3ql_authinfo"
+    template "s3ql_authinfo.erb", "#{shared_path}/config/s3ql_authinfo"
     
     run "#{sudo} ln -nfs #{shared_path}/config/s3ql.conf /etc/init/s3ql.conf"
     run "#ln -nfs #{shared_path}/config/s3ql_authinfo /home/#{user}/.s3ql/authinfo"

@@ -12,7 +12,7 @@ stop on starting rc RUNLEVEL=[016]
 # pre-stop script
 kill timeout 300
 
-env STORAGE_URL="s3://%<= app_server %>"
+env STORAGE_URL="s3://<%= app_server %>"
 env MOUNTPOINT="/mnt/s3/<%= application %>"
 
 env USER="<%= user %>"
