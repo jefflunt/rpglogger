@@ -30,7 +30,9 @@ sudo apt-get -y upgrade &>> /tmp/rpglogger.bootstrap.log
 echo ""
 echo "======> Setting up Ruby environment <======"
 echo "------> (03/$total_steps) Installing RVM package dependencies..."
-sudo apt-get -y install git-core build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config &>> /tmp/rpglogger.bootstrap.log
+sudo apt-get -y install git-core build-essential openssl libreadline6 libreadline6-dev curl zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison pkg-config &>> /tmp/rpglogger.bootstrap.log
+# Questionable dependencies - not sure if/why I need these. Maybe I don't.
+sudo apt-get -y install libsqlite3-dev sqlite3 subversion
 echo "------> (03/$total_steps) Installing S3QL package dependencies..."
 sudo apt-get -y install s3ql
 # echo "------> (04/$total_steps) Installing RVM in single-user mode..."
