@@ -61,12 +61,12 @@ end
 # ------= Deploy the actual app =------
 namespace :deploy do
   # ASSUMPTIONS when deploying this app:
-  # Ubuntu 10.04 LTS
-  # User `deployer` has been created
-  #  |-> is a sudoer
-  #  |-> and has SSH `authorized_keys` setup
-  # You've run the "bootstrap.sh" script on the server to get RVM+Ruby installed.
-  # Ex: `curl -sL [URL to bootstrap.sh script] | bash -s`
+  # 1. Ubuntu 10.04 LTS
+  # 2. User `deployer` has been created
+  #     |-> is a sudoer
+  #     |-> and has SSH `authorized_keys` setup
+  # 3. You've run the "bootstrap.sh" script on the server to get RVM+Ruby installed.
+  #     |-> Ex: `curl -sL [URL to bootstrap.sh script] | bash`
   #
   # ------# Now that you have a working version of Ruby installed =------
   #
@@ -79,15 +79,16 @@ namespace :deploy do
   task :install do
     install_app_package_dependencies
     nginx.install
+    s3ql.install
   end
     
   desc "Installs system packages required by the app"
   task :install_app_package_dependencies, roles: :app do
-    required_packages = ["libxml2",       # Required by `nokogiri` gem
-                         "libxslt-dev",   # Required by `nokogiri` gem
-                         "libxml2-dev",   # Required by `nokogiri` gem
-                         "libpq-dev"]     # Required by `pg` gem
-    
+    required_packages = ["libxml2",           # Required by `nokogiri` gem
+                         "libxslt-dev",       # Required by `nokogiri` gem
+                         "libxml2-dev",       # Required by `nokogiri` gem
+                         "libpq-dev",         # Required by `pg` gem
+                         "libmagickwand-dev"] # Required by `rmagick` gem as part of native ImageMagick
     required_packages.each do |package|
       run "#{sudo} apt-get -y install #{package}"
     end
@@ -97,13 +98,17 @@ namespace :deploy do
     run "mkdir -p #{shared_path}/config"
     run "mkdir -p #{shared_path}/uploads"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.example.yml"
-    puts "Now edit the config files in #{shared_path}."
+    
+    puts ""
+    puts "====> NEXT STEPS ==================================================="
+    puts "Edit the config files in #{shared_path} - including:"
+    puts "--> Your database.yml file, so it points to the correct database"
   end
   after "deploy:setup", "deploy:setup_config"
 
   task :symlink_config, :roles => :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    run "ln -nfs #{shared_path}/uploads  #{release_path}/public/uploads"
+    run "ln -nfs /mnt/s3/#{application} #{release_path}/public/uploads"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 

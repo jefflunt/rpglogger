@@ -5,8 +5,6 @@ namespace :nginx do
     run "#{sudo} apt-get -y update"
     run "#{sudo} apt-get -y install nginx"
     run "#{sudo} rm -f /etc/nginx/sites-enabled/default"
-    
-    regenerate_config
   end
   
   desc "Create the nginx config for this application"

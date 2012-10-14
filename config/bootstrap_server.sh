@@ -56,9 +56,7 @@ sudo apt-get -y install s3ql
 echo "------> (10/$total_steps) Done. Rebooting."
 echo ""
 echo "======> NOTES <================================================"
-echo "Bootstrap finished. "
-echo "PLEASE REMEMBER to setup your ENV variables and aliases!"
+echo "Bootstrap finished."
+echo "NOW, SETUP the deployer user's ENV variables and aliases"
 echo "Use 'cap [env] deploy:install' to continue with app deployment."
 echo "==============================================================="
-
-sudo shutdown -r now &>> /tmp/rpglogger.bootstrap.log
