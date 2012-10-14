@@ -13,7 +13,7 @@ namespace :s3ql do
     template "s3ql_authinfo.erb", "#{shared_path}/config/s3ql_authinfo"
     
     run "#{sudo} ln -nfs #{shared_path}/config/s3ql.conf /etc/init/s3ql.conf"
-    run "#ln -nfs #{shared_path}/config/s3ql_authinfo /home/#{user}/.s3ql/authinfo"
+    run "ln -nfs #{shared_path}/config/s3ql_authinfo /home/#{user}/.s3ql/authinfo"
   end
   after "deploy:setup", "s3ql:regenerate_config"
 end
