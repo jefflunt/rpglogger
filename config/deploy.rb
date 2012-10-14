@@ -102,8 +102,8 @@ namespace :deploy do
     
     puts ""
     puts "====> NEXT STEPS ==================================================="
-    puts "Edit the config files in #{shared_path} - including:"
-    puts "--> Your database.yml file, so it points to the correct database"
+    puts "1. Edit the database.yml in #{shared_path}/config"
+    puts "2. Reboot and check that the auto-mount works as expected"
   end
   after "deploy:setup", "deploy:setup_config"
 
@@ -123,10 +123,18 @@ namespace :deploy do
   end
   before "deploy", "deploy:check_revision"
   
-  %w[start stop restart].each do |command|
+  %w[start stop].each do |command|
     desc "#{command} unicorn"
     task command, roles: :app do
       run "/etc/init.d/unicorn_#{application} #{command}"
     end
+  end
+  
+  # Because of some unicorn configuration we have, a restart has to be
+  # a full stop and start in order to work
+  desc "Restart unicorn"
+  task :restart, roles: :app do
+    stop
+    start
   end
 end

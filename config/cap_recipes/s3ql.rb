@@ -1,12 +1,12 @@
 namespace :s3ql do
   desc "Creates the necessary mount points for S3QL"
-  task :install, roles: :web do
+  task :install, roles: :app do
     run "#{sudo} mkdir -p /mnt/s3/#{application}"
     run "#{sudo} chown #{user}:#{user} /mnt/s3/#{application}"
   end
   
   desc "Create the nginx config for this application"
-  task :regenerate_config, roles: :web do
+  task :regenerate_config, roles: :app do
     run "mkdir -p /home/#{user}/.s3ql"
     
     template "s3ql.conf.erb",     "#{shared_path}/config/s3ql.conf"
