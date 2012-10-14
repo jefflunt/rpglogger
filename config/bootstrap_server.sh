@@ -12,7 +12,7 @@ total_steps="10"
 
 echo "====== rpglogger bootstrap - adventure awaits ======"
 
-# The `deployer` user must already exist and be in the `sudeoers` file by the time you run this.
+# The `deployer` user must already exist and be in the `sudoers` file by the time you run this.
 # You must also have the `deployer` user's SSH keys copied over.
 
 # Package requirements
