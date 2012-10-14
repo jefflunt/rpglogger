@@ -6,6 +6,7 @@ load "config/cap_recipes/apt"
 load "config/cap_recipes/nginx"
 load "config/cap_recipes/unicorn"
 load "config/cap_recipes/rvm"
+load "config/cap_recipes/s3ql"
 
 # App deploy setting and config options
 set :application, "rpglogger"
