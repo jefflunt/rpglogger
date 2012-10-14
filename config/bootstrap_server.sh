@@ -18,9 +18,9 @@ echo "====== rpglogger bootstrap - adventure awaits ======"
 # Package requirements
 echo ""
 echo "======> Updating OS & installed packages <======"
-echo "------> (01/$total_steps) Adding S3QL package source..."
+echo "------> (01/$total_steps) Adding S3QL package source to apt..."
 sudo add-apt-repository ppa:nikratio/s3ql
-echo "------> (01/$total_steps) Updating package sources..."
+echo "------> (01/$total_steps) Updating all package sources..."
 
 sudo apt-get -y update &>> /tmp/rpglogger.bootstrap.log
 echo "------> (02/$total_steps) Upgrading already installed packages (SLOW)..."
@@ -29,7 +29,7 @@ sudo apt-get -y upgrade &>> /tmp/rpglogger.bootstrap.log
 # RVM + Ruby
 echo ""
 echo "======> Setting up Ruby environment <======"
-echo "------> (03/$total_steps) Installing RVM package dependencies..."
+echo "------> (03/$total_steps) Installing RVM and other base package dependencies..."
 sudo apt-get -y install git-core build-essential openssl libreadline6 libreadline6-dev curl zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison pkg-config &>> /tmp/rpglogger.bootstrap.log
 # Questionable dependencies - not sure if/why I need these. Maybe I don't.
 sudo apt-get -y install libsqlite3-dev sqlite3 subversion
