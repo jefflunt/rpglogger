@@ -97,7 +97,6 @@ namespace :deploy do
     
   task :setup_config, :roles => :app do
     run "mkdir -p #{shared_path}/config"
-    run "mkdir -p #{shared_path}/uploads"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.example.yml"
     
     puts ""
