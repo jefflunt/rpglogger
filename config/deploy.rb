@@ -52,7 +52,7 @@ task :production do
 end
 
 desc "Set preop settings"
-task :production do
+task :preop do
   set :app_server, "preop.rpglogger.com"
   set :rails_env, "production"
   set_roles
