@@ -95,7 +95,7 @@ namespace :deploy do
   
   desc "Bootstraps the server with basic software dependency needs."
   task :bootstrap do
-    run "#{sudo} curl https://raw.github.com/normalocity/rpglogger/#{branch}/config/bootstrap_server.sh | bash -s"
+    run "curl https://raw.github.com/normalocity/rpglogger/#{branch}/config/bootstrap_server.sh | bash -s"
   end
   
   desc "Install application dependencies and web server."
