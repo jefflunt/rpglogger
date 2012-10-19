@@ -35,7 +35,7 @@ script
     su -s /bin/sh -c 'exec "$0" "$@"' "$USER" -- \
         fsck.s3ql --batch --authfile "$AUTHFILE" "$STORAGE_URL"
     exec su -s /bin/sh -c 'exec "$0" "$@"' "$USER" -- \
-        mount.s3ql --upstart --authfile "$AUTHFILE" "$STORAGE_URL" "$MOUNTPOINT"
+        mount.s3ql --upstart --authfile --allow-other "$AUTHFILE" "$STORAGE_URL" "$MOUNTPOINT"
 end script
 
 pre-stop script
