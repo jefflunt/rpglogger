@@ -51,13 +51,6 @@ task :production do
   set_roles
 end
 
-desc "Set preop settings"
-task :preop do
-  set :app_server, "preop.rpglogger.com"
-  set :rails_env, "production"
-  set_roles
-end
-
 desc "Set staging settings"
 task :staging do
   set :app_server, "staging.rpglogger.com"
@@ -107,9 +100,11 @@ namespace :deploy do
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.example.yml"
     
     puts ""
-    puts "====> NEXT STEPS ==================================================="
+    puts "====> NEXT STEPS ========================================================================================"
     puts "1. Edit the database.yml in #{shared_path}/config"
-    puts "2. Reboot and check that the auto-mount works as expected"
+    puts "2. Run the 'mkfs.s3ql s3://[app_server].rpglogger.com --plain'"
+    puts "    (if the FS alredy exists, that's fine - it'll fail gracefully)"
+    puts "3. Reboot and check that the auto-mount works as expected"
   end
   after "deploy:setup", "deploy:setup_config"
 

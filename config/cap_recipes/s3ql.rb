@@ -9,11 +9,13 @@ namespace :s3ql do
   task :regenerate_config, roles: :app do
     run "mkdir -p /home/#{user}/.s3ql"
     
+    # Create init script and credentials file from templates. Set permissions.
     template "s3ql.conf.erb",     "#{shared_path}/config/s3ql.conf"
-    template "s3ql_authinfo.erb", "#{shared_path}/config/s3ql_authinfo"
+    template "s3ql_authinfo.erb", "/home/#{user}/.s3ql/authinfo2"
+    run "chmod 600 /home/#{user}/.s3ql/authinfo2"
     
+    # Create symbolic links
     run "#{sudo} ln -nfs #{shared_path}/config/s3ql.conf /etc/init/s3ql.conf"
-    run "ln -nfs #{shared_path}/config/s3ql_authinfo /home/#{user}/.s3ql/authinfo"
   end
   after "deploy:setup", "s3ql:regenerate_config"
 end
