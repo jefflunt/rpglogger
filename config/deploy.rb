@@ -66,6 +66,23 @@ task :promote do
   set :app_server, "staging.rpglogger.com"
   set :rails_env, "production"
   set :server_name_for_config, "rpglogger.com"
+  
+  nginx_unicorn.regenerate_config
+  unicorn.regenerate_config
+  s3ql.regenerate_config
+  
+  reboot_full_server
+  
+  puts ""
+  puts "====> NEXT STEPS ======================================================"
+  puts "1. Change the EC2 labels"
+  puts "2. Re-point the production IP address"
+  puts "3. Do something for good luck."
+end
+
+desc "Reboots the entire server, not just the app"
+task :reboot_full_server do
+  run "#{sudo} shutdown -r now"
 end
 
 # ------= Deploy the actual app =------
