@@ -87,21 +87,17 @@ end
 
 # ------= Deploy the actual app =------
 namespace :deploy do
-  # ASSUMPTIONS when deploying this app:
-  # 1. Ubuntu 10.04 LTS
-  # 2. User `deployer` has been created
-  #     |-> is a sudoer
-  #     |-> and has SSH `authorized_keys` setup
-  # 3. You've run the "bootstrap.sh" script on the server to get RVM+Ruby installed.
-  #     |-> Ex: `curl -sL [URL to bootstrap.sh script] | bash`
-  #
-  # ------# Now that you have a working version of Ruby installed =------
-  #
   # To setup app on new server (these are all one-time run tasks):
+  # cap [env] deploy:bootstrap    <== Runs the bootstrap script, getting basics setup
   # cap [env] deploy:install      <== Installs app version of Ruby, package dependencies
   # cap [env] deploy:setup        <== Sets up magic app links, folders, etc.
   # cap [env] deploy:cold         <== Initial deploy of the actual application
-    
+  
+  desc "Bootstraps the server with basic software dependency needs."
+  task :bootstrap do
+    run "#{sudo} curl https://raw.github.com/normalocity/rpglogger/#{branch}/config/bootstrap_server.sh | bash -s"
+  end
+  
   desc "Install application dependencies and web server."
   task :install do
     install_app_package_dependencies

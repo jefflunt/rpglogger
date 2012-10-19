@@ -1,17 +1,15 @@
 #!/bin/bash -xe
 
 total_steps="11"
+USER=ubuntu
 LOG_FOLDER=/var/log/rpglogger-install
 LOG_FILE=$LOG_FOLDER/install.log
 
 sudo mkdir -p $LOG_FOLDER
-sudo chown ubuntu:ubuntu $LOG_FOLDER
+sudo chown $USER:$USER $LOG_FOLDER
 
 echo ""
 echo "====== rpglogger bootstrap - adventure awaits ======"
-
-# The `deployer` user must already exist and be in the `sudoers` file by the time you run this.
-# You must also have the `deployer` user's SSH keys copied over.
 
 # Package requirements
 echo ""
@@ -35,7 +33,7 @@ sudo apt-get -y install s3ql &>> $LOG_FILE
 echo "------> (06/$total_steps) Installing RVM in single-user mode..."
 curl -sL https://get.rvm.io | bash -s stable &>> $LOG_FILE
 echo "------> (07/$total_steps) Reloading PATH so that RVM works..."
-source /home/deployer/.rvm/scripts/rvm &>> $LOG_FILE
+source /home/$USER/.rvm/scripts/rvm &>> $LOG_FILE
 echo "------> (08/$total_steps) Installing RVM zlib package..."
 rvm pkg install zlib --verify-downloads 1 &>> $LOG_FILE
 echo "------> (09/$total_steps) Installing Ruby 1.9.2. Compiling from source (SLOW)..."
@@ -53,6 +51,6 @@ sudo apt-get -y autoremove &>> $LOG_FILE
 echo ""
 echo "======> NOTES <================================================"
 echo "Bootstrap finished!"
-echo "NOW, SETUP the deployer user's ENV variables and aliases"
+echo "NOW, SETUP the ENV variables and aliases for $USER"
 echo "Use 'cap [env] deploy:install' to continue with app deployment."
 echo "==============================================================="
