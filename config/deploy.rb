@@ -87,16 +87,13 @@ end
 
 # ------= Deploy the actual app =------
 namespace :deploy do
+  # IT'S IMPORTANT that you've already run the bootstrap script!!!
+  #
   # To setup app on new server (these are all one-time run tasks):
-  # cap [env] deploy:bootstrap    <== Runs the bootstrap script, getting basics setup
+  #
   # cap [env] deploy:install      <== Installs app version of Ruby, package dependencies
   # cap [env] deploy:setup        <== Sets up magic app links, folders, etc.
   # cap [env] deploy:cold         <== Initial deploy of the actual application
-  
-  desc "Bootstraps the server with basic software dependency needs."
-  task :bootstrap do
-    run "curl https://raw.github.com/normalocity/rpglogger/#{branch}/config/bootstrap_server.sh | bash -s"
-  end
   
   desc "Install application dependencies and web server."
   task :install do
