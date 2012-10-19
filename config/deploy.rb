@@ -66,6 +66,7 @@ task :promote do
   set :app_server, "staging.rpglogger.com"
   set :rails_env, "production"
   set :server_name_for_config, "rpglogger.com"
+  set_roles
   
   nginx.regenerate_config
   unicorn.regenerate_config
