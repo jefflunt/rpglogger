@@ -48,6 +48,7 @@ desc "Set production settings"
 task :production do
   set :app_server, "rpglogger.com"
   set :rails_env, "production"
+  set :server_name_for_config, app_server
   set_roles
 end
 
@@ -56,7 +57,15 @@ task :staging do
   set :app_server, "staging.rpglogger.com"
   set :rails_env, "production"  # It's intentional that this also says "production" - we want staging and production to be
                                 # basically identical, except for the server URL to which they're deployed.
+  set :server_name_for_config, app_server
   set_roles
+end
+
+desc "Promotes the staging server into a production server"
+task :promote do
+  set :app_server, "staging.rpglogger.com"
+  set :rails_env, "production"
+  set :server_name_for_config, "rpglogger.com"
 end
 
 # ------= Deploy the actual app =------

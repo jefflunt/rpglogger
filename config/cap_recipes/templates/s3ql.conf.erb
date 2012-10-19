@@ -12,11 +12,11 @@ stop on starting rc RUNLEVEL=[016]
 # pre-stop script
 kill timeout 300
 
-env STORAGE_URL="s3://<%= app_server %>"
+env STORAGE_URL="s3://<%= server_name_for_config %>"
 env MOUNTPOINT="/mnt/s3/<%= application %>"
 
 env USER="<%= user %>"
-env AUTHFILE="/home/<%= user %>/.s3ql/authinfo"
+env AUTHFILE="/home/<%= user %>/.s3ql/authinfo2"
 
 expect stop
 
