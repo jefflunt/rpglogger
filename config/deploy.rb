@@ -10,7 +10,7 @@ load "config/cap_recipes/s3ql"
 
 # App deploy setting and config options
 set :application, "rpglogger"
-set :user, "deployer"
+set :user, "ubuntu"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 
