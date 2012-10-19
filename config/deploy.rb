@@ -51,6 +51,13 @@ task :production do
   set_roles
 end
 
+desc "Set preop settings"
+task :production do
+  set :app_server, "preop.rpglogger.com"
+  set :rails_env, "production"
+  set_roles
+end
+
 desc "Set staging settings"
 task :staging do
   set :app_server, "staging.rpglogger.com"
