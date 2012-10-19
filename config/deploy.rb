@@ -67,7 +67,7 @@ task :promote do
   set :rails_env, "production"
   set :server_name_for_config, "rpglogger.com"
   
-  nginx_unicorn.regenerate_config
+  nginx.regenerate_config
   unicorn.regenerate_config
   s3ql.regenerate_config
   
