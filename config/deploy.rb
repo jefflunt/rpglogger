@@ -71,13 +71,13 @@ task :promote do
   unicorn.regenerate_config
   s3ql.regenerate_config
   
-  reboot_full_server
-  
   puts ""
   puts "====> NEXT STEPS ======================================================"
   puts "1. Change the EC2 labels"
-  puts "2. Re-point the production IP address"
-  puts "3. Do something for good luck."
+  puts "2. Update where the database points to"
+  puts "3. Restart the server"
+  puts "4. Re-point the production IP address"
+  puts "5. Do something for good luck."
 end
 
 desc "Reboots the entire server, not just the app"
