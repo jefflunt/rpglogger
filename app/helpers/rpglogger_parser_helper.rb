@@ -9,6 +9,8 @@ module RpgloggerParserHelper
     def replace_internal_links(text)
       # Find valid links and split them up into their component parts
       # and remove whitespace
+      return nil if text.nil?
+      
       parsed_text = text.gsub(/\[\[.+?\]\]\[\s*?\d+\s*?\]/) { |match|
         component_parts = match.split("][").each{|part| part.gsub!(/\[|\]/, '').strip!}
         
