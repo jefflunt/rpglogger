@@ -14,8 +14,14 @@ module RpgloggerParserHelper
       parsed_text = text.gsub(/\[\[.+?\]\]\[\s*?\d+\s*?\]/) { |match|
         component_parts = match.split("][").each{|part| part.gsub!(/\[|\]/, '').strip!}
         
-        world_object = WorldObject.find(component_parts[1])
-        link = "<a href=\"#{section_url(world_object.section.id)}##{world_object.id}\">#{component_parts[0]}</a>"
+        begin
+          world_object = WorldObject.find(component_parts[1])
+          link = "<a href=\"#{section_url(world_object.section.id)}##{world_object.id}\">#{component_parts[0]}</a>"
+        rescue ActiveRecord::RecordNotFound
+          link = match
+        end
+        
+        link
       }
       
       parsed_text || text  # Either give me back the link, or the original if no matches were found
