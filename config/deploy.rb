@@ -1,8 +1,6 @@
 require "bundler/capistrano"
-require 'rvm/capistrano'
 
 load "config/cap_recipes/cap_helpers"
-load "config/cap_recipes/server_build"
 load "config/cap_recipes/nginx"
 load "config/cap_recipes/unicorn"
 load "config/cap_recipes/rvm"
@@ -88,13 +86,40 @@ end
 
 # ------= Deploy the actual app =------
 namespace :deploy do
-  # IT'S IMPORTANT that you've already run the bootstrap script!!!
-  #
-  # To setup app on new server (these are all one-time run tasks):
-  #
-  # cap [env] deploy:install      <== Installs app version of Ruby, package dependencies
-  # cap [env] deploy:setup        <== Sets up magic app links, folders, etc.
-  # cap [env] deploy:cold         <== Initial deploy of the actual application
+  desc "Builds server from a blank OS image"
+  task :bootstrap, roles: :web do
+    puts "====== rpglogger bootstrap - adventure awaits ======"
+
+    # Update all installed packages, and add S3QL repository to apt sources
+    run "#{sudo} add-apt-repository ppa:nikratio/s3ql"    
+    run "#{sudo} apt-get -y update"
+    run "#{sudo} apt-get -y upgrade"
+    run "#{sudo} apt-get -y install s3ql"
+    
+    # Install RVM dependencies in two steps, then install RVM
+    run "#{sudo} apt-get -y install git-core build-essential openssl libreadline6 libreadline6-dev curl zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison pkg-config"
+    run "#{sudo} -y install libsqlite3-dev sqlite3 subversion"
+    run "curl -sL https://get.rvm.io | bash -s stable"
+    
+    # Move contents of .bash_profile into .bashrc, then re-source it
+    run "cat ~/.bashrc >> ~/.bash_profile"
+    run "mv ~/.bash_profile ~/.bashrc"
+    run "source /home/$USER/.rvm/scripts/rvm"
+    
+    # Install RVM zlib package, then required version of Ruby
+    run "rvm pkg install zlib --verify-downloads 1"
+    run "rvm install ruby-1.9.2-p320"
+    
+    # Install bundler gem
+    run "gem install bundler --no-ri --no-rdoc"
+    
+    # Next steps
+    puts "======> NOTES <================================================"
+    puts "Bootstrap finished!"
+    puts "NOW, SETUP the ENV variables and aliases for $USER"
+    puts "Use 'cap [env] deploy:install' to continue with app deployment."
+    puts "==============================================================="
+  end
   
   desc "Install application dependencies and web server."
   task :install do
