@@ -2,7 +2,7 @@ require "bundler/capistrano"
 require 'rvm/capistrano'
 
 load "config/cap_recipes/cap_helpers"
-load "config/cap_recipes/apt"
+load "config/cap_recipes/server_build"
 load "config/cap_recipes/nginx"
 load "config/cap_recipes/unicorn"
 load "config/cap_recipes/rvm"
