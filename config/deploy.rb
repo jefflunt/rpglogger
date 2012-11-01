@@ -20,6 +20,7 @@ set :rvm_ruby_string, 'ruby-1.9.2-p320'
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "kn-aws-servers.pem")]
 ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
+default_run_options[:shell] = '/bin/bash'
 ssh_options[:forward_agent] = true
 
 # Deploy branch/SCM options
@@ -88,7 +89,30 @@ end
 namespace :deploy do
   desc "Builds server from a blank OS image"
   task :bootstrap, roles: :web do
-    puts "====== rpglogger bootstrap - adventure awaits ======"
+    puts '
+                         .__                                      
+    _____________   ____ |  |   ____   ____   ____   ___________  
+    \_  __ \____ \ / ___\|  |  /  _ \ / ___\ / ___\_/ __ \_  __ \ 
+     |  | \/  |_> > /_/  >  |_(  <_> ) /_/  > /_/  >  ___/|  | \/ 
+     |__|  |   __/\___  /|____/\____/\___  /\___  / \___  >__|    
+           |__|  /_____/            /_____//_____/      \/        
+     ____________________________________________________________ 
+    /_____/_____/_____/_____/_____/_____/_____/_____/_____/_____/ 
+
+
+                .___                    __                        
+    _____     __| _/__  __ ____   _____/  |_ __ _________   ____  
+    \__  \   / __ |\  \/ // __ \ /    \   __\  |  \_  __ \_/ __ \ 
+     / __ \_/ /_/ | \   /\  ___/|   |  \  | |  |  /|  | \/\  ___/ 
+    (____  /\____ |  \_/  \___  >___|  /__| |____/ |__|    \___  >
+         \/      \/           \/     \/                        \/ 
+                                   .__  __                        
+             _____ __  _  _______  |__|/  |_  ______              
+             \__  \\ \/ \/ /\__  \ |  \   __\/  ___/              
+              / __ \\     /  / __ \|  ||  |  \___ \               
+             (____  /\/\_/  (____  /__||__| /____  >              
+                  \/             \/              \/               
+    '
 
     # Update all installed packages, and add S3QL repository to apt sources
     run "#{sudo} add-apt-repository ppa:nikratio/s3ql"    
@@ -98,17 +122,24 @@ namespace :deploy do
     
     # Install RVM dependencies in two steps, then install RVM
     run "#{sudo} apt-get -y install git-core build-essential openssl libreadline6 libreadline6-dev curl zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison pkg-config"
-    run "#{sudo} -y install libsqlite3-dev sqlite3 subversion"
+    run "#{sudo} apt-get -y install libsqlite3-dev sqlite3 subversion"
     run "curl -sL https://get.rvm.io | bash -s stable"
     
     # Move contents of .bash_profile into .bashrc, then re-source it
-    run "cat ~/.bashrc >> ~/.bash_profile"
-    run "mv ~/.bash_profile ~/.bashrc"
-    run "source /home/$USER/.rvm/scripts/rvm"
+    run "cat /home/#{user}/.bashrc >> /home/#{user}/.bash_profile"
+    run "mv /home/#{user}/.bash_profile ~/.bashrc"
+    run "source /home/#{user}/.rvm/scripts/rvm"
+    run "source /home/#{user}/.bashrc"
     
     # Install RVM zlib package, then required version of Ruby
-    run "rvm pkg install zlib --verify-downloads 1"
+    puts ""
+    puts "======================================================================="
+    puts "| About to install Ruby and the zlib package - this takes a long time |"
+    puts "======================================================================="
+    puts ""
+    run "rvm --skip-autoreconf pkg install zlib"
     run "rvm install ruby-1.9.2-p320"
+    run "rvm --default use 1.9.2"
     
     # Install bundler gem
     run "gem install bundler --no-ri --no-rdoc"
@@ -116,7 +147,7 @@ namespace :deploy do
     # Next steps
     puts "======> NOTES <================================================"
     puts "Bootstrap finished!"
-    puts "NOW, SETUP the ENV variables and aliases for $USER"
+    puts "NOW, SETUP the ENV variables and aliases for #{user}"
     puts "Use 'cap [env] deploy:install' to continue with app deployment."
     puts "==============================================================="
   end
