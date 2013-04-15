@@ -1,8 +1,10 @@
 source 'http://rubygems.org'
 
+# Deployment and web server
 gem 'rvm-capistrano'
 gem 'unicorn'
 
+# App basics
 gem 'rails','~>3.2.13'
 gem 'pg'
 gem 'json'
@@ -11,6 +13,7 @@ gem 'haml'
 gem 'therubyracer', '0.10.1'
 gem 'bluecloth'
 
+# Image processing
 gem 'rmagick'
 gem 'carrierwave'
 
@@ -20,6 +23,9 @@ gem 'omniauth'
 gem "omniauth-google-oauth2"
 gem "omniauth-facebook"
 gem "omniauth-twitter"
+
+# Metrics
+gem 'how_slow'
 
 # Gems used only for assets and not required
 # in production environments by default.
