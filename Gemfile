@@ -25,7 +25,7 @@ gem "omniauth-facebook"
 gem "omniauth-twitter"
 
 # Metrics
-gem 'how_slow'
+gem 'how_slow', '0.3.0.pre'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -37,7 +37,7 @@ group :assets do
 end
 
 group :development do
-  gem "ruby-debug19"
+  gem 'pry'
 end
 
 group :test do

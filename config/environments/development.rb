@@ -15,7 +15,9 @@ Rpglogger::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :file
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -29,4 +31,20 @@ Rpglogger::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = false
   config.serve_static_assets = true
+
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => ENV['RPG_EMAIL_SERVER'],
+    :port => ENV['RPG_EMAIL_PORT'].to_i,
+    :authentication => 'plain',
+    :domain => ENV['RPG_EMAIL_DOMAIN'],
+    :user_name => ENV['RPG_EMAIL_USERNAME'],
+    :password => ENV['RPG_EMAIL_PASSWORD']
+  }
+
+  HowSlow.configure(
+    :email_recipients     => ENV['RPG_EMAIL_TO'].split(' ').join(','),
+    :email_sender_address => ENV['RPG_EMAIL_FROM'],
+    :email_actions_max    => 100
+  )
 end
