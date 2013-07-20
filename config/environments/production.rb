@@ -30,4 +30,20 @@ Rpglogger::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => ENV['RPG_EMAIL_SERVER'],
+    :port => ENV['RPG_EMAIL_PORT'].to_i,
+    :authentication => 'plain',
+    :domain => ENV['RPG_EMAIL_DOMAIN'],
+    :user_name => ENV['RPG_EMAIL_USERNAME'],
+    :password => ENV['RPG_EMAIL_PASSWORD']
+  }
+
+  HowSlow.configure(
+    :email_recipients     => ENV['RPG_EMAIL_TO'].split(' ').join(','),
+    :email_sender_address => ENV['RPG_EMAIL_FROM'],
+    :email_actions_max    => 100
+  )
 end
