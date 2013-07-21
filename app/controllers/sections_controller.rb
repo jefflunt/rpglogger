@@ -4,13 +4,13 @@ class SectionsController < ApplicationController
     authorize! :show, @section.log_book
 
     if current_user
-      HowSlow::Collector::count("[user #{current_user.provider}:#{current_user.uid}] show-section")
+      HowSlow::Collector::count("views.sections.show.by-user.#{current_user.provider}.#{current_user.uid}")
     else
-      HowSlow::Collector::count("[user /anonymous/] show-section")
+      HowSlow::Collector::count("views.sections.show.by-user.anonymous")
     end
 
-    HowSlow::Collector::count("[user all] show-section")
-    HowSlow::Collector::count("[section #{@section.log_book.title} :: #{@section.name}] show")
+    HowSlow::Collector::count("views.sections.show.total")
+    HowSlow::Collector::count("views.section.show.by-section-name.#{@section.log_book.title} :: #{@section.name}]")
     
     if @section.archived?
       @section.log_book.create_empty_section if @section.log_book.does_not_have_active_sections
