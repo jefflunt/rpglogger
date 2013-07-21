@@ -2,6 +2,15 @@ class SectionsController < ApplicationController
   def show
     @section = Section.find(params[:id], select: "id, log_book_id, name, archived_at")
     authorize! :show, @section.log_book
+
+    if current_user
+      HowSlow::Collector::count("[user #{current_user.provider}:#{current_user.uid}] show-section")
+    else
+      HowSlow::Collector::count("[user /anonymous/] show-section")
+    end
+
+    HowSlow::Collector::count("[user all] show-section")
+    HowSlow::Collector::count("[section #{@section.log_book.title} :: #{@section.name}] show")
     
     if @section.archived?
       @section.log_book.create_empty_section if @section.log_book.does_not_have_active_sections

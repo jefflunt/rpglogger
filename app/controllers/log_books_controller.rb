@@ -2,6 +2,8 @@ class LogBooksController < ApplicationController
   def index
     authorize! :index, LogBook
     
+    HowSlow::Collector::count("index homepage")
+
     @public_log_books = LogBook.active.public.order_by_title
     
     if current_user
