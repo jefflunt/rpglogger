@@ -25,7 +25,7 @@ gem "omniauth-facebook"
 gem "omniauth-twitter"
 
 # Metrics
-gem 'how_slow', '0.3.0.pre.6'
+gem 'how_slow', '0.3.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
