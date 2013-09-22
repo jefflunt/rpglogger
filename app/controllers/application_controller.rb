@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  APP_VERSION='v117'
+
   protect_from_forgery
   helper_method :current_user
   check_authorization

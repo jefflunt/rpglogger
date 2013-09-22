@@ -7,7 +7,7 @@
         %span.icon-bar
       =link_to 'rpglogger'.html_safe, root_path, :class => 'brand'
       %p{:class => 'navbar-text pull-left'}
-        Create strategy guides for any RPG. Share them with the world.
+        ="#{ApplicationController::APP_VERSION} - Create strategy guides for any RPG. Share them with the world."
       .nav-collapse
         %ul{:class => "nav pull-right"}
           -if current_user
